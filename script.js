@@ -4,24 +4,28 @@ const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 CANVAS_WIDTH = canvas.width = window.innerWidth;
 CANVAS_HEIGHT = canvas.height = window.innerHeight;
-const numberOfEnemies = 100;
+const numberOfEnemies = 10;
 const enemiesArray = [];
 
-class Enemy{
-    constructor(){
+class Enemy {
+    constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.width = 5 * Math.random()+20;
+        this.width = Math.random() *80 + 50;
         this.height = this.width;
-        this.speed = Math.random() * 4 ;
+        this.speed = Math.random() * 3 + 1;
     }
-    update(){
-      
-            this.x-= this.speed;
+    update() {
         
+        if (this.x < -this.width ) {
+            this.x = canvas.width;
+        }
+        //this.x -= this.speed * -1;
+        this.x -= this.speed;
+
     }
-    draw(){
-        ctx.fillRect(this.x,this.y,this.width,this.height)
+    draw() {
+        ctx.fillRect(this.x, this.y, this.width, this.height)
     }
 
 };
@@ -34,9 +38,9 @@ for (let index = 0; index < numberOfEnemies; index++) {
 
 console.log(enemiesArray);
 
-function animate(){
+function animate() {
     //ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
-    ctx.clearRect(0,0,CANVAS_WIDTH,CANVAS_HEIGHT);
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     enemiesArray.forEach(enemy => {
         enemy.update();
         enemy.draw();
