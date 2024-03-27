@@ -2,8 +2,8 @@
 
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
-CANVAS_WIDTH = canvas.width = 2500;
-CANVAS_HEIGHT = canvas.height = 2500;
+CANVAS_WIDTH = canvas.width = window.innerWidth;
+CANVAS_HEIGHT = canvas.height = window.innerHeight;
 const numberOfEnemies = 100;
 const enemiesArray = [];
 
@@ -11,16 +11,17 @@ class Enemy{
     constructor(){
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.width = 50;
-        this.height = 50;
-        this.speed = Math.random() * 4 -2;
+        this.width = 5 * Math.random()+20;
+        this.height = this.width;
+        this.speed = Math.random() * 4 ;
     }
     update(){
-            this.x+= this.speed;
-            this.y+= this.speed;
+      
+            this.x-= this.speed;
+        
     }
     draw(){
-        ctx.strokeRect(this.x,this.y,this.width,this.height)
+        ctx.fillRect(this.x,this.y,this.width,this.height)
     }
 
 };
@@ -43,4 +44,6 @@ function animate(){
     requestAnimationFrame(animate);
 }
 
+
 animate();
+
