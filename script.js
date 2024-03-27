@@ -11,14 +11,14 @@ class Enemy {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.width = Math.random() *80 + 50;
+        this.width = Math.random() *20 + 30;
         this.height = this.width;
         this.speed = Math.random() * 3 + 1;
     }
     update() {
         
-        if (this.x < -this.width ) {
-            this.x = canvas.width;
+        if (this.x < -this.width || this.x > canvas.width -this.width) {
+            this.speed = this.speed * -1;
         }
         //this.x -= this.speed * -1;
         this.x -= this.speed;
