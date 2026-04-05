@@ -41,6 +41,22 @@
             max-height: calc(100vh - 40px);
         }
         
+        .sidebar-avatar {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .avatar-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f5f5f5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
         .sidebar-contacts {
             display: flex;
             flex-direction: row;
@@ -311,6 +327,9 @@
 <body>
     <div class="container">
         <div class="sidebar">
+            <div class="sidebar-avatar">
+                <img src="avatar.jpg" alt="头像" class="avatar-image">
+            </div>
             <div class="sidebar-contacts">
                 <div class="sidebar-item">
                     <a href="mailto:78472957@qq.com" class="sidebar-icon" title="邮箱">
