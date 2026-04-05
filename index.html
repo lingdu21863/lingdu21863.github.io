@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日历</title>
+    <!-- 添加marked.js库用于Markdown转HTML -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .calendar {
+            flex: 0 0 400px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .calendar-header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .calendar-header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+        .nav-btn {
+            background-color: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .nav-btn:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+        
+        .calendar-body {
+            padding: 20px;
+        }
+        
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .weekday {
+            text-align: center;
+            font-weight: bold;
+            color: #666;
+            padding: 10px;
+        }
+        
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        
+        .day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .day:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .day.has-data {
+            position: relative;
+        }
+        
+        .day.has-data::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            width: 6px;
+            height: 6px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        
+        .day.other-month {
+            color: #ccc;
+        }
+        
+        .day.today {
+            background-color: #e3f2fd;
+            font-weight: bold;
+        }
+        
+        .content-area {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            min-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .content-area h2 {
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .content-area pre {
+            white-space: pre-wrap;
+            font-family: inherit;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .content-area .no-content {
+            color: #999;
+            text-align: center;
+            padding: 50px 0;
+        }
+        
+        /* Markdown样式 */
+        .content-area h1,
+        .content-area h2,
+        .content-area h3,
+        .content-area h4,
+        .content-area h5,
+        .content-area h6 {
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .content-area h1 {
+            font-size: 24px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        
+        .content-area h2 {
+            font-size: 20px;
+        }
+        
+        .content-area h3 {
+            font-size: 18px;
+        }
+        
+        .content-area p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .content-area ul,
+        .content-area ol {
+            margin-bottom: 15px;
+            margin-left: 20px;
+        }
+        
+        .content-area li {
+            margin-bottom: 5px;
+        }
+        
+        .content-area a {
+            color: #1E88E5;
+            text-decoration: none;
+        }
+        
+        .content-area a:hover {
+            text-decoration: underline;
+        }
+        
+        .content-area code {
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .content-area pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+        
+        .content-area pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        .content-area blockquote {
+            border-left: 4px solid #ddd;
+            padding-left: 15px;
+            margin-left: 0;
+            margin-bottom: 15px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calendar">
+            <div class="calendar-header">
+                <h1 id="current-month"></h1>
+                <div class="calendar-nav">
+                    <button class="nav-btn" id="prev-month">上一月</button>
+                    <button class="nav-btn" id="next-month">下一月</button>
+                </div>
+            </div>
+            <div class="calendar-body">
+                <div class="weekdays">
+                    <div class="weekday">日</div>
+                    <div class="weekday">一</div>
+                    <div class="weekday">二</div>
+                    <div class="weekday">三</div>
+                    <div class="weekday">四</div>
+                    <div class="weekday">五</div>
+                    <div class="weekday">六</div>
+                </div>
+                <div class="days" id="days-container"></div>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <h2 id="content-title">选择一个日期查看内容</h2>
+            <div id="content-body" class="no-content">
+                点击日历上的日期查看对应的内容
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 日期数据（从文件名提取）
+        const dateFiles = [
+            "2026-03-25.md",
+            "2026-03-26.md",
+            "2026-03-27.md",
+            "2026-03-30.md",
+            "2026-03-31.md",
+            "2026-04-01.md",
+            "2026-04-02.md",
+            "2026-04-03.md",
+            "2026-04-05.md",
+            "2026-04-06.md"
+        ];
+
+        // 提取日期并转换为YYYY-MM-DD格式
+        const hasDataDates = dateFiles.map(file => file.replace('.md', '')).sort();
+
+        // 当前显示的月份
+        let currentDate = new Date();
+
+        // 渲染日历
+        function renderCalendar(year, month) {
+            const daysContainer = document.getElementById('days-container');
+            const currentMonthElement = document.getElementById('current-month');
+            
+            // 清空容器
+            daysContainer.innerHTML = '';
+            
+            // 更新月份标题
+            const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];
+            currentMonthElement.textContent = `${year}年 ${monthNames[month]}`;
+            
+            // 获取当月第一天
+            const firstDay = new Date(year, month, 1);
+            // 获取当月最后一天
+            const lastDay = new Date(year, month + 1, 0);
+            // 获取当月第一天是星期几（0-6，0表示星期日）
+            const startDay = firstDay.getDay();
+            // 获取当月天数
+            const daysInMonth = lastDay.getDate();
+            
+            // 添加上个月的日期
+            const prevMonthLastDay = new Date(year, month, 0).getDate();
+            const prevYear = month === 0 ? year - 1 : year;
+            const prevMonth = month === 0 ? 11 : month - 1;
+            for (let i = startDay - 1; i >= 0; i--) {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('day', 'other-month');
+                dayElement.textContent = prevMonthLastDay - i;
+                
+                // 计算日期字符串
+                const dateString = `${prevYear}-${String(prevMonth + 1).padStart(2, '0')}-${String(prevMonthLastDay - i).padStart(2, '0')}`;
+                
+                // 检查是否有数据
+                if (hasDataDates.includes(dateString)) {
+                    dayElement.classList.add('has-data');
+                }
+                
+                // 添加点击事件
+                dayElement.addEventListener('click', function() {
+                    loadContent(dateString);
+                });
+                
+                daysContainer.appendChild(dayElement);
+            }
+            
+            // 添加当月的日期
+            const today = new Date();
+            const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
+            
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('day');
+                
+                // 检查是否是今天
+                if (isCurrentMonth && today.getDate() === i) {
+                    dayElement.classList.add('today');
+                }
+                
+                // 检查是否有数据
+                const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                if (hasDataDates.includes(dateString)) {
+                    dayElement.classList.add('has-data');
+                }
+                
+                dayElement.textContent = i;
+                
+                // 添加点击事件
+                dayElement.addEventListener('click', function() {
+                    loadContent(dateString);
+                });
+                
+                daysContainer.appendChild(dayElement);
+            }
+            
+            // 添加下个月的日期
+            const remainingDays = 42 - (startDay + daysInMonth); // 6行7列共42个格子
+            const nextYear = month === 11 ? year + 1 : year;
+            const nextMonth = month === 11 ? 0 : month + 1;
+            for (let i = 1; i <= remainingDays; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.classList.add('day', 'other-month');
+                dayElement.textContent = i;
+                
+                // 计算日期字符串
+                const dateString = `${nextYear}-${String(nextMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                
+                // 检查是否有数据
+                if (hasDataDates.includes(dateString)) {
+                    dayElement.classList.add('has-data');
+                }
+                
+                // 添加点击事件
+                dayElement.addEventListener('click', function() {
+                    loadContent(dateString);
+                });
+                
+                daysContainer.appendChild(dayElement);
+            }
+        }
+
+        // 加载内容函数
+        function loadContent(dateString) {
+            const contentTitle = document.getElementById('content-title');
+            const contentBody = document.getElementById('content-body');
+            
+            contentTitle.textContent = `内容 - ${dateString}`;
+            contentBody.innerHTML = '<div style="text-align: center; padding: 50px 0;">加载中...</div>';
+            
+            // 检查是否有对应的md文件
+            if (hasDataDates.includes(dateString)) {
+                // 使用fetch加载md文件，添加缓存控制参数
+                fetch(`${dateString}.md?timestamp=${Date.now()}`)  // 添加时间戳参数以防止缓存
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        // 使用marked.js将Markdown转换为HTML
+                        const htmlContent = marked.parse(data);
+                        contentBody.innerHTML = htmlContent;
+                    })
+                    .catch(error => {
+                        console.error('Error loading file:', error);
+                        contentBody.innerHTML = '<div class="no-content">无法加载文件内容</div>';
+                    });
+            } else {
+                contentBody.innerHTML = '<div class="no-content">该日期没有对应的内容</div>';
+            }
+        }
+
+        // 初始化日历
+        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+
+        // 上一月按钮
+        document.getElementById('prev-month').addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        });
+
+        // 下一月按钮
+        document.getElementById('next-month').addEventListener('click', function() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        });
+    </script>
+</body>
+</html>
