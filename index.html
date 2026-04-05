@@ -28,17 +28,26 @@
         }
         
         .sidebar {
-            flex: 0 0 200px;
+            flex: 0 0 400px;
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
             position: sticky;
             top: 20px;
             max-height: calc(100vh - 40px);
+        }
+        
+        .sidebar-contacts {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
         
         .sidebar-item {
@@ -62,7 +71,7 @@
         }
         
         .sidebar-icon:hover {
-            background-color: #4CAF50;
+            background-color: #24292f;
             color: white;
         }
         
@@ -88,57 +97,55 @@
         }
         
         .calendar {
-            flex: 0 0 400px;
+            flex: 1;
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            border-radius: 4px;
             overflow: hidden;
-            position: sticky;
-            top: 20px;
-            max-height: calc(100vh - 40px);
         }
         
         .calendar-header {
-            background-color: #4CAF50;
+            background-color: #ff0000;
             color: white;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
         }
         
         .calendar-header h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 20px;
+            margin: 0;
+        }
+        
+        .calendar-body {
+            padding: 15px;
         }
         
         .calendar-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 15px;
         }
         
         .nav-btn {
-            background-color: rgba(255,255,255,0.2);
+            background-color: #ff99cc;
             border: none;
             color: white;
             padding: 8px 16px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
+            transition: background-color 0.2s;
         }
         
         .nav-btn:hover {
-            background-color: rgba(255,255,255,0.3);
-        }
-        
-        .calendar-body {
-            padding: 20px;
+            background-color: #ff66b3;
         }
         
         .weekdays {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
+            gap: 5px;
             margin-bottom: 10px;
         }
         
@@ -146,13 +153,14 @@
             text-align: center;
             font-weight: bold;
             color: #666;
-            padding: 10px;
+            padding: 8px;
+            font-size: 14px;
         }
         
         .days {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
+            gap: 5px;
         }
         
         .day {
@@ -160,10 +168,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border: 1px solid #ddd;
             border-radius: 4px;
             position: relative;
             cursor: pointer;
             transition: background-color 0.2s;
+            font-size: 14px;
         }
         
         .day:hover {
@@ -171,17 +181,12 @@
         }
         
         .day.has-data {
-            position: relative;
+            background-color: #ff99cc;
+            color: #333;
         }
         
-        .day.has-data::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            width: 6px;
-            height: 6px;
-            background-color: red;
-            border-radius: 50%;
+        .day.has-data:hover {
+            background-color: #ff66b3;
         }
         
         .day.other-month {
@@ -306,47 +311,49 @@
 <body>
     <div class="container">
         <div class="sidebar">
-            <div class="sidebar-item">
-                <a href="mailto:78472957@qq.com" class="sidebar-icon" title="邮箱">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                </a>
-                <div class="sidebar-text">
-                    <a href="mailto:78472957@qq.com">lingdu21863@qq.com</a>
+            <div class="sidebar-contacts">
+                <div class="sidebar-item">
+                    <a href="mailto:78472957@qq.com" class="sidebar-icon" title="邮箱">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </a>
+                    <div class="sidebar-text">
+                        <a href="mailto:78472957@qq.com">lingdu21863@qq.com</a>
+                    </div>
+                </div>
+                <div class="sidebar-item">
+                    <a href="https://x.com/lingdu21863" class="sidebar-icon" target="_blank" title="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <div class="sidebar-text">
+                        <a href="https://x.com/lingdu21863" target="_blank">@lingdu21863</a>
+                    </div>
                 </div>
             </div>
-            <div class="sidebar-item">
-                <a href="https://x.com/lingdu21863" class="sidebar-icon" target="_blank" title="Twitter">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                </a>
-                <div class="sidebar-text">
-                    <a href="https://x.com/lingdu21863" target="_blank">@lingdu21863</a>
+            <div class="calendar">
+                <div class="calendar-header">
+                    <h1 id="current-month"></h1>
                 </div>
-            </div>
-        </div>
-        <div class="calendar">
-            <div class="calendar-header">
-                <h1 id="current-month"></h1>
+                <div class="calendar-body">
+                    <div class="weekdays">
+                        <div class="weekday">日</div>
+                        <div class="weekday">一</div>
+                        <div class="weekday">二</div>
+                        <div class="weekday">三</div>
+                        <div class="weekday">四</div>
+                        <div class="weekday">五</div>
+                        <div class="weekday">六</div>
+                    </div>
+                    <div class="days" id="days-container"></div>
                 <div class="calendar-nav">
                     <button class="nav-btn" id="prev-month">上一月</button>
                     <button class="nav-btn" id="next-month">下一月</button>
                 </div>
             </div>
-            <div class="calendar-body">
-                <div class="weekdays">
-                    <div class="weekday">日</div>
-                    <div class="weekday">一</div>
-                    <div class="weekday">二</div>
-                    <div class="weekday">三</div>
-                    <div class="weekday">四</div>
-                    <div class="weekday">五</div>
-                    <div class="weekday">六</div>
-                </div>
-                <div class="days" id="days-container"></div>
-            </div>
+        </div>
         </div>
         
         <div class="content-area">
@@ -513,6 +520,16 @@
 
         // 初始化日历
         renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+
+        // 加载当天的内容
+        function loadTodayContent() {
+            const today = new Date();
+            const dateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            loadContent(dateString);
+        }
+
+        // 页面加载时加载当天内容
+        loadTodayContent();
 
         // 上一月按钮
         document.getElementById('prev-month').addEventListener('click', function() {
