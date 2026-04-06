@@ -1,0 +1,1 @@
+New-Item -Name "$(Get-Date -Format 'yyyy-MM-dd').md" -ItemType File
