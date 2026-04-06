@@ -1,1 +1,1 @@
-投机倒把
+python -m http.server 8000
