@@ -35,14 +35,14 @@ def md_to_html(md_text):
                         if i == 0:
                             html_table += '<tr>'
                             for cell in cells:
-                                html_table += f'<th style="border: 1px solid #ddd; padding: 8px; background-color: #f5f5f5; text-align: left;">{cell}</th>'
+                                html_table += f'<th>{cell}</th>'
                             html_table += '</tr>'
                         elif i == 1:
                             continue
                         else:
                             html_table += '<tr>'
                             for cell in cells:
-                                html_table += f'<td style="border: 1px solid #ddd; padding: 8px;">{cell}</td>'
+                                html_table += f'<td>{cell}</td>'
                             html_table += '</tr>'
                     html_table += '</table><!-- TABLE_END -->'
                     result.append(html_table)
@@ -57,14 +57,14 @@ def md_to_html(md_text):
             if i == 0:
                 html_table += '<tr>'
                 for cell in cells:
-                    html_table += f'<th style="border: 1px solid #ddd; padding: 8px; background-color: #f5f5f5; text-align: left;">{cell}</th>'
+                    html_table += f'<th>{cell}</th>'
                 html_table += '</tr>'
             elif i == 1:
                 continue
             else:
                 html_table += '<tr>'
                 for cell in cells:
-                    html_table += f'<td style="border: 1px solid #ddd; padding: 8px;">{cell}</td>'
+                    html_table += f'<td>{cell}</td>'
                 html_table += '</tr>'
         html_table += '</table><!-- TABLE_END -->'
         result.append(html_table)
