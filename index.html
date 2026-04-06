@@ -384,20 +384,21 @@
     </div>
 
     <script>
-        let hasDataDates = [];
+        const hasDataDates = [
+            "2026-03-25",
+            "2026-03-26",
+            "2026-03-27",
+            "2026-03-30",
+            "2026-03-31",
+            "2026-04-01",
+            "2026-04-02",
+            "2026-04-03",
+            "2026-04-05",
+            "2026-04-06",
+            "2026-04-07",
+            "2026-04-08"
+        ].sort();
         let currentDate = new Date();
-
-        function loadDataList() {
-            return fetch('data/index.json?timestamp=' + Date.now())
-                .then(response => response.json())
-                .then(files => {
-                    hasDataDates = files.map(file => file.replace('.md', '')).sort();
-                })
-                .catch(error => {
-                    console.error('Error loading index.json:', error);
-                    hasDataDates = [];
-                });
-        }
 
         // 渲染日历
         function renderCalendar(year, month) {
@@ -532,20 +533,8 @@
             }
         }
 
-        function loadTodayContent() {
-            const today = new Date();
-            const dateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-            loadContent(dateString);
-        }
-
-        function init() {
-            loadDataList().then(() => {
-                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
-                loadTodayContent();
-            });
-        }
-
-        init();
+        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        loadTodayContent();
 
         // 上一月按钮
         document.getElementById('prev-month').addEventListener('click', function() {
