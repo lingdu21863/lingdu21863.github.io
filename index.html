@@ -384,25 +384,20 @@
     </div>
 
     <script>
-        // 日期数据（从文件名提取）
-        const dateFiles = [
-            "2026-03-25.md",
-            "2026-03-26.md",
-            "2026-03-27.md",
-            "2026-03-30.md",
-            "2026-03-31.md",
-            "2026-04-01.md",
-            "2026-04-02.md",
-            "2026-04-03.md",
-            "2026-04-05.md",
-            "2026-04-06.md"
-        ];
-
-        // 提取日期并转换为YYYY-MM-DD格式
-        const hasDataDates = dateFiles.map(file => file.replace('.md', '')).sort();
-
-        // 当前显示的月份
+        let hasDataDates = [];
         let currentDate = new Date();
+
+        function loadDataList() {
+            return fetch('data/index.json?timestamp=' + Date.now())
+                .then(response => response.json())
+                .then(files => {
+                    hasDataDates = files.map(file => file.replace('.md', '')).sort();
+                })
+                .catch(error => {
+                    console.error('Error loading index.json:', error);
+                    hasDataDates = [];
+                });
+        }
 
         // 渲染日历
         function renderCalendar(year, month) {
@@ -516,7 +511,7 @@
             // 检查是否有对应的md文件
             if (hasDataDates.includes(dateString)) {
                 // 使用fetch加载md文件，添加缓存控制参数
-                fetch(`${dateString}.md?timestamp=${Date.now()}`)  // 添加时间戳参数以防止缓存
+                fetch(`data/${dateString}.md?timestamp=${Date.now()}`)  // 添加时间戳参数以防止缓存
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
@@ -537,18 +532,20 @@
             }
         }
 
-        // 初始化日历
-        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
-
-        // 加载当天的内容
         function loadTodayContent() {
             const today = new Date();
             const dateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
             loadContent(dateString);
         }
 
-        // 页面加载时加载当天内容
-        loadTodayContent();
+        function init() {
+            loadDataList().then(() => {
+                renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+                loadTodayContent();
+            });
+        }
+
+        init();
 
         // 上一月按钮
         document.getElementById('prev-month').addEventListener('click', function() {
