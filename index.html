@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>零度投资</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.9/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.0/github-markdown.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <style>
         * {
             margin: 0;
@@ -12,8 +17,8 @@
         }
         
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: #f6f8fa;
             padding: 20px;
         }
         
@@ -222,127 +227,18 @@
             overflow-y: auto;
         }
         
-        .content-area h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #FF5604;
-            font-size: 22px;
-        }
-        
         .content-area .no-content {
             color: #999;
             text-align: center;
             padding: 80px 0;
-            font-size: 16px;
         }
         
-        .content-area h1 {
-            color: #2c3e50;
-            font-size: 28px;
-            margin: 25px 0 15px 0;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-        }
-        
-        .content-area h2 {
-            color: #34495e;
-            font-size: 22px;
-            margin: 20px 0 12px 0;
-        }
-        
-        .content-area h3 {
-            color: #34495e;
-            font-size: 18px;
-            margin: 18px 0 10px 0;
-        }
-        
-        .content-area p {
-            color: #333;
-            line-height: 1.8;
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-        
-        .content-area table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 14px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .content-area th {
-            color: #333;
-            padding: 12px 10px;
-            text-align: left;
-            font-weight: 700;
-        }
-        
-        .content-area td {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            color: #333;
-        }
-        
-        .content-area tr:hover td {
-            background-color: #f9f9f9;
-        }
-        
-        .content-area tr:nth-child(even) td {
-            background-color: #fafafa;
-        }
-        
-        .content-area blockquote {
-            border-left: 4px solid #FF5604;
-            padding: 15px 20px;
-            margin: 15px 0;
-            background-color: #fff8f5;
-            color: #555;
-            border-radius: 0 4px 4px 0;
-        }
-        
-        .content-area hr {
-            border: none;
-            border-top: 1px solid #eee;
-            margin: 25px 0;
-        }
-        
-        .content-area a {
-            color: #FF5604;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        
-        .content-area a:hover {
-            color: #e04500;
-            text-decoration: underline;
-        }
-        
-        .content-area strong {
-            color: #333;
-            font-weight: 700;
-        }
-        
-        .content-area code {
-            background-color: #f5f5f5;
-            padding: 3px 6px;
-            border-radius: 3px;
-            font-family: 'Consolas', 'Monaco', monospace;
-            font-size: 13px;
-            color: #c7254e;
-        }
-        
-        .content-area ul,
-        .content-area ol {
-            margin: 15px 0;
-            padding-left: 25px;
-            color: #333;
-        }
-        
-        .content-area li {
-            margin-bottom: 8px;
-            line-height: 1.6;
+        .markdown-body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px 0;
         }
 
     </style>
@@ -523,6 +419,21 @@
             }
         }
 
+        // 配置 marked
+        marked.setOptions({
+            gfm: true,
+            breaks: true
+        });
+
+        // 代码高亮函数
+        function applyHighlight() {
+            if (typeof hljs !== 'undefined') {
+                document.querySelectorAll('#content-body pre code').forEach((block) => {
+                    hljs.highlightElement(block);
+                });
+            }
+        }
+
         // 加载内容函数
         function loadContent(dateString) {
             const contentTitle = document.getElementById('content-title');
@@ -531,10 +442,8 @@
             contentTitle.textContent = `内容 - ${dateString}`;
             contentBody.innerHTML = '<div style="text-align: center; padding: 50px 0;">加载中...</div>';
             
-            // 检查是否有对应的html文件
             if (hasDataDates.includes(dateString)) {
-                // 使用fetch加载html文件，添加缓存控制参数
-                fetch(`data/${dateString}.html?timestamp=${Date.now()}`)  // 添加时间戳参数以防止缓存
+                fetch(`data/${dateString}.md`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
@@ -542,13 +451,10 @@
                         return response.text();
                     })
                     .then(data => {
-                        // 提取body标签内的内容
-                        const bodyMatch = data.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-                        if (bodyMatch) {
-                            contentBody.innerHTML = bodyMatch[1];
-                        } else {
-                            contentBody.innerHTML = data;
-                        }
+                        const rawHtml = marked.parse(data);
+                        const cleanHtml = DOMPurify.sanitize(rawHtml);
+                        contentBody.innerHTML = `<div class="markdown-body">${cleanHtml}</div>`;
+                        applyHighlight();
                     })
                     .catch(error => {
                         console.error('Error loading file:', error);
@@ -560,6 +466,11 @@
         }
 
         function loadTodayContent() {
+            if (window.location.protocol === 'file:') {
+                const contentBody = document.getElementById('content-body');
+                contentBody.innerHTML = '<div class="no-content">请使用HTTP服务器访问此页面。<br><br>方法：在项目目录下运行 <code>python -m http.server 8080</code><br>然后访问 <a href="http://localhost:8080">http://localhost:8080</a></div>';
+                return;
+            }
             const today = new Date();
             const dateString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
             loadContent(dateString);
