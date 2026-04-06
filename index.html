@@ -92,8 +92,8 @@
         
         .sidebar-icon:hover {
             background-color: #f3f4f6;
-            color: #0969da;
-            border-color: #0969da;
+            color: #9fbee2;
+            border-color: #9fbee2;
         }
         
         .sidebar svg {
@@ -109,7 +109,7 @@
         }
         
         .sidebar-text a {
-            color: #0969da;
+            color: #24292f;
             text-decoration: none;
         }
         
@@ -164,8 +164,8 @@
         
         .nav-btn:hover {
             background-color: #f3f4f6;
-            border-color: #0969da;
-            color: #0969da;
+            border-color: #9fbee2;
+            color: #9fbee2;
         }
         
         .weekdays {
@@ -206,17 +206,29 @@
         
         .day:hover {
             background-color: #f6f8fa;
-            border-color: #0969da;
+            border-color: #9fbee2;
         }
         
         .day.has-data {
-            background-color: #0969da;
-            color: white;
-            border-color: #0969da;
+            background-color: white;
+            color: #24292f;
+            border-color: #d0d7de;
+        }
+        
+        .day.has-data::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: #cf222e;
+            border-radius: 50%;
         }
         
         .day.has-data:hover {
-            background-color: #085fc4;
+            background-color: #f6f8fa;
         }
         
         .day.other-month {
@@ -226,8 +238,12 @@
         
         .day.today {
             background-color: #ddf4ff;
-            color: #0969da;
-            border-color: #0969da;
+            color: #9fbee2;
+            border-color: #9fbee2;
+        }
+        
+        .day.today.has-data::after {
+            bottom: 2px;
         }
         
         .content-area {
