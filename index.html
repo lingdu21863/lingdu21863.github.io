@@ -295,9 +295,9 @@
         </div>
         
         <div class="content-area">
-            <h2 id="content-title">选择一个日期查看内容</h2>
-            <div id="content-body" class="no-content">
-                点击日历上的日期查看对应的内容
+            <div id="content-body" class="markdown-body">
+                <h2>选择一个日期查看内容</h2>
+                <p>点击日历上的日期查看对应的内容</p>
             </div>
         </div>
     </div>
@@ -436,11 +436,9 @@
 
         // 加载内容函数
         function loadContent(dateString) {
-            const contentTitle = document.getElementById('content-title');
             const contentBody = document.getElementById('content-body');
             
-            contentTitle.textContent = `内容 - ${dateString}`;
-            contentBody.innerHTML = '<div style="text-align: center; padding: 50px 0;">加载中...</div>';
+            contentBody.innerHTML = '<p style="text-align: center; padding: 50px 0;">加载中...</p>';
             
             if (hasDataDates.includes(dateString)) {
                 fetch(`data/${dateString}.md`)
@@ -451,17 +449,17 @@
                         return response.text();
                     })
                     .then(data => {
-                        const rawHtml = marked.parse(data);
+                        const rawHtml = marked.parse(`# 内容 - ${dateString}\n\n` + data);
                         const cleanHtml = DOMPurify.sanitize(rawHtml);
-                        contentBody.innerHTML = `<div class="markdown-body">${cleanHtml}</div>`;
+                        contentBody.innerHTML = cleanHtml;
                         applyHighlight();
                     })
                     .catch(error => {
                         console.error('Error loading file:', error);
-                        contentBody.innerHTML = '<div class="no-content">无法加载文件内容</div>';
+                        contentBody.innerHTML = '<p style="text-align: center; color: #999; padding: 80px 0;">无法加载文件内容</p>';
                     });
             } else {
-                contentBody.innerHTML = '<div class="no-content">该日期没有对应的内容</div>';
+                contentBody.innerHTML = '<p style="text-align: center; color: #999; padding: 80px 0;">该日期没有对应的内容</p>';
             }
         }
 
