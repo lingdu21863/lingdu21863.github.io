@@ -251,12 +251,19 @@
             background-color: white;
             border: 1px solid #d0d7de;
             border-radius: 6px;
-            padding: 0;
+            padding: 24px;
             min-height: 600px;
             overflow-y: auto;
+            color: #333;
         }
         
         .content-area .no-content {
+            color: #57606a;
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .content-area .loading {
             color: #57606a;
             text-align: center;
             padding: 80px 0;
@@ -467,7 +474,7 @@
         function loadContent(dateString) {
             const contentBody = document.getElementById('content-body');
             
-            contentBody.innerHTML = '<p style="text-align: center; padding: 50px 0;">加载中...</p>';
+            contentBody.innerHTML = '<div class="loading">加载中...</div>';
             
             if (hasDataDates.includes(dateString)) {
                 fetch(`data/${dateString}.md`)
@@ -485,10 +492,10 @@
                     })
                     .catch(error => {
                         console.error('Error loading file:', error);
-                        contentBody.innerHTML = '<p style="text-align: center; color: #999; padding: 80px 0;">无法加载文件内容</p>';
+                        contentBody.innerHTML = '<div class="no-content">无法加载文件内容</div>';
                     });
             } else {
-                contentBody.innerHTML = '<p style="text-align: center; color: #999; padding: 80px 0;">该日期没有对应的内容</p>';
+                contentBody.innerHTML = '<div class="no-content">该日期没有对应的内容</div>';
             }
         }
 
