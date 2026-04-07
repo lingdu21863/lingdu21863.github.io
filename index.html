@@ -28,21 +28,22 @@
             margin: 0 auto;
             display: flex;
             gap: 24px;
-            align-items: flex-start;
         }
         
         .sidebar {
-            flex: 0 0 380px;
+            width: 320px;
+            flex-shrink: 0;
             background-color: white;
             border: 1px solid #d0d7de;
             border-radius: 6px;
-            padding: 24px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 20px;
             position: sticky;
             top: 24px;
             max-height: calc(100vh - 48px);
+            height: fit-content;
         }
         
         .sidebar-avatar {
@@ -118,69 +119,40 @@
         }
         
         .calendar {
-            flex: 1;
-            background-color: white;
-            border: 1px solid #d0d7de;
-            border-radius: 6px;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            flex-shrink: 0;
         }
         
         .calendar-header {
-            background-color: #f6f8fa;
-            color: #24292f;
-            padding: 16px;
             text-align: center;
-            border-bottom: 1px solid #d0d7de;
         }
         
         .calendar-header h1 {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
-            margin: 0;
+            color: #24292f;
         }
         
         .calendar-body {
-            padding: 16px;
-        }
-        
-        .calendar-nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 16px;
-        }
-        
-        .nav-btn {
-            background-color: white;
-            border: 1px solid #d0d7de;
-            color: #24292f;
-            padding: 5px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-        
-        .nav-btn:hover {
-            background-color: #f3f4f6;
-            border-color: #9fbee2;
-            color: #9fbee2;
+            flex-direction: column;
+            gap: 8px;
         }
         
         .weekdays {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 4px;
-            margin-bottom: 8px;
         }
         
         .weekday {
             text-align: center;
+            font-size: 12px;
             font-weight: 600;
             color: #57606a;
-            padding: 8px;
-            font-size: 12px;
+            padding: 8px 0;
         }
         
         .days {
@@ -190,29 +162,33 @@
         }
         
         .day {
-            aspect-ratio: 1;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #d0d7de;
-            border-radius: 6px;
-            position: relative;
+            height: 40px;
+            font-size: 14px;
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 14px;
-            font-weight: 500;
-            color: #24292f;
         }
         
         .day:hover {
             background-color: #f6f8fa;
-            border-color: #9fbee2;
+        }
+        
+        .day.today {
+            background-color: #9fbee2;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .day.other-month {
+            color: #d0d7de;
         }
         
         .day.has-data {
-            background-color: white;
-            color: #24292f;
-            border-color: #d0d7de;
+            position: relative;
         }
         
         .day.has-data::after {
@@ -227,23 +203,31 @@
             border-radius: 50%;
         }
         
-        .day.has-data:hover {
-            background-color: #f6f8fa;
-        }
-        
-        .day.other-month {
-            color: #8c959f;
-            border-color: #eaeef2;
-        }
-        
-        .day.today {
-            background-color: #ddf4ff;
-            color: #9fbee2;
-            border-color: #9fbee2;
-        }
-        
         .day.today.has-data::after {
             bottom: 2px;
+        }
+        
+        .calendar-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+        
+        .nav-btn {
+            padding: 6px 12px;
+            font-size: 14px;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            background-color: white;
+            color: #24292f;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .nav-btn:hover {
+            background-color: #f6f8fa;
+            border-color: #9fbee2;
+            color: #9fbee2;
         }
         
         .content-area {
@@ -274,9 +258,141 @@
             min-width: 200px;
             max-width: 980px;
             margin: 0 auto;
-            padding: 32px;
+            padding: 45px;
         }
-
+        
+        @media (max-width: 767px) {
+            .markdown-body {
+                padding: 15px;
+            }
+        }
+        
+        .markdown-body h1 {
+            padding-bottom: 0.3em;
+            font-size: 2em;
+            border-bottom: 1px solid #eaecef;
+        }
+        
+        .markdown-body h2 {
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            border-bottom: 1px solid #eaecef;
+        }
+        
+        .markdown-body h3 {
+            font-size: 1.25em;
+        }
+        
+        .markdown-body h4 {
+            font-size: 1em;
+        }
+        
+        .markdown-body h5 {
+            font-size: 0.875em;
+        }
+        
+        .markdown-body h6 {
+            font-size: 0.85em;
+            color: #6a737d;
+        }
+        
+        .markdown-body p {
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        
+        .markdown-body blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: 0.25em solid #dfe2e5;
+            margin: 0 0 16px 0;
+        }
+        
+        .markdown-body ul {
+            margin-top: 0;
+            margin-bottom: 16px;
+            padding-left: 2em;
+        }
+        
+        .markdown-body ol {
+            margin-top: 0;
+            margin-bottom: 16px;
+            padding-left: 2em;
+        }
+        
+        .markdown-body li {
+            margin-top: 0.25em;
+        }
+        
+        .markdown-body code {
+            padding: 0.2em 0.4em;
+            font-size: 85%;
+            background-color: rgba(27,31,35,0.05);
+            border-radius: 3px;
+        }
+        
+        .markdown-body pre {
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #f6f8fa;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+        
+        .markdown-body pre code {
+            display: inline;
+            padding: 0;
+            margin: 0;
+            overflow: visible;
+            line-height: inherit;
+            word-wrap: normal;
+            background-color: transparent;
+            border: 0;
+        }
+        
+        .markdown-body table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+        
+        .markdown-body table th {
+            font-weight: 600;
+            background-color: transparent;
+            color: #24292f;
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+            text-align: left;
+        }
+        
+        .markdown-body table td {
+            padding: 6px 13px;
+            border: 1px solid #dfe2e5;
+        }
+        
+        .markdown-body table tr {
+            background-color: white;
+        }
+        
+        .markdown-body table tr:nth-child(2n) {
+            background-color: #f6f8fa;
+        }
+        
+        .markdown-body a {
+            color: #9fbee2;
+            text-decoration: none;
+        }
+        
+        .markdown-body a:hover {
+            text-decoration: underline;
+        }
+        
+        .markdown-body strong {
+            font-weight: 600;
+            color: #24292f;
+        }
     </style>
 </head>
 <body>
@@ -322,14 +438,13 @@
                         <div class="weekday">六</div>
                     </div>
                     <div class="days" id="days-container"></div>
-                <div class="calendar-nav">
-                    <button class="nav-btn" id="prev-month">上一月</button>
-                    <button class="nav-btn" id="next-month">下一月</button>
+                    <div class="calendar-nav">
+                        <button class="nav-btn" id="prev-month">上一月</button>
+                        <button class="nav-btn" id="next-month">下一月</button>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
-        
         <div class="content-area">
             <div id="content-body" class="markdown-body">
                 <h2>选择一个日期查看内容</h2>
