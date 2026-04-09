@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -107,8 +107,9 @@
     </div>
     <script>
         let words=[],currentIndex=0,isAutoPlaying=false,autoPlayTimer=null,currentRate=0.8,currentInterval=3;
-        function loadVoices(){const v=speechSynthesis.getVoices(),s=document.getElementById('voiceSelect');s.innerHTML='<option value="">默认语音</option>';v.filter(x=>x.lang.startsWith('en')).forEach((x,i)=>s.innerHTML+='<option value="'+i+'">'+x.name+' ('+x.lang+')</option>');}
-        speechSynthesis.onvoiceschanged=loadVoices;loadVoices();
+        function loadVoices(){const v=speechSynthesis.getVoices(),s=document.getElementById('voiceSelect');s.innerHTML='<option value="">默认语音</option>';const ev=v.filter(x=>x.lang.startsWith('en'));ev.forEach((x,i)=>s.innerHTML+='<option value="'+i+'">'+x.name+' ('+x.lang+')</option>');console.log('已加载'+ev.length+'个英语语音');}
+        if(speechSynthesis.onvoiceschanged!==undefined){speechSynthesis.onvoiceschanged=loadVoices;}
+        setTimeout(loadVoices,100);
         function parseWordText(text){return text.split('\n').map(l=>l.trim()).filter(l=>l).map(l=>{const p=l.split('\t');return{word:p[0]||'',definition:p.slice(1).join('\t')||''};}).filter(i=>i.word);}
         async function loadWords(){const st=document.getElementById('status');st.className='status loading';st.textContent='正在加载单词...';st.classList.remove('hidden');try{const r=await fetch('./1 初中-乱序.txt');if(!r.ok)throw new Error('文件加载失败');const t=await r.text();words=parseWordText(t);if(!words.length)throw new Error('未找到有效单词');currentIndex=0;displayCurrentWord();renderWordList();updateProgress();st.className='status success';st.textContent='成功加载 '+words.length+' 个单词';setTimeout(()=>st.classList.add('hidden'),2000);}catch(e){st.className='status error';st.textContent='加载失败: '+e.message;}}
         async function loadSelectedFile(){const select=document.getElementById('fileSelect');const filename=select.value;if(!filename)return;const st=document.getElementById('status');st.className='status loading';st.textContent='正在加载 '+filename+'...';st.classList.remove('hidden');try{const r=await fetch('./'+filename);if(!r.ok)throw new Error('文件加载失败');const t=await r.text();words=parseWordText(t);if(!words.length)throw new Error('未找到有效单词');currentIndex=0;displayCurrentWord();renderWordList();updateProgress();st.className='status success';st.textContent='成功加载 '+words.length+' 个单词';setTimeout(()=>st.classList.add('hidden'),2000);}catch(e){st.className='status error';st.textContent='加载失败: '+e.message;}}
@@ -116,11 +117,11 @@
         function displayCurrentWord(){if(!words.length)return;const w=words[currentIndex];document.getElementById('currentWord').textContent=w.word;document.getElementById('wordDefinition').textContent=w.definition;const items=document.querySelectorAll('.word-item');items.forEach((x,i)=>x.classList.toggle('active',i===currentIndex));const activeItem=items[currentIndex];if(activeItem)activeItem.scrollIntoView({behavior:'smooth',block:'center'});}
         function renderWordList(){const l=document.getElementById('wordList');l.innerHTML='';words.forEach((x,i)=>{const d=document.createElement('div');d.className='word-item'+(i===currentIndex?' active':'');d.textContent=(i+1)+'. '+x.word;d.onclick=()=>{currentIndex=i;displayCurrentWord();updateProgress();speakCurrent();};l.appendChild(d);});}
         function updateProgress(){const p=words.length?((currentIndex+1)/words.length*100):0;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressText').textContent=(currentIndex+1)+' / '+words.length;}
-        function speakCurrent(){if(!words.length)return;stopSpeaking();const u=new SpeechSynthesisUtterance(words[currentIndex].word);u.rate=currentRate;const v=speechSynthesis.getVoices(),s=document.getElementById('voiceSelect');if(s.value&&v[s.value])u.voice=v[s.value];else{const e=v.find(x=>x.lang.startsWith('en'));if(e)u.voice=e;}speechSynthesis.speak(u);}
+        function speakCurrent(){if(!words.length){alert('请先加载单词！');return;}if(!('speechSynthesis'in window)){alert('您的浏览器不支持语音朗读功能，请使用Chrome、Edge或Safari浏览器');return;}stopSpeaking();const u=new SpeechSynthesisUtterance(words[currentIndex].word);u.rate=currentRate;u.lang='en-US';const v=speechSynthesis.getVoices();const s=document.getElementById('voiceSelect');if(s.value&&v[parseInt(s.value)]){u.voice=v[parseInt(s.value)];}else{const e=v.find(x=>x.lang.startsWith('en'));if(e)u.voice=e;}u.onerror=function(e){console.error('朗读错误:',e.error);};speechSynthesis.speak(u);console.log('正在朗读:',words[currentIndex].word);}
         function stopSpeaking(){speechSynthesis.cancel();}
         function nextWord(){if(!words.length)return;currentIndex=(currentIndex+1)%words.length;displayCurrentWord();updateProgress();if(isAutoPlaying)speakCurrent();}
         function prevWord(){if(!words.length)return;currentIndex=(currentIndex-1+words.length)%words.length;displayCurrentWord();updateProgress();if(isAutoPlaying)speakCurrent();}
-        function toggleAutoPlay(){isAutoPlaying=!isAutoPlaying;document.getElementById('autoPlayBtn').textContent=isAutoPlaying?'停止自动':'自动播放';if(isAutoPlaying)startAutoPlay();else stopAutoPlay();}
+        function toggleAutoPlay(){if(!words.length){alert('请先加载单词！');return;}isAutoPlaying=!isAutoPlaying;document.getElementById('autoPlayBtn').textContent=isAutoPlaying?'停止自动':'自动播放';if(isAutoPlaying)startAutoPlay();else stopAutoPlay();}
         function startAutoPlay(){if(!words.length)return;speakCurrent();autoPlayTimer=setInterval(nextWord,currentInterval*1000);}
         function stopAutoPlay(){if(autoPlayTimer){clearInterval(autoPlayTimer);autoPlayTimer=null;}stopSpeaking();}
         function updateRate(){currentRate=parseFloat(document.getElementById('rateRange').value);document.getElementById('rateValue').textContent=currentRate;}
