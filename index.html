@@ -91,7 +91,9 @@
                         <label>发音引擎:</label>
                         <select id="engineSelect">
                             <option value="browser">浏览器语音 (免费)</option>
-                            <option value="google">Google TTS (更自然)</option>
+                            <option value="google">Google TTS (推荐)</option>
+                            <option value="responsivevoice">ResponsiveVoice</option>
+                            <option value="voicerss">Voice RSS</option>
                         </select>
                     </div>
                     <div class="setting-row">
@@ -112,6 +114,7 @@
             </div>
         </div>
     </div>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=free"></script>
     <script>
         let words=[],currentIndex=0,isAutoPlaying=false,autoPlayTimer=null,currentRate=0.8,currentInterval=3,audioElement=null;
         function loadVoices(){const v=speechSynthesis.getVoices(),s=document.getElementById('voiceSelect');s.innerHTML='<option value="">默认语音</option>';const ev=v.filter(x=>x.lang.startsWith('en'));ev.forEach((x,i)=>s.innerHTML+='<option value="'+i+'">'+x.name+' ('+x.lang+')</option>');console.log('已加载'+ev.length+'个英语语音');}
@@ -129,10 +132,11 @@
             stopSpeaking();
             const engine=document.getElementById('engineSelect').value;
             const word=words[currentIndex].word;
-            if(engine==='google'){
-                speakWithGoogleTTS(word);
-            }else{
-                speakWithBrowser(word);
+            switch(engine){
+                case 'google': speakWithGoogleTTS(word); break;
+                case 'responsivevoice': speakWithResponsiveVoice(word); break;
+                case 'voicerss': speakWithVoiceRSS(word); break;
+                default: speakWithBrowser(word);
             }
         }
         function speakWithBrowser(word){
@@ -154,27 +158,35 @@
             audioElement.src=url;
             audioElement.onloadedmetadata=function(){
                 if(audioElement.duration){
-                    audioElement.play().catch(e=>{
-                        console.error('Google TTS播放失败，切换到浏览器语音:',e);
-                        speakWithBrowser(word);
-                    });
+                    audioElement.play().catch(e=>{console.error('Google TTS播放失败:',e);speakWithBrowser(word);});
                     console.log('正在朗读(Google):',word);
-                }else{
-                    console.warn('Google TTS返回空音频，切换到浏览器语音');
-                    speakWithBrowser(word);
-                }
+                }else{speakWithBrowser(word);}
             };
-            audioElement.onerror=function(){
-                console.error('Google TTS加载失败，切换到浏览器语音');
+            audioElement.onerror=function(){console.error('Google TTS加载失败');speakWithBrowser(word);};
+        }
+        function speakWithResponsiveVoice(word){
+            if(typeof responsiveVoice!=='undefined'){
+                responsiveVoice.speak(word,'US English Female',{rate:currentRate,onerror:function(){speakWithBrowser(word);}});
+                console.log('正在朗读(ResponsiveVoice):',word);
+            }else{
+                console.error('ResponsiveVoice未加载');
                 speakWithBrowser(word);
+            }
+        }
+        function speakWithVoiceRSS(word){
+            audioElement=new Audio();
+            const url='https://api.voicerss.org/?key=free&hl=en-us&src='+encodeURIComponent(word)+'&r='+Math.round((currentRate-1)*10);
+            audioElement.src=url;
+            audioElement.onloadedmetadata=function(){
+                audioElement.play().catch(e=>{console.error('Voice RSS播放失败:',e);speakWithBrowser(word);});
+                console.log('正在朗读(Voice RSS):',word);
             };
+            audioElement.onerror=function(){console.error('Voice RSS加载失败');speakWithBrowser(word);};
         }
         function stopSpeaking(){
             speechSynthesis.cancel();
-            if(audioElement){
-                audioElement.pause();
-                audioElement.currentTime=0;
-            }
+            if(audioElement){audioElement.pause();audioElement.currentTime=0;}
+            if(typeof responsiveVoice!=='undefined')responsiveVoice.cancel();
         }
         function nextWord(){if(!words.length)return;currentIndex=(currentIndex+1)%words.length;displayCurrentWord();updateProgress();if(isAutoPlaying)speakCurrent();}
         function prevWord(){if(!words.length)return;currentIndex=(currentIndex-1+words.length)%words.length;displayCurrentWord();updateProgress();if(isAutoPlaying)speakCurrent();}
