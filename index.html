@@ -454,21 +454,28 @@
     </div>
 
     <script>
-        const hasDataDates = [
-            "2026-03-25",
-            "2026-03-26",
-            "2026-03-27",
-            "2026-03-30",
-            "2026-03-31",
-            "2026-04-01",
-            "2026-04-02",
-            "2026-04-03",
-            "2026-04-05",
-            "2026-04-06",
-            "2026-04-07",
-            "2026-04-08"
-        ].sort();
+        let hasDataDates = [];
         let currentDate = new Date();
+        
+        // 动态加载data目录索引
+        async function loadDataIndex() {
+            try {
+                const response = await fetch('data/index.json');
+                if (response.ok) {
+                    const indexData = await response.json();
+                    hasDataDates = indexData.files.sort();
+                    console.log('已加载数据索引:', hasDataDates);
+                    // 重新渲染日历以显示数据标记
+                    renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+                } else {
+                    console.error('无法加载数据索引文件');
+                    hasDataDates = [];
+                }
+            } catch (error) {
+                console.error('加载数据索引失败:', error);
+                hasDataDates = [];
+            }
+        }
 
         // 渲染日历
         function renderCalendar(year, month) {
@@ -626,8 +633,11 @@
             loadContent(dateString);
         }
 
-        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
-        loadTodayContent();
+        // 先加载数据索引，然后渲染日历
+        loadDataIndex().then(() => {
+            renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            loadTodayContent();
+        });
 
         // 上一月按钮
         document.getElementById('prev-month').addEventListener('click', function() {
