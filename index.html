@@ -88,6 +88,13 @@
                 </div>
                 <div class="settings">
                     <div class="setting-row">
+                        <label>发音引擎:</label>
+                        <select id="engineSelect">
+                            <option value="browser">浏览器语音 (免费)</option>
+                            <option value="google">Google TTS (更自然)</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
                         <label>语速:</label>
                         <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="0.8" onchange="updateRate()">
                         <span id="rateValue">0.8</span>
@@ -106,7 +113,7 @@
         </div>
     </div>
     <script>
-        let words=[],currentIndex=0,isAutoPlaying=false,autoPlayTimer=null,currentRate=0.8,currentInterval=3;
+        let words=[],currentIndex=0,isAutoPlaying=false,autoPlayTimer=null,currentRate=0.8,currentInterval=3,audioElement=null;
         function loadVoices(){const v=speechSynthesis.getVoices(),s=document.getElementById('voiceSelect');s.innerHTML='<option value="">默认语音</option>';const ev=v.filter(x=>x.lang.startsWith('en'));ev.forEach((x,i)=>s.innerHTML+='<option value="'+i+'">'+x.name+' ('+x.lang+')</option>');console.log('已加载'+ev.length+'个英语语音');}
         if(speechSynthesis.onvoiceschanged!==undefined){speechSynthesis.onvoiceschanged=loadVoices;}
         setTimeout(loadVoices,100);
@@ -117,8 +124,58 @@
         function displayCurrentWord(){if(!words.length)return;const w=words[currentIndex];document.getElementById('currentWord').textContent=w.word;document.getElementById('wordDefinition').textContent=w.definition;const items=document.querySelectorAll('.word-item');items.forEach((x,i)=>x.classList.toggle('active',i===currentIndex));const activeItem=items[currentIndex];if(activeItem)activeItem.scrollIntoView({behavior:'smooth',block:'center'});}
         function renderWordList(){const l=document.getElementById('wordList');l.innerHTML='';words.forEach((x,i)=>{const d=document.createElement('div');d.className='word-item'+(i===currentIndex?' active':'');d.textContent=(i+1)+'. '+x.word;d.onclick=()=>{currentIndex=i;displayCurrentWord();updateProgress();speakCurrent();};l.appendChild(d);});}
         function updateProgress(){const p=words.length?((currentIndex+1)/words.length*100):0;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressText').textContent=(currentIndex+1)+' / '+words.length;}
-        function speakCurrent(){if(!words.length){alert('请先加载单词！');return;}if(!('speechSynthesis'in window)){alert('您的浏览器不支持语音朗读功能，请使用Chrome、Edge或Safari浏览器');return;}stopSpeaking();const u=new SpeechSynthesisUtterance(words[currentIndex].word);u.rate=currentRate;u.lang='en-US';const v=speechSynthesis.getVoices();const s=document.getElementById('voiceSelect');if(s.value&&v[parseInt(s.value)]){u.voice=v[parseInt(s.value)];}else{const e=v.find(x=>x.lang.startsWith('en'));if(e)u.voice=e;}u.onerror=function(e){console.error('朗读错误:',e.error);};speechSynthesis.speak(u);console.log('正在朗读:',words[currentIndex].word);}
-        function stopSpeaking(){speechSynthesis.cancel();}
+        function speakCurrent(){
+            if(!words.length){alert('请先加载单词！');return;}
+            stopSpeaking();
+            const engine=document.getElementById('engineSelect').value;
+            const word=words[currentIndex].word;
+            if(engine==='google'){
+                speakWithGoogleTTS(word);
+            }else{
+                speakWithBrowser(word);
+            }
+        }
+        function speakWithBrowser(word){
+            if(!('speechSynthesis'in window)){alert('您的浏览器不支持语音朗读功能，请使用Chrome、Edge或Safari浏览器');return;}
+            const u=new SpeechSynthesisUtterance(word);
+            u.rate=currentRate;
+            u.lang='en-US';
+            const v=speechSynthesis.getVoices();
+            const s=document.getElementById('voiceSelect');
+            if(s.value&&v[parseInt(s.value)]){u.voice=v[parseInt(s.value)];}
+            else{const e=v.find(x=>x.lang.startsWith('en'));if(e)u.voice=e;}
+            u.onerror=function(e){console.error('朗读错误:',e.error);};
+            speechSynthesis.speak(u);
+            console.log('正在朗读(浏览器):',word);
+        }
+        function speakWithGoogleTTS(word){
+            audioElement=new Audio();
+            const url='https://translate.google.com/translate_tts?ie=UTF-8&tl=en&client=tw-ob&q='+encodeURIComponent(word);
+            audioElement.src=url;
+            audioElement.onloadedmetadata=function(){
+                if(audioElement.duration){
+                    audioElement.play().catch(e=>{
+                        console.error('Google TTS播放失败，切换到浏览器语音:',e);
+                        speakWithBrowser(word);
+                    });
+                    console.log('正在朗读(Google):',word);
+                }else{
+                    console.warn('Google TTS返回空音频，切换到浏览器语音');
+                    speakWithBrowser(word);
+                }
+            };
+            audioElement.onerror=function(){
+                console.error('Google TTS加载失败，切换到浏览器语音');
+                speakWithBrowser(word);
+            };
+        }
+        function stopSpeaking(){
+            speechSynthesis.cancel();
+            if(audioElement){
+                audioElement.pause();
+                audioElement.currentTime=0;
+            }
+        }
         function nextWord(){if(!words.length)return;currentIndex=(currentIndex+1)%words.length;displayCurrentWord();updateProgress();if(isAutoPlaying)speakCurrent();}
         function prevWord(){if(!words.length)return;currentIndex=(currentIndex-1+words.length)%words.length;displayCurrentWord();updateProgress();if(isAutoPlaying)speakCurrent();}
         function toggleAutoPlay(){if(!words.length){alert('请先加载单词！');return;}isAutoPlaying=!isAutoPlaying;document.getElementById('autoPlayBtn').textContent=isAutoPlaying?'停止自动':'自动播放';if(isAutoPlaying)startAutoPlay();else stopAutoPlay();}
