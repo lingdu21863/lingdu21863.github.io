@@ -547,6 +547,13 @@
         setTimeout(loadVoices, 100);
         setTimeout(loadVoices, 500);
         
+        document.getElementById('currentWord').addEventListener('click', () => {
+            if (isAutoPlaying) {
+                toggleAutoPlay();
+            }
+            speakCurrent();
+        });
+        
         function saveSettings() {
             localStorage.setItem('tts_voice', document.getElementById('voiceSelect').value);
             localStorage.setItem('tts_rate', document.getElementById('rateRange').value);
@@ -677,6 +684,9 @@
                 d.className = 'word-item' + (i === currentIndex ? ' active' : '');
                 d.textContent = (i + 1) + '. ' + x.word;
                 d.onclick = () => {
+                    if (isAutoPlaying) {
+                        toggleAutoPlay();
+                    }
                     currentIndex = i;
                     displayCurrentWord();
                     updateProgress();
