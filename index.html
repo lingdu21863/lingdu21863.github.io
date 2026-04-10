@@ -821,8 +821,14 @@
             if (activeElement.tagName === 'SELECT') return;
             
             if (e.key === 'ArrowDown') {
+                if (isAutoPlaying) {
+                    toggleAutoPlay();
+                }
                 nextWord();
             } else if (e.key === 'ArrowUp') {
+                if (isAutoPlaying) {
+                    toggleAutoPlay();
+                }
                 prevWord();
             } else if (e.key === ' ') {
                 e.preventDefault();
