@@ -266,7 +266,7 @@
         function stopAutoPlay(){if(autoPlayTimer){clearInterval(autoPlayTimer);autoPlayTimer=null;}stopSpeaking();}
         function updateRate(){currentRate=parseFloat(document.getElementById('rateRange').value);document.getElementById('rateValue').textContent=currentRate;saveSettings();}
         function updateInterval(){currentInterval=parseFloat(document.getElementById('intervalRange').value);document.getElementById('intervalValue').textContent=currentInterval;if(isAutoPlaying){stopAutoPlay();startAutoPlay();}saveSettings();}
-        document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')nextWord();else if(e.key==='ArrowLeft')prevWord();else if(e.key===' '){e.preventDefault();speakCurrent();}});
+        document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')nextWord();else if(e.key==='ArrowLeft')prevWord();else if(e.key===' '){e.preventDefault();toggleAutoPlay();}});
     </script>
 </body>
 </html>
