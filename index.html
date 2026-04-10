@@ -89,8 +89,6 @@
                 <option value="6 托福-乱序.txt">6 托福-乱序.txt</option>
                 <option value="7 SAT-乱序.txt">7 SAT-乱序.txt</option>
             </select>
-            <label class="btn-upload" for="fileUpload">或上传本地文件</label>
-            <input type="file" id="fileUpload" accept=".txt" onchange="loadUploadedFile(event)">
         </div>
         <div class="main-content">
             <div class="left-panel">
@@ -121,8 +119,8 @@
                     </div>
                     <div class="setting-row">
                         <label>语速:</label>
-                        <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="0.8" onchange="updateRate()">
-                        <span id="rateValue">0.8</span>
+                        <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1" onchange="updateRate()">
+                        <span id="rateValue">1</span>
                     </div>
                     <div class="setting-row">
                         <label>间隔(秒):</label>
@@ -135,12 +133,12 @@
     </div>
     <script src="words-data.js"></script>
     <script>
-        let words=[],currentIndex=0,isAutoPlaying=false,autoPlayTimer=null,currentRate=0.8,currentInterval=3;
+        let words=[],currentIndex=0,isAutoPlaying=false,autoPlayTimer=null,currentRate=1,currentInterval=3;
         function loadVoices(){
             const v=speechSynthesis.getVoices();
             const s=document.getElementById('voiceSelect');
             s.innerHTML='';
-            const preferredVoices=['Google US English','Google UK English Female','Microsoft David','Microsoft Zira'];
+            const preferredVoices=['Google US English','Google UK English Female'];
             const filtered=v.filter(x=>preferredVoices.some(p=>x.name.includes(p)));
             filtered.forEach((x,i)=>{
                 const opt=document.createElement('option');
@@ -150,7 +148,7 @@
             });
             if(filtered.length===0){
                 const ev=v.filter(x=>x.lang.startsWith('en'));
-                ev.slice(0,3).forEach((x,i)=>{
+                ev.slice(0,2).forEach((x,i)=>{
                     const opt=document.createElement('option');
                     opt.value=v.indexOf(x);
                     opt.textContent=x.name;
@@ -182,7 +180,6 @@
             }
             return array;
         }
-        function parseWordText(text){return text.split('\n').map(l=>l.trim()).filter(l=>l).map(l=>{const p=l.split('\t');return{word:p[0]||'',definition:p.slice(1).join('\t')||''};}).filter(i=>i.word);}
         function loadDefault(){
             const st=document.getElementById('status');
             st.className='status loading';
@@ -231,33 +228,6 @@
                 st.className='status error';
                 st.textContent='加载失败: '+e.message;
             }
-        }
-        function loadUploadedFile(event){
-            const file=event.target.files[0];
-            if(!file)return;
-            const st=document.getElementById('status');
-            st.className='status loading';
-            st.textContent='正在加载 '+file.name+'...';
-            st.classList.remove('hidden');
-            const reader=new FileReader();
-            reader.onload=function(e){
-                try{
-                    const t=e.target.result;
-                    words=shuffleArray(parseWordText(t));
-                    if(!words.length)throw new Error('未找到有效单词');
-                    currentIndex=0;
-                    displayCurrentWord();
-                    renderWordList();
-                    updateProgress();
-                    st.className='status success';
-                    st.textContent='成功加载 '+words.length+' 个单词';
-                    setTimeout(()=>st.classList.add('hidden'),2000);
-                }catch(err){
-                    st.className='status error';
-                    st.textContent='加载失败: '+err.message;
-                }
-            };
-            reader.readAsText(file);
         }
         function displayCurrentWord(){if(!words.length)return;const w=words[currentIndex];document.getElementById('currentWord').textContent=w.word;document.getElementById('wordDefinition').textContent=w.definition;const items=document.querySelectorAll('.word-item');items.forEach((x,i)=>x.classList.toggle('active',i===currentIndex));const activeItem=items[currentIndex];if(activeItem)activeItem.scrollIntoView({behavior:'smooth',block:'center'});}
         function renderWordList(){const l=document.getElementById('wordList');l.innerHTML='';words.forEach((x,i)=>{const d=document.createElement('div');d.className='word-item'+(i===currentIndex?' active':'');d.textContent=(i+1)+'. '+x.word;d.onclick=()=>{currentIndex=i;displayCurrentWord();updateProgress();speakCurrent();};l.appendChild(d);});}
