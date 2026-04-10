@@ -477,12 +477,12 @@
                     </div>
                     <div class="setting-row">
                         <label>语速:</label>
-                        <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1" onchange="updateRate()">
+                        <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="0.6" onchange="updateRate()">
                         <span id="rateValue">0.6</span>
                     </div>
                     <div class="setting-row">
                         <label>间隔(秒):</label>
-                        <input type="range" id="intervalRange" min="1" max="10" step="0.5" value="3" onchange="updateInterval()">
+                        <input type="range" id="intervalRange" min="1" max="10" step="0.5" value="5" onchange="updateInterval()">
                         <span id="intervalValue">5</span>
                     </div>
                 </div>
@@ -750,9 +750,9 @@
             displayCurrentWord();
             updateProgress();
             
-            if (isAutoPlaying) {
-                speakCurrent();
-            }
+           
+            speakCurrent();
+            
         }
         
         function prevWord() {
@@ -762,9 +762,9 @@
             displayCurrentWord();
             updateProgress();
             
-            if (isAutoPlaying) {
-                speakCurrent();
-            }
+          
+            speakCurrent();
+            
         }
         
         function toggleAutoPlay() {
