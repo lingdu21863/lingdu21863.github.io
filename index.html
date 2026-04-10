@@ -5,88 +5,424 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>英语单词朗读器</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 10px; display: flex; align-items: center; justify-content: center; }
-        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: 20px; }
-        h1 { text-align: center; color: #333; margin-bottom: 20px; font-size: 28px; }
-        .controls { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
-        button { padding: 10px 20px; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-        button:active { transform: translateY(0); }
-        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-        .btn-primary:hover { background: linear-gradient(135deg, #7c8ff8 0%, #8b5fb8 100%); }
-        .btn-secondary { background: linear-gradient(135deg, #ff9a56 0%, #ff6b95 100%); color: white; }
-        .btn-secondary:hover { background: linear-gradient(135deg, #ffb07a 0%, #ff85a8 100%); }
-        .btn-danger { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; }
-        .btn-danger:hover { background: linear-gradient(135deg, #ff8585 0%, #f06d82 100%); }
-        .btn-success { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; }
-        .btn-success:hover { background: linear-gradient(135deg, #6bb8ff 0%, #33f5ff 100%); }
-        .word-display { text-align: center; padding: 30px 15px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 12px; margin-bottom: 20px; }
-        .current-word { font-size: 36px; font-weight: bold; color: #333; margin-bottom: 15px; }
-        .word-definition { font-size: 16px; color: #666; line-height: 1.6; }
-        .progress { text-align: center; margin-bottom: 20px; color: #888; }
-        .progress-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
-        .progress-fill { height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .settings { background: #f8f9fa; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
-        .setting-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-        .setting-row label { min-width: 70px; font-weight: 600; color: #555; }
-        .setting-row input[type="range"] { flex: 1; max-width: 200px; }
-        .setting-row select { padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px; min-width: 150px; }
-        .word-list { height: 400px; overflow-y: auto; border: 1px solid #e0e0e0; border-radius: 8px; padding: 10px; }
-        .word-item { padding: 6px 10px; cursor: pointer; border-radius: 4px; font-size: 14px; }
-        .word-item:hover { background: #f0f0f0; }
-        .word-item.active { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
-        .status { text-align: center; padding: 8px; border-radius: 8px; margin-bottom: 15px; font-size: 14px; }
-        .status.loading { background: #fff3cd; color: #856404; }
-        .status.error { background: #f8d7da; color: #721c24; }
-        .status.success { background: #d4edda; color: #155724; }
-        .hidden { display: none; }
-        .keyboard-hints { background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #e0e6ed; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-        .hint-title { font-weight: 600; color: #333; font-size: 15px; }
-        .hint-item { display: flex; align-items: center; gap: 6px; color: #555; font-size: 14px; }
-        kbd { background: white; border: 1px solid #ccc; border-radius: 4px; padding: 4px 8px; font-family: monospace; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-width: 40px; text-align: center; display: inline-block; }
-        .file-input-wrapper { display: flex; gap: 8px; margin-bottom: 20px; align-items: center; justify-content: center; flex-wrap: wrap; }
-        .file-input-wrapper label { font-weight: 600; color: #555; font-size: 14px; }
-        .file-input-wrapper select { padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; min-width: 180px; }
-        .file-input-wrapper input[type="file"] { display: none; }
-        .file-input-wrapper .btn-upload { background: #667eea; color: white; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; }
-        .main-content { display: flex; gap: 20px; margin-top: 20px; flex-direction: row; }
-        .left-panel { flex: 1; min-width: 320px; }
-        .right-panel { flex: 1.5; min-width: 450px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #7c8ff8 0%, #8b5fb8 100%);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b95 100%);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #ffb07a 0%, #ff85a8 100%);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #ff8585 0%, #f06d82 100%);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(135deg, #6bb8ff 0%, #33f5ff 100%);
+        }
+        
+        .word-display {
+            text-align: center;
+            padding: 30px 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .current-word {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .word-definition {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .progress {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #888;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .settings {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .setting-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .setting-row label {
+            min-width: 70px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .setting-row input[type="range"] {
+            flex: 1;
+            max-width: 200px;
+        }
+        
+        .setting-row select {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            min-width: 150px;
+        }
+        
+        .word-list {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+        }
+        
+        .word-item {
+            padding: 6px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .word-item:hover {
+            background: #f0f0f0;
+        }
+        
+        .word-item.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .status {
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .status.loading {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .keyboard-hints {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e6ed;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .hint-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+        
+        .hint-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        kbd {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-family: monospace;
+            font-size: 13px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            min-width: 40px;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        .file-input-wrapper {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .file-input-wrapper label {
+            font-weight: 600;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .file-input-wrapper select {
+            padding: 6px 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            min-width: 180px;
+        }
+        
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+        
+        .file-input-wrapper .btn-upload {
+            background: #667eea;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-direction: row;
+        }
+        
+        .left-panel {
+            flex: 1;
+            min-width: 320px;
+        }
+        
+        .right-panel {
+            flex: 1.5;
+            min-width: 450px;
+        }
         
         @media (max-width: 768px) {
-            .container { padding: 15px; }
-            h1 { font-size: 24px; }
-            .main-content { flex-direction: column; }
-            .left-panel, .right-panel { min-width: auto; }
-            .word-list { height: 300px; }
-            .current-word { font-size: 28px; }
-            .word-definition { font-size: 14px; }
-            .controls { gap: 6px; }
-            button { padding: 8px 16px; font-size: 12px; }
-            .file-input-wrapper { flex-direction: column; align-items: stretch; }
-            .file-input-wrapper select { width: 100%; }
-            .setting-row { flex-direction: column; align-items: flex-start; }
-            .setting-row input[type="range"] { width: 100%; max-width: none; }
-            .setting-row select { width: 100%; }
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .left-panel, .right-panel {
+                min-width: auto;
+            }
+            
+            .word-list {
+                height: 300px;
+            }
+            
+            .current-word {
+                font-size: 28px;
+            }
+            
+            .word-definition {
+                font-size: 14px;
+            }
+            
+            .controls {
+                gap: 6px;
+            }
+            
+            button {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            
+            .file-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .file-input-wrapper select {
+                width: 100%;
+            }
+            
+            .setting-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .setting-row input[type="range"] {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .setting-row select {
+                width: 100%;
+            }
         }
         
         @media (max-width: 480px) {
-            body { padding: 5px; }
-            .container { border-radius: 12px; }
-            h1 { font-size: 20px; margin-bottom: 15px; }
-            .word-display { padding: 20px 10px; }
-            .current-word { font-size: 24px; }
-            .word-list { height: 250px; }
-            .controls { flex-direction: column; }
-            .controls button { width: 100%; }
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                border-radius: 12px;
+            }
+            
+            h1 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .word-display {
+                padding: 20px 10px;
+            }
+            
+            .current-word {
+                font-size: 24px;
+            }
+            
+            .word-list {
+                height: 250px;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .controls button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>英语单词朗读器</h1>
+        
         <div id="status" class="status loading hidden">正在加载单词...</div>
+        
         <div class="file-input-wrapper">
             <label>选择词库:</label>
             <select id="fileSelect" onchange="loadSelectedFile()">
@@ -100,31 +436,44 @@
                 <option value="7 SAT-乱序.txt">7 SAT-乱序.txt</option>
             </select>
         </div>
+        
         <div class="main-content">
             <div class="left-panel">
                 <h3 style="margin-bottom: 10px; color: #333;">单词列表</h3>
-                <div class="word-list" id="wordList"><p style="color: #888; text-align: center;">加载单词后显示列表</p></div>
+                <div class="word-list" id="wordList">
+                    <p style="color: #888; text-align: center;">加载单词后显示列表</p>
+                </div>
             </div>
+            
             <div class="right-panel">
                 <div class="progress">
-                    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
                     <span id="progressText">0 / 0</span>
                 </div>
+                
                 <div class="word-display">
                     <div class="current-word" id="currentWord">点击加载单词开始</div>
                     <div class="word-definition" id="wordDefinition"></div>
                 </div>
+                
                 <div class="controls">
                     <button class="btn-primary" onclick="loadDefault()">刷新单词</button>
                     <button class="btn-success" onclick="speakCurrent()">朗读当前</button>
                     <button class="btn-primary" onclick="prevWord()">上一个</button>
                     <button class="btn-primary" onclick="nextWord()">下一个</button>
-                    <button class="btn-secondary" onclick="toggleAutoPlay()"><span id="autoPlayBtn">自动播放</span></button>
+                    <button class="btn-secondary" onclick="toggleAutoPlay()">
+                        <span id="autoPlayBtn">自动播放</span>
+                    </button>
                 </div>
+                
                 <div class="settings">
                     <div class="setting-row">
                         <label>语音:</label>
-                        <select id="voiceSelect" onchange="saveSettings()"><option value="">加载中...</option></select>
+                        <select id="voiceSelect" onchange="saveSettings()">
+                            <option value="">加载中...</option>
+                        </select>
                     </div>
                     <div class="setting-row">
                         <label>语速:</label>
@@ -137,57 +486,95 @@
                         <span id="intervalValue">3</span>
                     </div>
                 </div>
+                
                 <div class="keyboard-hints">
                     <div class="hint-title">⌨️ 快捷键说明</div>
-                    <div class="hint-item"><kbd>↑</kbd> 上一个单词</div>
-                    <div class="hint-item"><kbd>↓</kbd> 下一个单词</div>
-                    <div class="hint-item"><kbd>空格</kbd> 自动播放/暂停</div>
+                    <div class="hint-item">
+                        <kbd>↑</kbd> 上一个单词
+                    </div>
+                    <div class="hint-item">
+                        <kbd>↓</kbd> 下一个单词
+                    </div>
+                    <div class="hint-item">
+                        <kbd>空格</kbd> 自动播放/暂停
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    
     <script src="words-data.js"></script>
     <script>
-        let words=[],currentIndex=0,isAutoPlaying=false,autoPlayTimer=null,currentRate=1,currentInterval=3;
-        function loadVoices(){
-            const v=speechSynthesis.getVoices();
-            const s=document.getElementById('voiceSelect');
-            s.innerHTML='';
-            const preferredVoices=['Google US English','Google UK English Female'];
-            const filtered=v.filter(x=>preferredVoices.some(p=>x.name.includes(p)));
-            filtered.forEach((x,i)=>{
-                const opt=document.createElement('option');
-                opt.value=v.indexOf(x);
-                opt.textContent=x.name;
+        let words = [],
+            currentIndex = 0,
+            isAutoPlaying = false,
+            autoPlayTimer = null,
+            currentRate = 1,
+            currentInterval = 3;
+        
+        function loadVoices() {
+            const v = speechSynthesis.getVoices();
+            const s = document.getElementById('voiceSelect');
+            s.innerHTML = '';
+            
+            const preferredVoices = ['Google US English', 'Google UK English Female'];
+            const filtered = v.filter(x => preferredVoices.some(p => x.name.includes(p)));
+            
+            filtered.forEach((x, i) => {
+                const opt = document.createElement('option');
+                opt.value = v.indexOf(x);
+                opt.textContent = x.name;
                 s.appendChild(opt);
             });
-            if(filtered.length===0){
-                const ev=v.filter(x=>x.lang.startsWith('en'));
-                ev.slice(0,2).forEach((x,i)=>{
-                    const opt=document.createElement('option');
-                    opt.value=v.indexOf(x);
-                    opt.textContent=x.name;
+            
+            if (filtered.length === 0) {
+                const ev = v.filter(x => x.lang.startsWith('en'));
+                ev.slice(0, 2).forEach((x, i) => {
+                    const opt = document.createElement('option');
+                    opt.value = v.indexOf(x);
+                    opt.textContent = x.name;
                     s.appendChild(opt);
                 });
             }
+            
             loadSettings();
         }
-        if(speechSynthesis.onvoiceschanged!==undefined){speechSynthesis.onvoiceschanged=loadVoices;}
-        setTimeout(loadVoices,100);
-        setTimeout(loadVoices,500);
-        function saveSettings(){
-            localStorage.setItem('tts_voice',document.getElementById('voiceSelect').value);
-            localStorage.setItem('tts_rate',document.getElementById('rateRange').value);
-            localStorage.setItem('tts_interval',document.getElementById('intervalRange').value);
+        
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
         }
-        function loadSettings(){
-            const savedVoice=localStorage.getItem('tts_voice');
-            const savedRate=localStorage.getItem('tts_rate');
-            const savedInterval=localStorage.getItem('tts_interval');
-            if(savedVoice){document.getElementById('voiceSelect').value=savedVoice;}
-            if(savedRate){document.getElementById('rateRange').value=savedRate;currentRate=parseFloat(savedRate);document.getElementById('rateValue').textContent=savedRate;}
-            if(savedInterval){document.getElementById('intervalRange').value=savedInterval;currentInterval=parseFloat(savedInterval);document.getElementById('intervalValue').textContent=savedInterval;}
+        
+        setTimeout(loadVoices, 100);
+        setTimeout(loadVoices, 500);
+        
+        function saveSettings() {
+            localStorage.setItem('tts_voice', document.getElementById('voiceSelect').value);
+            localStorage.setItem('tts_rate', document.getElementById('rateRange').value);
+            localStorage.setItem('tts_interval', document.getElementById('intervalRange').value);
         }
+        
+        function loadSettings() {
+            const savedVoice = localStorage.getItem('tts_voice');
+            const savedRate = localStorage.getItem('tts_rate');
+            const savedInterval = localStorage.getItem('tts_interval');
+            
+            if (savedVoice) {
+                document.getElementById('voiceSelect').value = savedVoice;
+            }
+            
+            if (savedRate) {
+                document.getElementById('rateRange').value = savedRate;
+                currentRate = parseFloat(savedRate);
+                document.getElementById('rateValue').textContent = savedRate;
+            }
+            
+            if (savedInterval) {
+                document.getElementById('intervalRange').value = savedInterval;
+                currentInterval = parseFloat(savedInterval);
+                document.getElementById('intervalValue').textContent = savedInterval;
+            }
+        }
+        
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -195,93 +582,252 @@
             }
             return array;
         }
-        function loadDefault(){
-            const st=document.getElementById('status');
-            st.className='status loading';
-            st.textContent='正在加载单词...';
+        
+        function loadDefault() {
+            const st = document.getElementById('status');
+            st.className = 'status loading';
+            st.textContent = '正在加载单词...';
             st.classList.remove('hidden');
-            try{
-                if(typeof wordData==='undefined'||!wordData['1 初中-乱序.txt']){
+            
+            try {
+                if (typeof wordData === 'undefined' || !wordData['1 初中-乱序.txt']) {
                     throw new Error('单词数据未加载');
                 }
-                words=shuffleArray([...wordData['1 初中-乱序.txt']]);
-                if(!words.length)throw new Error('未找到有效单词');
-                currentIndex=0;
+                
+                words = shuffleArray([...wordData['1 初中-乱序.txt']]);
+                
+                if (!words.length) {
+                    throw new Error('未找到有效单词');
+                }
+                
+                currentIndex = 0;
                 displayCurrentWord();
                 renderWordList();
                 updateProgress();
-                st.className='status success';
-                st.textContent='成功加载 '+words.length+' 个单词';
-                setTimeout(()=>st.classList.add('hidden'),2000);
-            }catch(e){
-                st.className='status error';
-                st.textContent='加载失败: '+e.message;
+                
+                st.className = 'status success';
+                st.textContent = '成功加载 ' + words.length + ' 个单词';
+                setTimeout(() => st.classList.add('hidden'), 2000);
+                
+            } catch (e) {
+                st.className = 'status error';
+                st.textContent = '加载失败: ' + e.message;
             }
         }
-        function loadSelectedFile(){
-            const select=document.getElementById('fileSelect');
-            const filename=select.value;
-            if(!filename)return;
-            const st=document.getElementById('status');
-            st.className='status loading';
-            st.textContent='正在加载 '+filename+'...';
+        
+        function loadSelectedFile() {
+            const select = document.getElementById('fileSelect');
+            const filename = select.value;
+            
+            if (!filename) return;
+            
+            const st = document.getElementById('status');
+            st.className = 'status loading';
+            st.textContent = '正在加载 ' + filename + '...';
             st.classList.remove('hidden');
-            try{
-                if(typeof wordData==='undefined'||!wordData[filename]){
+            
+            try {
+                if (typeof wordData === 'undefined' || !wordData[filename]) {
                     throw new Error('单词数据未加载');
                 }
-                words=shuffleArray([...wordData[filename]]);
-                if(!words.length)throw new Error('未找到有效单词');
-                currentIndex=0;
+                
+                words = shuffleArray([...wordData[filename]]);
+                
+                if (!words.length) {
+                    throw new Error('未找到有效单词');
+                }
+                
+                currentIndex = 0;
                 displayCurrentWord();
                 renderWordList();
                 updateProgress();
-                st.className='status success';
-                st.textContent='成功加载 '+words.length+' 个单词';
-                setTimeout(()=>st.classList.add('hidden'),2000);
-            }catch(e){
-                st.className='status error';
-                st.textContent='加载失败: '+e.message;
+                
+                st.className = 'status success';
+                st.textContent = '成功加载 ' + words.length + ' 个单词';
+                setTimeout(() => st.classList.add('hidden'), 2000);
+                
+            } catch (e) {
+                st.className = 'status error';
+                st.textContent = '加载失败: ' + e.message;
             }
         }
-        function displayCurrentWord(){if(!words.length)return;const w=words[currentIndex];document.getElementById('currentWord').textContent=w.word;document.getElementById('wordDefinition').textContent=w.definition;const items=document.querySelectorAll('.word-item');items.forEach((x,i)=>x.classList.toggle('active',i===currentIndex));const activeItem=items[currentIndex];if(activeItem)activeItem.scrollIntoView({behavior:'smooth',block:'center'});}
-        function renderWordList(){const l=document.getElementById('wordList');l.innerHTML='';words.forEach((x,i)=>{const d=document.createElement('div');d.className='word-item'+(i===currentIndex?' active':'');d.textContent=(i+1)+'. '+x.word;d.onclick=()=>{currentIndex=i;displayCurrentWord();updateProgress();speakCurrent();};l.appendChild(d);});}
-        function updateProgress(){const p=words.length?((currentIndex+1)/words.length*100):0;document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressText').textContent=(currentIndex+1)+' / '+words.length;}
-        function speakCurrent(){
-            if(!words.length){alert('请先加载单词！');return;}
-            if(!('speechSynthesis'in window)){alert('您的浏览器不支持语音朗读功能，请使用Chrome、Edge或Safari浏览器');return;}
+        
+        function displayCurrentWord() {
+            if (!words.length) return;
+            
+            const w = words[currentIndex];
+            document.getElementById('currentWord').textContent = w.word;
+            document.getElementById('wordDefinition').textContent = w.definition;
+            
+            const items = document.querySelectorAll('.word-item');
+            items.forEach((x, i) => x.classList.toggle('active', i === currentIndex));
+            
+            const activeItem = items[currentIndex];
+            if (activeItem) {
+                activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+        
+        function renderWordList() {
+            const l = document.getElementById('wordList');
+            l.innerHTML = '';
+            
+            words.forEach((x, i) => {
+                const d = document.createElement('div');
+                d.className = 'word-item' + (i === currentIndex ? ' active' : '');
+                d.textContent = (i + 1) + '. ' + x.word;
+                d.onclick = () => {
+                    currentIndex = i;
+                    displayCurrentWord();
+                    updateProgress();
+                    speakCurrent();
+                };
+                l.appendChild(d);
+            });
+        }
+        
+        function updateProgress() {
+            const p = words.length ? ((currentIndex + 1) / words.length * 100) : 0;
+            document.getElementById('progressFill').style.width = p + '%';
+            document.getElementById('progressText').textContent = (currentIndex + 1) + ' / ' + words.length;
+        }
+        
+        function speakCurrent() {
+            if (!words.length) {
+                alert('请先加载单词！');
+                return;
+            }
+            
+            if (!('speechSynthesis' in window)) {
+                alert('您的浏览器不支持语音朗读功能，请使用Chrome、Edge或Safari浏览器');
+                return;
+            }
+            
             stopSpeaking();
-            const word=words[currentIndex].word;
-            const u=new SpeechSynthesisUtterance(word);
-            u.rate=currentRate;
-            u.pitch=1;
-            u.volume=1;
-            const v=speechSynthesis.getVoices();
-            const s=document.getElementById('voiceSelect');
-            if(s.value&&v[parseInt(s.value)]){u.voice=v[parseInt(s.value)];}
-            else{
-                const preferred=v.find(x=>x.name.includes('Google US English')||x.name.includes('Google UK English Female'));
-                if(preferred)u.voice=preferred;
-                else{const e=v.find(x=>x.lang.startsWith('en'));if(e)u.voice=e;}
+            
+            const word = words[currentIndex].word;
+            const u = new SpeechSynthesisUtterance(word);
+            u.rate = currentRate;
+            u.pitch = 1;
+            u.volume = 1;
+            
+            const v = speechSynthesis.getVoices();
+            const s = document.getElementById('voiceSelect');
+            
+            if (s.value && v[parseInt(s.value)]) {
+                u.voice = v[parseInt(s.value)];
+            } else {
+                const preferred = v.find(x => x.name.includes('Google US English') || x.name.includes('Google UK English Female'));
+                if (preferred) {
+                    u.voice = preferred;
+                } else {
+                    const e = v.find(x => x.lang.startsWith('en'));
+                    if (e) {
+                        u.voice = e;
+                    }
+                }
             }
-            u.onstart=function(){console.log('正在朗读:',word);};
-            u.onerror=function(e){console.error('朗读错误:',e.error);};
+            
+            u.onstart = function() {
+                console.log('正在朗读:', word);
+            };
+            
+            u.onerror = function(e) {
+                console.error('朗读错误:', e.error);
+            };
+            
             speechSynthesis.speak(u);
         }
-        function stopSpeaking(){speechSynthesis.cancel();}
-        function nextWord(){if(!words.length)return;currentIndex=(currentIndex+1)%words.length;displayCurrentWord();updateProgress();if(isAutoPlaying)speakCurrent();}
-        function prevWord(){if(!words.length)return;currentIndex=(currentIndex-1+words.length)%words.length;displayCurrentWord();updateProgress();if(isAutoPlaying)speakCurrent();}
-        function toggleAutoPlay(){if(!words.length){alert('请先加载单词！');return;}isAutoPlaying=!isAutoPlaying;document.getElementById('autoPlayBtn').textContent=isAutoPlaying?'停止自动':'自动播放';if(isAutoPlaying)startAutoPlay();else stopAutoPlay();}
-        function startAutoPlay(){if(!words.length)return;speakCurrent();autoPlayTimer=setInterval(nextWord,currentInterval*1000);}
-        function stopAutoPlay(){if(autoPlayTimer){clearInterval(autoPlayTimer);autoPlayTimer=null;}stopSpeaking();}
-        function updateRate(){currentRate=parseFloat(document.getElementById('rateRange').value);document.getElementById('rateValue').textContent=currentRate;saveSettings();}
-        function updateInterval(){currentInterval=parseFloat(document.getElementById('intervalRange').value);document.getElementById('intervalValue').textContent=currentInterval;if(isAutoPlaying){stopAutoPlay();startAutoPlay();}saveSettings();}
-        document.addEventListener('keydown',e=>{
-            const activeElement=document.activeElement;
-            if(activeElement.tagName==='SELECT')return;
-            if(e.key==='ArrowDown')nextWord();
-            else if(e.key==='ArrowUp')prevWord();
-            else if(e.key===' '){e.preventDefault();toggleAutoPlay();}
+        
+        function stopSpeaking() {
+            speechSynthesis.cancel();
+        }
+        
+        function nextWord() {
+            if (!words.length) return;
+            
+            currentIndex = (currentIndex + 1) % words.length;
+            displayCurrentWord();
+            updateProgress();
+            
+            if (isAutoPlaying) {
+                speakCurrent();
+            }
+        }
+        
+        function prevWord() {
+            if (!words.length) return;
+            
+            currentIndex = (currentIndex - 1 + words.length) % words.length;
+            displayCurrentWord();
+            updateProgress();
+            
+            if (isAutoPlaying) {
+                speakCurrent();
+            }
+        }
+        
+        function toggleAutoPlay() {
+            if (!words.length) {
+                alert('请先加载单词！');
+                return;
+            }
+            
+            isAutoPlaying = !isAutoPlaying;
+            document.getElementById('autoPlayBtn').textContent = isAutoPlaying ? '停止自动' : '自动播放';
+            
+            if (isAutoPlaying) {
+                startAutoPlay();
+            } else {
+                stopAutoPlay();
+            }
+        }
+        
+        function startAutoPlay() {
+            if (!words.length) return;
+            
+            speakCurrent();
+            autoPlayTimer = setInterval(nextWord, currentInterval * 1000);
+        }
+        
+        function stopAutoPlay() {
+            if (autoPlayTimer) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+            stopSpeaking();
+        }
+        
+        function updateRate() {
+            currentRate = parseFloat(document.getElementById('rateRange').value);
+            document.getElementById('rateValue').textContent = currentRate;
+            saveSettings();
+        }
+        
+        function updateInterval() {
+            currentInterval = parseFloat(document.getElementById('intervalRange').value);
+            document.getElementById('intervalValue').textContent = currentInterval;
+            
+            if (isAutoPlaying) {
+                stopAutoPlay();
+                startAutoPlay();
+            }
+            
+            saveSettings();
+        }
+        
+        document.addEventListener('keydown', e => {
+            const activeElement = document.activeElement;
+            if (activeElement.tagName === 'SELECT') return;
+            
+            if (e.key === 'ArrowDown') {
+                nextWord();
+            } else if (e.key === 'ArrowUp') {
+                prevWord();
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                toggleAutoPlay();
+            }
         });
     </script>
 </body>
