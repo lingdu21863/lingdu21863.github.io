@@ -505,49 +505,145 @@
     </div>
     
     <script>
-        let words = [],
-            currentIndex = 0,
-            isAutoPlaying = false,
-            autoPlayTimer = null,
-            currentRate = 1,
-            currentInterval = 3;
+        // 兼容旧浏览器的Polyfill
+        if (typeof Array.prototype.forEach === 'undefined') {
+            Array.prototype.forEach = function(callback, thisArg) {
+                var T, k;
+                if (this == null) {
+                    throw new TypeError(' this is null or not defined');
+                }
+                var O = Object(this);
+                var len = O.length >>> 0;
+                if (typeof callback !== 'function') {
+                    throw new TypeError(callback + ' is not a function');
+                }
+                if (arguments.length > 1) {
+                    T = thisArg;
+                }
+                k = 0;
+                while (k < len) {
+                    var kValue;
+                    if (k in O) {
+                        kValue = O[k];
+                        callback.call(T, kValue, k, O);
+                    }
+                    k++;
+                }
+            };
+        }
+        
+        if (typeof Array.prototype.filter === 'undefined') {
+            Array.prototype.filter = function(fun) {
+                var len = this.length;
+                if (typeof fun !== 'function') {
+                    throw new TypeError();
+                }
+                var res = [];
+                var thisp = arguments[1];
+                for (var i = 0; i < len; i++) {
+                    if (i in this) {
+                        var val = this[i];
+                        if (fun.call(thisp, val, i, this)) {
+                            res.push(val);
+                        }
+                    }
+                }
+                return res;
+            };
+        }
+        
+        if (typeof Array.prototype.some === 'undefined') {
+            Array.prototype.some = function(fun) {
+                var len = this.length;
+                if (typeof fun !== 'function') {
+                    throw new TypeError();
+                }
+                var thisp = arguments[1];
+                for (var i = 0; i < len; i++) {
+                    if (i in this) {
+                        if (fun.call(thisp, this[i], i, this)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            };
+        }
+        
+        if (typeof Array.prototype.find === 'undefined') {
+            Array.prototype.find = function(predicate) {
+                if (this == null) {
+                    throw new TypeError('Array.prototype.find called on null or undefined');
+                }
+                if (typeof predicate !== 'function') {
+                    throw new TypeError('predicate must be a function');
+                }
+                var list = Object(this);
+                var length = list.length >>> 0;
+                var thisArg = arguments[1];
+                var value;
+                
+                for (var i = 0; i < length; i++) {
+                    value = list[i];
+                    if (predicate.call(thisArg, value, i, list)) {
+                        return value;
+                    }
+                }
+                return undefined;
+            };
+        }
+        
+        // 全局变量
+        var words = [];
+        var currentIndex = 0;
+        var isAutoPlaying = false;
+        var autoPlayTimer = null;
+        var currentRate = 1;
+        var currentInterval = 3;
         
         function loadVoices() {
-            const v = speechSynthesis.getVoices();
-            const s = document.getElementById('voiceSelect');
+            var v = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+            var s = document.getElementById('voiceSelect');
             s.innerHTML = '';
             
-            const preferredVoices = ['Google US English', 'Google UK English Female'];
-            const filtered = v.filter(x => preferredVoices.some(p => x.name.includes(p)));
+            var preferredVoices = ['Google US English', 'Google UK English Female'];
+            var filtered = v.filter(function(x) {
+                return preferredVoices.some(function(p) {
+                    return x.name.indexOf(p) !== -1;
+                });
+            });
             
-            filtered.forEach((x, i) => {
-                const opt = document.createElement('option');
+            filtered.forEach(function(x, i) {
+                var opt = document.createElement('option');
                 opt.value = v.indexOf(x);
                 opt.textContent = x.name;
                 s.appendChild(opt);
             });
             
             if (filtered.length === 0) {
-                const ev = v.filter(x => x.lang.startsWith('en'));
-                ev.slice(0, 2).forEach((x, i) => {
-                    const opt = document.createElement('option');
+                var ev = v.filter(function(x) {
+                    return x.lang.indexOf('en') === 0;
+                });
+                for (var i = 0; i < Math.min(2, ev.length); i++) {
+                    var x = ev[i];
+                    var opt = document.createElement('option');
                     opt.value = v.indexOf(x);
                     opt.textContent = x.name;
                     s.appendChild(opt);
-                });
+                }
             }
             
             loadSettings();
         }
         
-        if (speechSynthesis.onvoiceschanged !== undefined) {
+        if (window.speechSynthesis && speechSynthesis.onvoiceschanged !== undefined) {
             speechSynthesis.onvoiceschanged = loadVoices;
         }
         
         setTimeout(loadVoices, 100);
         setTimeout(loadVoices, 500);
         
-        document.getElementById('currentWord').addEventListener('click', () => {
+        document.getElementById('currentWord').addEventListener('click', function() {
             if (isAutoPlaying) {
                 toggleAutoPlay();
             }
@@ -555,37 +651,51 @@
         });
         
         function saveSettings() {
-            localStorage.setItem('tts_voice', document.getElementById('voiceSelect').value);
-            localStorage.setItem('tts_rate', document.getElementById('rateRange').value);
-            localStorage.setItem('tts_interval', document.getElementById('intervalRange').value);
+            if (typeof localStorage !== 'undefined') {
+                try {
+                    localStorage.setItem('tts_voice', document.getElementById('voiceSelect').value);
+                    localStorage.setItem('tts_rate', document.getElementById('rateRange').value);
+                    localStorage.setItem('tts_interval', document.getElementById('intervalRange').value);
+                } catch (e) {
+                    // 忽略localStorage错误
+                }
+            }
         }
         
         function loadSettings() {
-            const savedVoice = localStorage.getItem('tts_voice');
-            const savedRate = localStorage.getItem('tts_rate');
-            const savedInterval = localStorage.getItem('tts_interval');
-            
-            if (savedVoice) {
-                document.getElementById('voiceSelect').value = savedVoice;
-            }
-            
-            if (savedRate) {
-                document.getElementById('rateRange').value = savedRate;
-                currentRate = parseFloat(savedRate);
-                document.getElementById('rateValue').textContent = savedRate;
-            }
-            
-            if (savedInterval) {
-                document.getElementById('intervalRange').value = savedInterval;
-                currentInterval = parseFloat(savedInterval);
-                document.getElementById('intervalValue').textContent = savedInterval;
+            if (typeof localStorage !== 'undefined') {
+                try {
+                    var savedVoice = localStorage.getItem('tts_voice');
+                    var savedRate = localStorage.getItem('tts_rate');
+                    var savedInterval = localStorage.getItem('tts_interval');
+                    
+                    if (savedVoice) {
+                        document.getElementById('voiceSelect').value = savedVoice;
+                    }
+                    
+                    if (savedRate) {
+                        document.getElementById('rateRange').value = savedRate;
+                        currentRate = parseFloat(savedRate);
+                        document.getElementById('rateValue').textContent = savedRate;
+                    }
+                    
+                    if (savedInterval) {
+                        document.getElementById('intervalRange').value = savedInterval;
+                        currentInterval = parseFloat(savedInterval);
+                        document.getElementById('intervalValue').textContent = savedInterval;
+                    }
+                } catch (e) {
+                    // 忽略localStorage错误
+                }
             }
         }
         
         function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
             }
             return array;
         }
@@ -595,8 +705,8 @@
         }
         
         function loadSelectedFile() {
-            const select = document.getElementById('fileSelect');
-            const filename = select.value;
+            var select = document.getElementById('fileSelect');
+            var filename = select.value;
             
             if (!filename) return;
             
@@ -604,7 +714,7 @@
         }
         
         function loadSelectedFileByFilename(filename) {
-            const st = document.getElementById('status');
+            var st = document.getElementById('status');
             st.className = 'status loading';
             st.textContent = '正在加载 ' + filename + '...';
             st.classList.remove('hidden');
@@ -614,8 +724,14 @@
                     throw new Error('单词数据未加载');
                 }
                 
+                // 兼容旧浏览器的数组复制
+                var tempArray = [];
+                for (var i = 0; i < wordData[filename].length; i++) {
+                    tempArray.push(wordData[filename][i]);
+                }
+                
                 // 一次性加载全部单词
-                words = shuffleArray([...wordData[filename]]);
+                words = shuffleArray(tempArray);
                 
                 if (!words.length) {
                     throw new Error('未找到有效单词');
@@ -624,14 +740,16 @@
                 currentIndex = 0;
                 displayCurrentWord();
                 
-                // 优化：使用文档片段批量创建DOM元素
+                // 使用文档片段批量创建DOM元素
                 renderWordList();
                 
                 updateProgress();
                 
                 st.className = 'status success';
                 st.textContent = '成功加载 ' + words.length + ' 个单词';
-                setTimeout(() => st.classList.add('hidden'), 2000);
+                setTimeout(function() {
+                    st.classList.add('hidden');
+                }, 2000);
                 
             } catch (e) {
                 st.className = 'status error';
@@ -642,13 +760,13 @@
         function displayCurrentWord() {
             if (!words.length) return;
             
-            const w = words[currentIndex];
+            var w = words[currentIndex];
             document.getElementById('currentWord').textContent = w.word;
             document.getElementById('wordDefinition').textContent = w.definition;
             
-            // 优化：只更新需要的元素
-            const items = document.querySelectorAll('.word-item');
-            items.forEach((x, i) => {
+            // 只更新需要的元素
+            var items = document.querySelectorAll('.word-item');
+            items.forEach(function(x, i) {
                 if (i === currentIndex) {
                     x.classList.add('active');
                 } else {
@@ -656,25 +774,29 @@
                 }
             });
             
-            const activeItem = items[currentIndex];
-            if (activeItem) {
-                // 优化：使用更轻量的滚动方式
-                activeItem.scrollIntoView({ behavior: 'auto', block: 'center' });
+            var activeItem = items[currentIndex];
+            if (activeItem && activeItem.scrollIntoView) {
+                // 兼容旧浏览器的滚动方式
+                try {
+                    activeItem.scrollIntoView(false);
+                } catch (e) {
+                    // 忽略滚动错误
+                }
             }
         }
         
         function renderWordList() {
-            const l = document.getElementById('wordList');
+            var l = document.getElementById('wordList');
             l.innerHTML = '';
             
-            // 优化：使用文档片段减少DOM操作
-            const fragment = document.createDocumentFragment();
+            // 使用文档片段减少DOM操作
+            var fragment = document.createDocumentFragment();
             
-            words.forEach((x, i) => {
-                const d = document.createElement('div');
+            words.forEach(function(x, i) {
+                var d = document.createElement('div');
                 d.className = 'word-item' + (i === currentIndex ? ' active' : '');
                 d.textContent = (i + 1) + '. ' + x.word;
-                d.onclick = () => {
+                d.onclick = function() {
                     if (isAutoPlaying) {
                         toggleAutoPlay();
                     }
@@ -690,7 +812,7 @@
         }
         
         function updateProgress() {
-            const p = words.length ? ((currentIndex + 1) / words.length * 100) : 0;
+            var p = words.length ? ((currentIndex + 1) / words.length * 100) : 0;
             document.getElementById('progressFill').style.width = p + '%';
             document.getElementById('progressText').textContent = (currentIndex + 1) + ' / ' + words.length;
         }
@@ -701,30 +823,34 @@
                 return;
             }
             
-            if (!('speechSynthesis' in window)) {
+            if (!window.speechSynthesis) {
                 alert('您的浏览器不支持语音朗读功能，请使用Chrome、Edge或Safari浏览器');
                 return;
             }
             
             stopSpeaking();
             
-            const word = words[currentIndex].word;
-            const u = new SpeechSynthesisUtterance(word);
+            var word = words[currentIndex].word;
+            var u = new SpeechSynthesisUtterance(word);
             u.rate = currentRate;
             u.pitch = 1;
             u.volume = 1;
             
-            const v = speechSynthesis.getVoices();
-            const s = document.getElementById('voiceSelect');
+            var v = speechSynthesis.getVoices();
+            var s = document.getElementById('voiceSelect');
             
             if (s.value && v[parseInt(s.value)]) {
                 u.voice = v[parseInt(s.value)];
             } else {
-                const preferred = v.find(x => x.name.includes('Google US English') || x.name.includes('Google UK English Female'));
+                var preferred = v.find(function(x) {
+                    return x.name.indexOf('Google US English') !== -1 || x.name.indexOf('Google UK English Female') !== -1;
+                });
                 if (preferred) {
                     u.voice = preferred;
                 } else {
-                    const e = v.find(x => x.lang.startsWith('en'));
+                    var e = v.find(function(x) {
+                        return x.lang.indexOf('en') === 0;
+                    });
                     if (e) {
                         u.voice = e;
                     }
@@ -732,18 +858,32 @@
             }
             
             u.onstart = function() {
-                console.log('正在朗读:', word);
+                if (console && console.log) {
+                    console.log('正在朗读:', word);
+                }
             };
             
             u.onerror = function(e) {
-                console.error('朗读错误:', e.error);
+                if (console && console.error) {
+                    console.error('朗读错误:', e.error);
+                }
             };
             
-            speechSynthesis.speak(u);
+            try {
+                speechSynthesis.speak(u);
+            } catch (e) {
+                // 忽略朗读错误
+            }
         }
         
         function stopSpeaking() {
-            speechSynthesis.cancel();
+            if (window.speechSynthesis) {
+                try {
+                    speechSynthesis.cancel();
+                } catch (e) {
+                    // 忽略停止错误
+                }
+            }
         }
         
         function nextWord() {
@@ -753,9 +893,7 @@
             displayCurrentWord();
             updateProgress();
             
-           
             speakCurrent();
-            
         }
         
         function prevWord() {
@@ -765,9 +903,7 @@
             displayCurrentWord();
             updateProgress();
             
-          
             speakCurrent();
-            
         }
         
         function toggleAutoPlay() {
@@ -777,7 +913,7 @@
             }
             
             isAutoPlaying = !isAutoPlaying;
-            const autoPlayBtn = document.getElementById('autoPlayBtn');
+            var autoPlayBtn = document.getElementById('autoPlayBtn');
             
             if (isAutoPlaying) {
                 autoPlayBtn.textContent = '停止自动';
@@ -829,25 +965,38 @@
             saveSettings();
         }
         
-        document.addEventListener('keydown', e => {
-            const activeElement = document.activeElement;
-            if (activeElement.tagName === 'SELECT') return;
+        document.addEventListener('keydown', function(e) {
+            var activeElement = document.activeElement;
+            if (activeElement && activeElement.tagName === 'SELECT') return;
             
-            if (e.key === 'ArrowDown') {
+            var key = e.key || String.fromCharCode(e.keyCode);
+            var keyCode = e.keyCode || e.which;
+            
+            if (key === 'ArrowDown' || keyCode === 40) {
                 if (isAutoPlaying) {
                     toggleAutoPlay();
                 }
                 nextWord();
-            } else if (e.key === 'ArrowUp') {
+            } else if (key === 'ArrowUp' || keyCode === 38) {
                 if (isAutoPlaying) {
                     toggleAutoPlay();
                 }
                 prevWord();
-            } else if (e.key === ' ') {
-                e.preventDefault();
+            } else if (key === ' ' || keyCode === 32) {
+                if (e.preventDefault) {
+                    e.preventDefault();
+                } else {
+                    e.returnValue = false;
+                }
                 toggleAutoPlay();
             }
         });
+        
+        // 初始化
+        window.onload = function() {
+            // 延迟加载默认词库
+            setTimeout(loadDefault, 1000);
+        };
     </script>
 </body>
 </html>
