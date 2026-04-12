@@ -614,9 +614,8 @@
                     throw new Error('单词数据未加载');
                 }
                 
-                // 优化：直接使用原数据的引用，避免深拷贝
-                // 随机排序后只取前50个单词
-                words = shuffleArray([...wordData[filename]]).slice(0, 50);
+                // 一次性加载全部单词
+                words = shuffleArray([...wordData[filename]]);
                 
                 if (!words.length) {
                     throw new Error('未找到有效单词');
