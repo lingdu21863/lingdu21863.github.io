@@ -463,7 +463,7 @@
                     <button class="btn-success" onclick="speakCurrent()">朗读当前</button>
                     <button class="btn-primary" onclick="prevWord()">上一个</button>
                     <button class="btn-primary" onclick="nextWord()">下一个</button>
-                    <button class="btn-secondary" onclick="toggleAutoPlay()">
+                    <button class="btn-danger" onclick="toggleAutoPlay()">
                         <span id="autoPlayBtn">自动播放</span>
                     </button>
                 </div>
@@ -778,11 +778,15 @@
             }
             
             isAutoPlaying = !isAutoPlaying;
-            document.getElementById('autoPlayBtn').textContent = isAutoPlaying ? '停止自动' : '自动播放';
+            const autoPlayBtn = document.getElementById('autoPlayBtn');
             
             if (isAutoPlaying) {
+                autoPlayBtn.textContent = '停止自动';
+                autoPlayBtn.parentElement.className = 'btn-secondary';
                 startAutoPlay();
             } else {
+                autoPlayBtn.textContent = '自动播放';
+                autoPlayBtn.parentElement.className = 'btn-danger';
                 stopAutoPlay();
             }
         }
@@ -792,6 +796,9 @@
             
             speakCurrent();
             autoPlayTimer = setInterval(nextWord, currentInterval * 1000);
+            
+            // 确保按钮状态正确
+            document.getElementById('autoPlayBtn').parentElement.className = 'btn-secondary';
         }
         
         function stopAutoPlay() {
@@ -800,6 +807,9 @@
                 autoPlayTimer = null;
             }
             stopSpeaking();
+            
+            // 确保按钮状态正确
+            document.getElementById('autoPlayBtn').parentElement.className = 'btn-danger';
         }
         
         function updateRate() {
