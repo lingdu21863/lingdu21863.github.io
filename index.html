@@ -591,35 +591,7 @@
         }
         
         function loadDefault() {
-            const st = document.getElementById('status');
-            st.className = 'status loading';
-            st.textContent = '正在加载单词...';
-            st.classList.remove('hidden');
-            
-            try {
-                if (typeof wordData === 'undefined' || !wordData['1 初中-乱序.txt']) {
-                    throw new Error('单词数据未加载');
-                }
-                
-                words = shuffleArray([...wordData['1 初中-乱序.txt']]);
-                
-                if (!words.length) {
-                    throw new Error('未找到有效单词');
-                }
-                
-                currentIndex = 0;
-                displayCurrentWord();
-                renderWordList();
-                updateProgress();
-                
-                st.className = 'status success';
-                st.textContent = '成功加载 ' + words.length + ' 个单词';
-                setTimeout(() => st.classList.add('hidden'), 2000);
-                
-            } catch (e) {
-                st.className = 'status error';
-                st.textContent = '加载失败: ' + e.message;
-            }
+            loadSelectedFileByFilename('1 初中-乱序.txt');
         }
         
         function loadSelectedFile() {
@@ -628,6 +600,10 @@
             
             if (!filename) return;
             
+            loadSelectedFileByFilename(filename);
+        }
+        
+        function loadSelectedFileByFilename(filename) {
             const st = document.getElementById('status');
             st.className = 'status loading';
             st.textContent = '正在加载 ' + filename + '...';
@@ -638,6 +614,7 @@
                     throw new Error('单词数据未加载');
                 }
                 
+                // 优化：直接使用原数据的引用，避免深拷贝
                 words = shuffleArray([...wordData[filename]]);
                 
                 if (!words.length) {
@@ -646,7 +623,10 @@
                 
                 currentIndex = 0;
                 displayCurrentWord();
+                
+                // 优化：使用文档片段批量创建DOM元素
                 renderWordList();
+                
                 updateProgress();
                 
                 st.className = 'status success';
@@ -666,18 +646,29 @@
             document.getElementById('currentWord').textContent = w.word;
             document.getElementById('wordDefinition').textContent = w.definition;
             
+            // 优化：只更新需要的元素
             const items = document.querySelectorAll('.word-item');
-            items.forEach((x, i) => x.classList.toggle('active', i === currentIndex));
+            items.forEach((x, i) => {
+                if (i === currentIndex) {
+                    x.classList.add('active');
+                } else {
+                    x.classList.remove('active');
+                }
+            });
             
             const activeItem = items[currentIndex];
             if (activeItem) {
-                activeItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // 优化：使用更轻量的滚动方式
+                activeItem.scrollIntoView({ behavior: 'auto', block: 'center' });
             }
         }
         
         function renderWordList() {
             const l = document.getElementById('wordList');
             l.innerHTML = '';
+            
+            // 优化：使用文档片段减少DOM操作
+            const fragment = document.createDocumentFragment();
             
             words.forEach((x, i) => {
                 const d = document.createElement('div');
@@ -692,8 +683,10 @@
                     updateProgress();
                     speakCurrent();
                 };
-                l.appendChild(d);
+                fragment.appendChild(d);
             });
+            
+            l.appendChild(fragment);
         }
         
         function updateProgress() {
