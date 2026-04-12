@@ -615,7 +615,8 @@
                 }
                 
                 // 优化：直接使用原数据的引用，避免深拷贝
-                words = shuffleArray([...wordData[filename]]);
+                // 随机排序后只取前50个单词
+                words = shuffleArray([...wordData[filename]]).slice(0, 50);
                 
                 if (!words.length) {
                     throw new Error('未找到有效单词');
