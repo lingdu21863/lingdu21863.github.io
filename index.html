@@ -574,8 +574,8 @@
         saveSettings();
     }
     
-    // 渲染单词列表 (仅刷新列表高亮与内容)
-    function renderWordList() {
+    // 完整渲染单词列表（仅在加载词库时调用）
+    function renderWordListFull() {
         if (!wordsList.length) {
             wordListDiv.innerHTML = '<p style="text-align:center; color:#94a3b8; padding: 20px;">📭 暂无单词，请选择词库</p>';
             return;
@@ -584,22 +584,24 @@
         wordsList.forEach((item, idx) => {
             const div = document.createElement('div');
             div.className = 'word-item' + (idx === currentIdx ? ' active' : '');
+            div.dataset.index = idx;
             div.textContent = `${idx+1}. ${item.word}`;
-            div.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (autoPlaying) stopAutoPlay();
-                currentIdx = idx;
-                updateDisplayAndProgress();
-                speakCurrentWord();
-                renderWordList(); // 刷新高亮
-            });
             fragment.appendChild(div);
         });
         wordListDiv.innerHTML = '';
         wordListDiv.appendChild(fragment);
-        // 滚动到当前活动项
-        const activeItem = wordListDiv.querySelector('.word-item.active');
-        if (activeItem) activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    // 只更新高亮，不重新渲染
+    function updateWordListHighlight() {
+        const items = wordListDiv.querySelectorAll('.word-item');
+        items.forEach((item, idx) => {
+            if (idx === currentIdx) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
     }
     
     function updateDisplayAndProgress() {
@@ -688,13 +690,22 @@
         }
     }
     
+    // 滚动到当前活动项
+    function scrollToActiveWord() {
+        const activeItem = wordListDiv.querySelector('.word-item.active');
+        if (activeItem) {
+            activeItem.scrollIntoView({ behavior: 'auto', block: 'nearest' });
+        }
+    }
+    
     // 下一个单词
     function nextWord() {
         if (!wordsList.length) return;
         cancelSpeech();
         currentIdx = (currentIdx + 1) % wordsList.length;
         updateDisplayAndProgress();
-        renderWordList();   // 保持高亮同步
+        updateWordListHighlight();
+        scrollToActiveWord();
         speakCurrentWord();
     }
     
@@ -703,7 +714,8 @@
         cancelSpeech();
         currentIdx = (currentIdx - 1 + wordsList.length) % wordsList.length;
         updateDisplayAndProgress();
-        renderWordList();
+        updateWordListHighlight();
+        scrollToActiveWord();
         speakCurrentWord();
     }
     
@@ -721,7 +733,7 @@
                 cancelSpeech();
                 currentIdx = (currentIdx + 1) % wordsList.length;
                 updateDisplayAndProgress();
-                renderWordList();
+                updateWordListHighlight();
                 speakCurrentWord();
             }
         }, currentInterval * 1000);
@@ -777,7 +789,8 @@
             if (!wordsList.length) throw new Error('无效单词列表');
             currentIdx = 0;
             updateDisplayAndProgress();
-            renderWordList();
+            renderWordListFull();
+            scrollToActiveWord();
             // 自动朗读第一个单词（可选，提高体验）
             cancelSpeech();
             setTimeout(() => {
@@ -894,6 +907,18 @@
             if (autoPlaying) restartAutoPlay();
         });
         voiceSelect.addEventListener('change', saveSettings);
+        
+        // 单词列表点击事件委托
+        wordListDiv.addEventListener('click', (e) => {
+            const wordItem = e.target.closest('.word-item');
+            if (wordItem && wordItem.dataset.index !== undefined) {
+                if (autoPlaying) stopAutoPlay();
+                currentIdx = parseInt(wordItem.dataset.index);
+                updateDisplayAndProgress();
+                updateWordListHighlight();
+                speakCurrentWord();
+            }
+        });
         
         // 全局键盘事件
         document.addEventListener('keydown', (e) => {
