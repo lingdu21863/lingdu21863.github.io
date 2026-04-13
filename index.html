@@ -734,6 +734,7 @@
                 currentIdx = (currentIdx + 1) % wordsList.length;
                 updateDisplayAndProgress();
                 updateWordListHighlight();
+                scrollToActiveWord();
                 speakCurrentWord();
             }
         }, currentInterval * 1000);
