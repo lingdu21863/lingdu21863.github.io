@@ -771,13 +771,50 @@
         }
     }
     
-    // 加载词库 (核心) - 从TXT文件读取
+    // 内置单词数据 (作为本地文件读取失败时的后备)
+    const fallbackWordData = {
+        "1 初中-乱序.txt": [
+            { "word": "boat", "definition": "n. 小船；轮船 v. 划船" },
+            { "word": "group", "definition": "n. 组；团体 adj. 群的；团体的 v. 聚合" },
+            { "word": "nineteen", "definition": "num. 十九" },
+            { "word": "party", "definition": "n. 政党，党派；聚会，派对；当事人 [复数 parties] v. 参加社交聚会 [ 过去式 partied 过去分词 partied 现在分词 partying ]" },
+            { "word": "marriage", "definition": "n. 结婚；婚姻生活；密切结合，合并" },
+            { "word": "clean", "definition": "adj. 清洁的，干净的；清白的 v. 使干净 adv. 完全地 n. 打扫" },
+            { "word": "bottle", "definition": "n. 瓶子；一瓶的容量 v. 控制；把…装入瓶中" },
+            { "word": "tail", "definition": "n. 尾巴；踪迹；辫子；燕尾服 v. 尾随；装上尾巴 adj. 从后面而来的；尾部的" },
+            { "word": "very", "definition": "adj. 恰好是，正是；甚至；十足的；特有的 adv. 非常，很；完全 n. (Very)人名；(英)维里" },
+            { "word": "bag", "definition": "n. 袋；猎获物；（俚）一瓶啤酒 v. 猎获；把…装入袋中；占据，私吞；使膨大" }
+        ],
+        "2 高中-乱序.txt": [
+            { "word": "abandon", "definition": "v. 放弃，抛弃；离弃，丢弃；使屈从；停止进行，终止 n. 放任，放纵；完全屈从于压制" },
+            { "word": "ability", "definition": "n. 能力，资格；能耐，才能" },
+            { "word": "abnormal", "definition": "adj. 反常的，不规则的；变态的" },
+            { "word": "abolish", "definition": "vt. 废除，废止；取消，革除" },
+            { "word": "abortion", "definition": "n. 流产，小产；流产的胎儿；（计划等）失败，夭折" }
+        ],
+        "3 四级-乱序.txt": [
+            { "word": "academic", "definition": "adj. 学术的；理论的；学院的 n. 大学生，大学教师；学者" },
+            { "word": "academy", "definition": "n. 学院；研究院；学会；专科院校" },
+            { "word": "accelerate", "definition": "vt. 使……加快；使……增速 vi. 加速；促进；增加" },
+            { "word": "accent", "definition": "n. 口音；重音；强调；特点；重音符号 vt. 强调；重读；带…口音讲话" },
+            { "word": "acceptance", "definition": "n. 接纳；赞同；容忍" }
+        ]
+    };
+    
+    // 加载词库 (核心) - 优先从TXT文件读取，失败时使用内置数据
     function loadWordBank(filename) {
         if (!filename) return;
         showStatus(`📖 加载 ${filename} 中...`, 'loading');
         
         // 重置状态
         wordsList = [];
+        
+        // 检查是否在本地文件协议下
+        if (window.location.protocol === 'file:') {
+            // 本地文件协议下，使用内置数据作为后备
+            useFallbackData(filename);
+            return;
+        }
         
         // 使用fetch读取同目录下的TXT文件
         fetch(filename)
@@ -828,15 +865,45 @@
                 showStatus(`✅ 成功加载 ${wordsList.length} 个单词`, 'success');
             })
             .catch(err => {
-                console.error('加载词库失败:', err);
-                showStatus(`❌ 加载失败: ${err.message}`, 'error');
-                wordsList = [];
-                wordListDiv.innerHTML = '<p style="text-align:center; color:#94a3b8; padding: 20px;">⚠️ 加载失败，请检查词库文件是否存在</p>';
-                currentWordSpan.textContent = '加载失败';
-                definitionDiv.textContent = '请重新选择词库';
-                progressFill.style.width = '0%';
-                progressTextSpan.textContent = '0 / 0';
+                console.error('加载词库失败，使用内置数据:', err);
+                useFallbackData(filename);
             });
+    }
+    
+    // 使用内置数据作为后备
+    function useFallbackData(filename) {
+        try {
+            const rawArray = fallbackWordData[filename];
+            if (!rawArray || !rawArray.length) {
+                throw new Error('内置词库数据缺失');
+            }
+            
+            // 乱序处理
+            wordsList = shuffleArray([...rawArray]);
+            currentIdx = 0;
+            
+            // 更新UI
+            updateDisplayAndProgress();
+            renderWordListFull();
+            scrollToActiveWord();
+            
+            // 自动朗读第一个单词
+            cancelSpeech();
+            setTimeout(() => {
+                if (wordsList.length) speakCurrentWord();
+            }, 100);
+            
+            showStatus(`✅ 成功加载 ${wordsList.length} 个单词（内置数据）`, 'success');
+        } catch (err) {
+            console.error('使用内置数据失败:', err);
+            showStatus(`❌ 加载失败: ${err.message}`, 'error');
+            wordsList = [];
+            wordListDiv.innerHTML = '<p style="text-align:center; color:#94a3b8; padding: 20px;">⚠️ 加载失败，请检查词库文件</p>';
+            currentWordSpan.textContent = '加载失败';
+            definitionDiv.textContent = '请重新选择词库';
+            progressFill.style.width = '0%';
+            progressTextSpan.textContent = '0 / 0';
+        }
     }
     
     function loadSelectedFile() {
