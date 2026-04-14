@@ -771,44 +771,72 @@
         }
     }
     
-    // 加载词库 (核心)
+    // 加载词库 (核心) - 从TXT文件读取
     function loadWordBank(filename) {
         if (!filename) return;
         showStatus(`📖 加载 ${filename} 中...`, 'loading');
-        try {
-            if (typeof wordData === 'undefined' || !wordData[filename]) {
-                throw new Error(`词库 "${filename}" 数据缺失，请确保 words-data.js 包含该词库`);
-            }
-            const rawArray = wordData[filename];
-            if (!rawArray || !rawArray.length) throw new Error('词库为空');
-            // 复制一份并乱序
-            const copyArray = [];
-            for (let i = 0; i < rawArray.length; i++) {
-                copyArray.push(rawArray[i]);
-            }
-            wordsList = shuffleArray(copyArray);
-            if (!wordsList.length) throw new Error('无效单词列表');
-            currentIdx = 0;
-            updateDisplayAndProgress();
-            renderWordListFull();
-            scrollToActiveWord();
-            // 自动朗读第一个单词（可选，提高体验）
-            cancelSpeech();
-            setTimeout(() => {
-                if (wordsList.length) speakCurrentWord();
-            }, 100);
-            hideStatus();
-            showStatus(`✅ 成功加载 ${wordsList.length} 个单词`, 'success');
-        } catch (err) {
-            console.error(err);
-            showStatus(`❌ 加载失败: ${err.message}`, 'error');
-            wordsList = [];
-            wordListDiv.innerHTML = '<p style="text-align:center; color:#94a3b8; padding: 20px;">⚠️ 加载失败，请刷新或检查词库文件</p>';
-            currentWordSpan.textContent = '加载失败';
-            definitionDiv.textContent = '请重新选择词库';
-            progressFill.style.width = '0%';
-            progressTextSpan.textContent = '0 / 0';
-        }
+        
+        // 重置状态
+        wordsList = [];
+        
+        // 使用fetch读取同目录下的TXT文件
+        fetch(filename)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`文件加载失败: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(text => {
+                // 解析TXT文件内容，格式为 "单词\t释义"
+                const lines = text.split('\n');
+                const wordObjects = [];
+                
+                for (const line of lines) {
+                    const trimmedLine = line.trim();
+                    if (trimmedLine) {
+                        const parts = trimmedLine.split('\t');
+                        if (parts.length >= 2) {
+                            const word = parts[0].trim();
+                            const definition = parts.slice(1).join('\t').trim();
+                            if (word) {
+                                wordObjects.push({ word, definition });
+                            }
+                        }
+                    }
+                }
+                
+                if (wordObjects.length === 0) {
+                    throw new Error('词库文件为空或格式错误');
+                }
+                
+                // 乱序处理
+                wordsList = shuffleArray(wordObjects);
+                currentIdx = 0;
+                
+                // 更新UI
+                updateDisplayAndProgress();
+                renderWordListFull();
+                scrollToActiveWord();
+                
+                // 自动朗读第一个单词
+                cancelSpeech();
+                setTimeout(() => {
+                    if (wordsList.length) speakCurrentWord();
+                }, 100);
+                
+                showStatus(`✅ 成功加载 ${wordsList.length} 个单词`, 'success');
+            })
+            .catch(err => {
+                console.error('加载词库失败:', err);
+                showStatus(`❌ 加载失败: ${err.message}`, 'error');
+                wordsList = [];
+                wordListDiv.innerHTML = '<p style="text-align:center; color:#94a3b8; padding: 20px;">⚠️ 加载失败，请检查词库文件是否存在</p>';
+                currentWordSpan.textContent = '加载失败';
+                definitionDiv.textContent = '请重新选择词库';
+                progressFill.style.width = '0%';
+                progressTextSpan.textContent = '0 / 0';
+            });
     }
     
     function loadSelectedFile() {
@@ -952,6 +980,5 @@
         // 默认不加载任何词库，但预置一个友好提示
     });
 </script>
-<script src="words-data.js"></script>
 </body>
 </html>
