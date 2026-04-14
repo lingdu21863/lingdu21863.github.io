@@ -801,7 +801,7 @@
         ]
     };
     
-    // 加载词库 (核心) - 优先从TXT文件读取，失败时使用内置数据
+    // 加载词库 (核心) - 尝试使用XMLHttpRequest读取本地TXT文件
     function loadWordBank(filename) {
         if (!filename) return;
         showStatus(`📖 加载 ${filename} 中...`, 'loading');
@@ -809,65 +809,80 @@
         // 重置状态
         wordsList = [];
         
-        // 检查是否在本地文件协议下
-        if (window.location.protocol === 'file:') {
-            // 本地文件协议下，使用内置数据作为后备
-            useFallbackData(filename);
-            return;
-        }
+        // 创建XMLHttpRequest对象
+        const xhr = new XMLHttpRequest();
         
-        // 使用fetch读取同目录下的TXT文件
-        fetch(filename)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`文件加载失败: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(text => {
-                // 解析TXT文件内容，格式为 "单词\t释义"
-                const lines = text.split('\n');
-                const wordObjects = [];
-                
-                for (const line of lines) {
-                    const trimmedLine = line.trim();
-                    if (trimmedLine) {
-                        const parts = trimmedLine.split('\t');
-                        if (parts.length >= 2) {
-                            const word = parts[0].trim();
-                            const definition = parts.slice(1).join('\t').trim();
-                            if (word) {
-                                wordObjects.push({ word, definition });
+        // 配置请求
+        xhr.open('GET', filename, true);
+        
+        // 设置响应类型
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200 || xhr.status === 0) { // status 0 for local files
+                    try {
+                        const text = xhr.responseText;
+                        // 解析TXT文件内容，格式为 "单词\t释义"
+                        const lines = text.split('\n');
+                        const wordObjects = [];
+                        
+                        for (const line of lines) {
+                            const trimmedLine = line.trim();
+                            if (trimmedLine) {
+                                const parts = trimmedLine.split('\t');
+                                if (parts.length >= 2) {
+                                    const word = parts[0].trim();
+                                    const definition = parts.slice(1).join('\t').trim();
+                                    if (word) {
+                                        wordObjects.push({ word, definition });
+                                    }
+                                }
                             }
                         }
+                        
+                        if (wordObjects.length === 0) {
+                            throw new Error('词库文件为空或格式错误');
+                        }
+                        
+                        // 乱序处理
+                        wordsList = shuffleArray(wordObjects);
+                        currentIdx = 0;
+                        
+                        // 更新UI
+                        updateDisplayAndProgress();
+                        renderWordListFull();
+                        scrollToActiveWord();
+                        
+                        // 自动朗读第一个单词
+                        cancelSpeech();
+                        setTimeout(() => {
+                            if (wordsList.length) speakCurrentWord();
+                        }, 100);
+                        
+                        showStatus(`✅ 成功加载 ${wordsList.length} 个单词`, 'success');
+                    } catch (err) {
+                        console.error('解析词库文件失败:', err);
+                        useFallbackData(filename);
                     }
+                } else {
+                    console.error('加载词库文件失败，状态码:', xhr.status);
+                    useFallbackData(filename);
                 }
-                
-                if (wordObjects.length === 0) {
-                    throw new Error('词库文件为空或格式错误');
-                }
-                
-                // 乱序处理
-                wordsList = shuffleArray(wordObjects);
-                currentIdx = 0;
-                
-                // 更新UI
-                updateDisplayAndProgress();
-                renderWordListFull();
-                scrollToActiveWord();
-                
-                // 自动朗读第一个单词
-                cancelSpeech();
-                setTimeout(() => {
-                    if (wordsList.length) speakCurrentWord();
-                }, 100);
-                
-                showStatus(`✅ 成功加载 ${wordsList.length} 个单词`, 'success');
-            })
-            .catch(err => {
-                console.error('加载词库失败，使用内置数据:', err);
-                useFallbackData(filename);
-            });
+            }
+        };
+        
+        // 处理网络错误
+        xhr.onerror = function() {
+            console.error('加载词库文件网络错误');
+            useFallbackData(filename);
+        };
+        
+        // 发送请求
+        try {
+            xhr.send();
+        } catch (err) {
+            console.error('发送请求失败:', err);
+            useFallbackData(filename);
+        }
     }
     
     // 使用内置数据作为后备
