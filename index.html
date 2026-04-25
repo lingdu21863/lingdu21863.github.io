@@ -10,7 +10,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -20,23 +20,23 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .container {
             width: 100%;
             max-width: 1200px;
             background: white;
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             padding: 24px;
         }
-        
+
         h1 {
             text-align: center;
             color: #1e293b;
             margin-bottom: 20px;
             font-size: 28px;
         }
-        
+
         .header {
             display: flex;
             gap: 12px;
@@ -44,7 +44,7 @@
             flex-wrap: wrap;
             align-items: center;
         }
-        
+
         select, button {
             padding: 12px 20px;
             border: none;
@@ -54,42 +54,42 @@
             font-weight: 500;
             transition: all 0.2s;
         }
-        
+
         select {
             background: #f1f5f9;
             color: #1e293b;
             flex: 1;
             min-width: 180px;
         }
-        
+
         button {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
         }
-        
+
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
-        
+
         button:active {
             transform: translateY(0);
         }
-        
+
         button.danger {
             background: linear-gradient(135deg, #ef4444, #dc2626);
         }
-        
+
         button.success {
             background: linear-gradient(135deg, #10b981, #059669);
         }
-        
+
         .main {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
         }
-        
+
         .left-panel {
             flex: 1;
             min-width: 280px;
@@ -97,13 +97,13 @@
             border-radius: 16px;
             padding: 16px;
         }
-        
+
         .left-panel h3 {
             color: #1e293b;
             margin-bottom: 12px;
             font-size: 18px;
         }
-        
+
         .word-list {
             max-height: 500px;
             overflow-y: auto;
@@ -111,7 +111,7 @@
             border-radius: 12px;
             padding: 8px;
         }
-        
+
         .word-item {
             padding: 12px 16px;
             border-radius: 10px;
@@ -121,40 +121,40 @@
             font-weight: 500;
             color: #475569;
         }
-        
+
         .word-item:hover {
             background: #f1f5f9;
         }
-        
+
         .word-item.active {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
         }
-        
+
         .right-panel {
             flex: 1.5;
             min-width: 320px;
         }
-        
+
         .word-card {
             background: linear-gradient(135deg, #f8fafc, #ffffff);
             border-radius: 20px;
             padding: 40px 24px;
             text-align: center;
             margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             cursor: pointer;
             transition: transform 0.2s;
         }
-        
+
         .word-card:hover {
             transform: scale(1.02);
         }
-        
+
         .word-card:active {
             transform: scale(0.98);
         }
-        
+
         .current-word {
             font-size: 48px;
             font-weight: 800;
@@ -162,13 +162,13 @@
             margin-bottom: 16px;
             word-break: break-word;
         }
-        
+
         .word-definition {
             font-size: 18px;
             color: #475569;
             line-height: 1.6;
         }
-        
+
         .controls {
             display: flex;
             gap: 12px;
@@ -176,14 +176,14 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-        
+
         .progress {
             background: #f1f5f9;
             border-radius: 12px;
             padding: 16px;
             margin-bottom: 20px;
         }
-        
+
         .progress-bar {
             height: 8px;
             background: #e2e8f0;
@@ -191,47 +191,47 @@
             overflow: hidden;
             margin-bottom: 8px;
         }
-        
+
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #667eea, #764ba2);
             width: 0%;
             transition: width 0.3s;
         }
-        
+
         .progress-text {
             text-align: center;
             color: #64748b;
             font-weight: 500;
         }
-        
+
         .settings {
             background: #f8fafc;
             border-radius: 16px;
             padding: 16px;
         }
-        
+
         .setting-row {
             display: flex;
             align-items: center;
             gap: 12px;
             margin-bottom: 12px;
         }
-        
+
         .setting-row label {
             min-width: 80px;
             font-weight: 500;
             color: #475569;
         }
-        
+
         .setting-row input[type="range"] {
             flex: 1;
         }
-        
+
         .setting-row select {
             flex: 1;
         }
-        
+
         .status {
             text-align: center;
             padding: 12px;
@@ -239,26 +239,26 @@
             margin-bottom: 16px;
             font-weight: 500;
         }
-        
+
         .status.success {
             background: #dcfce7;
             color: #15803d;
         }
-        
+
         .status.error {
             background: #fee2e2;
             color: #b91c1c;
         }
-        
+
         .status.loading {
             background: #fff3cd;
             color: #a16207;
         }
-        
+
         .hidden {
             display: none;
         }
-        
+
         .keyboard-hints {
             background: #f1f5f9;
             border-radius: 12px;
@@ -271,7 +271,7 @@
             font-size: 13px;
             color: #64748b;
         }
-        
+
         kbd {
             background: #1e293b;
             color: white;
@@ -280,7 +280,7 @@
             font-family: monospace;
             font-weight: bold;
         }
-        
+
         @media (max-width: 768px) {
             .main {
                 flex-direction: column;
@@ -294,9 +294,9 @@
 <body>
     <div class="container">
         <h1>📖 英语单词朗读器</h1>
-        
+
         <div id="status" class="status hidden"></div>
-        
+
         <div class="header">
             <select id="fileSelect">
                 <option value="">-- 请选择词库 --</option>
@@ -310,7 +310,7 @@
             </select>
             <button id="refreshBtn">🔄 刷新单词</button>
         </div>
-        
+
         <div class="main">
             <div class="left-panel">
                 <h3>📋 单词列表</h3>
@@ -318,7 +318,7 @@
                     <p style="text-align:center; color:#94a3b8; padding: 40px;">请选择词库</p>
                 </div>
             </div>
-            
+
             <div class="right-panel">
                 <div class="progress">
                     <div class="progress-bar">
@@ -326,19 +326,19 @@
                     </div>
                     <div class="progress-text" id="progressText">0 / 0</div>
                 </div>
-                
+
                 <div class="word-card" id="wordCard">
                     <div class="current-word" id="currentWord">✨ 选择词库开始</div>
                     <div class="word-definition" id="wordDefinition">点击卡片可朗读</div>
                 </div>
-                
+
                 <div class="controls">
                     <button id="prevBtn">⏪ 上一个</button>
                     <button id="speakBtn" class="success">🔊 朗读</button>
                     <button id="nextBtn">下一个 ⏩</button>
                     <button id="autoPlayBtn">▶ 自动播放</button>
                 </div>
-                
+
                 <div class="settings">
                     <div class="setting-row">
                         <label>语音：</label>
@@ -346,8 +346,8 @@
                     </div>
                     <div class="setting-row">
                         <label>语速：</label>
-                        <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1">
-                        <span id="rateValue">1.0</span>
+                        <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="0.7">
+                        <span id="rateValue">0.7</span>
                     </div>
                     <div class="setting-row">
                         <label>间隔：</label>
@@ -355,7 +355,7 @@
                         <span id="intervalValue">3.0秒</span>
                     </div>
                 </div>
-                
+
                 <div class="keyboard-hints">
                     <span><kbd>↑</kbd> 上一个</span>
                     <span><kbd>↓</kbd> 下一个</span>
@@ -372,7 +372,7 @@
         let autoPlaying = false;
         let autoTimer = null;
         let speechSynth = window.speechSynthesis;
-        
+
         const fileSelect = document.getElementById('fileSelect');
         const wordListDiv = document.getElementById('wordList');
         const currentWordSpan = document.getElementById('currentWord');
@@ -391,14 +391,14 @@
         const speakBtn = document.getElementById('speakBtn');
         const autoPlayBtn = document.getElementById('autoPlayBtn');
         const wordCard = document.getElementById('wordCard');
-        
+
         function showStatus(msg, type = 'loading') {
             statusDiv.textContent = msg;
             statusDiv.className = `status ${type}`;
             statusDiv.classList.remove('hidden');
             setTimeout(() => statusDiv.classList.add('hidden'), 2000);
         }
-        
+
         function shuffleArray(arr) {
             const newArr = [...arr];
             for (let i = newArr.length - 1; i > 0; i--) {
@@ -407,7 +407,7 @@
             }
             return newArr;
         }
-        
+
         function renderWordList() {
             if (!wordsList.length) {
                 wordListDiv.innerHTML = '<p style="text-align:center; color:#94a3b8; padding: 40px;">请选择词库</p>';
@@ -424,34 +424,34 @@
             wordListDiv.innerHTML = '';
             wordListDiv.appendChild(fragment);
         }
-        
+
         function updateDisplay() {
             if (!wordsList.length) return;
             const wordObj = wordsList[currentIdx];
             currentWordSpan.textContent = wordObj.word;
             definitionDiv.textContent = wordObj.definition;
-            
+
             const percent = ((currentIdx + 1) / wordsList.length) * 100;
             progressFill.style.width = `${percent}%`;
             progressTextSpan.textContent = `${currentIdx + 1} / ${wordsList.length}`;
-            
+
             const items = wordListDiv.querySelectorAll('.word-item');
             items.forEach((item, idx) => {
                 item.classList.toggle('active', idx === currentIdx);
             });
-            
+
             const activeItem = wordListDiv.querySelector('.word-item.active');
             if (activeItem) {
                 activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
-        
+
         function cancelSpeech() {
             if (speechSynth) {
                 speechSynth.cancel();
             }
         }
-        
+
         function speakCurrentWord() {
             if (!wordsList.length) {
                 showStatus('请先选择词库', 'error');
@@ -459,7 +459,7 @@
             }
             cancelSpeech();
             const wordText = wordsList[currentIdx].word;
-            
+
             let voices = speechSynth.getVoices();
             if (!voices.length) {
                 setTimeout(() => {
@@ -470,13 +470,13 @@
             }
             doSpeak(wordText, voices);
         }
-        
+
         function doSpeak(text, voices) {
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.rate = parseFloat(rateRange.value);
             utterance.pitch = 1;
             utterance.lang = 'en-US';
-            
+
             let selectedVoice = null;
             const selectedIdx = voiceSelect.value;
             if (selectedIdx && voices[parseInt(selectedIdx)]) {
@@ -496,14 +496,14 @@
                 }
             }
             if (selectedVoice) utterance.voice = selectedVoice;
-            
+
             try {
                 speechSynth.speak(utterance);
             } catch (err) {
                 console.error('speak error', err);
             }
         }
-        
+
         function nextWord() {
             if (!wordsList.length) return;
             cancelSpeech();
@@ -511,7 +511,7 @@
             updateDisplay();
             speakCurrentWord();
         }
-        
+
         function prevWord() {
             if (!wordsList.length) return;
             cancelSpeech();
@@ -519,7 +519,7 @@
             updateDisplay();
             speakCurrentWord();
         }
-        
+
         function startAutoPlay() {
             if (autoTimer) clearInterval(autoTimer);
             autoPlaying = true;
@@ -535,7 +535,7 @@
                 }
             }, parseFloat(intervalRange.value) * 1000);
         }
-        
+
         function stopAutoPlay() {
             if (autoTimer) {
                 clearInterval(autoTimer);
@@ -546,7 +546,7 @@
             autoPlayBtn.classList.remove('danger');
             cancelSpeech();
         }
-        
+
         function toggleAutoPlay() {
             if (!wordsList.length) {
                 showStatus('请先选择词库', 'error');
@@ -558,13 +558,13 @@
                 startAutoPlay();
             }
         }
-        
+
         function loadWordBank(filename) {
             if (!filename) return;
             showStatus(`📖 加载 ${filename} 中...`, 'loading');
-            
+
             wordsList = [];
-            
+
             fetch(filename)
                 .then(response => {
                     if (!response.ok && window.location.protocol !== 'file:') {
@@ -575,7 +575,7 @@
                 .then(text => {
                     const lines = text.split('\n');
                     const wordObjects = [];
-                    
+
                     for (const line of lines) {
                         const trimmedLine = line.trim();
                         if (trimmedLine) {
@@ -589,19 +589,19 @@
                             }
                         }
                     }
-                    
+
                     if (wordObjects.length === 0) {
                         throw new Error('词库文件为空或格式错误');
                     }
-                    
+
                     wordsList = shuffleArray(wordObjects);
                     currentIdx = 0;
-                    
+
                     updateDisplay();
                     renderWordList();
-                    
+
                     cancelSpeech();
-                    
+
                     showStatus(`✅ 成功加载 ${wordsList.length} 个单词`, 'success');
                 })
                 .catch(err => {
@@ -610,11 +610,11 @@
                     wordListDiv.innerHTML = '<p style="text-align:center; color:#94a3b8; padding: 40px;">请使用HTTP服务器访问</p>';
                 });
         }
-        
+
         function populateVoiceList() {
             const voices = speechSynth.getVoices();
             const enVoices = voices.filter(v => v.lang.startsWith('en'));
-            
+
             voiceSelect.innerHTML = '';
             if (!enVoices.length) {
                 const opt = document.createElement('option');
@@ -630,12 +630,12 @@
                 });
             }
         }
-        
+
         fileSelect.addEventListener('change', () => {
             if (autoPlaying) stopAutoPlay();
             loadWordBank(fileSelect.value);
         });
-        
+
         refreshBtn.addEventListener('click', () => {
             if (!fileSelect.value) {
                 showStatus('请先选择词库', 'error');
@@ -644,33 +644,33 @@
             if (autoPlaying) stopAutoPlay();
             loadWordBank(fileSelect.value);
         });
-        
+
         prevBtn.addEventListener('click', () => {
             if (autoPlaying) stopAutoPlay();
             prevWord();
         });
-        
+
         nextBtn.addEventListener('click', () => {
             if (autoPlaying) stopAutoPlay();
             nextWord();
         });
-        
+
         speakBtn.addEventListener('click', () => {
             if (autoPlaying) stopAutoPlay();
             speakCurrentWord();
         });
-        
+
         autoPlayBtn.addEventListener('click', toggleAutoPlay);
-        
+
         wordCard.addEventListener('click', () => {
             if (autoPlaying) stopAutoPlay();
             speakCurrentWord();
         });
-        
+
         rateRange.addEventListener('input', () => {
             rateValueSpan.textContent = parseFloat(rateRange.value).toFixed(1);
         });
-        
+
         intervalRange.addEventListener('input', () => {
             intervalValueSpan.textContent = parseFloat(intervalRange.value).toFixed(1) + '秒';
             if (autoPlaying) {
@@ -678,7 +678,7 @@
                 startAutoPlay();
             }
         });
-        
+
         wordListDiv.addEventListener('click', (e) => {
             const wordItem = e.target.closest('.word-item');
             if (wordItem && wordItem.dataset.index !== undefined) {
@@ -688,11 +688,11 @@
                 speakCurrentWord();
             }
         });
-        
+
         document.addEventListener('keydown', (e) => {
             const tag = e.target.tagName;
             if (tag === 'SELECT' || tag === 'INPUT') return;
-            
+
             if (e.key === 'ArrowUp') {
                 e.preventDefault();
                 if (autoPlaying) stopAutoPlay();
@@ -706,7 +706,7 @@
                 toggleAutoPlay();
             }
         });
-        
+
         if (speechSynth.onvoiceschanged !== undefined) {
             speechSynth.onvoiceschanged = populateVoiceList;
         }
