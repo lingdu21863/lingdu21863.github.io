@@ -1,71 +1,118 @@
 # lingdu21863.github.io
 
-一个简洁美观的英语单词朗读器，支持多种词库和自定义设置。
+灵渡的个人博客，使用 Jekyll 搭建，部署在 GitHub Pages 上。
 
-## 🚀 功能特点
+## 🌟 站点功能
 
-- **多种词库**：支持初中、高中、四级、六级、考研、托福、SAT 等 7 种词库
-- **单词乱序**：每次加载词库后自动打乱单词顺序
-- **左右布局**：左侧显示单词列表，右侧为朗读区
-- **语音朗读**：使用 Web Speech API 实现语音朗读，支持多种英语语音选择
-- **自动播放**：支持自动播放模式，可调节间隔时间
-- **语速调节**：支持 0.5x - 2.0x 的语速调节
-- **键盘快捷键**：
-  - `↑` 上一个单词
-  - `↓` 下一个单词
-  - `空格` 播放/暂停自动播放
-- **响应式设计**：适配桌面端和移动端
+### 📝 博客
 
-## 📁 文件说明
+记录学习与生活的点滴，分享知识和经验。
 
-- `index.html` - 主页面，包含完整的 HTML、CSS 和 JavaScript
-- `1 初中-乱序.txt` ~ `7 SAT-乱序.txt` - 各种词库文件，格式为「单词\t释义」
-- `oldmanandsea.html` - 其他页面
+- 文章列表展示
+- 分类标签支持
+- 代码语法高亮
+- 响应式设计
 
-## 🎯 使用方法
+### 📖 单词朗读器
 
-### 在线使用
+在线英语单词朗读工具，支持：
 
-直接访问：https://lingdu21863.github.io/
+- **7 种词库**：初中、高中、四级、六级、考研、托福、SAT
+- **语音朗读**：使用 Web Speech API
+- **自动播放**：可调节间隔时间
+- **语速调节**：0.5x - 2.0x
+- **键盘快捷键**：↑↓ 切换单词，空格播放/暂停
 
-### 本地运行
+访问地址：[https://lingdu21863.github.io/words/](https://lingdu21863.github.io/words/)
 
-1. 克隆仓库
-2. 使用 HTTP 服务器打开（推荐）：
+## 📁 目录结构
+
+```
+├── _config.yml          # Jekyll 配置文件
+├── _layouts/            # 布局模板
+│   ├── default.html     # 默认布局
+│   ├── home.html        # 首页布局
+│   ├── post.html        # 文章布局
+│   └── page.html        # 页面布局
+├── _posts/              # 博客文章
+├── index.md             # 首页
+├── about.md             # 关于页面
+├── words/               # 单词朗读器
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+└── *.txt                # 词库文件
+```
+
+## 🚀 本地运行
+
+### 前置要求
+
+- Ruby 2.5.0 或更高版本
+- RubyGems
+- GCC 和 Make
+
+### 安装步骤
+
+1. 安装 Jekyll 和 Bundler：
    ```bash
-   python -m http.server 8080
-   # 或使用其他 HTTP 服务器
+   gem install jekyll bundler
    ```
-3. 浏览器访问 `http://localhost:8080`
 
-**注意**：不要直接双击打开 HTML 文件，因为浏览器安全限制可能无法加载 TXT 词库文件。
+2. 克隆仓库：
+   ```bash
+   git clone https://github.com/lingdu21863/lingdu21863.github.io.git
+   cd lingdu21863.github.io
+   ```
+
+3. 安装依赖：
+   ```bash
+   bundle install
+   ```
+
+4. 启动本地服务器：
+   ```bash
+   bundle exec jekyll serve
+   ```
+
+5. 浏览器访问 `http://localhost:4000`
+
+## ✍️ 写作指南
+
+### 创建新文章
+
+在 `_posts` 目录下创建文件，命名格式为 `YYYY-MM-DD-title.md`：
+
+```markdown
+---
+title: "文章标题"
+date: 2025-06-15
+categories: [分类]
+tags: [标签1, 标签2]
+---
+
+文章内容...
+```
+
+### 创建新页面
+
+在根目录创建 `.md` 文件：
+
+```markdown
+---
+layout: page
+title: "页面标题"
+---
+
+页面内容...
+```
 
 ## 🛠️ 技术栈
 
-- **HTML5** - 页面结构
-- **CSS3** - 样式设计（渐变、响应式、动画）
-- **JavaScript** - 交互逻辑
-- **Web Speech API** - 语音合成
-
-## 📝 词库格式
-
-词库文件使用 TXT 格式，每行一个单词，格式为：
-```
-单词\t释义
-```
-
-例如：
-```
-boat	n. 小船；轮船 v. 划船
-group	n. 组；团体 adj. 群的；团体的 v. 聚合
-```
-
-## 🎨 界面预览
-
-- 渐变色背景（紫蓝色调）
-- 圆角卡片设计
-- 清晰的视觉层次
-- 流畅的交互动画
+- [Jekyll](https://jekyllrb.com/) - 静态站点生成器
+- [GitHub Pages](https://pages.github.com/) - 免费托管
+- [Markdown](https://www.markdownguide.org/) - 文章写作
+- [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) - 语音合成
 
 ## 📄 许可证
 

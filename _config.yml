@@ -1,0 +1,60 @@
+title: "灵渡的博客"
+description: "记录学习与生活的点滴"
+author: "lingdu21863"
+email: "lingdu21863@example.com"
+baseurl: ""
+url: "https://lingdu21863.github.io"
+
+lang: zh-CN
+timezone: Asia/Shanghai
+
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+permalink: /posts/:year/:month/:day/:title/
+
+paginate: 10
+paginate_path: "/page:num/"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "lingdu21863"
+      comments: true
+
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+exclude:
+  - "*.txt"
+  - "*.py"
+  - "translate.py"
+  - "高平单词.txt"
+  - "高平单词-翻译版.txt"
+  - "1 初中-乱序.txt"
+  - "2 高中-乱序.txt"
+  - "3 四级-乱序.txt"
+  - "4 六级-乱序.txt"
+  - "5 考研-乱序.txt"
+  - "6 托福-乱序.txt"
+  - "7 SAT-乱序.txt"
+  - "node_modules/"
+  - "Gemfile"
+  - "Gemfile.lock"
+
+include:
+  - _pages

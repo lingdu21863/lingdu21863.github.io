@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<article class="card">
+    <header>
+        <h1 class="page-title">{{ page.title }}</h1>
+        {% if page.description %}
+        <p class="post-excerpt">{{ page.description }}</p>
+        {% endif %}
+    </header>
+    
+    <div class="post-content">
+        {{ content }}
+    </div>
+</article>

@@ -1,0 +1,57 @@
+---
+layout: default
+---
+
+<div class="card">
+    <h1 class="page-title">{{ page.title | default: '最新文章' }}</h1>
+    {% if page.description %}
+    <p class="post-excerpt">{{ page.description }}</p>
+    {% endif %}
+</div>
+
+<ul class="post-list card">
+{% for post in paginator.posts %}
+    <li>
+        <h2 class="post-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        <div class="post-meta">
+            <time datetime="{{ post.date | date_to_xmlschema }}">
+                {{ post.date | date: '%Y年%m月%d日' }}
+            </time>
+            {% if post.categories.size > 0 %}
+            · {{ post.categories | join: ', ' }}
+            {% endif %}
+            {% if post.tags.size > 0 %}
+            · {{ post.tags | join: ', ' }}
+            {% endif %}
+        </div>
+        {% if post.excerpt %}
+        <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
+        {% endif %}
+        <a href="{{ post.url | relative_url }}" class="read-more">阅读全文 →</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}">← 上一页</a>
+    {% endif %}
+    
+    {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+        <span class="current">{{ page }}</span>
+        {% elsif page == 1 %}
+        <a href="{{ '/' | relative_url }}">{{ page }}</a>
+        {% else %}
+        <a href="{{ site.paginate_path | replace: ':num', page | relative_url }}">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+    
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}">下一页 →</a>
+    {% endif %}
+</div>
+{% endif %}
