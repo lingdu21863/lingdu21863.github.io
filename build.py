@@ -7,6 +7,18 @@ from datetime import datetime, date
 SITE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_DIR = os.path.join(SITE_DIR, '_site')
 
+def read_file_with_encoding(filepath):
+    encodings = ['utf-8-sig', 'utf-8', 'gb18030', 'gbk', 'gb2312']
+    for encoding in encodings:
+        try:
+            with open(filepath, 'r', encoding=encoding) as f:
+                content = f.read()
+                if '\x00' not in content:
+                    return content
+        except (UnicodeDecodeError, LookupError):
+            continue
+    raise ValueError(f"无法读取文件 {filepath}，尝试了编码: {encodings}")
+
 def parse_frontmatter(text):
     if not text.startswith('---\n'):
         return {}, text
@@ -128,58 +140,54 @@ def render_template(template, variables):
 def load_config():
     config_path = os.path.join(SITE_DIR, '_config.yml')
     if os.path.exists(config_path):
-        with open(config_path, 'r', encoding='utf-8') as f:
-            return yaml.safe_load(f) or {}
+        content = read_file_with_encoding(config_path)
+        return yaml.safe_load(content) or {}
     return {}
 
 def load_layout(name):
     path = os.path.join(SITE_DIR, '_layouts', name + '.html')
     if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
-            content = f.read()
+        content = read_file_with_encoding(path)
         fm, html = parse_frontmatter(content)
-        return html or content
-    return '{{ content }}'
+        return fm, html or content
+    return {}, '{{ content }}'
 
 def build_page(page_path, output_path, config, posts=None):
-    with open(page_path, 'r', encoding='utf-8') as f:
-        text = f.read()
+    text = read_file_with_encoding(page_path)
     
     fm, md_content = parse_frontmatter(text)
     html_content = markdown_to_html(md_content)
     layout_name = fm.get('layout', 'default')
-    layout = load_layout(layout_name)
-    
-    if posts and layout_name == 'home':
-        posts_html = build_posts_list(posts)
-        html_content = build_home_content(fm, posts)
     
     title = fm.get('title', config.get('title', ''))
     site_title = config.get('title', '')
     
-    page_vars = {
-        'content': html_content,
-        'title': fm.get('title', ''),
-        'date': str(fm.get('date', '')),
-        'categories': ', '.join(fm.get('categories', [])),
-        'tags': ', '.join(fm.get('tags', [])),
-        'excerpt': fm.get('excerpt', ''),
-        'description': fm.get('description', config.get('description', '')),
-        'author': fm.get('author', config.get('author', '')),
-    }
+    if posts and layout_name == 'home':
+        html_content = build_home_content(fm, posts)
+        layout_name = 'default'
     
-    site_vars = {
-        'site.title': site_title,
-        'site.description': config.get('description', ''),
-        'site.author': config.get('author', ''),
-        'site.time': datetime.now(),
-        'site.lang': config.get('lang', 'zh-CN'),
-        'page.url': '/' + os.path.relpath(output_path, OUTPUT_DIR).replace('\\', '/'),
-    }
+    current_content = html_content
+    current_layout_name = layout_name
     
-    full_content = layout
+    while current_layout_name:
+        layout_fm, layout_content = load_layout(current_layout_name)
+        current_content = layout_content.replace('{{ content }}', current_content)
+        current_layout_name = layout_fm.get('layout')
     
-    if '{% if page.title %}' in full_content:
+    full_content = current_content
+    
+    full_content = full_content.replace('{{ page.title | default: site.title }}', title or site_title)
+    full_content = full_content.replace('{{ page.title }}', title)
+    full_content = full_content.replace('{{ page.description | default: site.description }}', fm.get('description', config.get('description', '')))
+    full_content = full_content.replace('{{ site.title }}', site_title)
+    full_content = full_content.replace('{{ site.lang | default: "zh-CN" }}', 'zh-CN')
+    full_content = full_content.replace('{{ site.time | date: "%Y" }}', str(datetime.now().year))
+    
+    full_content = full_content.replace("{{ '/' | relative_url }}", '/')
+    full_content = full_content.replace("{{ '/about/' | relative_url }}", '/about/')
+    full_content = full_content.replace("{{ '/words/' | relative_url }}", '/words/')
+    
+    if '{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}' in full_content:
         if title:
             full_content = full_content.replace(
                 '{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}',
@@ -191,33 +199,14 @@ def build_page(page_path, output_path, config, posts=None):
                 site_title
             )
     
-    full_content = full_content.replace('{{ page.title | default: site.title }}', title or site_title)
-    full_content = full_content.replace('{{ page.title }}', title)
-    full_content = full_content.replace('{{ page.description | default: site.description }}', fm.get('description', config.get('description', '')))
-    full_content = full_content.replace('{{ page.excerpt | strip_html | truncatewords: 50 }}', fm.get('excerpt', ''))
-    full_content = full_content.replace('{{ page.author }}', fm.get('author', config.get('author', '')))
-    full_content = full_content.replace('{{ site.time | date: "%Y" }}', str(datetime.now().year))
-    full_content = full_content.replace('{{ site.title }}', site_title)
-    full_content = full_content.replace("{{ site.lang | default: 'zh-CN' }}", 'zh-CN')
-    
-    if '{{ content }}' in full_content:
-        full_content = full_content.replace('{{ content }}', html_content)
-    
-    full_content = full_content.replace("{{ '/' | relative_url }}", '/')
-    full_content = full_content.replace("{{ '/about/' | relative_url }}", '/about/')
-    full_content = full_content.replace("{{ '/words/' | relative_url }}", '/words/')
-    
-    full_content = re.sub(r'\{\{ site\.\w+ \| date: [^}]+\}\}', '', full_content)
     full_content = re.sub(r'\{\{ [^}]+\}\}', '', full_content)
     full_content = re.sub(r'\{\%[^%]*\%\}', '', full_content)
-    full_content = re.sub(r'\| [^}]+\}\}', '}}', full_content)
-    
-    if '{% seo %}' in full_content:
-        full_content = full_content.replace('{% seo %}', '')
     
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(full_content)
+    
+    return True
 
 def build_posts_list(posts):
     html = '<ul class="post-list card">\n'
@@ -254,8 +243,7 @@ def get_posts():
         for fname in sorted(os.listdir(posts_dir), reverse=True):
             if fname.endswith('.md'):
                 fpath = os.path.join(posts_dir, fname)
-                with open(fpath, 'r', encoding='utf-8') as f:
-                    text = f.read()
+                text = read_file_with_encoding(fpath)
                 fm, _ = parse_frontmatter(text)
                 if fm:
                     name = fname.replace('.md', '')
@@ -272,12 +260,10 @@ def get_posts():
 
 def build_post(post, config):
     fpath = post['_file']
-    with open(fpath, 'r', encoding='utf-8') as f:
-        text = f.read()
+    text = read_file_with_encoding(fpath)
     
     fm, md_content = parse_frontmatter(text)
     html_content = markdown_to_html(md_content)
-    layout = load_layout('post')
     
     title = fm.get('title', '')
     site_title = config.get('title', '')
@@ -289,38 +275,35 @@ def build_post(post, config):
         else:
             date_str = str(d)
     
-    full_content = layout.replace('{{ content }}', html_content)
+    current_content = html_content
+    current_layout_name = 'post'
+    
+    while current_layout_name:
+        layout_fm, layout_content = load_layout(current_layout_name)
+        current_content = layout_content.replace('{{ content }}', current_content)
+        current_layout_name = layout_fm.get('layout')
+    
+    full_content = current_content
+    
     full_content = full_content.replace('{{ page.title }}', title)
     full_content = full_content.replace('{{ page.date | date: "%Y年%m月%d日" }}', date_str)
     full_content = full_content.replace('{{ page.author }}', str(fm.get('author', config.get('author', ''))))
     full_content = full_content.replace('{{ page.categories | join: ", " }}', ', '.join(fm.get('categories', [])))
     full_content = full_content.replace('{{ page.tags | join: ", " }}', ', '.join(fm.get('tags', [])))
     full_content = full_content.replace('{{ page.date | date_to_xmlschema }}', '')
+    full_content = full_content.replace('{{ page.title | default: site.title }}', title or site_title)
+    full_content = full_content.replace('{{ page.description | default: site.description }}', fm.get('description', config.get('description', '')))
+    full_content = full_content.replace('{{ site.title }}', site_title)
+    full_content = full_content.replace("{{ site.lang | default: 'zh-CN' }}", 'zh-CN')
+    full_content = full_content.replace("{{ '/' | relative_url }}", '/')
+    full_content = full_content.replace("{{ '/about/' | relative_url }}", '/about/')
+    full_content = full_content.replace("{{ '/words/' | relative_url }}", '/words/')
+    full_content = full_content.replace("{{ site.time | date: '%Y' }}", str(datetime.now().year))
     full_content = re.sub(r'\{\{ [^}]+\}\}', '', full_content)
+    full_content = re.sub(r'\{\%.+?\%\}', '', full_content)
     
-    page_vars = {
-        'title': title,
-        'site.title': site_title,
-        'site.time': datetime.now(),
-        'content': html_content,
-    }
-    
-    default_layout = load_layout('default')
-    default_layout = default_layout.replace('{{ content }}', full_content)
-    default_layout = default_layout.replace('{{ page.title | default: site.title }}', title or site_title)
-    default_layout = default_layout.replace('{{ page.title }}', title)
-    default_layout = default_layout.replace('{{ page.description | default: site.description }}', fm.get('description', config.get('description', '')))
-    default_layout = default_layout.replace('{{ site.title }}', site_title)
-    default_layout = default_layout.replace("{{ site.lang | default: 'zh-CN' }}", 'zh-CN')
-    default_layout = default_layout.replace("{{ '/' | relative_url }}", '/')
-    default_layout = default_layout.replace("{{ '/about/' | relative_url }}", '/about/')
-    default_layout = default_layout.replace("{{ '/words/' | relative_url }}", '/words/')
-    default_layout = default_layout.replace("{{ site.time | date: '%Y' }}", str(datetime.now().year))
-    default_layout = re.sub(r'\{\{ [^}]+\}\}', '', default_layout)
-    default_layout = re.sub(r'\{\%.+?\%\}', '', default_layout)
-    
-    if '{% seo %}' in default_layout:
-        default_layout = default_layout.replace('{% seo %}', '')
+    if '{% seo %}' in full_content:
+        full_content = full_content.replace('{% seo %}', '')
     
     output_path = os.path.join(OUTPUT_DIR, post['url'].lstrip('/'))
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
@@ -331,14 +314,17 @@ def build_post(post, config):
         output_path = os.path.join(output_path, 'index.html')
     
     with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(default_layout)
+        f.write(full_content)
 
 def main():
     print("Building site...")
     
     if os.path.exists(OUTPUT_DIR):
-        shutil.rmtree(OUTPUT_DIR)
-    os.makedirs(OUTPUT_DIR)
+        try:
+            shutil.rmtree(OUTPUT_DIR)
+        except PermissionError:
+            print("  Warning: _site directory is in use, skipping cleanup")
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     
     config = load_config()
     posts = get_posts()
