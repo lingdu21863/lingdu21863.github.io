@@ -1,6 +1,6 @@
 # lingdu21863.github.io
 
-灵渡的个人博客，使用 Jekyll 搭建，部署在 GitHub Pages 上。
+零度的个人博客，使用 Jekyll 搭建，部署在 GitHub Pages 上。
 
 ## 🌟 站点功能
 
