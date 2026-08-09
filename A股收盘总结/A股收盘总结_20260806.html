@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日投资报告 · 2026-08-06 盘后复盘</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  :root{
+    --bg:#f5f3ee; --card:#ffffff; --ink:#1a1d28; --ink2:#6b7280; --ink3:#9ca3af;
+    --line:#e8e4dc; --line2:#f0ede6;
+    --gold:#b8893b; --gold-light:#f4ead4; --gold-bg:#fbf6ea;
+    --red:#cf3b3e; --red-soft:#fcebec; --red-bg:#fef6f6;
+    --green:#1a8a5e; --green-soft:#e4f3ec; --green-bg:#f4faf7;
+    --blue:#2f5fb0; --blue-soft:#eaf0fa;
+    --radius:14px; --radius-sm:10px;
+    --shadow:0 1px 2px rgba(31,35,48,.04),0 4px 16px rgba(31,35,48,.05);
+    --shadow-lg:0 2px 8px rgba(31,35,48,.06),0 12px 32px rgba(31,35,48,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    line-height:1.75;font-size:15px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:32px 20px 64px}
+
+  /* Header */
+  .hd{
+    background:linear-gradient(135deg,#fffdf8 0%,#fbf4e3 100%);
+    border:1px solid #ead9b0;
+    border-radius:var(--radius);
+    padding:24px 28px;
+    margin-bottom:24px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    box-shadow:var(--shadow);
+  }
+  .hd-left{display:flex;align-items:center;gap:14px}
+  .hd-badge{
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),#d4a44a);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;color:#fff;flex-shrink:0;
+    box-shadow:0 4px 12px rgba(184,137,59,.3);
+  }
+  .hd h1{font-size:22px;font-weight:800;letter-spacing:.3px;line-height:1.3}
+  .hd .tagline{color:var(--ink2);font-size:12px;margin-top:2px}
+  .hd .tag{
+    display:inline-block;background:var(--gold);color:#fff;
+    font-size:11px;padding:3px 10px;border-radius:20px;
+    font-weight:600;letter-spacing:.5px;
+  }
+  .hd-right{text-align:right;font-size:13px;color:var(--ink2);line-height:1.6}
+  .hd-right .date{font-size:20px;font-weight:700;color:var(--ink)}
+  .hd-right .weekday{font-size:12px;color:var(--gold);font-weight:600}
+
+  /* TL;DR */
+  .tldr{
+    background:linear-gradient(135deg,#fffef9,#fdf8ec);
+    border:1px solid #e8d9b5;
+    border-radius:var(--radius);
+    padding:20px 24px;
+    margin-bottom:22px;
+    box-shadow:var(--shadow);
+    position:relative;overflow:hidden;
+  }
+  .tldr::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
+    background:linear-gradient(180deg,var(--gold),#d4a44a);
+  }
+  .tldr .lab{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:700;color:var(--gold);
+    letter-spacing:1.5px;margin-bottom:8px;text-transform:uppercase;
+  }
+  .tldr .lab::before{content:'';width:14px;height:2px;background:var(--gold);border-radius:1px}
+  .tldr p{font-size:14.5px;line-height:1.85;color:#3a3d48}
+  .tldr b{color:var(--red);font-weight:700}
+  .tldr u{text-decoration:none;color:var(--green);font-weight:700}
+
+  /* Section */
+  .sec{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px 26px;
+    margin-bottom:18px;
+    box-shadow:var(--shadow);
+  }
+  .sec h2{
+    font-size:18px;font-weight:800;
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:18px;
+  }
+  .sec h2 .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:28px;height:28px;border-radius:8px;
+    background:var(--gold-light);color:var(--gold);
+    font-size:14px;font-weight:800;flex-shrink:0;
+  }
+  .sec h2 .txt{color:var(--ink)}
+
+  /* Index Grid */
+  .idx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+  .idx{
+    border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:14px 16px;text-align:center;
+    transition:transform .15s,box-shadow .15s;
+  }
+  .idx:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .idx .nm{font-size:13px;color:var(--ink2);font-weight:500}
+  .idx .val{font-size:22px;font-weight:800;margin:4px 0 2px;letter-spacing:-.5px}
+  .idx .ch{font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:3px}
+  .up{color:var(--red)} .up-bg{background:var(--red-bg);border-color:#f0d4d4}
+  .dn{color:var(--green)} .dn-bg{background:var(--green-bg);border-color:#c9e8d8}
+
+  /* Stat Row */
+  .stat-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+  .stat{
+    flex:1;min-width:140px;
+    background:var(--gold-bg);border:1px solid var(--line2);
+    border-radius:var(--radius-sm);padding:11px 15px;
+  }
+  .stat .k{font-size:11px;color:var(--ink2);font-weight:500;letter-spacing:.3px}
+  .stat .v{font-size:18px;font-weight:800;margin-top:3px;color:var(--ink)}
+
+  /* Charts */
+  .chart{width:100%;height:300px;margin:10px 0;border-radius:var(--radius-sm)}
+  .chart.sm{height:220px}
+  .chart-wrap{
+    background:#fdfcfa;border:1px solid var(--line2);
+    border-radius:var(--radius-sm);padding:4px;margin:10px 0;
+  }
+
+  /* Two Column */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}
+  .col-title{
+    display:flex;align-items:center;gap:6px;
+    font-weight:700;font-size:14px;margin-bottom:8px;
+    padding-bottom:8px;border-bottom:2px solid var(--line2);
+  }
+  .col-title.up{color:var(--red);border-color:var(--red-soft)}
+  .col-title.dn{color:var(--green);border-color:var(--green-soft)}
+
+  /* List */
+  .list{list-style:none}
+  .list li{padding:10px 0;border-bottom:1px solid var(--line2)}
+  .list li:last-child{border-bottom:0}
+  .list .tt{font-weight:700;font-size:14px}
+  .list .ds{font-size:13px;color:var(--ink2);margin-top:3px;line-height:1.7}
+
+  /* Pills */
+  .pill{
+    display:inline-block;font-size:11px;padding:2px 8px;
+    border-radius:6px;margin-right:7px;font-weight:700;
+    vertical-align:middle;
+  }
+  .pill.up{background:var(--red-soft);color:var(--red)}
+  .pill.dn{background:var(--green-soft);color:var(--green)}
+  .pill.gold{background:var(--gold-light);color:var(--gold)}
+  .pill.blue{background:var(--blue-soft);color:var(--blue)}
+
+  /* Table */
+  .tbl-wrap{overflow-x:auto;margin-top:8px}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:480px}
+  th,td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--line2)}
+  th{background:var(--gold-bg);color:var(--ink2);font-weight:700;font-size:12px;letter-spacing:.3px}
+  td.l{text-align:left}
+  tbody tr{transition:background .12s}
+  tbody tr:hover{background:var(--gold-bg)}
+
+  /* Notes */
+  .note{
+    font-size:12px;color:var(--ink2);
+    margin-top:14px;border-top:1px solid var(--line2);
+    padding-top:10px;line-height:1.7;
+  }
+
+  /* Strategy Boxes */
+  .strat-grid{display:grid;gap:12px;margin-top:8px}
+  .strat-box{
+    background:var(--gold-bg);border:1px solid #e6d9b8;
+    border-radius:var(--radius-sm);padding:16px 18px;
+    border-left:4px solid var(--gold);
+  }
+  .strat-box h4{
+    font-size:14px;font-weight:700;color:var(--gold);
+    margin-bottom:8px;display:flex;align-items:center;gap:6px;
+  }
+  .strat-box h4 .icon{
+    width:22px;height:22px;border-radius:6px;
+    background:var(--gold);color:#fff;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:12px;
+  }
+  .strat-box p{font-size:13.5px;line-height:1.8;color:#3a3d48}
+  .strat-box b{color:var(--ink)}
+
+  /* Risk */
+  .risk{
+    font-size:13px;color:#7a2d2d;
+    background:linear-gradient(135deg,#fef6f6,#fceeee);
+    border:1px solid #f0d4d4;border-left:4px solid var(--red);
+    border-radius:var(--radius-sm);padding:14px 18px;margin-top:16px;
+    line-height:1.8;
+  }
+  .risk b{color:var(--red)}
+
+  /* Source */
+  .src{
+    font-size:11px;color:var(--ink3);
+    margin-top:20px;padding-top:14px;
+    border-top:1px solid var(--line);
+    text-align:center;line-height:1.8;
+  }
+
+  /* Section intro */
+  .sec-intro{font-size:13.5px;color:var(--ink2);margin-bottom:12px;line-height:1.7}
+
+  /* Responsive */
+  @media(max-width:680px){
+    .idx-grid{grid-template-columns:repeat(2,1fr)}
+    .twocol{grid-template-columns:1fr}
+    .hd{flex-direction:column;align-items:flex-start}
+    .hd-right{text-align:left}
+    .sec{padding:18px 16px}
+    .tldr{padding:16px 18px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="hd">
+    <div class="hd-left">
+      <div class="hd-badge">📊</div>
+      <div>
+        <h1>每日投资报告</h1>
+        <div class="tagline"><span class="tag">盘后复盘</span> A股收盘 / 港股收盘 / 美股隔夜</div>
+      </div>
+    </div>
+    <div class="hd-right">
+      <div class="date">2026.08.06</div>
+      <div class="weekday">周四 · 北京时间收盘后</div>
+    </div>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="lab">今日结论</div>
+    <p>沪指连续第二日「低开高走」，收涨 <b>+0.57%</b> 重返 3900 点上方，但深成指 <u>-0.24%</u>、创业板指 <u>-0.55%</u> 冲高回落，市场呈现明显「冰火两重天」。两市成交 <b>2.53 万亿</b> 较前日缩量 1309 亿，资金围绕<b>资源品（煤炭/贵金属）</b>与<b>半导体材料（电子特气/PCB/CPO）</b>双线展开。港股受地产、科网拖累下跌（恒指 <u>-1.61%</u>），隔夜美股则在闪迪超预期财报带动下大涨（纳指 <b>+2.59%</b>）。短期沪指 3900 点整数关 + 缩量为关键观察点，结构性行情延续，建议均衡配置。</p>
+  </div>
+
+  <!-- 一、市场概览 -->
+  <div class="sec">
+    <h2><span class="num">1</span><span class="txt">市场概览</span></h2>
+    <div class="idx-grid">
+      <div class="idx up-bg"><div class="nm">上证指数</div><div class="val up">3900.35</div><div class="ch up">▲ +0.57%</div></div>
+      <div class="idx dn-bg"><div class="nm">深证成指</div><div class="val dn">14110.12</div><div class="ch dn">▼ -0.24%</div></div>
+      <div class="idx dn-bg"><div class="nm">创业板指</div><div class="val dn">3515.56</div><div class="ch dn">▼ -0.55%</div></div>
+      <div class="idx dn-bg"><div class="nm">沪深300</div><div class="val dn">4651.31</div><div class="ch dn">▼ -0.15%</div></div>
+      <div class="idx up-bg"><div class="nm">科创50</div><div class="val up">+0.45%</div><div class="ch up">▲ 低开高走</div></div>
+      <div class="idx up-bg"><div class="nm">北证50</div><div class="val up">+0.31%</div><div class="ch up">▲</div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="k">两市成交额</div><div class="v">2.53 万亿</div></div>
+      <div class="stat"><div class="k">较前日</div><div class="v dn">缩量 1309 亿</div></div>
+      <div class="stat"><div class="k">涨 / 跌 / 平</div><div class="v"><span class="up">2789</span> / <span class="dn">2590</span> / 159</div></div>
+      <div class="stat"><div class="k">涨停 / 跌停</div><div class="v"><span class="up">83</span> / <span class="dn">1</span></div></div>
+    </div>
+    <div class="chart-wrap"><div id="chartIdx" class="chart"></div></div>
+    <div class="chart-wrap"><div id="chartVol" class="chart sm"></div></div>
+    <div class="note">数据来源：NeoData 大盘统计 / Wind。沪指连续两日低开高走，8月5日放量上涨（成交2.66万亿）后今日缩量分化，显示高位兑现压力与结构性配置并存。沪市成交 11668 亿、深市 13620 亿。</div>
+  </div>
+
+  <!-- 二、板块表现 -->
+  <div class="sec">
+    <h2><span class="num">2</span><span class="txt">板块表现</span></h2>
+    <p class="sec-intro">行业涨幅榜由资源品与半导体材料包揽，跌幅方向集中在消费服务与新能源车。</p>
+    <div class="chart-wrap"><div id="chartSector" class="chart"></div></div>
+    <div class="twocol">
+      <div>
+        <div class="col-title up">▲ 领涨方向</div>
+        <ul class="list">
+          <li><span class="pill up">+4.73%</span><span class="tt">电子化学品</span><div class="ds">中巨芯20cm涨停、和远气体2连板；HBM/先进制程拉动特气需求，六氟化钨涨价</div></li>
+          <li><span class="pill up">+4.56%</span><span class="tt">煤炭开采</span><div class="ds">昊华能源、淮北矿业、平煤股份、兖矿能源等近10只涨停；产能核减+反内卷，煤价中枢回升</div></li>
+          <li><span class="pill up">+3.13%</span><span class="tt">小金属 / 贵金属</span><div class="ds">云南锗业涨停；西部黄金领涨；地缘缓和+美元走弱支撑金价</div></li>
+          <li><span class="pill gold">热点</span><span class="tt">PCB / 数字货币 / 医药商业</span><div class="ds">宝鼎科技5天4板、景旺电子涨停；飞天诚信等涨停；人民同泰、合富中国涨停</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-title dn">▼ 领跌方向</div>
+        <ul class="list">
+          <li><span class="pill dn">个股</span><span class="tt">教育</span><div class="ds">中公教育 -7.66%、凯文教育 -6.80%、传智教育 -6.65%、全通教育 -5.56%</div></li>
+          <li><span class="pill dn">个股</span><span class="tt">汽车整车</span><div class="ds">北汽蓝谷、江淮汽车跌超5%，赛力斯下跌</div></li>
+          <li><span class="pill dn">-2.20%</span><span class="tt">医疗服务</span><div class="ds">药明康德 -3.25%、凯莱英 -4.15%；高位CRO兑现压力</div></li>
+          <li><span class="pill dn">个股</span><span class="tt">电力 / 证券 / AI语料</span><div class="ds">立新能源逼近跌停；券商、影视院线、短剧板块偏弱</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">涨幅数据来源：NeoData 板块涨跌排行（截至 8月6日 19:10）。领跌板块行业跌幅榜数据样本有限，部分以代表性个股涨跌幅呈现，仅供方向参考。</div>
+  </div>
+
+  <!-- 三、资金流向 -->
+  <div class="sec">
+    <h2><span class="num">3</span><span class="txt">资金流向与机构行为</span></h2>
+    <div class="chart-wrap"><div id="chartFlow" class="chart"></div></div>
+    <div class="stat-row">
+      <div class="stat"><div class="k">融资余额（8/4）</div><div class="v">2.59 万亿</div></div>
+      <div class="stat"><div class="k">两融余额</div><div class="v">2.62 万亿</div></div>
+      <div class="stat"><div class="k">占流通市值比</div><div class="v">2.60%</div></div>
+      <div class="stat"><div class="k">ETF合计成交</div><div class="v">5069.9 亿</div></div>
+    </div>
+    <div class="strat-box" style="margin-top:14px;border-left-color:var(--blue);background:var(--blue-soft);border-color:#d4e0f5">
+      <h4 style="color:var(--blue)"><span class="icon" style="background:var(--blue)">⬆</span>北向活跃股（8/5 沪深股通）</h4>
+      <p>外资继续聚焦 AI 硬件链——沪股通前十含<b>药明康德、寒武纪、工业富联、兆易创新、中微公司、生益科技、中国巨石、亨通光电</b>；深股通前十为<b>中际旭创、新易盛、宁德时代、东山精密、天孚通信、北方华创、光迅科技、立讯精密、沪电股份、通富微电</b>。</p>
+    </div>
+    <div class="note">资金流向数据来源：每经/财联社主力净流入统计、NeoData 两融市场统计与沪深港通交易统计。融资余额近2日小幅连增，但杠杆做多情绪整体一般；北向净额今日未取到精确值，以上为活跃股方向。</div>
+  </div>
+
+  <!-- 四、新闻导读 -->
+  <div class="sec">
+    <h2><span class="num">4</span><span class="txt">新闻导读</span></h2>
+    <ul class="list">
+      <li><span class="pill up">利好</span><span class="tt">闪迪FY26Q4超预期，AI存储链景气确认</span><div class="ds">美东8/5盘后，闪迪单季营收89.6亿美元、同比+372%（超预期83.94亿），落地140亿美元回购；与8家数据中心客户签NBM长期锁单，2027财年占总出货比特50%+。→ 利好存储芯片/AI硬件上游，是隔夜美股纳指+2.59%的核心驱动</div></li>
+      <li><span class="pill dn">扰动</span><span class="tt">美国拟禁进口中国产新型光收发模块、对多晶硅加征关税</span><div class="ds">外交部坚决反对，称将维护中企合法权益。→ 贸易摩擦升温，短期扰动光模块/出口链情绪，但国产替代逻辑反而强化</div></li>
+      <li><span class="pill up">利好</span><span class="tt">国家税务总局：上半年科创制造业减税降费退税超1.9万亿</span><div class="ds">数字经济核心产业收入+8.7%；智能车载设备+43%、无人机+36.2%、机器人+27.3%。→ 景气方向确认，利好相关新质生产力赛道</div></li>
+      <li><span class="pill gold">政策</span><span class="tt">工信部《"十五五"促进中小企业发展规划》即将发布</span><div class="ds">优化发展环境、完善专精特新梯度培育。→ 利好专精特新/中小制造</div></li>
+      <li><span class="pill blue">海外</span><span class="tt">美国7月ADP就业仅4.4万人，创1月来最小增幅</span><div class="ds">远低于预期7万；但美联储官员仍释放偏鹰信号（卡什卡利称应逐步加息）。→ 就业降温但通胀担忧未消，美债利率路径仍有变数</div></li>
+      <li><span class="pill gold">地缘</span><span class="tt">中东局势缓和：伊朗与阿曼接近达成霍尔木兹海峡协议</span><div class="ds">现有两条航道将关闭、启用新航道。→ 地缘风险溢价回落，叠加央行购金强劲，支撑金价与贵金属板块</div></li>
+      <li><span class="pill up">利好</span><span class="tt">华为余承东：内存涨价，手机可能大规模涨价</span><div class="ds">长鑫存储拒绝苹果压价，因华为/小米已锁产能。→ 存储/内存产业链景气延续，国产存储议价权提升</div></li>
+      <li><span class="pill up">利好</span><span class="tt">《集成电路布图设计保护条例》修订落地</span><div class="ds">叠加HBM/3D NAND/先进制程提升湿电子化学品用量。→ 电子特气、前驱体等半导体材料景气催化，今日板块领涨</div></li>
+    </ul>
+    <div class="note">资讯来源：陆家嘴财经早餐、金十数据、中新经纬、财联社、同花顺（2026-08-06）。媒体观点仅供参考，非一手来源。</div>
+  </div>
+
+  <!-- 五、盘中交易热点 -->
+  <div class="sec">
+    <h2><span class="num">5</span><span class="txt">盘中交易热点</span></h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:110px">方向</th><th class="l">代表个股</th><th style="width:200px">资金 / 逻辑</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pill up">先进封装</span></td><td class="l">长电科技涨停、通富微电活跃</td><td>主力净流入 +65.84亿，8只涨停</td></tr>
+          <tr><td><span class="pill up">CPO</span></td><td class="l">中际旭创、新易盛、天孚通信</td><td>主力净流入 +57.84亿，10只涨停</td></tr>
+          <tr><td><span class="pill up">PCB概念</span></td><td class="l">宝鼎科技5天4板、景旺电子涨停</td><td>主力净流入 +55.39亿，8只涨停</td></tr>
+          <tr><td><span class="pill up">第三代半导体</span></td><td class="l">板块热度80.5（偏热）</td><td>主力净流入 +53.79亿，6只涨停</td></tr>
+          <tr><td><span class="pill gold">煤炭</span></td><td class="l">昊华能源、淮北矿业、平煤股份涨停</td><td>产能核减+反内卷，防御属性支线</td></tr>
+          <tr><td><span class="pill gold">贵金属</span></td><td class="l">西部黄金、四川黄金、潼关黄金</td><td>地缘缓和+央行购金，金价上行</td></tr>
+          <tr><td><span class="pill dn">教育</span></td><td class="l">中公教育 -7.66%</td><td>高位题材回调</td></tr>
+          <tr><td><span class="pill dn">电力</span></td><td class="l">立新能源逼近跌停</td><td>资金切换，新能源承压</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">涨停股另含：云南锗业、有研新材、长电科技、百合花（涨停）；跌停：联创光电（-9.98%）。换手率前列：津富士达、龙鑫智能、嘉立创等超45%。数据来源：财联社/每经8月6日收评。</div>
+  </div>
+
+  <!-- 六、技术面观察 -->
+  <div class="sec">
+    <h2><span class="num">6</span><span class="txt">技术面观察</span></h2>
+    <ul class="list">
+      <li><span class="pill gold">上证</span><span class="tt">3900 点整数关攻防</span><div class="ds">连续两日低开高走，今日收 3900.35 重返整数关上方，显示多头韧性；但缩量下突破有效性待验。<b>支撑</b>3822（8/5昨收）/3800，<b>阻力</b>3950；若放量站稳3900则看高一线，缩量回落则回踩3822。</div></li>
+      <li><span class="pill dn">创业板</span><span class="tt">冲高回落，警惕短期走弱</span><div class="ds">今日高开冲高3574后回落至3515.56收跌，留长上影；<b>支撑</b>3444（今日低）/3488，<b>阻力</b>3584。若失守3488则短期转弱，CRO/新能源权重拖累需关注。</div></li>
+      <li><span class="pill up">科创50</span><span class="tt">强势但有分化</span><div class="ds">前日大涨4.78%后今日仅+0.45%震荡，半导体材料活跃但前期领涨的算力硬件涨势弱于前两日，量能持续性是关键。</div></li>
+      <li><span class="pill dn">恒指</span><span class="tt">跌破26000关口</span><div class="ds">收25497.86跌1.61%，跌破8月初平台；地产、科网拖累，需观察能否企稳25400，否则下看25000。</div></li>
+    </ul>
+    <div class="note">技术位基于近5日收盘与今日高低点推导，仅为结构性观察，不构成择时信号。趋势优先于单日，多周期确认。</div>
+  </div>
+
+  <!-- 七、后市研判 -->
+  <div class="sec">
+    <h2><span class="num">7</span><span class="txt">后市研判与策略</span></h2>
+    <div class="strat-grid">
+      <div class="strat-box">
+        <h4><span class="icon">①</span>短期（T+1 至 T+5）</h4>
+        <p>沪指3900点整数关 + 缩量（2.53万亿）为短期核心矛盾。重点观察：<b>①</b>量能能否重回2.6万亿以上；<b>②</b>创业板3488支撑得失；<b>③</b>煤炭/贵金属防御线与电子特气/PCB科技线能否共存。缩量环境下指数难言趋势突破，更多是结构轮动。</p>
+      </div>
+      <div class="strat-box">
+        <h4><span class="icon">②</span>中期（1-3个月）</h4>
+        <p>8月财报季是核心验证窗口——科技链（存储/算力/半导体材料）若中报确认产业景气，反弹持续性强；同时关注业绩韧性的非科技板块轮动修复（有色/化工/锂电/医药）。闪迪超预期财报已为存储链打开催化，国产算力、光模块、PCB、半导体设备材料高景气方向值得跟踪。</p>
+      </div>
+      <div class="strat-box">
+        <h4><span class="icon">③</span>配置建议（均衡配置应对波动）</h4>
+        <p><b>科技景气</b>：国产算力 / 存储 / PCB / 半导体材料（电子特气、前驱体）——产业趋势未退潮，杠杆出清后反弹值得期待<br>
+        <b>资源品波段</b>：煤炭（产能核减+反内卷）、贵金属（地缘缓和但央行购金）、化工<br>
+        <b>红利底仓</b>：银行、煤炭、电力——震荡市底仓价值<br>
+        <b>风险对冲</b>：地缘缓和但贸易摩擦（光模块禁令）与美债利率仍有变数，贵金属可作为组合对冲</p>
+      </div>
+    </div>
+    <div class="risk"><b>⚠ 风险提示：</b>①财报季业绩低于预期；②地缘与贸易摩擦升级（美对华光模块/多晶硅）；③缩量下高位题材兑现压力；④美债利率与美联储政策预期反复。本文为市场数据复盘与机构观点整理，不构成投资建议，投资有风险。</div>
+    <div class="note">策略框架综合巨丰投顾、平安证券、中信建投观点（来源：中新经纬/财联社8月6日），结合当日数据推演。</div>
+  </div>
+
+  <div class="src">
+    数据来源：NeoData 金融数据服务、Wind、中新经纬、财联社、每经、同花顺、陆家嘴财经早餐、金十数据（2026-08-06）<br>
+    行情数据截至 2026-08-06 收盘 ｜ 本报告由 WorkBuddy 自动生成，仅供研究参考
+  </div>
+
+</div>
+
+<script>
+// ===== Chart 1: A股指数今日涨跌幅 =====
+(function(){
+  var d=[['上证指数',0.57],['科创50',0.45],['北证50',0.31],['沪深300',-0.15],['深证成指',-0.24],['创业板指',-0.55]];
+  var cols=d.map(function(x){return x[1]>=0?'#cf3b3e':'#1a8a5e';});
+  echarts.init(document.getElementById('chartIdx')).setOption({
+    title:{text:'A股主要指数今日涨跌幅（%）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': '+p[0].value+'%';}},
+    grid:{left:'8%',right:'6%',bottom:'12%',top:'20%'},
+    xAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{fontSize:11,color:'#6b7280'},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    yAxis:{type:'value',axisLabel:{formatter:'{value}%',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}}},
+    series:[{
+      type:'bar',
+      data:d.map(function(x,i){return {value:x[1],itemStyle:{color:cols[i]}};}),
+      barWidth:'46%',
+      itemStyle:{borderRadius:[6,6,0,0]},
+      label:{show:true,position:'top',formatter:function(p){return p.value+'%';},fontSize:11,color:'#1a1d28',fontWeight:600}
+    }]
+  });
+})();
+
+// ===== Chart 2: 沪市成交额趋势 =====
+(function(){
+  var dt=[['7/30',11065],['7/31',11877],['8/3',9523],['8/4',10084],['8/5',12087],['8/6',11668]];
+  echarts.init(document.getElementById('chartVol')).setOption({
+    title:{text:'沪市单边成交额近6日（亿元）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',formatter:function(p){return p[0].name+': '+p[0].value+' 亿';}},
+    grid:{left:'10%',right:'6%',bottom:'12%',top:'22%'},
+    xAxis:{type:'category',data:dt.map(function(x){return x[0];}),axisLabel:{color:'#6b7280'},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    yAxis:{type:'value',axisLabel:{color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}}},
+    series:[{
+      type:'bar',
+      data:dt.map(function(x,i){
+        var c = i===5 ? '#b8893b' : (i===4 ? '#cf3b3e' : '#d4cab8');
+        return {value:x[1],itemStyle:{color:c}};
+      }),
+      barWidth:'50%',
+      itemStyle:{borderRadius:[4,4,0,0]},
+      label:{show:true,position:'top',fontSize:10,color:'#6b7280',fontWeight:600}
+    }]
+  });
+})();
+
+// ===== Chart 3: 行业板块涨幅TOP6 =====
+(function(){
+  var d=[['贵金属',2.78],['小金属',3.13],['非金属材料',3.19],['玻璃玻纤',3.85],['煤炭开采',4.56],['电子化学品',4.73]];
+  echarts.init(document.getElementById('chartSector')).setOption({
+    title:{text:'行业板块涨幅 TOP6（%）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': +'+p[0].value+'%';}},
+    grid:{left:'24%',right:'10%',bottom:'8%',top:'20%'},
+    xAxis:{type:'value',axisLabel:{formatter:'{value}%',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}}},
+    yAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{color:'#1a1d28',fontSize:12,fontWeight:600},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    series:[{
+      type:'bar',
+      data:d.map(function(x){return x[1];}),
+      barWidth:'52%',
+      itemStyle:{
+        color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#e8a0a2'},{offset:1,color:'#cf3b3e'}]),
+        borderRadius:[0,6,6,0]
+      },
+      label:{show:true,position:'right',formatter:'+{c}%',fontSize:11,color:'#cf3b3e',fontWeight:700}
+    }]
+  });
+})();
+
+// ===== Chart 4: 主力资金净流入板块 =====
+(function(){
+  var d=[['第三代半导体',53.79],['毫米波雷达',55.14],['PCB概念',55.39],['CPO',57.84],['先进封装',65.84]];
+  echarts.init(document.getElementById('chartFlow')).setOption({
+    title:{text:'主力资金净流入板块 TOP5（亿元）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': +'+p[0].value+' 亿';}},
+    grid:{left:'24%',right:'12%',bottom:'8%',top:'20%'},
+    xAxis:{type:'value',axisLabel:{formatter:'{value}',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}}},
+    yAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{color:'#1a1d28',fontSize:12,fontWeight:600},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    series:[{
+      type:'bar',
+      data:d.map(function(x){return x[1];}),
+      barWidth:'52%',
+      itemStyle:{
+        color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#7ba0d8'},{offset:1,color:'#2f5fb0'}]),
+        borderRadius:[0,6,6,0]
+      },
+      label:{show:true,position:'right',formatter:'+{c}',fontSize:11,color:'#2f5fb0',fontWeight:700}
+    }]
+  });
+})();
+</script>
+</body>
+</html>
