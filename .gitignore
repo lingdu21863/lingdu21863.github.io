@@ -1,0 +1,12 @@
+# 构建产物
+_site/
+__pycache__/
+*.pyc
+
+# 依赖
+node_modules/
+Gemfile.lock
+
+# 编辑器
+.vscode/
+.idea/

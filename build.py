@@ -175,18 +175,7 @@ def build_page(page_path, output_path, config, posts=None):
         current_layout_name = layout_fm.get('layout')
     
     full_content = current_content
-    
-    full_content = full_content.replace('{{ page.title | default: site.title }}', title or site_title)
-    full_content = full_content.replace('{{ page.title }}', title)
-    full_content = full_content.replace('{{ page.description | default: site.description }}', fm.get('description', config.get('description', '')))
-    full_content = full_content.replace('{{ site.title }}', site_title)
-    full_content = full_content.replace('{{ site.lang | default: "zh-CN" }}', 'zh-CN')
-    full_content = full_content.replace('{{ site.time | date: "%Y" }}', str(datetime.now().year))
-    
-    full_content = full_content.replace("{{ '/' | relative_url }}", '/')
-    full_content = full_content.replace("{{ '/about/' | relative_url }}", '/about/')
-    full_content = full_content.replace("{{ '/words/' | relative_url }}", '/words/')
-    
+
     if '{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}' in full_content:
         if title:
             full_content = full_content.replace(
@@ -198,7 +187,18 @@ def build_page(page_path, output_path, config, posts=None):
                 '{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}',
                 site_title
             )
-    
+
+    full_content = full_content.replace('{{ page.title | default: site.title }}', title or site_title)
+    full_content = full_content.replace('{{ page.title }}', title)
+    full_content = full_content.replace('{{ page.description | default: site.description }}', fm.get('description', config.get('description', '')))
+    full_content = full_content.replace('{{ site.title }}', site_title)
+    full_content = full_content.replace('{{ site.lang | default: "zh-CN" }}', 'zh-CN')
+    full_content = full_content.replace('{{ site.time | date: "%Y" }}', str(datetime.now().year))
+
+    full_content = full_content.replace("{{ '/' | relative_url }}", '/')
+    full_content = full_content.replace("{{ '/about/' | relative_url }}", '/about/')
+    full_content = full_content.replace("{{ '/words/' | relative_url }}", '/words/')
+
     full_content = re.sub(r'\{\{ [^}]+\}\}', '', full_content)
     full_content = re.sub(r'\{\%[^%]*\%\}', '', full_content)
     
@@ -284,7 +284,19 @@ def build_post(post, config):
         current_layout_name = layout_fm.get('layout')
     
     full_content = current_content
-    
+
+    if '{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}' in full_content:
+        if title:
+            full_content = full_content.replace(
+                '{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}',
+                f'{title} | {site_title}'
+            )
+        else:
+            full_content = full_content.replace(
+                '{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }}{% endif %}',
+                site_title
+            )
+
     full_content = full_content.replace('{{ page.title }}', title)
     full_content = full_content.replace('{{ page.date | date: "%Y年%m月%d日" }}', date_str)
     full_content = full_content.replace('{{ page.author }}', str(fm.get('author', config.get('author', ''))))
