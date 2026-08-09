@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日投资报告 · 2026-08-07 盘后复盘</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  :root{
+    --bg:#f5f3ee; --card:#ffffff; --ink:#1a1d28; --ink2:#6b7280; --ink3:#9ca3af;
+    --line:#e8e4dc; --line2:#f0ede6;
+    --gold:#b8893b; --gold-light:#f4ead4; --gold-bg:#fbf6ea;
+    --red:#cf3b3e; --red-soft:#fcebec; --red-bg:#fef6f6;
+    --green:#1a8a5e; --green-soft:#e4f3ec; --green-bg:#f4faf7;
+    --blue:#2f5fb0; --blue-soft:#eaf0fa;
+    --radius:14px; --radius-sm:10px;
+    --shadow:0 1px 2px rgba(31,35,48,.04),0 4px 16px rgba(31,35,48,.05);
+    --shadow-lg:0 2px 8px rgba(31,35,48,.06),0 12px 32px rgba(31,35,48,.06);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    line-height:1.75;font-size:15px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:32px 20px 64px}
+
+  /* Header */
+  .hd{
+    background:linear-gradient(135deg,#fffdf8 0%,#fbf4e3 100%);
+    border:1px solid #ead9b0;
+    border-radius:var(--radius);
+    padding:24px 28px;
+    margin-bottom:24px;
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    box-shadow:var(--shadow);
+  }
+  .hd-left{display:flex;align-items:center;gap:14px}
+  .hd-badge{
+    width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,var(--gold),#d4a44a);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;color:#fff;flex-shrink:0;
+    box-shadow:0 4px 12px rgba(184,137,59,.3);
+  }
+  .hd h1{font-size:22px;font-weight:800;letter-spacing:.3px;line-height:1.3}
+  .hd .tagline{color:var(--ink2);font-size:12px;margin-top:2px}
+  .hd .tag{
+    display:inline-block;background:var(--gold);color:#fff;
+    font-size:11px;padding:3px 10px;border-radius:20px;
+    font-weight:600;letter-spacing:.5px;
+  }
+  .hd-right{text-align:right;font-size:13px;color:var(--ink2);line-height:1.6}
+  .hd-right .date{font-size:20px;font-weight:700;color:var(--ink)}
+  .hd-right .weekday{font-size:12px;color:var(--gold);font-weight:600}
+
+  /* TL;DR */
+  .tldr{
+    background:linear-gradient(135deg,#fffef9,#fdf8ec);
+    border:1px solid #e8d9b5;
+    border-radius:var(--radius);
+    padding:20px 24px;
+    margin-bottom:22px;
+    box-shadow:var(--shadow);
+    position:relative;overflow:hidden;
+  }
+  .tldr::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
+    background:linear-gradient(180deg,var(--gold),#d4a44a);
+  }
+  .tldr .lab{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:700;color:var(--gold);
+    letter-spacing:1.5px;margin-bottom:8px;text-transform:uppercase;
+  }
+  .tldr .lab::before{content:'';width:14px;height:2px;background:var(--gold);border-radius:1px}
+  .tldr p{font-size:14.5px;line-height:1.85;color:#3a3d48}
+  .tldr b{color:var(--red);font-weight:700}
+  .tldr u{text-decoration:none;color:var(--green);font-weight:700}
+
+  /* Section */
+  .sec{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:24px 26px;
+    margin-bottom:18px;
+    box-shadow:var(--shadow);
+  }
+  .sec h2{
+    font-size:18px;font-weight:800;
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:18px;
+  }
+  .sec h2 .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:28px;height:28px;border-radius:8px;
+    background:var(--gold-light);color:var(--gold);
+    font-size:14px;font-weight:800;flex-shrink:0;
+  }
+  .sec h2 .txt{color:var(--ink)}
+
+  /* Index Grid */
+  .idx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+  .idx{
+    border:1px solid var(--line);border-radius:var(--radius-sm);
+    padding:14px 16px;text-align:center;
+    transition:transform .15s,box-shadow .15s;
+  }
+  .idx:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .idx .nm{font-size:13px;color:var(--ink2);font-weight:500}
+  .idx .val{font-size:22px;font-weight:800;margin:4px 0 2px;letter-spacing:-.5px}
+  .idx .ch{font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:3px}
+  .up{color:var(--red)} .up-bg{background:var(--red-bg);border-color:#f0d4d4}
+  .dn{color:var(--green)} .dn-bg{background:var(--green-bg);border-color:#c9e8d8}
+
+  /* Stat Row */
+  .stat-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+  .stat{
+    flex:1;min-width:140px;
+    background:var(--gold-bg);border:1px solid var(--line2);
+    border-radius:var(--radius-sm);padding:11px 15px;
+  }
+  .stat .k{font-size:11px;color:var(--ink2);font-weight:500;letter-spacing:.3px}
+  .stat .v{font-size:18px;font-weight:800;margin-top:3px;color:var(--ink)}
+
+  /* Charts */
+  .chart{width:100%;height:300px;margin:10px 0;border-radius:var(--radius-sm)}
+  .chart.sm{height:220px}
+  .chart-wrap{
+    background:#fdfcfa;border:1px solid var(--line2);
+    border-radius:var(--radius-sm);padding:4px;margin:10px 0;
+  }
+
+  /* Two Column */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}
+  .col-title{
+    display:flex;align-items:center;gap:6px;
+    font-weight:700;font-size:14px;margin-bottom:8px;
+    padding-bottom:8px;border-bottom:2px solid var(--line2);
+  }
+  .col-title.up{color:var(--red);border-color:var(--red-soft)}
+  .col-title.dn{color:var(--green);border-color:var(--green-soft)}
+
+  /* List */
+  .list{list-style:none}
+  .list li{padding:10px 0;border-bottom:1px solid var(--line2)}
+  .list li:last-child{border-bottom:0}
+  .list .tt{font-weight:700;font-size:14px}
+  .list .ds{font-size:13px;color:var(--ink2);margin-top:3px;line-height:1.7}
+
+  /* Pills */
+  .pill{
+    display:inline-block;font-size:11px;padding:2px 8px;
+    border-radius:6px;margin-right:7px;font-weight:700;
+    vertical-align:middle;
+  }
+  .pill.up{background:var(--red-soft);color:var(--red)}
+  .pill.dn{background:var(--green-soft);color:var(--green)}
+  .pill.gold{background:var(--gold-light);color:var(--gold)}
+  .pill.blue{background:var(--blue-soft);color:var(--blue)}
+
+  /* Table */
+  .tbl-wrap{overflow-x:auto;margin-top:8px}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:480px}
+  th,td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--line2)}
+  th{background:var(--gold-bg);color:var(--ink2);font-weight:700;font-size:12px;letter-spacing:.3px}
+  td.l{text-align:left}
+  tbody tr{transition:background .12s}
+  tbody tr:hover{background:var(--gold-bg)}
+
+  /* Notes */
+  .note{
+    font-size:12px;color:var(--ink2);
+    margin-top:14px;border-top:1px solid var(--line2);
+    padding-top:10px;line-height:1.7;
+  }
+
+  /* Strategy Boxes */
+  .strat-grid{display:grid;gap:12px;margin-top:8px}
+  .strat-box{
+    background:var(--gold-bg);border:1px solid #e6d9b8;
+    border-radius:var(--radius-sm);padding:16px 18px;
+    border-left:4px solid var(--gold);
+  }
+  .strat-box h4{
+    font-size:14px;font-weight:700;color:var(--gold);
+    margin-bottom:8px;display:flex;align-items:center;gap:6px;
+  }
+  .strat-box h4 .icon{
+    width:22px;height:22px;border-radius:6px;
+    background:var(--gold);color:#fff;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:12px;
+  }
+  .strat-box p{font-size:13.5px;line-height:1.8;color:#3a3d48}
+  .strat-box b{color:var(--ink)}
+
+  /* Risk */
+  .risk{
+    font-size:13px;color:#7a2d2d;
+    background:linear-gradient(135deg,#fef6f6,#fceeee);
+    border:1px solid #f0d4d4;border-left:4px solid var(--red);
+    border-radius:var(--radius-sm);padding:14px 18px;margin-top:16px;
+    line-height:1.8;
+  }
+  .risk b{color:var(--red)}
+
+  /* Source */
+  .src{
+    font-size:11px;color:var(--ink3);
+    margin-top:20px;padding-top:14px;
+    border-top:1px solid var(--line);
+    text-align:center;line-height:1.8;
+  }
+
+  /* Section intro */
+  .sec-intro{font-size:13.5px;color:var(--ink2);margin-bottom:12px;line-height:1.7}
+
+  /* Responsive */
+  @media(max-width:680px){
+    .idx-grid{grid-template-columns:repeat(2,1fr)}
+    .twocol{grid-template-columns:1fr}
+    .hd{flex-direction:column;align-items:flex-start}
+    .hd-right{text-align:left}
+    .sec{padding:18px 16px}
+    .tldr{padding:16px 18px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="hd">
+    <div class="hd-left">
+      <div class="hd-badge">📊</div>
+      <div>
+        <h1>每日投资报告</h1>
+        <div class="tagline"><span class="tag">盘后复盘</span> A股收盘 / 港股收盘 / 美股隔夜</div>
+      </div>
+    </div>
+    <div class="hd-right">
+      <div class="date">2026.08.07</div>
+      <div class="weekday">周五 · 北京时间收盘后</div>
+    </div>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="lab">今日结论</div>
+    <p>A股低开高走、全线收涨超1%，沪指 <b>+1.02%</b> 站上 3940 点，深成指 <b>+1.42%</b>、创业板指 <b>+1.35%</b>，科创50领涨 <b>+2.51%</b>、科创综指 <b>+3.35%</b>。沪深京三市成交 <b>2.68 万亿</b> 较前日放量 1359 亿，赚钱效应升至 53%。资金围绕<b>创新药/CRO</b>与<b>算力硬件（PCB/CPO/半导体）</b>双主线展开，电子行业主力净流入 <b>282.97 亿</b> 居首、医药生物 88.46 亿紧随，北向小幅净流入 4.66 亿。隔夜美股三连跌歇脚（道指 <u>-0.85%</u> 结束五连涨），存储股绩后重挫（西部数据 -13%）；港股恒指倒升 <b>+0.54%</b>，药明系领涨。本周四连阳确立反弹格局，"先弹性后景气"特征延续，建议沿景气主线均衡配置。</p>
+  </div>
+
+  <!-- 一、市场概览 -->
+  <div class="sec">
+    <h2><span class="num">1</span><span class="txt">市场概览</span></h2>
+    <div class="idx-grid">
+      <div class="idx up-bg"><div class="nm">上证指数</div><div class="val up">3940.04</div><div class="ch up">▲ +1.02%</div></div>
+      <div class="idx up-bg"><div class="nm">深证成指</div><div class="val up">14311.01</div><div class="ch up">▲ +1.42%</div></div>
+      <div class="idx up-bg"><div class="nm">创业板指</div><div class="val up">3563.12</div><div class="ch up">▲ +1.35%</div></div>
+      <div class="idx up-bg"><div class="nm">沪深300</div><div class="val up">4694.44</div><div class="ch up">▲ +0.93%</div></div>
+      <div class="idx up-bg"><div class="nm">科创50</div><div class="val up">1744.02</div><div class="ch up">▲ +2.51% 领涨</div></div>
+      <div class="idx up-bg"><div class="nm">北证50</div><div class="val up">1134.24</div><div class="ch up">▲ +1.01%</div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="k">两市成交额</div><div class="v">2.68 万亿</div></div>
+      <div class="stat"><div class="k">较前日</div><div class="v up">放量 1359 亿</div></div>
+      <div class="stat"><div class="k">涨 / 跌 / 平</div><div class="v"><span class="up">2856</span> / <span class="dn">2536</span> / 142</div></div>
+      <div class="stat"><div class="k">涨停 / 跌停</div><div class="v"><span class="up">逾70</span> / <span class="dn">4</span></div></div>
+    </div>
+    <div class="chart-wrap"><div id="chartIdx" class="chart"></div></div>
+    <div class="chart-wrap"><div id="chartVol" class="chart sm"></div></div>
+    <div class="note">数据来源：交易所数据 / 证券时报·数据宝 / 金融界（截至 8月7日 15:30）。三大指数低开高走全线飘红，沪市成交 12095 亿、深市 14549 亿、北证 191 亿，合计 2.68 万亿连续多日维持 2.5 万亿上方。本周（8/3-8/7）四连阳：上证累计 +2.81%、深成 +5.39%、创业板 +6.55%、科创综指 +10.96%，中小盘领跑，日均成交逾 2.4 万亿。</div>
+  </div>
+
+  <!-- 二、板块表现 -->
+  <div class="sec">
+    <h2><span class="num">2</span><span class="txt">板块表现</span></h2>
+    <p class="sec-intro">行业涨幅榜由医药生物与电子包揽，CRO/PCB/CPO 概念掀涨停潮；跌幅方向集中在信息安全、计算机与银行。</p>
+    <div class="chart-wrap"><div id="chartSector" class="chart"></div></div>
+    <div class="twocol">
+      <div>
+        <div class="col-title up">▲ 领涨方向</div>
+        <ul class="list">
+          <li><span class="pill up">+4.77%</span><span class="tt">医药生物 / CRO概念</span><div class="ds">百花医药4连板、药康生物20cm涨停、博腾股份/近岸蛋白20cm；昭衍新药、哈三联、哈药股份涨停，药明康德大幅拉升；上午涨停个股达16只，为当日涨停最集中板块</div></li>
+          <li><span class="pill up">+3.53%</span><span class="tt">电子 / PCB概念</span><div class="ds">宝鼎科技6天5板、华正新材4天3板、景旺电子2连板；诺德股份、欧克科技涨停；高盛上调AI服务器PCB 2028年市场规模至840亿美元（CAGR 148%）</div></li>
+          <li><span class="pill up">+3.41%</span><span class="tt">半导体 / CPO概念</span><div class="ds">沃格光电4连板；一博科技、依顿电子、博敏电子、生益科技、方正科技涨停；光迅科技一字涨停（市值1598亿）；兆易创新、生益科技主力净流入居前</div></li>
+          <li><span class="pill gold">热点</span><span class="tt">小金属 / 稀土 / 6G</span><div class="ds">中国稀土涨停、云南锗业4连板；武汉凡谷2连板、通宇通讯5天4板；地缘反复+有色景气共振</div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-title dn">▼ 领跌方向</div>
+        <ul class="list">
+          <li><span class="pill dn">-0.86%</span><span class="tt">家用电器</span><div class="ds">申万一级跌幅居首；消费板块整体偏弱，资金切向成长</div></li>
+          <li><span class="pill dn">-0.65%</span><span class="tt">银行</span><div class="ds">主力净流出10.61亿；红利板块逆势调整，融资余额亦减少</div></li>
+          <li><span class="pill dn">-0.60%</span><span class="tt">计算机 / 信息安全</span><div class="ds">主力净流出58.56亿居首；绿盟科技、天融信、任子行下挫；横向通用软件、数字货币、跨境支付(CIPS)、财税数字化领跌</div></li>
+          <li><span class="pill dn">个股</span><span class="tt">煤炭 / 非银金融 / 游戏</span><div class="ds">煤炭-0.34%（融资减少）；非银金融-0.26%（净流出11.47亿）；多元金融、游戏板块跌幅居前</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">涨幅数据来源：证券时报·数据宝 申万一级行业资金流向日报、四川大决策投顾盘后分析（截至 8月7日 17:30）。跌停股：甘咨询 -10.01%、大晟文化 -10.04%、恒银科技 -9.96%、风范股份 -10.06%。换手率前列：展芯股份 79.39%、津富士达 62.20%、嘉立创 54.79%、万邦医药 48.92%、吉和昌 46.48%。</div>
+  </div>
+
+  <!-- 三、资金流向 -->
+  <div class="sec">
+    <h2><span class="num">3</span><span class="txt">资金流向与机构行为</span></h2>
+    <div class="chart-wrap"><div id="chartFlow" class="chart"></div></div>
+    <div class="stat-row">
+      <div class="stat"><div class="k">主力净流入</div><div class="v up">427.46 亿</div></div>
+      <div class="stat"><div class="k">北向净流入</div><div class="v up">4.66 亿</div></div>
+      <div class="stat"><div class="k">两融余额（8/6）</div><div class="v">2.64 万亿</div></div>
+      <div class="stat"><div class="k">占流通市值比</div><div class="v">2.66%</div></div>
+    </div>
+    <div class="stat-row">
+      <div class="stat"><div class="k">创业板主力净流入</div><div class="v up">51.95 亿</div></div>
+      <div class="stat"><div class="k">科创板主力净流入</div><div class="v up">104.35 亿</div></div>
+      <div class="stat"><div class="k">沪深300主力净流入</div><div class="v up">62.96 亿</div></div>
+      <div class="stat"><div class="k">两融3日累计增加</div><div class="v up">+373.33 亿</div></div>
+    </div>
+    <div class="strat-box" style="margin-top:14px;border-left-color:var(--blue);background:var(--blue-soft);border-color:#d4e0f5">
+      <h4 style="color:var(--blue)"><span class="icon" style="background:var(--blue)">⬆</span>主力净流入 / 流出个股（8/7）</h4>
+      <p>净流入居前：<b>光迅科技 +23.54亿</b>（一字涨停，市值1598亿）、<b>生益科技 +20.02亿</b>、<b>兆易创新 +19.01亿</b>，胜宏科技紧随。净流出居前：<b>中际旭创</b>遭主力净流出居首、<b>长电科技 -11.26亿</b>、<b>新易盛 -9.87亿</b>——高位算力硬件内部出现分歧，资金由软件题材切向实体硬件赛道。两融方面，截至8/6融资余额26155.66亿，<b>电子行业融资余额增加最多（+150.93亿，增幅3.04%）</b>，宁德时代获融资净买入额居首。</p>
+    </div>
+    <div class="note">资金流向数据来源：证券时报·数据宝主力资金统计、上海证券报两融日报、四川大决策投顾北向统计。北向全日净流入4.66亿、总成交1038.24亿、占大市11.66%；中际旭创净流出规模各源口径不一（22.89亿/55.90亿），已取偏保守值并标注分歧。两融余额连续3个交易日增加、累计加仓373.33亿，杠杆资金回流科技。</div>
+  </div>
+
+  <!-- 四、新闻导读 -->
+  <div class="sec">
+    <h2><span class="num">4</span><span class="txt">新闻导读</span></h2>
+    <ul class="list">
+      <li><span class="pill up">利好</span><span class="tt">创新药出海再创新高，CXO业绩加速兑现</span><div class="ds">2026上半年中国创新药License-out出海总金额约997亿美元，约为2024全年2倍；百济神州上调全年业绩预测，荣昌生物、信达生物业绩大幅向好；药康生物H1归母净利1.04-1.14亿同比+46.67%~60.78%。→ 利好CRO/CXO/创新药，今日板块掀涨停潮</div></li>
+      <li><span class="pill up">利好</span><span class="tt">高盛大幅上调AI服务器PCB/CCL预测</span><div class="ds">2028年市场规模将达840亿/480亿美元；全球AI服务器PCB 2027年375亿美元（上调38%）、2028年840亿，CCL 2027年221亿（上调18%）；2026-2028年CAGR分别达148%/161%。→ 利好PCB/CCL/铜箔，今日涨停潮</div></li>
+      <li><span class="pill gold">策略</span><span class="tt">招商证券复盘：A股九次大幅调整的反弹规律</span><div class="ds">2015年以来9次急跌多由外部冲击/流动性风险引发，企稳以政策回应为标志；反弹窗口平均34个交易日、万得全A平均反弹超19%，呈"先弹性后景气"两段式轮动。→ 当前处于弹性反弹阶段，景气主线后续占优</div></li>
+      <li><span class="pill blue">海外</span><span class="tt">隔夜美股存储股绩后重挫，财报季进入"验证时刻"</span><div class="ds">美东8/6，西部数据-13.03%、闪迪-6.81%（业绩超预期但指引不及高预期，获利回吐）；AppLovin-19.66%、Datadog-17%；道指-0.85%结束五连涨，标普-0.18%、纳指-0.06%。→ 高估值高预期股回调示范，关注A股算力链兑现压力</div></li>
+      <li><span class="pill dn">扰动</span><span class="tt">中东地缘反复：霍尔木兹海峡协议终审</span><div class="ds">伊朗与阿曼拟定航道地理坐标、联合声明进入终审；伊朗强调美继续违约则海峡保持关闭，并在海峡附近打击敌方目标。→ 油价大涨（布油盘中涨超5%收涨近4%）、黄金盘中涨超1%后转跌，贵金属/有色获支撑</div></li>
+      <li><span class="pill up">利好</span><span class="tt">DeepSeek官宣API涨价，AI大模型告别低价</span><div class="ds">DeepSeek宣布API涨价且"幅度较大"，Meta迅速跟进打出更低骨折价；字节讨论训超5万亿参数模型；宇树科技IPO定价150.8元，DeepSeek/腾讯等获战略配售。→ 利好AI算力/大模型商业化</div></li>
+      <li><span class="pill gold">机构</span><span class="tt">华泰/平安证券观点</span><div class="ds">华泰：7月拥挤度消化、估值超调、原材料涨价，AI硬件有望在定价"业绩持续性"中反弹；平安：8月杠杆资金出清接近尾声、政策积极，指数具性价比，但财报季扰动+地缘变数，建议均衡配置。→ 机构共识反弹延续、结构均衡</div></li>
+      <li><span class="pill up">利好</span><span class="tt">两融余额连续3日增加，杠杆资金回流科技</span><div class="ds">截至8/6两融26398.59亿（+113.93亿），3日累计+373.33亿；24个行业融资余额增加，电子+150.93亿居首，其次有色、电力设备。→ 杠杆做多情绪修复，聚焦电子/有色</div></li>
+    </ul>
+    <div class="note">资讯来源：上海证券报、证券时报、华尔街见闻、第一财经、中新经纬、四川大决策投顾（2026-08-07）。媒体观点仅供参考，非一手来源。</div>
+  </div>
+
+  <!-- 五、盘中交易热点 -->
+  <div class="sec">
+    <h2><span class="num">5</span><span class="txt">盘中交易热点</span></h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th style="width:110px">方向</th><th class="l">代表个股</th><th style="width:210px">资金 / 逻辑</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pill up">CRO/创新药</span></td><td class="l">百花医药4连板、药康生物20cm、昭衍新药/哈三联涨停、药明康德拉升</td><td>医药生物主力净流入 +88.46亿，涨停最集中</td></tr>
+          <tr><td><span class="pill up">PCB概念</span></td><td class="l">宝鼎科技6天5板、华正新材4天3板、景旺电子2连板、诺德股份涨停</td><td>十余只涨停，高盛上调PCB 2028至840亿美元催化</td></tr>
+          <tr><td><span class="pill up">CPO概念</span></td><td class="l">沃格光电4连板、生益科技涨停、光迅科技一字涨停</td><td>资金切向实体硬件赛道</td></tr>
+          <tr><td><span class="pill up">半导体</span></td><td class="l">兆易创新、生益科技、光迅科技（市值1598亿）</td><td>电子行业主力净流入 +282.97亿居首</td></tr>
+          <tr><td><span class="pill gold">稀土/6G</span></td><td class="l">中国稀土涨停、云南锗业4连板、武汉凡谷2连板、通宇通讯5天4板</td><td>地缘反复+有色景气，题材延续</td></tr>
+          <tr><td><span class="pill up">净流入TOP</span></td><td class="l">光迅科技 +23.54亿、生益科技 +20.02亿、兆易创新 +19.01亿</td><td>资金集中硬件上游</td></tr>
+          <tr><td><span class="pill dn">净流出TOP</span></td><td class="l">中际旭创（居首）、长电科技 -11.26亿、新易盛 -9.87亿</td><td>高位算力硬件内部分歧</td></tr>
+          <tr><td><span class="pill dn">信息安全</span></td><td class="l">绿盟科技、天融信、任子行下挫</td><td>计算机主力净流出 -58.56亿居首</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">涨停股另含：义翘神州、博腾股份、近岸蛋白（20cm）、哈药股份（9.97%）、有研新材（10.00%）、通宇通讯（10.00%）、欧克科技、诺德股份。连板：汇绿生态、云南锗业、宝鼎科技、百花医药、沃格光电均4连板。封单资金：光迅科技19.48亿居首，景旺电子11.64亿、中国稀土10.44亿紧随。数据来源：四川大决策投顾/证券时报8月7日收评。</div>
+  </div>
+
+  <!-- 六、技术面观察 -->
+  <div class="sec">
+    <h2><span class="num">6</span><span class="txt">技术面观察</span></h2>
+    <ul class="list">
+      <li><span class="pill gold">上证</span><span class="tt">站上3940点，四连阳确立反弹</span><div class="ds">今日低开3885后高走收3940.04（+1.02%），重返3900整数关上方并创反弹新高；<b>支撑</b>3900（整数关）/3885（今日低），<b>阻力</b>3950/4000。放量站稳3900则看高一线，本周累计+2.81%。</div></li>
+      <li><span class="pill up">创业板</span><span class="tt">反弹领先，关注3613阻力</span><div class="ds">收3563.12（+1.35%），盘中高见3613.87；<b>支撑</b>3507（今日低）/3488，<b>阻力</b>3613（今日高）。本周累计+6.55%领涨主板，CRO/新能源权重修复。</div></li>
+      <li><span class="pill up">科创50</span><span class="tt">领涨全场，量能配合</span><div class="ds">+2.51%收1744.02，科创综指+3.35%；半导体/PCB/CPO驱动，主力净流入科创板104.35亿，成长风格占优。</div></li>
+      <li><span class="pill up">恒指</span><span class="tt">倒升企稳25500上方</span><div class="ds">收25668（+0.54%），成交2596.86亿；药明系/贵金属领涨、科网分化。<b>支撑</b>25530（前日收），<b>阻力</b>25800/26000。</div></li>
+    </ul>
+    <div class="note">技术位基于近5日收盘与今日高低点推导，仅为结构性观察，不构成择时信号。招商复盘指反弹窗口平均34个交易日、前期跌幅越大反弹空间越高，趋势优先于单日、多周期确认。</div>
+  </div>
+
+  <!-- 七、后市研判 -->
+  <div class="sec">
+    <h2><span class="num">7</span><span class="txt">后市研判与策略</span></h2>
+    <div class="strat-grid">
+      <div class="strat-box">
+        <h4><span class="icon">①</span>短期（T+1 至 T+5）</h4>
+        <p>四连阳+放量（2.68万亿）确立反弹格局。重点观察：<b>①</b>量能能否维持2.6万亿以上；<b>②</b>沪指3950-4000阻力带得失；<b>③</b>CRO/PCB双主线持续性 vs 高位算力硬件分歧（中际旭创主力净流出居首）。招商复盘"反弹窗口平均34个交易日、先弹性后景气"，当前处弹性反弹阶段，结构轮动为主。</p>
+      </div>
+      <div class="strat-box">
+        <h4><span class="icon">②</span>中期（1-3个月）</h4>
+        <p>8月财报季是核心验证窗口。创新药出海+业绩（药康生物+46%~60%）已为CRO链打开催化，中信建投预计2026年CRO/CDMO新签订单及业绩加速增长；高盛上调AI服务器PCB/CCL 2028年840亿/480亿美元（CAGR 148%/161%），AI硬件景气确认。关注中报能否持续验证产业景气，"先弹性"后转向"有景气支撑的主线"。</p>
+      </div>
+      <div class="strat-box">
+        <h4><span class="icon">③</span>配置建议（均衡配置应对波动）</h4>
+        <p><b>科技景气</b>：国产算力 / PCB / CCL / 半导体材料 / 存储 —— 产业趋势未退潮，高盛上调预测强化逻辑<br>
+        <b>创新药/CXO</b>：出海逻辑+业绩兑现，反弹持续性强，板块涨停最集中<br>
+        <b>资源品波段</b>：贵金属（地缘反复+央行购金）、有色（稀土/小金属/锗）<br>
+        <b>红利底仓</b>：银行/煤炭/电力（今日逆势偏弱，震荡市底仓价值）<br>
+        <b>风险对冲</b>：中东地缘反复、美存储股回调示范效应，贵金属+均衡配置对冲</p>
+      </div>
+    </div>
+    <div class="risk"><b>⚠ 风险提示：</b>①财报季业绩低于预期（美存储股指引不及高预期已现两位数回调）；②中东地缘反复（霍尔木兹海峡）；③高位题材兑现压力（中际旭创主力净流出居首）；④美债利率与美联储政策预期反复（沃什拟9月加息传闻）；⑤缩量/放量切换带来的结构波动。本文为市场数据复盘与机构观点整理，不构成投资建议，投资有风险。</div>
+    <div class="note">策略框架综合招商证券、华泰证券、平安证券、中信建投观点（来源：上海证券报/中新经纬/四川大决策投顾8月7日），结合当日数据推演。</div>
+  </div>
+
+  <div class="src">
+    数据来源：交易所数据、证券时报·数据宝、上海证券报、中新经纬、第一财经、华尔街见闻、四川大决策投顾、金融界、Wind（2026-08-07）<br>
+    行情数据截至 2026-08-07 收盘 ｜ 本报告由 WorkBuddy 自动生成，仅供研究参考
+  </div>
+
+</div>
+
+<script>
+// ===== Chart 1: A股指数今日涨跌幅 =====
+(function(){
+  var d=[['科创50',2.51],['深证成指',1.42],['创业板指',1.35],['上证指数',1.02],['北证50',1.01],['沪深300',0.93]];
+  echarts.init(document.getElementById('chartIdx')).setOption({
+    title:{text:'A股主要指数今日涨跌幅（%）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': +'+p[0].value+'%';}},
+    grid:{left:'8%',right:'6%',bottom:'12%',top:'20%'},
+    xAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{fontSize:11,color:'#6b7280'},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    yAxis:{type:'value',axisLabel:{formatter:'{value}%',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}},min:0},
+    series:[{
+      type:'bar',
+      data:d.map(function(x){return {value:x[1],itemStyle:{color:'#cf3b3e'}};}),
+      barWidth:'46%',
+      itemStyle:{borderRadius:[6,6,0,0]},
+      label:{show:true,position:'top',formatter:function(p){return '+'+p.value+'%';},fontSize:11,color:'#1a1d28',fontWeight:600}
+    }]
+  });
+})();
+
+// ===== Chart 2: 沪市成交额趋势 =====
+(function(){
+  var dt=[['7/30',11065],['7/31',11877],['8/3',9523],['8/4',10084],['8/5',12087],['8/6',11668],['8/7',12095]];
+  echarts.init(document.getElementById('chartVol')).setOption({
+    title:{text:'沪市单边成交额近7日（亿元）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',formatter:function(p){return p[0].name+': '+p[0].value+' 亿';}},
+    grid:{left:'10%',right:'6%',bottom:'12%',top:'22%'},
+    xAxis:{type:'category',data:dt.map(function(x){return x[0];}),axisLabel:{color:'#6b7280'},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    yAxis:{type:'value',axisLabel:{color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}}},
+    series:[{
+      type:'bar',
+      data:dt.map(function(x,i){
+        var c = i===6 ? '#b8893b' : '#d4cab8';
+        return {value:x[1],itemStyle:{color:c}};
+      }),
+      barWidth:'50%',
+      itemStyle:{borderRadius:[4,4,0,0]},
+      label:{show:true,position:'top',fontSize:10,color:'#6b7280',fontWeight:600}
+    }]
+  });
+})();
+
+// ===== Chart 3: 行业板块涨幅TOP6 =====
+(function(){
+  var d=[['国防军工',1.47],['机械设备',2.08],['有色金属',3.19],['建筑材料',3.33],['电子',3.53],['医药生物',4.77]];
+  echarts.init(document.getElementById('chartSector')).setOption({
+    title:{text:'申万一级行业涨幅 TOP6（%）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': +'+p[0].value+'%';}},
+    grid:{left:'24%',right:'10%',bottom:'8%',top:'20%'},
+    xAxis:{type:'value',axisLabel:{formatter:'{value}%',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}},min:0},
+    yAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{color:'#1a1d28',fontSize:12,fontWeight:600},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    series:[{
+      type:'bar',
+      data:d.map(function(x){return x[1];}),
+      barWidth:'52%',
+      itemStyle:{
+        color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#e8a0a2'},{offset:1,color:'#cf3b3e'}]),
+        borderRadius:[0,6,6,0]
+      },
+      label:{show:true,position:'right',formatter:'+{c}%',fontSize:11,color:'#cf3b3e',fontWeight:700}
+    }]
+  });
+})();
+
+// ===== Chart 4: 主力资金净流入板块 =====
+(function(){
+  var d=[['电力设备',29.93],['机械设备',40.49],['有色金属',70.77],['医药生物',88.46],['电子',282.97]];
+  echarts.init(document.getElementById('chartFlow')).setOption({
+    title:{text:'行业主力资金净流入 TOP5（亿元）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': +'+p[0].value+' 亿';}},
+    grid:{left:'24%',right:'12%',bottom:'8%',top:'20%'},
+    xAxis:{type:'value',axisLabel:{formatter:'{value}',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}},min:0},
+    yAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{color:'#1a1d28',fontSize:12,fontWeight:600},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    series:[{
+      type:'bar',
+      data:d.map(function(x){return x[1];}),
+      barWidth:'52%',
+      itemStyle:{
+        color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#7ba0d8'},{offset:1,color:'#2f5fb0'}]),
+        borderRadius:[0,6,6,0]
+      },
+      label:{show:true,position:'right',formatter:'+{c}',fontSize:11,color:'#2f5fb0',fontWeight:700}
+    }]
+  });
+})();
+</script>
+</body>
+</html>
