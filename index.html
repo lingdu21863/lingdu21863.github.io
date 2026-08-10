@@ -58,7 +58,44 @@
     color: #1f2328;
     padding-left: 12px;
     border-left: 3px solid #0969da;
+    margin-bottom: 14px;
+  }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #d0d7de;
+  }
+  .filter-chip {
+    display: inline-block;
+    padding: 5px 13px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1f2328;
+    background: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    user-select: none;
+  }
+  .filter-chip:hover {
+    border-color: #0969da;
+    color: #0969da;
+  }
+  .filter-chip.active {
+    background: #0969da;
+    color: #ffffff;
+    border-color: #0969da;
+  }
+  .filter-chip .count {
+    font-size: 11px;
+    opacity: 0.75;
+    margin-left: 4px;
   }
 
   /* Article card */
@@ -104,6 +141,19 @@
     line-height: 1.8;
     margin-bottom: 14px;
   }
+  .post-card .card-tags {
+    margin-bottom: 12px;
+  }
+  .post-card .card-tags .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    color: #656d76;
+    background: #eaeef2;
+    border-radius: 6px;
+    padding: 2px 8px;
+    margin-right: 6px;
+  }
   .post-card .read-more {
     display: inline-block;
     color: #0969da;
@@ -117,6 +167,19 @@
   .post-card:hover .read-more::after {
     margin-left: 4px;
   }
+  .post-card.hidden { display: none; }
+
+  .empty-hint {
+    text-align: center;
+    padding: 36px 20px;
+    color: #656d76;
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    display: none;
+  }
+  .empty-hint.show { display: block; }
 
   /* Footer */
   .site-footer {
@@ -150,39 +213,106 @@
 <div class="container">
   <h2 class="section-title">最新文章</h2>
 
-  <a class="post-card" href="A股收盘总结/A股收盘总结_20260807.html">
+  <div class="filter-bar" id="filter-bar">
+    <span class="filter-chip active" data-tag="全部">全部</span>
+    <span class="filter-chip" data-tag="CPO">CPO</span>
+    <span class="filter-chip" data-tag="PCB">PCB</span>
+    <span class="filter-chip" data-tag="半导体">半导体</span>
+    <span class="filter-chip" data-tag="资源品">资源品</span>
+    <span class="filter-chip" data-tag="创新药">创新药</span>
+    <span class="filter-chip" data-tag="有色金属">有色金属</span>
+  </div>
+
+  <a class="post-card" href="A股收盘总结/A股收盘总结_20260807.html" data-tags="CPO PCB 半导体 创新药">
     <span class="date-badge">2026年8月7日 · 星期五</span>
     <h2>每日投资报告 · 盘后复盘</h2>
     <p class="excerpt">三大指数低开高走全线收涨超1%，沪指涨1.02%站上3940点，科创50领涨2.51%、科创综指涨3.35%。沪深京三市成交2.68万亿放量1359亿，CRO创新药与PCB/CPO算力硬件双主线掀涨停潮，电子行业主力净流入282.97亿居首。港股恒指倒升0.54%，药明系领涨；隔夜美股存储股绩后重挫，道指结束五连涨。</p>
+    <div class="card-tags">
+      <span class="tag">CPO</span><span class="tag">PCB</span><span class="tag">半导体</span><span class="tag">创新药</span>
+    </div>
     <span class="read-more">阅读全文</span>
   </a>
 
-  <a class="post-card" href="A股收盘总结/A股收盘总结_20260806.html">
+  <a class="post-card" href="A股收盘总结/A股收盘总结_20260806.html" data-tags="CPO PCB 半导体 资源品">
     <span class="date-badge">2026年8月6日 · 星期四</span>
     <h2>每日投资报告 · 盘后复盘</h2>
     <p class="excerpt">沪指低开高走收涨 0.57% 重返 3900 点，深成指、创业板冲高回落，两市成交 2.53 万亿缩量。资金围绕资源品（煤炭/贵金属）与半导体材料（电子特气/PCB/CPO）双线展开，港股受地产科网拖累下跌，隔夜美股在闪迪财报带动下大涨。</p>
+    <div class="card-tags">
+      <span class="tag">CPO</span><span class="tag">PCB</span><span class="tag">半导体</span><span class="tag">资源品</span>
+    </div>
     <span class="read-more">阅读全文</span>
   </a>
 
-  <a class="post-card" href="A股收盘总结/A股收盘总结_20260805.html">
+  <a class="post-card" href="A股收盘总结/A股收盘总结_20260805.html" data-tags="CPO 半导体 有色金属">
     <span class="date-badge">2026年8月5日 · 星期三</span>
     <h2>A股市场收盘总结</h2>
     <p class="excerpt">市场放量反弹，三大指数集体收涨，科创50 大涨 4.78%。半导体产业链集体爆发，有色金属板块领涨两市，工业富联午后封涨停。CPO 光模块方向明显分歧，中际旭创高开低走大跌 7.27%，成交 675 亿创历史天量。</p>
+    <div class="card-tags">
+      <span class="tag">CPO</span><span class="tag">半导体</span><span class="tag">有色金属</span>
+    </div>
     <span class="read-more">阅读全文</span>
   </a>
 
-  <a class="post-card" href="A股收盘总结/A股收盘总结_20260804.html">
+  <a class="post-card" href="A股收盘总结/A股收盘总结_20260804.html" data-tags="CPO PCB 半导体">
     <span class="date-badge">2026年8月4日 · 星期二</span>
     <h2>A股市场收盘总结</h2>
     <p class="excerpt">科技股强势反弹，创业板指大涨 5.64%，CPO 概念全线爆发。受英伟达宣布 CPO 量产催化，CPO、PCB、半导体等板块集体走强，全市场超 3600 只个股上涨，140 股涨停，两市成交 2.23 万亿。</p>
+    <div class="card-tags">
+      <span class="tag">CPO</span><span class="tag">PCB</span><span class="tag">半导体</span>
+    </div>
     <span class="read-more">阅读全文</span>
   </a>
+
+  <p class="empty-hint" id="empty-hint">该分类下暂无文章。</p>
 </div>
 
 <footer class="site-footer">
   <p>&copy; 2026 零度的博客</p>
   <p class="disclaimer">本站内容仅供信息参考，不构成任何投资建议 · 投资有风险，决策需谨慎</p>
 </footer>
+
+<script>
+(function () {
+  var bar = document.getElementById('filter-bar');
+  var cards = document.querySelectorAll('.post-card');
+  var emptyHint = document.getElementById('empty-hint');
+
+  // 统计每个分类的文章数
+  var chips = bar.querySelectorAll('.filter-chip');
+  chips.forEach(function (chip) {
+    var tag = chip.dataset.tag;
+    if (tag === '全部') return;
+    var n = 0;
+    cards.forEach(function (c) {
+      if (c.dataset.tags.split(/\s+/).indexOf(tag) !== -1) n++;
+    });
+    if (n > 0) {
+      var cnt = document.createElement('span');
+      cnt.className = 'count';
+      cnt.textContent = n;
+      chip.appendChild(cnt);
+    }
+  });
+
+  bar.addEventListener('click', function (e) {
+    var chip = e.target.closest('.filter-chip');
+    if (!chip) return;
+    var tag = chip.dataset.tag;
+
+    chips.forEach(function (c) { c.classList.remove('active'); });
+    chip.classList.add('active');
+
+    var visible = 0;
+    cards.forEach(function (c) {
+      var tags = c.dataset.tags.split(/\s+/);
+      var show = (tag === '全部') || (tags.indexOf(tag) !== -1);
+      c.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+    emptyHint.classList.toggle('show', visible === 0);
+  });
+})();
+</script>
 
 </body>
 </html>
