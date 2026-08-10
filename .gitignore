@@ -10,3 +10,6 @@ Gemfile.lock
 # 编辑器
 .vscode/
 .idea/
+
+# 工具记忆
+.workbuddy/
