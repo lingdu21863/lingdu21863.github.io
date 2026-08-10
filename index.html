@@ -58,46 +58,7 @@
     color: #1f2328;
     padding-left: 12px;
     border-left: 3px solid #0969da;
-    margin-bottom: 16px;
-  }
-
-  /* Search */
-  .search-wrap {
-    position: relative;
-    margin-bottom: 14px;
-  }
-  .search-wrap input {
-    width: 100%;
-    padding: 10px 14px 10px 38px;
-    font-size: 14px;
-    font-family: inherit;
-    color: #1f2328;
-    background: #ffffff;
-    border: 1px solid #d0d7de;
-    border-radius: 8px;
-    outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .search-wrap input:focus {
-    border-color: #0969da;
-    box-shadow: 0 0 0 3px rgba(9,105,218,0.15);
-  }
-  .search-wrap input::placeholder { color: #8c959f; }
-  .search-icon {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #8c959f;
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-  }
-  .result-count {
-    font-size: 12px;
-    color: #656d76;
-    margin-bottom: 14px;
-    padding-left: 2px;
+    margin-bottom: 18px;
   }
 
   /* Article card */
@@ -157,17 +118,6 @@
     margin-left: 4px;
   }
 
-  /* Empty state */
-  .empty {
-    text-align: center;
-    padding: 40px 20px;
-    color: #656d76;
-    font-size: 14px;
-    background: #fff;
-    border: 1px solid #d0d7de;
-    border-radius: 8px;
-  }
-
   /* Footer */
   .site-footer {
     text-align: center;
@@ -200,83 +150,39 @@
 <div class="container">
   <h2 class="section-title">最新文章</h2>
 
-  <div class="search-wrap">
-    <span class="search-icon">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11.5 7a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Zm-.82 4.74a6 6 0 1 1 1.06-1.06l3.04 3.04a.75.75 0 1 1-1.06 1.06l-3.04-3.04Z"/>
-      </svg>
-    </span>
-    <input type="search" id="search-input" placeholder="搜索文章（日期 / 板块 / 个股）…" autocomplete="off">
-  </div>
+  <a class="post-card" href="A股收盘总结/A股收盘总结_20260807.html">
+    <span class="date-badge">2026年8月7日 · 星期五</span>
+    <h2>每日投资报告 · 盘后复盘</h2>
+    <p class="excerpt">三大指数低开高走全线收涨超1%，沪指涨1.02%站上3940点，科创50领涨2.51%、科创综指涨3.35%。沪深京三市成交2.68万亿放量1359亿，CRO创新药与PCB/CPO算力硬件双主线掀涨停潮，电子行业主力净流入282.97亿居首。港股恒指倒升0.54%，药明系领涨；隔夜美股存储股绩后重挫，道指结束五连涨。</p>
+    <span class="read-more">阅读全文</span>
+  </a>
 
-  <div id="result-count" class="result-count"></div>
-  <div id="post-list">
-    <noscript>
-      <p class="empty">请启用 JavaScript 以查看和搜索文章列表。</p>
-    </noscript>
-  </div>
+  <a class="post-card" href="A股收盘总结/A股收盘总结_20260806.html">
+    <span class="date-badge">2026年8月6日 · 星期四</span>
+    <h2>每日投资报告 · 盘后复盘</h2>
+    <p class="excerpt">沪指低开高走收涨 0.57% 重返 3900 点，深成指、创业板冲高回落，两市成交 2.53 万亿缩量。资金围绕资源品（煤炭/贵金属）与半导体材料（电子特气/PCB/CPO）双线展开，港股受地产科网拖累下跌，隔夜美股在闪迪财报带动下大涨。</p>
+    <span class="read-more">阅读全文</span>
+  </a>
+
+  <a class="post-card" href="A股收盘总结/A股收盘总结_20260805.html">
+    <span class="date-badge">2026年8月5日 · 星期三</span>
+    <h2>A股市场收盘总结</h2>
+    <p class="excerpt">市场放量反弹，三大指数集体收涨，科创50 大涨 4.78%。半导体产业链集体爆发，有色金属板块领涨两市，工业富联午后封涨停。CPO 光模块方向明显分歧，中际旭创高开低走大跌 7.27%，成交 675 亿创历史天量。</p>
+    <span class="read-more">阅读全文</span>
+  </a>
+
+  <a class="post-card" href="A股收盘总结/A股收盘总结_20260804.html">
+    <span class="date-badge">2026年8月4日 · 星期二</span>
+    <h2>A股市场收盘总结</h2>
+    <p class="excerpt">科技股强势反弹，创业板指大涨 5.64%，CPO 概念全线爆发。受英伟达宣布 CPO 量产催化，CPO、PCB、半导体等板块集体走强，全市场超 3600 只个股上涨，140 股涨停，两市成交 2.23 万亿。</p>
+    <span class="read-more">阅读全文</span>
+  </a>
 </div>
 
 <footer class="site-footer">
   <p>&copy; 2026 零度的博客</p>
   <p class="disclaimer">本站内容仅供信息参考，不构成任何投资建议 · 投资有风险，决策需谨慎</p>
 </footer>
-
-<script>
-(function () {
-  var list = document.getElementById('post-list');
-  var countEl = document.getElementById('result-count');
-  var input = document.getElementById('search-input');
-  var posts = [];
-
-  function escapeHtml(s) {
-    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  }
-
-  function render(items, total) {
-    if (!items.length) {
-      list.innerHTML = '<p class="empty">未找到匹配的文章，换个关键词试试吧。</p>';
-      countEl.textContent = '共 ' + total + ' 篇 · 匹配 0 篇';
-      return;
-    }
-    list.innerHTML = items.map(function (p) {
-      return ''
-        + '<a class="post-card" href="' + escapeHtml(p.url) + '">'
-        +   '<span class="date-badge">' + escapeHtml(p.dateLabel) + '</span>'
-        +   '<h2>' + escapeHtml(p.title) + '</h2>'
-        +   '<p class="excerpt">' + escapeHtml(p.excerpt) + '</p>'
-        +   '<span class="read-more">阅读全文</span>'
-        + '</a>';
-    }).join('');
-    countEl.textContent = total === items.length
-      ? '共 ' + total + ' 篇文章'
-      : '共 ' + total + ' 篇 · 匹配 ' + items.length + ' 篇';
-  }
-
-  function filter() {
-    var q = input.value.trim().toLowerCase();
-    if (!q) { render(posts, posts.length); return; }
-    var terms = q.split(/\s+/);
-    var matched = posts.filter(function (p) {
-      var hay = (p.title + ' ' + p.excerpt + ' ' + p.dateLabel + ' ' + (p.keywords || '')).toLowerCase();
-      return terms.every(function (t) { return hay.indexOf(t) !== -1; });
-    });
-    render(matched, posts.length);
-  }
-
-  input.addEventListener('input', filter);
-
-  fetch('posts.json')
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      posts = data.posts || [];
-      render(posts, posts.length);
-    })
-    .catch(function () {
-      list.innerHTML = '<p class="empty">文章索引加载失败，请稍后刷新重试。</p>';
-    });
-})();
-</script>
 
 </body>
 </html>
