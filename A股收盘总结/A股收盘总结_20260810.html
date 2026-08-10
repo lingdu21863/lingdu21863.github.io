@@ -4,26 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>每日投资报告 · 2026-08-10 盘后复盘</title>
-<script>
-// ECharts 国内多 CDN 容灾加载 — 用 Promise 跟踪加载状态
-window.__echartsReady = new Promise(function(resolve, reject){
-  var urls=[
-    'https://cdn.bootcdn.net/ajax/libs/echarts/5.5.0/echarts.min.js',
-    'https://registry.npmmirror.com/echarts/5.5.0/files/dist/echarts.min.js',
-    'https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js'
-  ];
-  var deadline = setTimeout(function(){ reject('ECharts 加载超时（10秒）'); }, 10000);
-  function tryLoad(i){
-    if(i>=urls.length){ clearTimeout(deadline); reject('所有 CDN 均加载失败'); return; }
-    var s=document.createElement('script');
-    s.src=urls[i];
-    s.onerror=function(){ tryLoad(i+1); };
-    s.onload=function(){ clearTimeout(deadline); resolve(echarts); };
-    document.head.appendChild(s);
-  }
-  tryLoad(0);
-});
-</script>
 <style>
   :root{
     --bg:#f5f3ee; --card:#ffffff; --ink:#1a1d28; --ink2:#6b7280; --ink3:#9ca3af;
@@ -269,7 +249,7 @@ window.__echartsReady = new Promise(function(resolve, reject){
   <!-- TL;DR -->
   <div class="tldr">
     <div class="lab">今日结论</div>
-    <p>A股呈现“沪强深弱、个股普涨”分化格局，沪指 <b>+0.67%</b> 收3966.59点，实现日线五连阳、距4000点整数关一步之遥；深成指微涨 <b>+0.04%</b> 尾盘翻红，创业板指 <u>-0.73%</u> 盘中一度跌超2.5%后探底回升。两市成交 <b>2.52万亿</b> 较前日缩量约1413亿，但全市场 <b>4068只上涨</b>（占比73%），103只涨停、5只跌停，典型“赚个股、亏指数”。资金从高位科技硬件大幅切向低位消费/医药/有色/军工，<b>CPO/通信设备</b>遭集中兜商，中际旭创跌超6%。隔夜美股反弹（纳指 <b>+1.30%</b>），非农暴冷金价飙升至4344美元周涨7%；港股恒指 <b>+1.05%</b> 老铺黄金涨12%。风格切换明显，缩量五连阳后近4000点可能出现震荡，建议沿“高位放量”与“低位反弹”两条线均衡配置。</p>
+    <p>A股"沪强深弱、个股普涨"，沪指 <b>+0.67%</b> 五连阳收3966.59紧逼4000点，深成指微涨 <b>+0.04%</b> 尾盘翻红，创业板指 <u>-0.73%</u> 盘中一度跌超2.5%后探底回升。两市成交 <b>2.52万亿</b> 缩量1413亿，但 <b>4068只上涨</b>（73%）、103只涨停，典型"赚个股、亏指数"。风格剧烈切换：高位CPO/通信设备遭集中抛售（中际旭创-6%、光迅科技触跌停），资金涌向低位<b>医药/CRO</b>（百花医药5连板）、<b>军工/兵装</b>（北方长龙20cm）、<b>贵金属</b>（招金黄金2连板）、<b>消费</b>（白酒猪肉大涨）。隔夜美股反弹纳指+1.30%，非农爆冷金价飙至4344美元周涨7%。缩量五连阳逼近4000点，短期面临技术回调风险，沿"高位放量"与"低位反弹"两条线均衡配置。</p>
   </div>
 
   <!-- 一、市场概览 -->
@@ -277,11 +257,11 @@ window.__echartsReady = new Promise(function(resolve, reject){
     <h2><span class="num">1</span><span class="txt">市场概览</span></h2>
     <div class="idx-grid">
       <div class="idx up-bg"><div class="nm">上证指数</div><div class="val up">3966.59</div><div class="ch up">▲ +0.67% 五连阳</div></div>
-      <div class="idx up-bg"><div class="nm">深证成指</div><div class="val up">14316.96</div><div class="ch up">▲ +0.04%</div></div>
+      <div class="idx up-bg"><div class="nm">深证成指</div><div class="val up">14316.96</div><div class="ch up">▲ +0.04% 尾盘翻红</div></div>
       <div class="idx dn-bg"><div class="nm">创业板指</div><div class="val dn">3537.21</div><div class="ch dn">▼ -0.73% 盘中-2.5%</div></div>
       <div class="idx dn-bg"><div class="nm">科创50</div><div class="val dn">1737.77</div><div class="ch dn">▼ -0.36%</div></div>
-      <div class="idx dn-bg"><div class="nm">北证50</div><div class="val dn">1122.88</div><div class="ch dn">▼ -1.00%</div></div>
       <div class="idx dn-bg"><div class="nm">科创综指</div><div class="val dn">2012.30</div><div class="ch dn">▼ -0.35%</div></div>
+      <div class="idx up-bg"><div class="nm">北向成交</div><div class="val up">3220 亿</div><div class="ch up">占大市 12.76%</div></div>
     </div>
     <div class="stat-row">
       <div class="stat"><div class="k">两市成交额</div><div class="v">2.52 万亿</div></div>
@@ -289,40 +269,46 @@ window.__echartsReady = new Promise(function(resolve, reject){
       <div class="stat"><div class="k">涨 / 跌 / 平</div><div class="v"><span class="up">4068</span> / <span class="dn">1391</span> / 80</div></div>
       <div class="stat"><div class="k">涨停 / 跌停</div><div class="v"><span class="up">103</span> / <span class="dn">5</span></div></div>
     </div>
+    <div class="stat-row">
+      <div class="stat"><div class="k">沪市成交</div><div class="v">11669 亿</div></div>
+      <div class="stat"><div class="k">深市成交</div><div class="v">13562 亿</div></div>
+      <div class="stat"><div class="k">涨超9%</div><div class="v up">138 只</div></div>
+      <div class="stat"><div class="k">跌超9%</div><div class="v dn">13 只</div></div>
+    </div>
     <div class="chart-wrap"><div id="chartIdx" class="chart"></div></div>
     <div class="chart-wrap"><div id="chartVol" class="chart sm"></div></div>
-    <div class="note">数据来源：交易所数据 / 中新经绣 / 央广财经 / 证券时报（截至 8月10日 15:30）。沪市成交11669亿、深市13562亿，合计2.52万亿缩量明显。沪指五连阳（8/4-8/10）累计+3.50%，本周开局延续反弹但加速放缓；注意当日分化，涨停家数103只仍高但虽涨停百家，高位CPO/通信集中杀跌成最明显健康警讯。</div>
+    <div class="note">数据来源：交易所数据 / 中新经纬 / 央广财经 / 证券时报（截至 8月10日 15:30）。沪指五连阳（8/4-8/10）累计+3.50%；风格分化明显——沪强深弱、小强大弱、低位普涨高位杀跌，赚钱效应73%但指数结构不健康。北向资金自2024年8月19日起不再实时披露净买卖额，今日总成交3220亿元、占两市12.76%。</div>
   </div>
 
   <!-- 二、板块表现 -->
   <div class="sec">
     <h2><span class="num">2</span><span class="txt">板块表现</span></h2>
-    <p class="sec-intro">风格切换特征明显：申万一级涨幅前五分别为农林牧渔+3.14%、食品饮料+2.51%、纺织服饰+2.40%、煤炭+2.34%、有色金属+2.02%；细分赛道由医药、军工、贵金属、养殖与酒店餐饮包揽涨幅榜；跌幅方向集中在通信设备、CPO概念与元件。</p>
+    <p class="sec-intro">风格切换特征明显：申万一级涨幅前五为农林牧渔+3.14%、食品饮料+2.51%、纺织服饰+2.40%、煤炭+2.34%、有色金属+2.02%；细分由医药、军工、贵金属、养殖与消费包揽涨幅榜；跌幅集中CPO、通信设备、PCB与玻璃玻纤。</p>
     <div class="chart-wrap"><div id="chartSector" class="chart"></div></div>
     <div class="twocol">
       <div>
         <div class="col-title up">▲ 领涨方向</div>
         <ul class="list">
-          <li><span class="pill up">+5.12%</span><span class="tt">地面兵装Ⅱ / 军贸概念</span><div class="ds">北方长龙20cm涨停，长城军工、洪都航空涨停；机构研报指出"十五五"规划及军贸订单有望落地，公募持仓处历史低位</div></li>
-          <li><span class="pill up">+4.22%</span><span class="tt">酒店餐饮</span><div class="ds">华天酒店涨停，暑期档观影人次创新高，消费场景回暖</div></li>
-          <li><span class="pill up">+4.19%</span><span class="tt">养殖业 / 猪肉概念</span><div class="ds">益生股份涨停、神农集团涨超6%，7月猪肉价格环比由-0.8%转涨4.1%，创年内最大环比涨幅</div></li>
-          <li><span class="pill up">+3.92%</span><span class="tt">医疗服务 / CRO/CXO</span><div class="ds">毕得医药20cm涨停、百花医药5连板、哈三联5天3板、哈药股份/海正药业2连板；药明康德中报归母净利首破百亿+美法院批准禁令动议</div></li>
-          <li><span class="pill up">+3.89%</span><span class="tt">贵金属</span><div class="ds">招金黄金涨停、晓程科技涨9%、四川黄金涨7%；现货黄金突破4360美元，一周涨超7%，非农暴冷金价飙升</div></li>
-          <li><span class="pill gold">热点</span><span class="tt">能源金属 / 白酒 / 影视</span><div class="ds">能源金属+3.46%，刚果(金)禁铜精矿出口；茅台直营店提价至1753元/瓶，白酒+2.70%；惨意电影、北京文化涨停，暑期档票房超85亿</div></li>
+          <li><span class="pill up">+5.12%</span><span class="tt">地面兵装Ⅱ / 军贸概念</span><div class="ds">北方长龙20cm涨停，长城军工、洪都航空涨停，湖南天雁+10%+；"十五五"规划及军贸订单预期，公募持仓处历史低位</div></li>
+          <li><span class="pill up">+4.22%</span><span class="tt">酒店餐饮</span><div class="ds">华天酒店涨停，暑期消费场景回暖</div></li>
+          <li><span class="pill up">+4.19%</span><span class="tt">养殖业 / 猪肉概念</span><div class="ds">益生股份涨停、神农集团涨超6%，7月猪肉价格环比由-0.8%转涨4.1%，创年内最大涨幅</div></li>
+          <li><span class="pill up">+3.92%</span><span class="tt">医疗服务 / CRO/CXO</span><div class="ds">毕得医药20cm涨停、百花医药5连板、哈三联5天3板、哈药股份/海正药业2连板；药明康德中报破百亿+美法院批准禁令</div></li>
+          <li><span class="pill up">+3.89%</span><span class="tt">贵金属</span><div class="ds">招金黄金2连板（7/21低点至今+78%）、晓程科技涨9%、四川黄金涨7%；非农爆冷金价周涨7%突破4360美元</div></li>
+          <li><span class="pill gold">热点</span><span class="tt">白酒 / 影视 / 能源金属</span><div class="ds">白酒+2.70%（茅台提价1753元/瓶）；影视院线（儒意电影、北京文化涨停，暑期档票房超85亿）；能源金属+3.46%</div></li>
         </ul>
       </div>
       <div>
         <div class="col-title dn">▼ 领跌方向</div>
         <ul class="list">
-          <li><span class="pill dn">-3.67%</span><span class="tt">通信设备 / CPO概念</span><div class="ds">光迅科技盘中触及跌停，中际旭创跌超6%、新易盛跌超5%、长盈通跌超5%；AAOI宣布未来两年产能扩十倍+FCC限制进口传闻</div></li>
-          <li><span class="pill dn">-3.16%</span><span class="tt">通信（申万一级）</span><div class="ds">主力净流出超135亿，居申万一级净流出榜首；6G/PCB/复合铜篷的等相关概念普路</div></li>
-          <li><span class="pill dn">-1.25%</span><span class="tt">元件 / PCB概念</span><div class="ds">电子行业整体净流出超211亿；半导体、消费电子跟跌，高位科技硬件遭集中兜商</div></li>
-          <li><span class="pill dn">-1.04%</span><span class="tt">玻璃玻纤</span><div class="ds">申万二级跌幅居前，建材类周期品被资金抛售</div></li>
-          <li><span class="pill dn">个股</span><span class="tt">保险 / 云服务</span><div class="ds">保险股持续低迷，云服务、稳定币、AI PC概念跌幅居前</div></li>
+          <li><span class="pill dn">-3.67%</span><span class="tt">通信设备 / CPO概念</span><div class="ds">中际旭创-6.01%（成交457.64亿居两市之首）、新易盛-5%+、光迅科技触跌停、长盈通-8%+；AAOI扩产十倍+FCC限制进口传闻</div></li>
+          <li><span class="pill dn">-3.16%</span><span class="tt">通信（申万一级）</span><div class="ds">武汉凡谷-9.91%、通宇通讯-8.31%、泰金新能-8.36%；6G/PCB/复合铜箔概念普跌</div></li>
+          <li><span class="pill dn">-1.25%</span><span class="tt">元件 / PCB概念</span><div class="ds">力诺药包-8.88%、戈碧迦-7.61%；电子行业整体承压，PCB前期涨幅过大获利回吐</div></li>
+          <li><span class="pill dn">-1.04%</span><span class="tt">玻璃玻纤</span><div class="ds">申万二级跌幅居前，资金流出建材类周期品</div></li>
+          <li><span class="pill dn">个股</span><span class="tt">保险 / 云服务 / 稳定币</span><div class="ds">保险股持续低迷，云服务、稳定币、AI PC概念跌幅居前</div></li>
         </ul>
       </div>
     </div>
-    <div class="note">涨幅数据来源：neodata 板块涨跌排行/申万一级行业数据 / 中新经绣 / 智通财经 / 格隆汇（截至 8月10日 17:30）。跌停股：甘咨询 -9.96%、宝莱特 -19.99%、金发拉比 -9.99%、联创光电 -10.00%、宁夏建材 -10.00%。换手率前五：展芯股份59.21%、龙钦智能51.93%、万邦医药50.12%、托伦斯48.61%、津富士达43.84%。</div>
+    <div class="note">涨幅数据来源：中新经纬 / 央广财经 / 证券时报 / 21世纪经济报道（截至 8月10日 17:30）。跌停股：宝莱特 -19.99%、联创光电 -10.00%、宁夏建材 -10.00%、甘咨询 -9.96%、金发拉比 -9.99%。换手率前五：展芯股份 59.21%、龙鑫智能 51.93%、万邦医药 50.12%、托伦斯 48.61%、津富士达 43.84%。</div>
   </div>
 
   <!-- 三、资金流向 -->
@@ -330,42 +316,42 @@ window.__echartsReady = new Promise(function(resolve, reject){
     <h2><span class="num">3</span><span class="txt">资金流向与机构行为</span></h2>
     <div class="chart-wrap"><div id="chartFlow" class="chart"></div></div>
     <div class="stat-row">
-      <div class="stat"><div class="k">医药生物主力净流入</div><div class="v up">余68 亿</div></div>
-      <div class="stat"><div class="k">电子行业主力净流出</div><div class="v dn">余211 亿</div></div>
+      <div class="stat"><div class="k">医药生物主力净流入</div><div class="v up">约68 亿</div></div>
+      <div class="stat"><div class="k">电子行业主力净流出</div><div class="v dn">逾211 亿</div></div>
+      <div class="stat"><div class="k">通信主力净流出</div><div class="v dn">约135 亿</div></div>
       <div class="stat"><div class="k">两融余额（8/7）</div><div class="v">2.65 万亿</div></div>
-      <div class="stat"><div class="k">上周两融增加</div><div class="v up">+362.15 亿</div></div>
     </div>
     <div class="stat-row">
       <div class="stat"><div class="k">基础化工主力净流入</div><div class="v up">超30 亿</div></div>
       <div class="stat"><div class="k">食品饮料主力净流入</div><div class="v up">超30 亿</div></div>
-      <div class="stat"><div class="k">通信主力净流出</div><div class="v dn">余135 亿</div></div>
-      <div class="stat"><div class="k">新基建/华为净流出</div><div class="v dn">超200 亿</div></div>
+      <div class="stat"><div class="k">农林牧渔主力净流入</div><div class="v up">约24 亿</div></div>
+      <div class="stat"><div class="k">贵金属主力净流入</div><div class="v up">11.41 亿</div></div>
     </div>
     <div class="strat-box" style="margin-top:14px;border-left-color:var(--blue);background:var(--blue-soft);border-color:#d4e0f5">
-      <h4 style="color:var(--blue)"><span class="icon" style="background:var(--blue)">⇧</span>北向资金与两融行为（8/10）</h4>
-      <p>北向资金整体净卖出A股，结构分化明显：<b>沪股通</b>抄底白酒等低位消费权重，<b>深股通</b>减持高位成长；主要净买入<b>有色</b>、<b>计算机</b>、<b>医药</b>，净卖出<b>电子</b>、<b>机械</b>、<b>化工</b>。国金策略指出：A股去杠杆进程或已阶段结束，<b>两融重新回流</b>（连续4日增加，上周累计+362.15亿），ETF与北上转向净流出，后续关注两融回流持续性。<b>融资余额</b>截至8/7 26475.41亿（融资26225.44亿、融券249.97亿），主力加仓电子、有色、机械，减仓通信、家电。</p>
+      <h4 style="color:var(--blue)"><span class="icon" style="background:var(--blue)">↑</span>北向资金与两融行为（8/10）</h4>
+      <p>北向资金总成交<b>3220.29亿元</b>，占两市总成交12.76%（巨灵数据）。自2024年8月19日起北向不再实时披露净买卖额，各口径数据需谨慎对待。国金策略指出：A股去杠杆进程或已阶段结束，<b>两融重新回流</b>（连续4日增加，上周累计+362.15亿），ETF与北上转向净流出。融资余额截至8/7为26475.41亿（融资26225.44亿、融券249.97亿），主力加仓电子、有色、机械，减仓通信、家电。</p>
     </div>
     <div class="strat-box" style="margin-top:10px;border-left-color:#1a8a5e;background:var(--green-bg);border-color:#c9e8d8">
       <h4 style="color:var(--green)"><span class="icon" style="background:var(--green)">↓</span>主力净流出 / 流入个股（8/10）</h4>
-      <p>净流出居前：<b>中际旭创 -55.90亿</b>（A股跌超6%，港股跌超7%）、<b>光迅科技盘中触跌停</b>、<b>新易盛 -9.87亿</b>、<b>长电科技 -11.26亿</b>。半导体、CPO、6G、PCB等前期热门科技方向集中兜商，高位AI硬件内部出现明显分歧。主力净流入居前：<b>药明康德</b>、<b>招金黄金</b>（涨停）、<b>北方长龙</b>（20cm涨停）、<b>益生股份</b>（涨停）。资金并没有离开市场，只是不愿继续在同一批高位科技资产上不断提高价格。</p>
+      <p>净流出居前：<b>中际旭创成交457.64亿居两市之首、跌6.01%</b>；<b>光迅科技盘中触跌停</b>；<b>新易盛、长盈通跌超5%</b>。CPO/通信设备/PCB等高位科技硬件遭集中抛售，AAOI扩产+FCC传闻触发踩踏。净流入居前：<b>药明康德</b>（中报破百亿+美禁令利好）、<b>招金黄金</b>（2连板，金价突破）、<b>北方长龙</b>（20cm涨停）、<b>百花医药</b>（5连板）。资金并未离开市场，只是从高位科技切向低位医药/军工/有色。</p>
     </div>
-    <div class="note">资金流向数据来源：neodata 板块资金排行 / 国金策略《资金跟踪系列之五十七》/ 格隆汇 / 智通财经 8月10日收评。主力净流入金额存在数据源差异，贵金属neodata统计为11.41亿（申万二级），定性路线一致。北向资金结构分布基于国金策略模型测算，非实时个股数据。</div>
+    <div class="note">资金流向数据来源：巨灵北向成交数据 / 国金策略《资金跟踪系列之五十七》/ 中证报 / 21世纪经济报道 8月10日收评。北向净买卖额因2024年新规不再实时披露，盘中净买卖数据不可信。盘中数据分析基于行业板块整体资金流向。</div>
   </div>
 
   <!-- 四、新闻导读 -->
   <div class="sec">
     <h2><span class="num">4</span><span class="txt">新闻导读</span></h2>
     <ul class="list">
-      <li><span class="pill up">利好</span><span class="tt">药明康德双重利好，医药板块线爆发</span><div class="ds">8月9日美国法院批准针对国防部1260H认定的初步禁令申请，叠加2026中报营收+38.9%、归母净利首次突破百亿并上调全年指引。→ 利好CRO/CXO/创新药，百花医药5连板、哈三联5天3板</div></li>
-      <li><span class="pill up">利好</span><span class="tt">美国7月非农爆冷，黄金一周馂升7%创1月以来最佳</span><div class="ds">非农就业减少2.3万人（预期+8万），联储9月加息概率降至44%，美元指数跳水；现货黄金收4344美元/盖司，周涨264美元（+7.44%），脱离近两个月整理区间。→ 利好贵金属/有色，招金黄金涨停、络绝生稳固，老铺黄金港股涨12%</div></li>
-      <li><span class="pill up">利好</span><span class="tt">7月CPI同比+0.5%，猪肉价格大幅转涨</span><div class="ds">7月猪肉价格环比由-0.8%转涨4.1%，创年内最大环比涨幅；茅台直营店飞天茅台售价提至1753元/瓶。→ 利好养殖、白酒、消费品，益生股份涨停、一鸣食品涨停</div></li>
-      <li><span class="pill dn">扰动</span><span class="tt">AAOI宣布产能扩十倍+FCC限制进口传闻，CPO坍塌</span><div class="ds">美国光模块厂商AAOI业绩电话会表示未来两年产能将扩产十倍以上，叠加FCC拟限制进口中国数据中心组件的传闻。→ CPO/通信设备集中杀跌，中际旭创A股跌超6%、H股跌超7%，光迅科技触及跌停</div></li>
-      <li><span class="pill gold">政策</span><span class="tt">北京优化房地产政策，非京籍买房社保降至1年</span><div class="ds">北京市三部门联合印发通知，非京籍五环内购房社保或个税降至1年，放开父母向子女赠与住房资格核验。→ 金科股份、京投发展涨停，房地产版块走强</div></li>
-      <li><span class="pill blue">海外</span><span class="tt">联想集团创历史新高，AI服务器订单210亿美元</span><div class="ds">联想集团涨3.20%报29港元，盘中创下29.12港元历史新高，今年以来累计涨225%；AI服务器在手订单210亿美元，摩根士丹利上调目标价至34港元。→ 利好AI硬件/服务器产业链，但短期高位兜商压力仍在</div></li>
-      <li><span class="pill gold">策略</span><span class="tt">东吴证券：市场进入降波筑底阶段，8月业绩期是关键变奏点</span><div class="ds">从市场波动、股价位置、拥挤度、融资四个维度看，当前市场已经进入降波筑底的阶段，接下来8月的业绩期将是关键的变奏点，AI主线有望在业绩期后再度走强。</div></li>
-      <li><span class="pill gold">机构</span><span class="tt">华泰证券：港股反弹资金驱动，建议均衡配置</span><div class="ds">港股反弹更多源于AI硬件去杠杆中的跨市场再平衡，建议均衡配置三个方向：低波红利底仓、中报确认经营周期底部的消费品、需求景气逻辑仍成立的AI链。</div></li>
+      <li><span class="pill up">利好</span><span class="tt">药明康德双重利好引爆CRO板块</span><div class="ds">8月9日美国法院批准针对国防部1260H认定的初步禁令申请；2026中报营收+38.9%、归母净利首次突破百亿并上调全年指引。→ CRO/CXO/创新药掀涨停潮：百花医药5连板、哈三联5天3板、毕得医药20cm涨停</div></li>
+      <li><span class="pill up">利好</span><span class="tt">美国7月非农爆冷，黄金一周飙涨7%</span><div class="ds">非农就业减少2.3万人（预期+8万），联储9月加息概率降至44%，美元指数跳水；COMEX黄金盘中突破4418美元，伦敦金现报4352美元，脱离近两个月整理区间。→ 贵金属持续走强：招金黄金2连板、晓程科技+9%、四川黄金+7%</div></li>
+      <li><span class="pill up">利好</span><span class="tt">7月CPI同比+0.5%，猪肉价格大幅转涨</span><div class="ds">猪肉价格环比由-0.8%转涨4.1%创年内最大涨幅；茅台直营店飞天提至1753元/瓶。→ 养殖、白酒、消费集体走强：益生股份涨停、一鸣食品涨停、香飘飘涨停</div></li>
+      <li><span class="pill dn">扰动</span><span class="tt">AAOI产能扩十倍+FCC限制传闻，CPO全线暴跌</span><div class="ds">美国光模块厂商AAOI宣布未来两年产能扩十倍以上，叠加FCC拟限制进口中国数据中心组件传闻。→ CPO/通信设备集中杀跌：中际旭创A股-6%、成交458亿居两市之首；光迅科技触跌停；武汉凡谷-9.91%</div></li>
+      <li><span class="pill gold">政策</span><span class="tt">北京优化房地产政策，非京籍买房社保降至1年</span><div class="ds">北京市三部门联合印发通知，非京籍五环内购房社保或个税降至1年。→ 金科股份、京投发展涨停，地产板块走强</div></li>
+      <li><span class="pill blue">海外</span><span class="tt">联想集团创历史新高，AI服务器订单210亿美元</span><div class="ds">联想涨3.20%报29港元创历史新高，年内涨225%；AI服务器在手订单210亿美元，大摩上调目标价至34港元。→ 利好AI硬件/服务器产业链，但短期高位抛压仍在</div></li>
+      <li><span class="pill gold">策略</span><span class="tt">东吴证券：市场进入降波筑底，8月业绩期是关键变奏点</span><div class="ds">从波动、股价位置、拥挤度、融资四个维度看，当前已进入降波筑底阶段，AI主线有望在业绩期后再度走强。中信建投认为"W型底部"形成，修复行情将延续。</div></li>
+      <li><span class="pill gold">机构</span><span class="tt">中信建投 / 华泰证券：均衡配置应对波动</span><div class="ds">中信建投：科技成长修复程度偏低，关注AI算力、创新药、有色金属；华泰：港股反弹资金驱动，建议均衡配置低波红利、消费、AI链三个方向；世界黄金协会：二季度全球央行购金量环比增超400%。</div></li>
     </ul>
-    <div class="note">资讯来源：中新经绣、证券时报、央广财经、华尔街见闻、智通财经、格隆汇（2026-08-10）。媒体观点仅供参考，非一手来源。</div>
+    <div class="note">资讯来源：中新经纬、证券时报、央广财经、21世纪经济报道、华尔街见闻（2026-08-10）。媒体观点仅供参考，非一手来源。</div>
   </div>
 
   <!-- 五、盘中交易热点 -->
@@ -375,30 +361,30 @@ window.__echartsReady = new Promise(function(resolve, reject){
       <table>
         <thead><tr><th style="width:110px">方向</th><th class="l">代表个股</th><th style="width:210px">资金 / 逻辑</th></tr></thead>
         <tbody>
-          <tr><td><span class="pill up">CRO/创新药</span></td><td class="l">百花医药5连板、毕得医药20cm、哈三联5天3板、哈药股份2连板、美年健康涨停</td><td>医药生物主力净流入余68亿，当日最大资金集中地</td></tr>
-          <tr><td><span class="pill up">军工/兵装</span></td><td class="l">北方长龙20cm涨停、长城军工涨停、洪都航空涨停、翔鹪锞业4天2板</td><td>十五五规划+军贸预期，公募持仓历史低位</td></tr>
-          <tr><td><span class="pill up">贵金属</span></td><td class="l">招金黄金涨停、晓程科技涨9%、四川黄金涨7%、西部黄金涨6%</td><td>贵金属主力净流入11.41亿，金价突破4360创1月以来最佳单周</td></tr>
-          <tr><td><span class="pill up">消费/白酒</span></td><td class="l">一鸣食品涨停、香飘飘涨停、益生股份涨停（养殖）</td><td>7月CPI+0.5%、猪肉价转涨、茅台提价，食品饮料净流入超30亿</td></tr>
-          <tr><td><span class="pill up">影视院线</span></td><td class="l">惨意电影涨停、北京文化涨停</td><td>暑期档票房超85亿，观影人次创新高</td></tr>
-          <tr><td><span class="pill dn">CPO/光通信</span></td><td class="l">中际旭创A股-6%+/H股-7%+、新易盛-5%+、光迅科技触跌停</td><td>AAOI扩产+FCC限制进口传闻，通信设备主力净流出约167亿</td></tr>
-          <tr><td><span class="pill dn">半导体/PCB</span></td><td class="l">兆易创新A股跌超5%、天数智芯港股跌超8%</td><td>电子行业整体净流出超211亿，高位科技硬件集中兜商</td></tr>
-          <tr><td><span class="pill dn">跌停个股</span></td><td class="l">宝莱特-19.99%、联创光电-10%、宁夏建材-10%、甘咨询-9.96%</td><td>个股雷暴，性质各异</td></tr>
+          <tr><td><span class="pill up">CRO/创新药</span></td><td class="l">百花医药5连板、毕得医药20cm、哈三联5天3板、美年健康涨停</td><td>医药生物主力净流入约68亿，当日最大资金集中地</td></tr>
+          <tr><td><span class="pill up">军工/兵装</span></td><td class="l">北方长龙20cm涨停、长城军工涨停、洪都航空涨停、翔鹭钨业4天2板</td><td>十五五规划+军贸预期，公募持仓历史低位</td></tr>
+          <tr><td><span class="pill up">贵金属</span></td><td class="l">招金黄金2连板（7/21至今+78%）、晓程科技+9%、四川黄金+7%</td><td>金价突破4360美元，非农爆冷，央行购金环比增400%</td></tr>
+          <tr><td><span class="pill up">消费/白酒</span></td><td class="l">一鸣食品涨停、香飘飘涨停、益生股份涨停（养殖）、品渥食品+10.6%</td><td>7月CPI+0.5%、猪肉转涨、茅台提价，消费集体回暖</td></tr>
+          <tr><td><span class="pill up">影视院线</span></td><td class="l">儒意电影涨停、北京文化涨停</td><td>暑期档票房超85亿，观影人次创新高</td></tr>
+          <tr><td><span class="pill dn">CPO/光通信</span></td><td class="l">中际旭创-6.01%（成交458亿）、光迅科技触跌停、新易盛-5%+</td><td>AAOI扩产+FCC传闻，通信设备主力净流出约135亿</td></tr>
+          <tr><td><span class="pill dn">6G/PCB/通信</span></td><td class="l">武汉凡谷-9.91%、通宇通讯-8.31%、泰金新能-8.36%</td><td>高位科技硬件集中获利回吐</td></tr>
+          <tr><td><span class="pill dn">跌停个股</span></td><td class="l">宝莱特-19.99%、联创光电-10%、宁夏建材-10%、甘咨询-9.96%</td><td>个股质地各异，宝莱特为前期暴涨后跌停</td></tr>
         </tbody>
       </table>
     </div>
-    <div class="note">涨停股另含：立新能源（10.03%）、贤丰控股（9.98%）、中电钧龙、京泉华、三变科技（电网设备）、石基信息/梽基软件（AI应用异动）、金科股份/京投发展（北京楼市重磨）、华钰矿业涨停。封单资金：药明康德登顶8月10日A股十大人气热股榜首，百花医药、哈药股份、昭衍新药等同行同步上榜。数据来源：中新经绣/证券时报/央广财经8月10日收评。</div>
+    <div class="note">涨停股另含：立新能源（10.03%）、贤丰控股（9.98%）、中电鑫龙（10.00%）、京泉华、三变科技（电网设备）、石基信息/榕基软件（AI应用异动）、金科股份/京投发展（北京楼市新政）、华钰矿业涨停。封单资金：药明康德登顶8月10日A股十大人气热股榜首。数据来源：中新经纬/央广财经/证券时报8月10日收评。</div>
   </div>
 
   <!-- 六、技术面观察 -->
   <div class="sec">
     <h2><span class="num">6</span><span class="txt">技术面观察</span></h2>
     <ul class="list">
-      <li><span class="pill gold">上证</span><span class="tt">五连阳逼近4000点，缩量筑顶警讯</span><div class="ds">收3966.59（+0.67%），日内低3938.63、高3967.59，开3943.82。<b>支撑</b>3938（今日低）/3900（整数关），<b>阻力</b>3967（今日高）/4000（整数关）。五连阳日线举动体现强势反弹，但成交缩1413亿，上涨速度放缓+量能背离营造短期天花板风险。若放量突破4000则看高一线，否则往3900-3950区间回调整理。</div></li>
-      <li><span class="pill dn">创业板</span><span class="tt">盘中深跌后回拉，关注3470支撑</span><div class="ds">收3537.21（-0.73%），盘中最低3470.95（一度跌超2.5%）、高3575.59。<b>支撑</b>3470（今日低）/3500，<b>阻力</b>3563（前收）/3575（今日高）。尾盘回拉势头较强，但权重股托累，需放量回归3560以上才能确认趋稳。</div></li>
-      <li><span class="pill dn">科创50</span><span class="tt">回调未破位，但科技硬件承压</span><div class="ds">收1737.77（-0.36%），日内低1704.08、高1752.93。<b>支撑</b>1704（今日低）/1700，<b>阻力</b>1752（今日高）/1760。CPO/通信设备集中兜商，但半导体材料/AI应用仍有活跃度，板块内部分化加剧。</div></li>
-      <li><span class="pill up">恒指</span><span class="tt">放量突破25900，受金价医药牵动</span><div class="ds">收25937（+1.05%），实体放量涨1.05%，成交2403亿港元。<b>支撑</b>25720（今日低）/25500，<b>阻力</b>25957（今日高）/26000。金价医药走强，科网普涨，南向净买入超20亿港元，短期趋势良好。</div></li>
+      <li><span class="pill up">上证</span><span class="tt">五连阳逼近4000，缩量筑顶警讯</span><div class="ds">收3966.59（+0.67%），日内低3938.63、高3967.59。<b>支撑</b>3938（今日低）/3900（整数关），<b>阻力</b>3967（今日高）/4000（整数关）。五连阳+缩量1413亿，上涨速度放缓+量能背离营造回调风险。若放量突破4000则打开空间，否则往3900-3950回调整理。</div></li>
+      <li><span class="pill dn">创业板</span><span class="tt">盘中深跌-2.5%后回拉，3470成关键支撑</span><div class="ds">收3537.21（-0.73%），盘中最低3470.95、高3575.59。<b>支撑</b>3470（今日低）/3500，<b>阻力</b>3563（前收）/3575（今日高）。尾盘回拉力度较强但权重拖累，需放量回归3560以上确认趋稳。</div></li>
+      <li><span class="pill dn">科创50</span><span class="tt">回调未破位，科技硬件内部剧烈分化</span><div class="ds">收1737.77（-0.36%），日内低1704.08、高1752.93。<b>支撑</b>1704/1700，<b>阻力</b>1752/1760。CPO/通信集中杀跌，但半导体材料/AI应用仍有活跃度，板块内部分化加剧。</div></li>
+      <li><span class="pill up">恒指</span><span class="tt">放量突破25900，受金价医药牵动</span><div class="ds">收25937（+1.05%），成交2403亿港元。<b>支撑</b>25720（今日低）/25500，<b>阻力</b>25957（今日高）/26000。金价医药走强，科网普涨，短期趋势良好。</div></li>
     </ul>
-    <div class="note">技术位基于近5日收盘与今日高低点推导，仅为结构性观察，不构成择时信号。东吴证券指市场已进入降波筑底阶段，8月业绩期为关键变奏点；国金策略指去杠杆进程或已阶段结束。</div>
+    <div class="note">技术位基于近5日收盘与今日高低点推导，仅为结构性观察，不构成择时信号。东吴证券指市场进入降波筑底阶段，中信建投指"W型底部"已形成。</div>
   </div>
 
   <!-- 七、后市研判 -->
@@ -407,170 +393,124 @@ window.__echartsReady = new Promise(function(resolve, reject){
     <div class="strat-grid">
       <div class="strat-box">
         <h4><span class="icon">①</span>短期（T+1 至 T+5）</h4>
-        <p>沪指五连阳逼近4000点，但缩量1413亿+创业板承压+科技硬件集中兜商三重警讯。重点观察：<b>①</b>沪指4000点阻力能否放量突破；<b>②</b>量能能否保持2.5万亿以上；<b>③</b>CPO/通信设备这轮兜商是否见底，还是进一步扩散至半导体、存储等方向。风格切换明显，“赚个股、亏指数”格局短期或延续，低位医药/军工/有色/消费反弹与高位科技硬件回调并行。</p>
+        <p>沪指五连阳逼近4000，但缩量+创业板承压+CPO杀跌三重警讯。重点观察：<b>①</b>沪指4000点阻力能否放量突破；<b>②</b>量能能否维持2.5万亿以上；<b>③</b>CPO这轮抛售是否见底，还是扩散至半导体、存储。风格切换明显，"赚个股、亏指数"格局短期或延续。</p>
       </div>
       <div class="strat-box">
         <h4><span class="icon">②</span>中期（1-3个月）</h4>
-        <p>8月财报季是核心验证窗口。药明康德中报归母净利首破百亿+上调指引已为CRO链打开催化；联想集团AI服务器订单210亿美元确认产业景气。东吴证券预计AI主线有望在业绩期后再度走强，国金策略指去杠杆进程或已结束。关注中报能否持续验证产业景气，“前期反弹”后转向“有景气支撑的主线”。</p>
+        <p>8月财报季是核心验证窗口。药明康德中报破百亿+上调指引为CRO链打开催化；联想AI服务器订单210亿美元确认产业景气。东吴预计AI主线在业绩期后再度走强，国金策略指去杠杆或已结束。关注中报能否持续验证产业景气，"前期反弹"后转向"有景气支撑的主线"。</p>
       </div>
       <div class="strat-box">
         <h4><span class="icon">③</span>配置建议（高低切换、均衡配置）</h4>
-        <p><b>低位反弹线</b>：医药/CRO（药明康德催化+美法院禁令）、军工（十五五+军贸+公募低位）、贵金属（金价突破+央行购金）<br>
-        <b>高位放量线</b>：国产算力 / 存储 / 半导体材料 —— 产业趋势未退潮，杀跌后批买机会，但须等量能缩量见底信号<br>
-        <b>消费底仓</b>：白酒（茅台提价+估值修复）、乳制品、影视院线（暑期档催化）<br>
-        <b>红利底仓</b>：银行/电力 —— 震荡市底仓价值，低波红利仍是稳定器<br>
-        <b>风险对冲</b>：美联储加息预期反复、地缘变数；贵金属+军工具对冲功能</p>
+        <p><b>低位反弹线</b>：医药/CRO（药明康德催化+美法院禁令）、军工（十五五+军贸+公募低位）、贵金属（金价突破+央行购金环比增400%）<br>
+        <b>高位放量线</b>：国产算力 / 存储 / 半导体材料 —— 产业趋势未退潮，杀跌后找买点，但须等量能缩量见底信号<br>
+        <b>消费底仓</b>：白酒（茅台提价+估值修复）、养殖（猪价转涨+CPI回正）<br>
+        <b>红利底仓</b>：银行/电力 —— 震荡市底仓价值<br>
+        <b>风险对冲</b>：美联储政策预期反复、地缘变数；贵金属+军工具备对冲功能</p>
       </div>
     </div>
-    <div class="risk"><b>⚠ 风险提示：</b>①CPO/通信设备高位杀跌可能扩散至半导体/AI应用等其他科技细分领域；②缩量五连阳后沪指4000点阻力位冲击失败带来的技术性回调；③美联储9月加息预期反复（非农暴冷降温后概率陡降至44%，但沃什总统侯选人曾放话9月加息）；④个股中报雷暴（宝莱特-19.99%为警讯）；⑤地缘反复（霍尔慧兹海峡协议）。本文为市场数据复盘与机构观点整理，不构成投资建议，投资有风险。</div>
-    <div class="note">策略框架综合东吴证券、华泰证券、国金策略、中信建投观点（来源：中新经绣/央广财经/智通财经8月10日），结合当日数据推演。</div>
+    <div class="risk"><b>⚠ 风险提示：</b>①CPO/通信设备高位杀跌可能扩散至半导体/AI应用等其他科技细分；②缩量五连阳后沪指4000点阻力位冲击失败的技术性回调风险；③美联储9月加息预期反复（非农暴冷后概率降至44%，但沃什曾放话9月加息）；④个股中报雷暴（宝莱特-19.99%为警讯）；⑤地缘反复。本文为市场数据复盘与机构观点整理，不构成投资建议，投资有风险。</div>
+    <div class="note">策略框架综合东吴证券、中信建投、华泰证券、国金策略观点（来源：中新经纬/央广财经/中证报8月10日），结合当日数据推演。</div>
   </div>
 
   <div class="src">
-    数据来源：交易所数据、neodata、中新经绣、证券时报、央广财经、智通财经、国金策略、格隆汇、和讯网（2026-08-10）<br>
-    行情数据截至 2026-08-10 收盘 ｜ 本报告由 WorkBuddy 自动生成，仅供研究参考
+    数据来源：交易所数据、中新经纬、证券时报、央广财经、21世纪经济报道、巨灵、国金策略（2026-08-10）<br>
+    行情数据截至 2026-08-10 收盘 ｜ 本报告由 WorkBuddy 自动生成，仅供研究参考<br>
+    <b>免责声明</b>：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。
   </div>
 
 </div>
 
+<script src="https://registry.npmmirror.com/echarts/5.5.0/files/dist/echarts.min.js"></script>
 <script>
-// 等待 ECharts 加载完成后再初始化所有图表
+// ===== Chart 1: A股指数今日涨跌幅 =====
 (function(){
-  var chartIds = ['chartIdx','chartVol','chartSector','chartFlow'];
+  var d=[['上证指数',0.67],['深证成指',0.04],['科创综指',-0.35],['科创50',-0.36],['创业板指',-0.73]];
+  echarts.init(document.getElementById('chartIdx')).setOption({
+    title:{text:'A股主要指数今日涨跌幅（%）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){var v=p[0].value;return p[0].name+': '+(v>=0?'+':'')+v+'%';}},
+    grid:{left:'8%',right:'6%',bottom:'12%',top:'20%'},
+    xAxis:{type:'category',data:[d[4][0],d[3][0],d[2][0],d[1][0],d[0][0]],axisLabel:{fontSize:11,color:'#6b7280'},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    yAxis:{type:'value',axisLabel:{formatter:'{value}%',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}}},
+    series:[{
+      type:'bar',
+      data:[
+        {value:d[4][1],itemStyle:{color:'#1a8a5e'}},
+        {value:d[3][1],itemStyle:{color:'#1a8a5e'}},
+        {value:d[2][1],itemStyle:{color:'#1a8a5e'}},
+        {value:d[1][1],itemStyle:{color:'#cf3b3e'}},
+        {value:d[0][1],itemStyle:{color:'#cf3b3e'}}
+      ],
+      barWidth:'46%',
+      itemStyle:{borderRadius:[6,6,0,0]},
+      label:{show:true,position:'top',formatter:function(p){var v=p.value;return (v>=0?'+':'')+v+'%';},fontSize:11,color:'#1a1d28',fontWeight:600}
+    }]
+  });
+})();
 
-  function showError(msg){
-    chartIds.forEach(function(id){
-      var el = document.getElementById(id);
-      if(el) el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#9ca3af;font-size:14px">'+msg+'</div>';
-    });
-  }
+// ===== Chart 2: 沪市成交额趋势 =====
+(function(){
+  var dt=[['7/30',11065],['7/31',11877],['8/3',9523],['8/4',10084],['8/5',12087],['8/6',11668],['8/7',12095],['8/10',11669]];
+  echarts.init(document.getElementById('chartVol')).setOption({
+    title:{text:'沪市单边成交额近8日（亿元）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',formatter:function(p){return p[0].name+': '+p[0].value+' 亿';}},
+    grid:{left:'10%',right:'6%',bottom:'12%',top:'22%'},
+    xAxis:{type:'category',data:dt.map(function(x){return x[0];}),axisLabel:{color:'#6b7280'},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    yAxis:{type:'value',axisLabel:{color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}}},
+    series:[{
+      type:'bar',
+      data:dt.map(function(x,i){
+        var c = i===7 ? '#b8893b' : '#d4cab8';
+        return {value:x[1],itemStyle:{color:c}};
+      }),
+      barWidth:'50%',
+      itemStyle:{borderRadius:[4,4,0,0]},
+      label:{show:true,position:'top',fontSize:10,color:'#6b7280',fontWeight:600}
+    }]
+  });
+})();
 
-  function initAllCharts(){
-    // ===== Chart 1: A股指数今日涨跌幅 =====
-    (function(){
-      var d=[['上证指数',0.67],['深证成指',0.04],['科创综指',-0.35],['科创50',-0.36],['创业板指',-0.73],['北证50',-1.00]];
-      var el=document.getElementById('chartIdx');
-      if(!el||el.clientWidth===0) return;
-      var c=echarts.init(el);
-      c.setOption({
-        title:{text:'A股主要指数今日涨跌幅（%）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
-        tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){var v=p[0].value;return p[0].name+': '+(v>=0?'+':'')+v+'%';}},
-        grid:{left:'8%',right:'6%',bottom:'12%',top:'20%'},
-        xAxis:{type:'category',data:[d[5][0],d[4][0],d[3][0],d[2][0],d[1][0],d[0][0]],axisLabel:{fontSize:11,color:'#6b7280'},axisLine:{lineStyle:{color:'#e0e0e0'}}},
-        yAxis:{type:'value',axisLabel:{formatter:'{value}%',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}}},
-        series:[{
-          type:'bar',
-          data:[
-            {value:d[5][1],itemStyle:{color:'#1a8a5e'}},
-            {value:d[4][1],itemStyle:{color:'#1a8a5e'}},
-            {value:d[3][1],itemStyle:{color:'#1a8a5e'}},
-            {value:d[2][1],itemStyle:{color:'#1a8a5e'}},
-            {value:d[1][1],itemStyle:{color:'#cf3b3e'}},
-            {value:d[0][1],itemStyle:{color:'#cf3b3e'}}
-          ],
-          barWidth:'46%',
-          itemStyle:{borderRadius:[6,6,0,0]},
-          label:{show:true,position:'top',formatter:function(p){var v=p.value;return (v>=0?'+':'')+v+'%';},fontSize:11,color:'#1a1d28',fontWeight:600}
-        }]
-      });
-    })();
+// ===== Chart 3: 板块涨幅TOP6 =====
+(function(){
+  var d=[['有色金属',2.02],['煤炭',2.34],['食品饮料',2.51],['农林牧渔',3.14],['贵金属',3.89],['医疗服务',3.92]];
+  echarts.init(document.getElementById('chartSector')).setOption({
+    title:{text:'板块涨幅 TOP6（%）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': +'+p[0].value+'%';}},
+    grid:{left:'24%',right:'10%',bottom:'8%',top:'20%'},
+    xAxis:{type:'value',axisLabel:{formatter:'{value}%',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}},min:0},
+    yAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{color:'#1a1d28',fontSize:12,fontWeight:600},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    series:[{
+      type:'bar',
+      data:d.map(function(x){return x[1];}),
+      barWidth:'52%',
+      itemStyle:{
+        color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#e8a0a2'},{offset:1,color:'#cf3b3e'}]),
+        borderRadius:[0,6,6,0]
+      },
+      label:{show:true,position:'right',formatter:'+{c}%',fontSize:11,color:'#cf3b3e',fontWeight:700}
+    }]
+  });
+})();
 
-    // ===== Chart 2: 沪市成交额趋势 =====
-    (function(){
-      var dt=[['7/30',11065],['7/31',11877],['8/3',9523],['8/4',10084],['8/5',12087],['8/6',11668],['8/7',12095],['8/10',11669]];
-      var elv=document.getElementById('chartVol');
-      if(!elv||elv.clientWidth===0) return;
-      var cv=echarts.init(elv);
-      cv.setOption({
-        title:{text:'沪市单边成交额近8日（亿元）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
-        tooltip:{trigger:'axis',formatter:function(p){return p[0].name+': '+p[0].value+' 亿';}},
-        grid:{left:'10%',right:'6%',bottom:'12%',top:'22%'},
-        xAxis:{type:'category',data:dt.map(function(x){return x[0];}),axisLabel:{color:'#6b7280'},axisLine:{lineStyle:{color:'#e0e0e0'}}},
-        yAxis:{type:'value',axisLabel:{color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}}},
-        series:[{
-          type:'line',
-          data:dt.map(function(x,i){
-            var c = i===7 ? '#b8893b' : '#d4cab8';
-            return {value:x[1],itemStyle:{color:c}};
-          }),
-          lineStyle:{color:'#b8893b',width:2},
-          symbol:'circle',symbolSize:6,
-          label:{show:true,position:'top',fontSize:10,color:'#6b7280',fontWeight:600}
-        }]
-      });
-    })();
-
-    // ===== Chart 3: 板块涨幅TOP6 =====
-    (function(){
-      var d=[['有色金属',2.02],['煤炭',2.34],['食品饮料',2.51],['农林牧渔',3.14],['贵金属',3.89],['医疗服务',3.92]];
-      var el3=document.getElementById('chartSector');
-      if(!el3||el3.clientWidth===0) return;
-      var c3=echarts.init(el3);
-      c3.setOption({
-        title:{text:'板块涨幅 TOP6（%）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
-        tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': +'+p[0].value+'%';}},
-        grid:{left:'24%',right:'10%',bottom:'8%',top:'20%'},
-        xAxis:{type:'value',axisLabel:{formatter:'{value}%',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}},min:0},
-        yAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{color:'#1a1d28',fontSize:12,fontWeight:600},axisLine:{lineStyle:{color:'#e0e0e0'}}},
-        series:[{
-          type:'bar',
-          data:d.map(function(x){return x[1];}),
-          barWidth:'52%',
-          itemStyle:{
-            color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#e8a0a2'},{offset:1,color:'#cf3b3e'}]),
-            borderRadius:[0,6,6,0]
-          },
-          label:{show:true,position:'right',formatter:'+{c}%',fontSize:11,color:'#cf3b3e',fontWeight:700}
-        }]
-      });
-    })();
-
-    // ===== Chart 4: 主力资金净流入板块 =====
-    (function(){
-      var d=[['电网设备',9.99],['贵金属',11.41],['农林牧渔',24],['食品饮料',30],['基础化工',30],['医药生物',68]];
-      var el4=document.getElementById('chartFlow');
-      if(!el4||el4.clientWidth===0) return;
-      var c4=echarts.init(el4);
-      c4.setOption({
-        title:{text:'行业主力资金净流入 TOP6（亿元）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
-        tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': +'+p[0].value+' 亿';}},
-        grid:{left:'24%',right:'12%',bottom:'8%',top:'20%'},
-        xAxis:{type:'value',axisLabel:{formatter:'{value}',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}},min:0},
-        yAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{color:'#1a1d28',fontSize:12,fontWeight:600},axisLine:{lineStyle:{color:'#e0e0e0'}}},
-        series:[{
-          type:'bar',
-          data:d.map(function(x){return x[1];}),
-          barWidth:'52%',
-          itemStyle:{
-            color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#7ba0d8'},{offset:1,color:'#2f5fb0'}]),
-            borderRadius:[0,6,6,0]
-          },
-          label:{show:true,position:'right',formatter:'+{c}',fontSize:11,color:'#2f5fb0',fontWeight:700}
-        }]
-      });
-    })();
-
-    // 窗口缩放时自动调整所有图表尺寸
-    window.addEventListener('resize',function(){
-      chartIds.forEach(function(id){
-        var el=document.getElementById(id);
-        if(el){
-          var inst=echarts.getInstanceByDom(el);
-          if(inst) inst.resize();
-        }
-      });
-    });
-  }
-
-  // 等待 ECharts Promise 完成
-  if (window.__echartsReady) {
-    window.__echartsReady.then(initAllCharts).catch(function(e){
-      console.error('ECharts 加载失败: ' + e);
-      showError('图表组件加载失败，请刷新页面重试');
-    });
-  } else {
-    showError('图表组件未配置，请联系管理员');
-  }
+// ===== Chart 4: 主力资金净流入板块 =====
+(function(){
+  var d=[['电网设备',9.99],['贵金属',11.41],['农林牧渔',24],['食品饮料',30],['基础化工',30],['医药生物',68]];
+  echarts.init(document.getElementById('chartFlow')).setOption({
+    title:{text:'行业主力资金净流入 TOP6（亿元）',left:'center',textStyle:{fontSize:13,color:'#1a1d28',fontWeight:700}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(p){return p[0].name+': +'+p[0].value+' 亿';}},
+    grid:{left:'24%',right:'12%',bottom:'8%',top:'20%'},
+    xAxis:{type:'value',axisLabel:{formatter:'{value}',color:'#9ca3af'},splitLine:{lineStyle:{color:'#f0ede6'}},min:0},
+    yAxis:{type:'category',data:d.map(function(x){return x[0];}),axisLabel:{color:'#1a1d28',fontSize:12,fontWeight:600},axisLine:{lineStyle:{color:'#e0e0e0'}}},
+    series:[{
+      type:'bar',
+      data:d.map(function(x){return x[1];}),
+      barWidth:'52%',
+      itemStyle:{
+        color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#7ba0d8'},{offset:1,color:'#2f5fb0'}]),
+        borderRadius:[0,6,6,0]
+      },
+      label:{show:true,position:'right',formatter:'+{c}',fontSize:11,color:'#2f5fb0',fontWeight:700}
+    }]
+  });
 })();
 </script>
 </body>
