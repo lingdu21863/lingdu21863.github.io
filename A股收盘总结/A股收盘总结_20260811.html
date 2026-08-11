@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 2026年8月11日</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    background: #f5f6f8;
+    color: #1a1a2e;
+    line-height: 1.7;
+    padding: 0;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+    padding: 32px 28px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .header .subtitle { font-size: 14px; opacity: 0.75; }
+  .header .date-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  /* TL;DR */
+  .tldr {
+    background: #fff;
+    border-left: 4px solid #e74c3c;
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .tldr .label { font-size: 13px; color: #e74c3c; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+  .tldr p { font-size: 15px; color: #333; }
+
+  /* Section */
+  .section { margin-bottom: 28px; }
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 14px;
+    padding-left: 12px;
+    border-left: 4px solid #1a1a2e;
+  }
+
+  /* Index Cards */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .index-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .index-card .name { font-size: 13px; color: #888; margin-bottom: 6px; }
+  .index-card .price { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .index-card .change { font-size: 14px; font-weight: 600; }
+  .index-card .vol { font-size: 12px; color: #aaa; margin-top: 6px; }
+  .up { color: #e74c3c; }
+  .down { color: #27ae60; }
+  .flat { color: #999; }
+
+  /* Chart container */
+  .chart-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+  }
+  .chart-box .chart-title { font-size: 14px; font-weight: 600; color: #555; margin-bottom: 10px; }
+  .chart-div { width: 100%; height: 380px; }
+
+  /* Data Table */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-size: 14px;
+  }
+  .data-table th {
+    background: #f0f1f3;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 10px 14px;
+    border-top: 1px solid #eee;
+  }
+  .data-table tr:hover { background: #fafbfc; }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .tag-red { background: #fde8e8; color: #e74c3c; }
+  .tag-green { background: #e8f8ee; color: #27ae60; }
+  .tag-blue { background: #e8f0fd; color: #3498db; }
+
+  /* Info cards */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .info-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .info-card .title { font-size: 14px; font-weight: 600; color: #888; margin-bottom: 10px; }
+  .info-card .big-num { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+  .info-card .desc { font-size: 13px; color: #aaa; }
+
+  /* News list */
+  .news-list { list-style: none; }
+  .news-list li {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-size: 14px;
+  }
+  .news-list li strong { color: #1a1a2e; }
+  .news-list li .news-tag {
+    display: inline-block;
+    background: #f0f1f3;
+    color: #666;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 8px;
+  }
+
+  /* Diagnosis box */
+  .diagnosis {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .diagnosis .badge {
+    display: inline-block;
+    background: #fff3cd;
+    color: #856404;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .diagnosis p { font-size: 14px; color: #444; margin-bottom: 10px; }
+
+  /* Outlook */
+  .outlook-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .outlook-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border-top: 3px solid #3498db;
+  }
+  .outlook-card .period { font-size: 12px; color: #3498db; font-weight: 700; margin-bottom: 8px; }
+  .outlook-card p { font-size: 13px; color: #555; }
+
+  /* Disclaimer */
+  .disclaimer {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-top: 28px;
+    font-size: 12px;
+    color: #999;
+    line-height: 1.8;
+  }
+
+  .source-note { font-size: 12px; color: #aaa; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>A股收盘总结</h1>
+    <div class="subtitle">每日投资报告 · 市场复盘与策略研判</div>
+    <div class="date-tag">2026年8月11日 星期二 · 收盘</div>
+  </div>
+
+  <!-- TL;DR -->
+  <div class="tldr">
+    <div class="label">核心结论</div>
+    <p>沪指止步五连阳，三大指数涨跌不一，市场呈"权重弱、成长强"剪刀差格局。两市缩量2000亿至2.32万亿，超3700只个股下跌，赚钱效应仅29%。但涨停60家 vs 跌停2家，个股层面温和调整而非恐慌。医药板块全线爆发形成四线联动，有色金属遭遇集体回吐。午后油价突涨引发通胀担忧成为跳水催化剂。市场处于<b>震荡结构调</b>阶段，热点轮动加快但缺乏一致主线，短期宜控仓观望、等待新催化。</p>
+  </div>
+
+  <!-- 指数概览 -->
+  <div class="section">
+    <div class="section-title">主要指数概览</div>
+    <div class="index-grid">
+      <div class="index-card">
+        <div class="name">上证指数</div>
+        <div class="price down">3,934.09</div>
+        <div class="change down">-0.82% (-32.50)</div>
+        <div class="vol">成交 10,667亿</div>
+      </div>
+      <div class="index-card">
+        <div class="name">深证成指</div>
+        <div class="price down">14,259.44</div>
+        <div class="change down">-0.40% (-57.52)</div>
+        <div class="vol">成交 12,542亿</div>
+      </div>
+      <div class="index-card">
+        <div class="name">创业板指</div>
+        <div class="price up">3,549.16</div>
+        <div class="change up">+0.34% (+11.95)</div>
+        <div class="vol">成交 5,975亿</div>
+      </div>
+      <div class="index-card">
+        <div class="name">沪深300</div>
+        <div class="price down">4,663.79</div>
+        <div class="change down">-0.81%</div>
+        <div class="vol">PE 14.37</div>
+      </div>
+      <div class="index-card">
+        <div class="name">科创50</div>
+        <div class="price down">1,709.50</div>
+        <div class="change down">-1.63%</div>
+        <div class="vol">跌幅居前</div>
+      </div>
+      <div class="index-card">
+        <div class="name">北证50</div>
+        <div class="price down">1,113.22</div>
+        <div class="change down">-0.86%</div>
+        <div class="vol">—</div>
+      </div>
+    </div>
+    <p class="source-note">数据来源：交易所行情数据，截至2026-08-11收盘 | 万得全A -0.71%，同样止步五连阳</p>
+  </div>
+
+  <!-- 成交与广度 -->
+  <div class="section">
+    <div class="section-title">市场成交与广度</div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="title">两市成交额</div>
+        <div class="big-num">2.32万亿</div>
+        <div class="desc">较前日缩量 2,021亿 (-8.0%)</div>
+      </div>
+      <div class="info-card">
+        <div class="title">涨跌家数比</div>
+        <div class="big-num">1615 : 3777</div>
+        <div class="desc">上涨29% / 下跌68% / 平盘3%</div>
+      </div>
+      <div class="info-card">
+        <div class="title">涨停 / 跌停</div>
+        <div class="big-num">60 <span style="font-size:18px;color:#aaa;">/</span> <span class="down" style="font-size:22px;">2</span></div>
+        <div class="desc">涨停成功率 85.9% · 首板41家 · 炸板10家</div>
+      </div>
+      <div class="info-card">
+        <div class="title">主力资金净流出</div>
+        <div class="big-num down">398.7亿</div>
+        <div class="desc">北向资金净流出 9.28亿</div>
+      </div>
+    </div>
+    <p class="source-note">数据来源：交易所行情、Wind，截至2026-08-11收盘</p>
+  </div>
+
+  <!-- 板块涨跌图 -->
+  <div class="section">
+    <div class="section-title">行业板块涨跌排行</div>
+    <div class="chart-box">
+      <div class="chart-title">涨幅前8 vs 跌幅前8（%）</div>
+      <div id="sectorChart" class="chart-div"></div>
+    </div>
+    <p class="source-note">数据来源：交易所行情数据，截至2026-08-11收盘</p>
+  </div>
+
+  <!-- 资金流向图 -->
+  <div class="section">
+    <div class="section-title">行业资金流向</div>
+    <div class="chart-box">
+      <div class="chart-title">主力资金净流入 / 净流出 TOP行业（亿元）</div>
+      <div id="fundFlowChart" class="chart-div"></div>
+    </div>
+    <p class="source-note">数据来源：Wind资金流向数据，截至2026-08-11收盘</p>
+  </div>
+
+  <!-- 涨停亮点 -->
+  <div class="section">
+    <div class="section-title">涨停板亮点</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>股票</th>
+          <th>代码</th>
+          <th>涨幅</th>
+          <th>收盘价</th>
+          <th>所属概念</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>百花医药</td><td>600721</td>
+          <td><span class="tag tag-red">+10.01%</span></td>
+          <td>12.75</td>
+          <td>CRO+创新药+金华国资</td>
+          <td>6连板</td>
+        </tr>
+        <tr>
+          <td>开开实业</td><td>600272</td>
+          <td><span class="tag tag-red">+10.02%</span></td>
+          <td>15.70</td>
+          <td>SPD+医药商业+上海国资</td>
+          <td>4连板</td>
+        </tr>
+        <tr>
+          <td>万邦医药</td><td>301520</td>
+          <td><span class="tag tag-red">+20.00%</span></td>
+          <td>70.39</td>
+          <td>CRO+创新药</td>
+          <td>20cm涨停</td>
+        </tr>
+        <tr>
+          <td>甘李药业</td><td>603087</td>
+          <td><span class="tag tag-red">+10.00%</span></td>
+          <td>74.47</td>
+          <td>胰岛素+创新药</td>
+          <td>一字涨停</td>
+        </tr>
+        <tr>
+          <td>老百姓</td><td>603883</td>
+          <td><span class="tag tag-red">+9.97%</span></td>
+          <td>14.01</td>
+          <td>医药商业+药店</td>
+          <td>批量涨停龙头</td>
+        </tr>
+        <tr>
+          <td>斯菱智驱</td><td>301550</td>
+          <td><span class="tag tag-red">+20.00%</span></td>
+          <td>87.42</td>
+          <td>人形机器人+精密传动</td>
+          <td>20cm涨停</td>
+        </tr>
+        <tr>
+          <td>巨轮智能</td><td>002031</td>
+          <td><span class="tag tag-red">+9.98%</span></td>
+          <td>5.84</td>
+          <td>机器人+减速器</td>
+          <td>午后拉升</td>
+        </tr>
+        <tr>
+          <td>双星新材</td><td>002585</td>
+          <td><span class="tag tag-red">+10.04%</span></td>
+          <td>10.52</td>
+          <td>MLCC+光学膜</td>
+          <td>MLCC 6连阳</td>
+        </tr>
+        <tr>
+          <td>杭钢股份</td><td>600126</td>
+          <td><span class="tag tag-red">+10.00%</span></td>
+          <td>7.37</td>
+          <td>算力租赁+IDC</td>
+          <td>盘中异动</td>
+        </tr>
+        <tr>
+          <td>北京文化</td><td>000802</td>
+          <td><span class="tag tag-red">+10.00%</span></td>
+          <td>5.17</td>
+          <td>影视院线+暑期档</td>
+          <td>2连板</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="source-note">数据来源：交易所行情数据，截至2026-08-11收盘</p>
+  </div>
+
+  <!-- 重要新闻 -->
+  <div class="section">
+    <div class="section-title">今日重点事件</div>
+    <ul class="news-list">
+      <li>
+        <span class="news-tag">地缘</span>
+        <strong>油价连涨5日引发通胀担忧，午后A股跳水</strong><br>
+        特朗普8月10日针对伊朗和平协议提出新强硬要求（含赔偿条款），霍尔木兹海峡重开前景更加不明朗。原油价格连续第五个交易日上涨，重新点燃市场对通胀的担忧，美国CPI数据将于次日公布。此举直接触发午后A股跳水。
+      </li>
+      <li>
+        <span class="news-tag">IPO</span>
+        <strong>宇树科技科创板IPO定价150.80元/股，发行市值约610亿元</strong><br>
+        8月10日开启申购，网上最终中签率0.0181%，8月12日缴款。中信建投认为有望带动机器人本体厂商估值重塑。受此催化，人形机器人概念午后异动拉升，斯菱智驱、巨轮智能、北特科技等涨停。
+      </li>
+      <li>
+        <span class="news-tag">新股</span>
+        <strong>三只新股同日上市，超纯应材首日暴涨662%</strong><br>
+        超纯应材（301717）发行价65.99元，首日收报503元，中一签浮盈约22万元，成为注册制以来沪深两市第六赚钱新股。国仪公司（688828）涨419%，珈凯生物（920165）涨139%。
+      </li>
+      <li>
+        <span class="news-tag">产业</span>
+        <strong>MLCC供应紧张加剧，AI需求推动被动元件涨价</strong><br>
+        AI需求持续升温引发全球被动元件供应紧张，部分客户以原价2-3倍向国巨、村田抢货，主要厂商产能利用率接近满载，部分产品交期拉长至12-16个月。MLCC概念指数录得6连阳。
+      </li>
+      <li>
+        <span class="news-tag">消费</span>
+        <strong>暑期档票房破87亿，单日连续31天破亿</strong><br>
+        截至8月11日，2026年暑期档总票房达87.41亿元。沈腾主演《欢迎来龙餐馆》上映，淘票票评分9.8创近三年纪录。影视院线板块全天强势。
+      </li>
+      <li>
+        <span class="news-tag">资金</span>
+        <strong>医药生物获逾百亿主力资金净流入</strong><br>
+        截至8月11日午间，医药生物行业获逾114亿元主力资金净流入，近5日合计净流入391亿元，近20日净流入790亿元，近60日净流入1665亿元。哈药股份获逾10亿净流入，恒瑞医药、药明康德各获逾8亿。
+      </li>
+    </ul>
+  </div>
+
+  <!-- 两融与估值 -->
+  <div class="section">
+    <div class="section-title">两融与估值水平</div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="title">两融余额（截至8/10）</div>
+        <div class="big-num">26,538亿</div>
+        <div class="desc">融资 26,283亿 (+0.54%) / 融券 255亿 (+2.17%)</div>
+      </div>
+      <div class="info-card">
+        <div class="title">万得全A PE-TTM</div>
+        <div class="big-num">23.14</div>
+        <div class="desc">历史分位 92.05% · 高估区间</div>
+      </div>
+      <div class="info-card">
+        <div class="title">上证指数 PE-TTM</div>
+        <div class="big-num">16.74</div>
+        <div class="desc">历史分位 87.77% · 高估区间</div>
+      </div>
+      <div class="info-card">
+        <div class="title">创业板指 PE-TTM</div>
+        <div class="big-num">44.84</div>
+        <div class="desc">历史分位 45.92% · 居中</div>
+      </div>
+    </div>
+    <p class="source-note">数据来源：Wind、交易所，两融截至2026-08-10，估值历史分位统计区间2010/1/1至今</p>
+  </div>
+
+  <!-- 市场诊断 -->
+  <div class="section">
+    <div class="section-title">市场状态诊断</div>
+    <div class="diagnosis">
+      <span class="badge">震荡结构调 · 非系统性风险</span>
+      <p><b>行情性质：</b>缩量调整 + 结构分化。沪指、万得全A均止步五连阳，沪指受年线压制。但调整并非全面转弱——创业板逆势收红，涨停60家 vs 跌停仅2家，涨停成功率85.9%处于健康区间，短线情绪仍有韧性。</p>
+      <p><b>广度诊断：</b>赚钱效应仅29%（1615涨/3777跌），广度明显偏弱。但涨停板数据表明个股层面是温和调整而非恐慌性抛售，资金在结构上主动选择"成长弹性"而非"大盘价值"。</p>
+      <p><b>资金信号：</b>北向资金小幅净流出9.28亿，属例行仓位再平衡而非趋势性撤离；融资余额增加146亿，杠杆资金仍在加仓。主力资金净流出398.7亿，主要集中在有色板块获利回吐。</p>
+      <p><b>结构特征：</b>医药独强（创新药+CRO+医药商业+减肥药四线联动），有色军工集体下挫，热点轮动加快但尚无一致主线。科技细分（MLCC、算力租赁）出现超跌反弹迹象，与医药"互不打扰"的并存格局暂处微妙平衡。</p>
+      <p><b>切换信号：</b>后续需关注——①沪指能否站回年线3950上方；②成交量能否回到2.5万亿以上；③有色板块止跌信号；④美国CPI数据对美联储降息预期的影响。</p>
+    </div>
+  </div>
+
+  <!-- 后市研判 -->
+  <div class="section">
+    <div class="section-title">后市研判与策略</div>
+    <div class="outlook-grid">
+      <div class="outlook-card">
+        <div class="period">短期 T+1 ~ T+5</div>
+        <p>沪指年线3950附近构成短期压力，下方3900为关键支撑。缩量背景下指数层面难有大动作，重点看结构。若美国CPI低于预期缓解通胀担忧，有望修复跳空。操作上控制仓位7成以内，关注医药主线持续性及有色板块超跌反弹机会。</p>
+      </div>
+      <div class="outlook-card">
+        <div class="period">中期 1~3个月</div>
+        <p>秋季行情逐渐进入布局阶段。华西证券指出，市场已从单一科技抱团转向多条配置主线共同展开。AI景气优势未证伪，7月深度调整后估值与筹码压力显著消化。关注国产算力链、创新药、锂电、食品饮料等方向。宇树IPO有望催化机器人板块估值重塑。</p>
+      </div>
+      <div class="outlook-card">
+        <div class="period">长期 3~12个月</div>
+        <p>万得全A PE历史分位92%处高估区间，但创业板指PE分位仅46%处居中，结构性机会大于系统性。AI硬件需求持续拉动上游产业链（MLCC、算力、被动元件），物理AI（机器人）产业趋势明确。医药板块经历长期调整后，资金持续流入（60日净流入1665亿）可能预示中期拐点。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 券商观点 -->
+  <div class="section">
+    <div class="section-title">券商核心观点</div>
+    <ul class="news-list">
+      <li>
+        <span class="news-tag">华西证券</span>
+        海外流动性担忧显著缓解，A股科技板块经7月深度调整后回撤空间已较充分，但仍需时间磨底。秋季行情逐渐进入布局阶段，已从单一科技抱团转向多条配置主线共同展开。建议关注：国产算力链、港股互联网、创新药、锂电、食品饮料、AI金属/稀土磁材。
+      </li>
+      <li>
+        <span class="news-tag">兴业证券</span>
+        本轮大跌后AI的景气优势和产业趋势并没有证伪，估值和筹码压力已显著消化。美国非农不及预期、美伊冲突缓和为流动性边际改善提供支撑。基准情形下，后续行情应该能够有比较大程度的修复。
+      </li>
+      <li>
+        <span class="news-tag">中信建投</span>
+        宇树IPO定价150.80元/股对应发行市值约610亿元，超出此前预期，有望带动本体厂商估值重塑。物理AI是人工智能下一波浪潮，机器人是AI最好的物理载体之一。后续Optimus V3发布及量产进展将持续催化板块行情。
+      </li>
+    </ul>
+  </div>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer">
+    <b>免责声明：</b>以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。<br><br>
+    <b>数据来源：</b>上海证券交易所、深圳证券交易所、Wind、东方财富、同花顺、证券时报、每日经济新闻、中国基金报、智通财经等公开渠道。数据截至2026年8月11日收盘。两融数据截至8月10日。历史分位统计区间为2010/1/1至今。
+  </div>
+
+</div>
+
+<script>
+// === 板块涨跌排行 ===
+echarts.init(document.getElementById('sectorChart')).setOption({
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+  grid: { left: '18%', right: '8%', top: '5%', bottom: '5%' },
+  xAxis: { type: 'value', axisLabel: { formatter: '{value}%' } },
+  yAxis: {
+    type: 'category',
+    data: ['有色金属','能源金属','小金属','工业金属','稀土','贵金属','风电设备','航天装备','核力发电','机器人','医药商业','光伏设备','装修装饰','工程咨询','影视院线'],
+    axisLabel: { fontSize: 12 }
+  },
+  series: [{
+    type: 'bar',
+    data: [
+      { value: -3.03, itemStyle: { color: '#27ae60' } },
+      { value: -3.19, itemStyle: { color: '#27ae60' } },
+      { value: -4.41, itemStyle: { color: '#229954' } },
+      { value: -4.84, itemStyle: { color: '#1e8449' } },
+      { value: -4.81, itemStyle: { color: '#1e8449' } },
+      { value: -5.34, itemStyle: { color: '#196f3d' } },
+      { value: -3.08, itemStyle: { color: '#27ae60' } },
+      { value: -6.26, itemStyle: { color: '#145a32' } },
+      { value: 1.03, itemStyle: { color: '#e74c3c' } },
+      { value: 1.20, itemStyle: { color: '#e74c3c' } },
+      { value: 1.74, itemStyle: { color: '#cb3535' } },
+      { value: 1.76, itemStyle: { color: '#cb3535' } },
+      { value: 1.83, itemStyle: { color: '#c0392b' } },
+      { value: 2.36, itemStyle: { color: '#b03a2e' } },
+      { value: 1.98, itemStyle: { color: '#c0392b' } }
+    ],
+    label: {
+      show: true,
+      position: 'inside',
+      formatter: function(p) { return p.value + '%'; },
+      color: '#fff',
+      fontSize: 11,
+      fontWeight: 'bold'
+    },
+    barWidth: '70%'
+  }]
+});
+
+// === 行业资金流向 ===
+echarts.init(document.getElementById('fundFlowChart')).setOption({
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+  legend: { data: ['净流入', '净流出'], top: 0 },
+  grid: { left: '15%', right: '8%', top: '10%', bottom: '5%' },
+  xAxis: { type: 'value', name: '亿元' },
+  yAxis: {
+    type: 'category',
+    data: ['光伏设备','建筑装饰','通信设备','汽车零部件','电子化学品','电力设备','消费电子','小金属','半导体','工业金属','有色金属'],
+    axisLabel: { fontSize: 12 },
+    inverse: true
+  },
+  series: [
+    {
+      name: '净流入',
+      type: 'bar',
+      data: [11.06, 11.53, 11.89, 13.76, 0, 0, 0, 0, 0, 0, 0],
+      itemStyle: { color: '#e74c3c' },
+      label: { show: true, position: 'right', formatter: '{c}' }
+    },
+    {
+      name: '净流出',
+      type: 'bar',
+      data: [0, 0, 0, 0, -22.17, -28.14, -28.92, -47.51, -55.75, -59.27, -139.86],
+      itemStyle: { color: '#27ae60' },
+      label: { show: true, position: 'left', formatter: '{c}' }
+    }
+  ]
+});
+</script>
+</body>
+</html>
