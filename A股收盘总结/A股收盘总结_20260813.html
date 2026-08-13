@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 2026年8月13日</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+    background: #f5f6f8;
+    color: #1a1a2e;
+    line-height: 1.7;
+    padding: 0;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 20px 60px; }
+
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #fff;
+    padding: 32px 28px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .header .subtitle { font-size: 14px; opacity: 0.75; }
+  .header .date-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-top: 10px;
+  }
+
+  .tldr {
+    background: #fff;
+    border-left: 4px solid #27ae60;
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .tldr .label { font-size: 13px; color: #27ae60; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+  .tldr p { font-size: 15px; color: #333; }
+
+  .section { margin-bottom: 28px; }
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 14px;
+    padding-left: 12px;
+    border-left: 4px solid #1a1a2e;
+  }
+
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .index-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .index-card .name { font-size: 12px; color: #888; margin-bottom: 4px; }
+  .index-card .price { font-size: 20px; font-weight: 700; margin-bottom: 2px; }
+  .index-card .change { font-size: 13px; font-weight: 600; }
+  .index-card .vol { font-size: 11px; color: #aaa; margin-top: 4px; }
+  .up { color: #e74c3c; }
+  .down { color: #27ae60; }
+  .flat { color: #999; }
+
+  .chart-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+  }
+  .chart-box .chart-title { font-size: 14px; font-weight: 600; color: #555; margin-bottom: 10px; }
+  .chart-div { width: 100%; height: 380px; }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-size: 14px;
+  }
+  .data-table th {
+    background: #f0f1f3;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 10px 14px;
+    border-top: 1px solid #eee;
+  }
+  .data-table tr:hover { background: #fafbfc; }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .tag-red { background: #fde8e8; color: #e74c3c; }
+  .tag-green { background: #e8f8ee; color: #27ae60; }
+  .tag-blue { background: #e8f0fd; color: #3498db; }
+  .tag-orange { background: #fff3cd; color: #856404; }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .info-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .info-card .title { font-size: 14px; font-weight: 600; color: #888; margin-bottom: 10px; }
+  .info-card .big-num { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+  .info-card .desc { font-size: 13px; color: #aaa; }
+
+  .news-list { list-style: none; }
+  .news-list li {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    font-size: 14px;
+  }
+  .news-list li strong { color: #1a1a2e; }
+  .news-list li .news-tag {
+    display: inline-block;
+    background: #f0f1f3;
+    color: #666;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 8px;
+  }
+
+  .diagnosis {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .diagnosis .badge {
+    display: inline-block;
+    background: #fde8e8;
+    color: #c0392b;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .diagnosis p { font-size: 14px; color: #444; margin-bottom: 10px; }
+
+  .outlook-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .outlook-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 18px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border-top: 3px solid #e74c3c;
+  }
+  .outlook-card .period { font-size: 12px; color: #e74c3c; font-weight: 700; margin-bottom: 8px; }
+  .outlook-card p { font-size: 13px; color: #555; }
+
+  .disclaimer {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-top: 28px;
+    font-size: 12px;
+    color: #999;
+    line-height: 1.8;
+  }
+
+  .source-note { font-size: 12px; color: #aaa; margin-top: 8px; }
+
+  .dive-highlight {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px 24px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 16px;
+    border-left: 4px solid #e74c3c;
+  }
+  .dive-highlight h3 { font-size: 15px; font-weight: 700; color: #c0392b; margin-bottom: 10px; }
+  .dive-highlight p { font-size: 14px; color: #444; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>A股收盘总结</h1>
+    <div class="subtitle">每日投资报告 · 市场复盘与策略研判</div>
+    <div class="date-tag">2026年8月13日 星期四 · 收盘</div>
+  </div>
+
+  <div class="tldr">
+    <div class="label">核心结论</div>
+    <p>三大指数<b>冲高回落全线收绿</b>，午后14:00左右直线跳水是今日最大特征。沪指跌0.50%报3926.96，深成指跌0.87%，创业板指跌0.45%（抹去盘中2%涨幅），科创50跌1.11%。两市放量至2.55万亿（+3985亿），但超4300只个股收跌，涨停股纷纷炸板。<b>跳水导火索</b>：午后日元直线飙升214点，市场传日本首相支持BOJ 9月或10月加息，引发全球套息交易平仓担忧；叠加AI产业链短期获利了结、美国CPI"卖现实"、沪指逼近年线阻力等多重因素共振。板块方面，医药逆势全天强势，电力午后局部回暖；贵金属（-5.29%）、工业金属（-4.20%）、半导体午后翻绿、教育板块尾盘崩跌（传智教育跌停）为重灾区。</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">主要指数概览</div>
+    <div class="index-grid">
+      <div class="index-card">
+        <div class="name">上证指数</div>
+        <div class="price down">3,926.96</div>
+        <div class="change down">-0.50% (-19.72)</div>
+        <div class="vol">成交 11,642亿</div>
+      </div>
+      <div class="index-card">
+        <div class="name">深证成指</div>
+        <div class="price down">14,289.44</div>
+        <div class="change down">-0.87% (-124.99)</div>
+        <div class="vol">成交 13,867亿</div>
+      </div>
+      <div class="index-card">
+        <div class="name">创业板指</div>
+        <div class="price down">3,586.04</div>
+        <div class="change down">-0.45% (-16.04)</div>
+        <div class="vol">成交 6,615亿</div>
+      </div>
+      <div class="index-card">
+        <div class="name">科创50</div>
+        <div class="price down">1,717.75</div>
+        <div class="change down">-1.11%</div>
+        <div class="vol">成交 1,257亿</div>
+      </div>
+      <div class="index-card">
+        <div class="name">沪深300</div>
+        <div class="price down">4,663.95</div>
+        <div class="change down">-0.57% (-26.97)</div>
+        <div class="vol">成交 6,907亿</div>
+      </div>
+      <div class="index-card">
+        <div class="name">中证500</div>
+        <div class="price down">7,968.38</div>
+        <div class="change down">-0.96%</div>
+        <div class="vol">PE 37.01</div>
+      </div>
+      <div class="index-card">
+        <div class="name">中证1000</div>
+        <div class="price down">7,715.89</div>
+        <div class="change down">-1.00%</div>
+        <div class="vol">PE 45.88</div>
+      </div>
+      <div class="index-card">
+        <div class="name">科创综指</div>
+        <div class="price down">2,004.58</div>
+        <div class="change down">-0.75%</div>
+        <div class="vol">小盘成长</div>
+      </div>
+    </div>
+    <p class="source-note">数据来源：交易所行情数据，截至2026-08-13收盘</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">市场成交与广度</div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="title">两市成交额</div>
+        <div class="big-num">2.55万亿</div>
+        <div class="desc">较前日放量 3,985亿 (+18.5%)</div>
+      </div>
+      <div class="info-card">
+        <div class="title">涨跌家数比</div>
+        <div class="big-num">1,143 : 4,317</div>
+        <div class="desc">上涨21% / 下跌79% / 平盘1%</div>
+      </div>
+      <div class="info-card">
+        <div class="title">涨停 / 跌停</div>
+        <div class="big-num"><span class="up">62</span> <span style="font-size:18px;color:#aaa;">/</span> <span class="down" style="font-size:22px;">4</span></div>
+        <div class="desc">情绪快速转冷 · 多只涨停股炸板</div>
+      </div>
+      <div class="info-card">
+        <div class="title">上证振幅</div>
+        <div class="big-num">1.12%</div>
+        <div class="desc">最高3968.48 → 最低3924.64</div>
+      </div>
+    </div>
+    <p class="source-note">数据来源：交易所行情数据、央广财经、中新经纬，截至2026-08-13收盘</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">午后跳水重点板块跌幅排行</div>
+    <div class="chart-box">
+      <div class="chart-title">跌幅前12板块（申万二级/概念板块，%）</div>
+      <div id="sectorChart" class="chart-div"></div>
+    </div>
+    <p class="source-note">数据来源：交易所行情数据，截至2026-08-13收盘</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">行业板块涨跌全景</div>
+    <div class="chart-box">
+      <div class="chart-title">主要行业板块涨跌幅（%）</div>
+      <div id="allSectorChart" class="chart-div"></div>
+    </div>
+    <p class="source-note">数据来源：交易所行情数据、证券时报，截至2026-08-13收盘</p>
+  </div>
+
+  <div class="section">
+    <div class="dive-highlight">
+      <h3>午后14:00跳水事件复盘</h3>
+      <p><b>时间线：</b>早盘受隔夜美国7月CPI同比+2.5%符合预期提振，三大指数高开高走，AI硬件、算力租赁、半导体等硬科技方向上冲，创业板一度涨超2%。然而午后抛压显著加剧，<b>14:00前后三大指数直线跳水</b>，热门涨停股纷纷炸板，最终全线收绿。</p>
+      <p><b>直接导火索 —— 日元飙升与日本加息预期：</b>午后日元突然直线拉升，美元兑日元一度暴跌超214点，日本国债期货同步下跌。据彭博报道，市场人士称日本首相支持BOJ在近期加息，下一步行动可能在9月或10月。日本7月PPI同比+7.2%，输入性通胀压力加剧。日元作为全球核心融资货币，一旦加息可能引发大规模套息交易平仓，杠杆资金集中撤离风险资产。</p>
+      <p><b>叠加因素：</b>①近期AI产业链快速反弹，部分资金短期获利较高，趁反弹获利了结；②前期被套资金迎来集中解套卖出；③美国CPI利好兑现即"卖现实"；④沪指逼近年线压力位，技术面阻力明显；⑤"黑色星期四"效应。</p>
+      <p><b>警示信号：</b>今日为<b>放量冲高回落</b>，说明又有一批增量资金买入被套。若后续不能快速有力修复，可能还有继续下探可能。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">午后跳水板块逐一拆解</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>板块</th>
+          <th>跌幅</th>
+          <th>类型</th>
+          <th>跳水原因 / 个股表现</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>贵金属</td>
+          <td><span class="tag tag-green">-5.29%</span></td>
+          <td>申万二级</td>
+          <td>全天走弱。晓程科技跌近9%，招金黄金、湖南白银跌超7%，兴业银锡、赤峰黄金、山东黄金跟跌</td>
+        </tr>
+        <tr>
+          <td>白银概念</td>
+          <td><span class="tag tag-green">-4.26%</span></td>
+          <td>概念</td>
+          <td>有色金属全线承压，白银相关个股大幅回调</td>
+        </tr>
+        <tr>
+          <td>工业金属</td>
+          <td><span class="tag tag-green">-4.20%</span></td>
+          <td>申万二级</td>
+          <td>天山铝业、中孚实业、宏桥控股领跌板块，日本加息预期压制全球大宗商品</td>
+        </tr>
+        <tr>
+          <td>有色金属</td>
+          <td><span class="tag tag-green">-3.63%</span></td>
+          <td>申万一级</td>
+          <td>铅锌-4.11%、锡-3.92%、锗镓-3.73%、小金属-3.06%，全面下挫</td>
+        </tr>
+        <tr>
+          <td>农化制品</td>
+          <td><span class="tag tag-green">-3.33%</span></td>
+          <td>申万二级</td>
+          <td>化肥农药板块跌幅居前，化工周期品承压</td>
+        </tr>
+        <tr>
+          <td>房地产服务</td>
+          <td><span class="tag tag-green">-3.16%</span></td>
+          <td>申万二级</td>
+          <td>地产链整体走弱，前期新政利好兑现后回落</td>
+        </tr>
+        <tr>
+          <td>黄金概念</td>
+          <td><span class="tag tag-green">-3.15%</span></td>
+          <td>概念</td>
+          <td>国际金价承压，黄金股集体回调</td>
+        </tr>
+        <tr>
+          <td>玻璃玻纤</td>
+          <td><span class="tag tag-green">-3.12%</span></td>
+          <td>申万二级</td>
+          <td>建材板块全面下跌，地产链拖累</td>
+        </tr>
+        <tr>
+          <td>光伏设备</td>
+          <td><span class="tag tag-green">-2.85%</span></td>
+          <td>申万</td>
+          <td>BC电池、太空光伏概念领跌，新能源板块整体疲软</td>
+        </tr>
+        <tr>
+          <td>教育</td>
+          <td><span class="tag tag-green">-2.80%</span></td>
+          <td>申万</td>
+          <td>尾盘跌幅扩大。传智教育跌停（此前13天9板），学大教育、昂立教育、华图山鼎跟跌</td>
+        </tr>
+        <tr>
+          <td>半导体</td>
+          <td><span class="tag tag-green">午后翻绿</span></td>
+          <td>概念</td>
+          <td>早盘冲高后午后翻绿。兆易创新、长鑫科技、佰维存储、澜起科技翻绿，风华高科大跌超6%</td>
+        </tr>
+        <tr>
+          <td>算力租赁</td>
+          <td><span class="tag tag-orange">尾盘涨幅收窄</span></td>
+          <td>概念</td>
+          <td>立昂技术、利通电子涨停后炸板收涨4.73%，城地香江3连板但封板艰难</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="source-note">数据来源：交易所行情数据、21世纪经济报道、证券时报、星图金融研究院，截至2026-08-13收盘</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">逆势上涨板块与涨停亮点</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>股票</th>
+          <th>代码</th>
+          <th>涨幅</th>
+          <th>所属概念</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>博济医药</td><td>300404</td>
+          <td><span class="tag tag-red">+20.00%</span></td>
+          <td>CRO+创新药</td>
+          <td>20CM涨停，医药板块龙头</td>
+        </tr>
+        <tr>
+          <td>陇神戎发</td><td>300534</td>
+          <td><span class="tag tag-red">+20.00%</span></td>
+          <td>中药+创新药</td>
+          <td>20CM涨停</td>
+        </tr>
+        <tr>
+          <td>誉衡药业</td><td>002437</td>
+          <td><span class="tag tag-red">+10.02%</span></td>
+          <td>创新药+生物制品</td>
+          <td>5天4板</td>
+        </tr>
+        <tr>
+          <td>亚泰集团</td><td>600881</td>
+          <td><span class="tag tag-red">+10.03%</span></td>
+          <td>医药+水泥</td>
+          <td>3连板</td>
+        </tr>
+        <tr>
+          <td>万邦医药</td><td>301520</td>
+          <td><span class="tag tag-red">+10.01%</span></td>
+          <td>CRO+医药商业</td>
+          <td>3天2板，换手率49%</td>
+        </tr>
+        <tr>
+          <td>城地香江</td><td>603887</td>
+          <td><span class="tag tag-red">+10.04%</span></td>
+          <td>算力租赁+IDC</td>
+          <td>3连板，尾盘涨幅收窄但封住</td>
+        </tr>
+        <tr>
+          <td>群兴玩具</td><td>002575</td>
+          <td><span class="tag tag-red">+10.00%</span></td>
+          <td>算力租赁</td>
+          <td>涨停</td>
+        </tr>
+        <tr>
+          <td>大唐发电</td><td>601991</td>
+          <td><span class="tag tag-red">+10.02%</span></td>
+          <td>电力+算电协同</td>
+          <td>千亿市值龙头涨停，市值990亿</td>
+        </tr>
+        <tr>
+          <td>华电能源</td><td>600726</td>
+          <td><span class="tag tag-red">+10.04%</span></td>
+          <td>电力</td>
+          <td>午后电力板块局部回暖</td>
+        </tr>
+        <tr>
+          <td>京能电力</td><td>600578</td>
+          <td><span class="tag tag-red">+10.03%</span></td>
+          <td>电力</td>
+          <td>午后涨停</td>
+        </tr>
+        <tr>
+          <td>皇氏集团</td><td>002329</td>
+          <td><span class="tag tag-red">+10.00%</span></td>
+          <td>食品饮料</td>
+          <td>4连板</td>
+        </tr>
+        <tr>
+          <td>一鸣食品</td><td>605179</td>
+          <td><span class="tag tag-red">+10.00%</span></td>
+          <td>食品饮料</td>
+          <td>4连板</td>
+        </tr>
+        <tr>
+          <td>共进股份</td><td>603118</td>
+          <td><span class="tag tag-red">+10.04%</span></td>
+          <td>超节点概念</td>
+          <td>开盘不到6分钟涨停</td>
+        </tr>
+        <tr>
+          <td>北京文化</td><td>000802</td>
+          <td><span class="tag tag-red">+10.02%</span></td>
+          <td>影视传媒</td>
+          <td>4连板，市值45亿</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="source-note">数据来源：交易所行情数据、央广财经、21世纪经济报道，截至2026-08-13收盘</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">今日重点事件</div>
+    <ul class="news-list">
+      <li>
+        <span class="news-tag">海外</span>
+        <strong>日元午后直线飙升214点，日本加息预期骤升</strong><br>
+        午后日元突然直线拉升，美元兑日元一度暴跌超214点，日本国债期货同步下跌9个基点至126.48。据彭博报道，市场人士称日本首相支持BOJ在近期加息，下一步行动可能在9月或10月。日本7月PPI同比+7.2%，石油、化工、有色金属齐涨，叠加日元贬值输入性通胀压力，BOJ行长植田和男此前已释放9月加息信号。日元作为全球核心融资货币，一旦加息可能引发大规模套息交易平仓，导致杠杆资金集中撤离风险资产——这是午后A股跳水的最直接外部导火索。
+        <span class="source-note" style="display:block;margin-top:6px;">来源：彭博社、星图金融研究院，2026-08-13</span>
+      </li>
+      <li>
+        <span class="news-tag">宏观</span>
+        <strong>美国7月CPI同比+2.5%符合预期，早盘提振但午后"卖现实"</strong><br>
+        隔夜美国7月CPI数据同比上涨2.5%，符合市场预期，一度被解读为紧缩周期结束、风险偏好回归的信号，直接推动早盘科技股活跃。然而A股素有"利好兑现即成利空"的博弈传统，此前基于预期布局的资金在数据落地后失去继续持股的理由，医药、科技等持续反弹板块中的获利筹码借机出货，形成典型的"卖现实"集体调仓行为。
+        <span class="source-note" style="display:block;margin-top:6px;">来源：巨丰投顾，2026-08-13</span>
+      </li>
+      <li>
+        <span class="news-tag">AI</span>
+        <strong>DeepSeek V4 Pro正式版上线API，算力租赁板块延续强势</strong><br>
+        DeepSeek V4 Pro正式版已更新至API，在Terminal Bench基准测试得分为87.9分，逼近Fable 5的88.0分。平安证券认为，DeepSeek 8月6日的涨价预告具有标志性意义，有望重新锚定国产大模型定价体系、释放行业定价空间。算力租赁概念延续强势，城地香江3连板，群兴玩具涨停，但尾盘涨幅收窄，立昂技术、利通电子涨停后炸板。
+        <span class="source-note" style="display:block;margin-top:6px;">来源：21世纪经济报道、财联社，2026-08-13</span>
+      </li>
+      <li>
+        <span class="news-tag">科技</span>
+        <strong>阿里云灵骏真武M890超节点实例正式上线</strong><br>
+        8月12日，阿里云灵骏真武M890超节点实例正式上线，首批已在乌兰察布地域开售。超节点概念震荡走强，共进股份开盘不到6分钟涨停，锐捷科技涨超13%，华勤技术、紫光股份、浪潮信息均大涨。
+        <span class="source-note" style="display:block;margin-top:6px;">来源：财联社、21世纪经济报道，2026-08-13</span>
+      </li>
+      <li>
+        <span class="news-tag">个股</span>
+        <strong>AI教育牛股传智教育跌停，此前13天9板</strong><br>
+        AI应用端教育龙头传智教育今日触及跌停（-9.99%），该股此前已实现13天9板的强势行情。学大教育、昂立教育、华图山鼎跌幅居前，教育板块尾盘跌幅扩大，反映出前期高位题材股在市场跳水中的获利了结压力。
+        <span class="source-note" style="display:block;margin-top:6px;">来源：21世纪经济报道、证券时报，2026-08-13</span>
+      </li>
+      <li>
+        <span class="news-tag">电力</span>
+        <strong>电力板块午后逆势走高，算电协同逻辑强化</strong><br>
+        电力板块午后局部回暖，大唐发电涨停（最新市值990亿元），华电能源、京能电力涨停，粤电力A、晋控电力跟涨。算电协同逻辑持续强化，AI算力需求高增带动电力 consumption预期，电力板块成为午后少数逆势上涨的方向。
+        <span class="source-note" style="display:block;margin-top:6px;">来源：央广财经，2026-08-13</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">市场状态诊断</div>
+    <div class="diagnosis">
+      <span class="badge">放量冲高回落 · 短期承压</span>
+      <p><b>行情性质：</b>典型的"过山车"行情。早盘高开高走，午后14:00直线跳水，三大指数全线翻绿。两市成交2.55万亿放量3985亿，但放量更多体现在尾盘跳水时的恐慌性抛压上，而非早盘上涨时的有效跟进。超4300只个股收跌，涨停股纷纷炸板，市场情绪由热转冷极为迅速。</p>
+      <p><b>跳水成因分析：</b>①<b>外部冲击</b>——日元飙升+日本加息预期，套息交易平仓风险传导至全球风险资产；②<b>内部获利了结</b>——AI产业链近期快速反弹累积大量获利盘，"卖现实"逻辑主导；③<b>技术面阻力</b>——沪指连续反弹后逼近年线压力位，缺乏超预期基本面支撑难以有效突破；④<b>结构性脆弱</b>——涨停股率先炸板引发连锁反应，浮盈盘如惊弓之鸟。</p>
+      <p><b>板块分化特征：</b>今日板块涨少跌多，仅医药医疗、算力租赁、电力等少数方向逆势走强。医药板块全天强势（CRO、创新药、减肥药等方向领涨），属防御+产业催化双重驱动；电力板块午后逆势走高，算电协同逻辑强化。而贵金属(-5.29%)、工业金属(-4.20%)、教育、半导体午后翻绿等方向为重灾区，有色金属全产业链受日本加息预期+全球大宗商品承压影响大幅下挫。</p>
+      <p><b>关键警示：</b>今日为<b>放量冲高回落</b>，说明又有一批增量资金买入被套。券商研报此前已提示，前期市场快速调整后持仓浮盈由正转负，盈亏平衡线附近的调仓减仓被抑制，这部分压力可能在反弹中集中释放——今日正是这一压力的兑现。若后续不能快速实现有力修复，可能还有继续下探的可能。</p>
+      <p><b>积极因素：</b>医药板块逆势全天强势，说明场内资金并非完全恐慌，而是在进行结构性切换——从高位科技向医药等防御+产业逻辑方向转移。两市成交放量至2.55万亿也说明市场承接力仍在，并非缩量阴跌格局。</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">后市研判与策略</div>
+    <div class="outlook-grid">
+      <div class="outlook-card">
+        <div class="period">短期 T+1 ~ T+5</div>
+        <p>沪指3920-3930为短期支撑，上方3960-3980为阻力。今日放量冲高回落套牢一批资金，短期需要消化抛压。关注：①日本BOJ加息预期后续演变及日元走势；②沪指能否守住3920不破；③医药板块能否延续强势形成新主线。策略上建议控制仓位6-7成，回避前期涨幅过大的高位题材股，关注医药、电力等逆势方向持续性。若明日能快速收复3950则短期风险缓解。</p>
+      </div>
+      <div class="outlook-card">
+        <div class="period">中期 1~3个月</div>
+        <p>央行"适度宽松+增量政策"基调未变，融资余额此前连增构成中期支撑。AI产业景气持续验证（DeepSeek V4 Pro上线、CoreWeave/Lumentum财报超预期），算力租赁供需两旺。但日本加息若落地将扰动全球流动性，需密切关注9月BOJ议息会议。医药板块创新药/CXO方向政策催化+业绩改善双重驱动值得关注。秋季行情仍在酝酿中，回调或提供布局机会。</p>
+      </div>
+      <div class="outlook-card">
+        <div class="period">长期 3~12个月</div>
+        <p>AI硬件需求从GPU向光互联、服务器整机、云算力租赁同步扩张，DeepSeek涨价重新锚定国产大模型定价体系。算力期货推出在即，算力正式商品化将重塑产业链估值。电力板块算电协同逻辑强化，AI用电需求持续高增。关注全球流动性环境变化（日本加息节奏、美联储降息路径）及地缘风险。医药创新药出海+医保谈判常态化提供长期成长逻辑。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <b>免责声明：</b>以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。<br><br>
+    <b>数据来源：</b>上海证券交易所、深圳证券交易所、央广财经、证券时报、21世纪经济报道、中新经纬、中国基金报、星图金融研究院、巨丰投顾、彭博社、财联社等公开渠道。行情数据截至2026年8月13日收盘。
+  </div>
+
+</div>
+
+<script>
+// === 午后跳水板块跌幅排行 ===
+echarts.init(document.getElementById('sectorChart')).setOption({
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, formatter: function(p) { return p[0].name + ': ' + p[0].value + '%'; } },
+  grid: { left: '22%', right: '8%', top: '3%', bottom: '3%' },
+  xAxis: { type: 'value', axisLabel: { formatter: '{value}%', fontSize: 11 } },
+  yAxis: {
+    type: 'category',
+    data: ['光伏设备','教育','半导体(午后翻绿)','小金属','玻璃玻纤','黄金概念','房地产服务','农化制品','有色金属(一级)','工业金属','白银概念','贵金属'],
+    axisLabel: { fontSize: 12 }
+  },
+  series: [{
+    type: 'bar',
+    data: [
+      { value: -2.85, itemStyle: { color: '#82c3a3' } },
+      { value: -2.80, itemStyle: { color: '#82c3a3' } },
+      { value: -2.50, itemStyle: { color: '#82c3a3' } },
+      { value: -3.06, itemStyle: { color: '#27ae60' } },
+      { value: -3.12, itemStyle: { color: '#27ae60' } },
+      { value: -3.15, itemStyle: { color: '#27ae60' } },
+      { value: -3.16, itemStyle: { color: '#27ae60' } },
+      { value: -3.33, itemStyle: { color: '#27ae60' } },
+      { value: -3.63, itemStyle: { color: '#229954' } },
+      { value: -4.20, itemStyle: { color: '#1e8449' } },
+      { value: -4.26, itemStyle: { color: '#196f3d' } },
+      { value: -5.29, itemStyle: { color: '#145a32' } }
+    ],
+    label: {
+      show: true,
+      position: 'inside',
+      formatter: function(p) { return p.value + '%'; },
+      color: '#fff',
+      fontSize: 11,
+      fontWeight: 'bold'
+    },
+    barWidth: '70%'
+  }]
+});
+
+// === 行业板块涨跌全景 ===
+echarts.init(document.getElementById('allSectorChart')).setOption({
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, formatter: function(p) { return p[0].name + ': ' + p[0].value + '%'; } },
+  grid: { left: '18%', right: '8%', top: '3%', bottom: '3%' },
+  xAxis: { type: 'value', axisLabel: { formatter: '{value}%', fontSize: 11 } },
+  yAxis: {
+    type: 'category',
+    data: ['贵金属','工业金属','有色金属','农化制品','房地产服务','黄金概念','玻璃玻纤','光伏设备','教育','半导体','白酒概念','银行','券商','超节点概念','算力租赁','食品饮料','电力','医药生物','医疗服务','CRO概念','创新药'],
+    axisLabel: { fontSize: 11 }
+  },
+  series: [{
+    type: 'bar',
+    data: [
+      { value: -5.29, itemStyle: { color: '#145a32' } },
+      { value: -4.20, itemStyle: { color: '#1e8449' } },
+      { value: -3.63, itemStyle: { color: '#229954' } },
+      { value: -3.33, itemStyle: { color: '#27ae60' } },
+      { value: -3.16, itemStyle: { color: '#27ae60' } },
+      { value: -3.15, itemStyle: { color: '#27ae60' } },
+      { value: -3.12, itemStyle: { color: '#2ecc71' } },
+      { value: -2.85, itemStyle: { color: '#2ecc71' } },
+      { value: -2.80, itemStyle: { color: '#82c3a3' } },
+      { value: -2.00, itemStyle: { color: '#82c3a3' } },
+      { value: 0.50, itemStyle: { color: '#f5b7b1' } },
+      { value: 0.60, itemStyle: { color: '#f5b7b1' } },
+      { value: 0.80, itemStyle: { color: '#ec7063' } },
+      { value: 1.50, itemStyle: { color: '#ec7063' } },
+      { value: 2.00, itemStyle: { color: '#e74c3c' } },
+      { value: 2.50, itemStyle: { color: '#e74c3c' } },
+      { value: 3.00, itemStyle: { color: '#cb3535' } },
+      { value: 3.50, itemStyle: { color: '#cb3535' } },
+      { value: 4.00, itemStyle: { color: '#c0392b' } },
+      { value: 4.50, itemStyle: { color: '#b03a2e' } },
+      { value: 5.00, itemStyle: { color: '#a93226' } }
+    ],
+    label: {
+      show: true,
+      position: 'inside',
+      formatter: function(p) { return (p.value > 0 ? '+' : '') + p.value + '%'; },
+      color: '#fff',
+      fontSize: 10,
+      fontWeight: 'bold'
+    },
+    barWidth: '70%'
+  }]
+});
+</script>
+</body>
+</html>
