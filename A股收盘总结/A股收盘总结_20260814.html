@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 | 2026年8月14日</title>
+<style>
+:root {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --border: #e8e8ed;
+  --text: #1a1a2e;
+  --text-sub: #6b7280;
+  --red: #e74c3c;
+  --red-bg: #fef2f2;
+  --green: #27ae60;
+  --green-bg: #f0fdf4;
+  --blue: #3b82f6;
+  --blue-bg: #eff6ff;
+  --orange: #f39c12;
+  --purple: #8b5cf6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  padding: 32px 24px 28px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  margin-bottom: 24px;
+  color: #fff;
+}
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.header .date { font-size: 15px; opacity: 0.7; }
+.header .tag {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 14px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  font-size: 13px;
+}
+.section { margin-bottom: 24px; }
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  padding-left: 12px;
+  border-left: 4px solid var(--blue);
+}
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+.index-card {
+  text-align: center;
+  padding: 18px 12px;
+}
+.index-name { font-size: 14px; color: var(--text-sub); margin-bottom: 6px; }
+.index-value { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+.index-change { font-size: 14px; font-weight: 600; }
+.red { color: var(--red); }
+.green { color: var(--green); }
+.blue { color: var(--blue); }
+.stat-box {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 18px 16px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.stat-label { font-size: 13px; color: var(--text-sub); margin-bottom: 6px; }
+.stat-value { font-size: 22px; font-weight: 700; }
+.stat-sub { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+table th {
+  background: #f8f9fb;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-sub);
+  border-bottom: 2px solid var(--border);
+  font-size: 13px;
+}
+table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+table tr:last-child td { border-bottom: none; }
+.tag-up {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--red-bg);
+  color: var(--red);
+}
+.tag-down {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--green-bg);
+  color: var(--green);
+}
+.highlight-box {
+  background: var(--blue-bg);
+  border-radius: 10px;
+  padding: 16px 20px;
+  border-left: 4px solid var(--blue);
+  margin-bottom: 12px;
+}
+.highlight-box.warning {
+  background: #fffbeb;
+  border-left-color: var(--orange);
+}
+.highlight-box.success {
+  background: var(--green-bg);
+  border-left-color: var(--green);
+}
+.highlight-title { font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+.highlight-text { font-size: 14px; color: var(--text-sub); }
+.flow-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.flow-name { width: 100px; font-size: 13px; text-align: right; }
+.flow-bar-container { flex: 1; height: 24px; background: #f0f0f0; border-radius: 4px; overflow: hidden; position: relative; }
+.flow-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: #fff; font-size: 12px; font-weight: 600; }
+.weekly-table td:first-child { font-weight: 600; }
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 12px;
+  color: var(--text-sub);
+  border-top: 1px solid var(--border);
+  margin-top: 24px;
+}
+.disclaimer {
+  background: #fffbeb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: #92400e;
+  margin-top: 16px;
+  line-height: 1.8;
+}
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  body { padding: 12px; }
+  .header h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>A股收盘总结</h1>
+  <div class="date">2026年8月14日 · 周五</div>
+  <div class="tag">缩量震荡 · 创业板领涨 · CPO概念强势</div>
+</div>
+
+<!-- 核心指数 -->
+<div class="section">
+  <div class="section-title">核心指数收盘</div>
+  <div class="grid-4">
+    <div class="card index-card">
+      <div class="index-name">上证指数</div>
+      <div class="index-value red">3927.18</div>
+      <div class="index-change red">+0.01% (+0.22)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">深证成指</div>
+      <div class="index-value red">14354.31</div>
+      <div class="index-change red">+0.45% (+64.87)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">创业板指</div>
+      <div class="index-value red">3626.30</div>
+      <div class="index-change red">+1.12% (+40.26)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">科创50</div>
+      <div class="index-value green">1717.68</div>
+      <div class="index-change green">-0.00% (-0.07)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">沪深300</div>
+      <div class="index-value red">4665.88</div>
+      <div class="index-change red">+0.04% (+1.93)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">中证500</div>
+      <div class="index-value red">7990.33</div>
+      <div class="index-change red">+0.28% (+21.95)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">中证1000</div>
+      <div class="index-value red">7769.82</div>
+      <div class="index-change red">+0.70% (+53.93)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">中证A50</div>
+      <div class="index-value green">1800.65</div>
+      <div class="index-change green">-0.23% (-4.14)</div>
+    </div>
+  </div>
+</div>
+
+<!-- 市场概览 -->
+<div class="section">
+  <div class="section-title">市场情绪概览</div>
+  <div class="grid-4">
+    <div class="stat-box">
+      <div class="stat-label">两市成交额</div>
+      <div class="stat-value blue">2.14万亿</div>
+      <div class="stat-sub green">较前日缩量4081亿</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">上涨家数</div>
+      <div class="stat-value red">2400</div>
+      <div class="stat-sub">占比 43.3%</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">下跌家数</div>
+      <div class="stat-value green">2970</div>
+      <div class="stat-sub">占比 53.6%</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">涨停 / 跌停</div>
+      <div class="stat-value"><span class="red">64</span> / <span class="green">10</span></div>
+      <div class="stat-sub">赚钱效应偏弱</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">北向资金</div>
+      <div class="stat-value red">+16.24亿</div>
+      <div class="stat-sub">深股通大幅净流入</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">主力资金</div>
+      <div class="stat-value green">-42.46亿</div>
+      <div class="stat-sub">抛压较昨日收敛</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">沪市成交额</div>
+      <div class="stat-value">9904亿</div>
+      <div class="stat-sub">缩量明显</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">深市成交额</div>
+      <div class="stat-value">11525亿</div>
+      <div class="stat-sub">成长股活跃</div>
+    </div>
+  </div>
+</div>
+
+<!-- 板块表现 -->
+<div class="section">
+  <div class="section-title">板块涨跌一览</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">领涨板块 TOP8</h3>
+      <table>
+        <thead>
+          <tr><th>板块</th><th style="text-align:right;">涨跌幅</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>玻璃玻纤</td><td style="text-align:right;"><span class="tag-up">+4.31%</span></td></tr>
+          <tr><td>通信设备</td><td style="text-align:right;"><span class="tag-up">+3.63%</span></td></tr>
+          <tr><td>电子化学品</td><td style="text-align:right;"><span class="tag-up">+3.44%</span></td></tr>
+          <tr><td>小金属</td><td style="text-align:right;"><span class="tag-up">+3.04%</span></td></tr>
+          <tr><td>非金属材料</td><td style="text-align:right;"><span class="tag-up">+3.01%</span></td></tr>
+          <tr><td>元器件</td><td style="text-align:right;"><span class="tag-up">+2.80%</span></td></tr>
+          <tr><td>金属新材料</td><td style="text-align:right;"><span class="tag-up">+2.55%</span></td></tr>
+          <tr><td>通信（申万）</td><td style="text-align:right;"><span class="tag-up">+3.45%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">领跌板块 TOP8</h3>
+      <table>
+        <thead>
+          <tr><th>板块</th><th style="text-align:right;">涨跌幅</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>影视院线</td><td style="text-align:right;"><span class="tag-down">-2.71%</span></td></tr>
+          <tr><td>饰品</td><td style="text-align:right;"><span class="tag-down">-2.20%</span></td></tr>
+          <tr><td>化妆品</td><td style="text-align:right;"><span class="tag-down">-2.14%</span></td></tr>
+          <tr><td>养殖业</td><td style="text-align:right;"><span class="tag-down">-2.10%</span></td></tr>
+          <tr><td>广告营销</td><td style="text-align:right;"><span class="tag-down">-2.05%</span></td></tr>
+          <tr><td>公用事业</td><td style="text-align:right;"><span class="tag-down">-1.75%</span></td></tr>
+          <tr><td>电力</td><td style="text-align:right;"><span class="tag-down">-1.68%</span></td></tr>
+          <tr><td>白酒</td><td style="text-align:right;"><span class="tag-down">-1.20%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 概念板块 -->
+<div class="section">
+  <div class="section-title">热门概念</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">强势概念</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span class="tag-up">CPO概念</span>
+        <span class="tag-up">光通信</span>
+        <span class="tag-up">铜缆高速连接</span>
+        <span class="tag-up">存储芯片</span>
+        <span class="tag-up">先进封装</span>
+        <span class="tag-up">6G概念</span>
+        <span class="tag-up">PCB概念</span>
+        <span class="tag-up">光刻机</span>
+        <span class="tag-up">液冷服务器</span>
+        <span class="tag-up">算力租赁</span>
+        <span class="tag-up">稀土永磁</span>
+      </div>
+      <p style="margin-top:12px;font-size:13px;color:var(--text-sub);">
+        CPO概念板块强势领涨，37股涨超5%，金戈新材、中石科技等10股涨停。
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">弱势概念</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <span class="tag-down">种业</span>
+        <span class="tag-down">免税概念</span>
+        <span class="tag-down">风沙治理</span>
+        <span class="tag-down">知识付费</span>
+        <span class="tag-down">鸡肉</span>
+        <span class="tag-down">猪肉</span>
+        <span class="tag-down">白酒概念</span>
+        <span class="tag-down">短剧游戏</span>
+        <span class="tag-down">房地产</span>
+      </div>
+      <p style="margin-top:12px;font-size:13px;color:var(--text-sub);">
+        前期热点高位股集体下挫，秦安股份、宝鹰股份、德龙汇能等跌停。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- 主力资金流向 -->
+<div class="section">
+  <div class="section-title">主力资金流向（申万一级行业）</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:14px;font-size:16px;">净流入 TOP5</h3>
+      <div class="flow-bar">
+        <div class="flow-name">通信</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:100%;background:var(--red);">+81.57亿</div>
+        </div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-name">食品饮料</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:11%;background:var(--red);">+9.29亿</div>
+        </div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-name">房地产</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:9%;background:var(--red);">+7.72亿</div>
+        </div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-name">银行</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:3%;background:var(--red);">+2.52亿</div>
+        </div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-name">环保</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:3%;background:var(--red);">+2.35亿</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:14px;font-size:16px;">净流出 TOP5</h3>
+      <div class="flow-bar">
+        <div class="flow-name">电子</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:100%;background:var(--green);">-43.30亿</div>
+        </div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-name">公用事业</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:54%;background:var(--green);">-23.52亿</div>
+        </div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-name">传媒</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:32%;background:var(--green);">-13.80亿</div>
+        </div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-name">医药生物</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:28%;background:var(--green);">-12.10亿</div>
+        </div>
+      </div>
+      <div class="flow-bar">
+        <div class="flow-name">非银金融</div>
+        <div class="flow-bar-container">
+          <div class="flow-bar-fill" style="width:25%;background:var(--green);">-10.90亿</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 涨停跌停 -->
+<div class="section">
+  <div class="section-title">个股异动</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">涨停股（部分）</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">涨幅</th><th style="text-align:right;">亮点</th></tr></thead>
+        <tbody>
+          <tr><td>中石科技</td><td style="text-align:right;" class="red">+20.01%</td><td style="text-align:right;">CPO概念</td></tr>
+          <tr><td>亨通光电</td><td style="text-align:right;" class="red">+10.01%</td><td style="text-align:right;">光通信</td></tr>
+          <tr><td>利通电子</td><td style="text-align:right;" class="red">+10.00%</td><td style="text-align:right;">算力租赁</td></tr>
+          <tr><td>共进股份</td><td style="text-align:right;" class="red">+10.03%</td><td style="text-align:right;">通信设备</td></tr>
+          <tr><td>金螳螂</td><td style="text-align:right;" class="red">+9.98%</td><td style="text-align:right;">建筑装饰</td></tr>
+          <tr><td>金戈新材</td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">CPO概念</td></tr>
+          <tr><td>剑桥科技</td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">CPO概念</td></tr>
+          <tr><td>网宿科技</td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">算力租赁</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">跌停股</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">跌幅</th><th style="text-align:right;">备注</th></tr></thead>
+        <tbody>
+          <tr><td>北投科技</td><td style="text-align:right;" class="green">-10.07%</td><td style="text-align:right;">高位股</td></tr>
+          <tr><td>德龙汇能</td><td style="text-align:right;" class="green">-10.00%</td><td style="text-align:right;">高位股</td></tr>
+          <tr><td>北部湾港</td><td style="text-align:right;" class="green">-10.00%</td><td style="text-align:right;">高位股</td></tr>
+          <tr><td>宝鹰股份</td><td style="text-align:right;" class="green">-10.00%</td><td style="text-align:right;">高位股</td></tr>
+          <tr><td>秦安股份</td><td style="text-align:right;" class="green">-9.97%</td><td style="text-align:right;">高位股</td></tr>
+          <tr><td>皇氏集团</td><td style="text-align:right;" class="green">触及跌停</td><td style="text-align:right;">高位股</td></tr>
+          <tr><td>京投发展</td><td style="text-align:right;" class="green">跌停</td><td style="text-align:right;">地产链</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 今日要点 -->
+<div class="section">
+  <div class="section-title">今日盘面要点</div>
+  <div class="highlight-box">
+    <div class="highlight-title">1. 三大指数集体收涨，创业板领涨</div>
+    <div class="highlight-text">
+      周五A股缩量震荡，沪指微涨0.01%收3927点，深成指涨0.45%，创业板指涨1.12%表现最强。两市成交2.14万亿，较前日缩量约4081亿，市场进入存量博弈格局。
+    </div>
+  </div>
+  <div class="highlight-box success">
+    <div class="highlight-title">2. CPO概念板块强势领涨</div>
+    <div class="highlight-text">
+      CPO概念板块全天强势，37股涨超5%，金戈新材、中石科技等10股涨停。通信行业获主力资金净流入81.57亿元，远超其他行业。光通信、铜缆高速连接、PCB概念等算力硬件方向集体走强。
+    </div>
+  </div>
+  <div class="highlight-box warning">
+    <div class="highlight-title">3. 高位股集体退潮，跌停个股增多</div>
+    <div class="highlight-text">
+      秦安股份、宝鹰股份、德龙汇能、京投发展等前期高位股跌停，资金做多意愿减弱。全市场2970只个股下跌，赚钱效应偏弱。电力板块震荡调整，华银电力、京能电力等大跌。
+    </div>
+  </div>
+  <div class="highlight-box">
+    <div class="highlight-title">4. 算力赛道内部严重分化</div>
+    <div class="highlight-text">
+      资金持续抛弃海外收入占比高的光模块标的（新易盛净流出17.49亿），转向国产光芯片、无源光器件、服务器PCB等自主可控方向。算力硬件端成为通信板块内部的核心偏好。
+    </div>
+  </div>
+  <div class="highlight-box success">
+    <div class="highlight-title">5. 北向资金小幅净流入，深股通为主</div>
+    <div class="highlight-text">
+      北向资金全天净买入16.24亿元，沪股通小幅净卖出，深股通大幅净流入。加仓方向集中在PCB服务器板、国产光芯片、CXO医药、有色稀土小金属；减持银行、地产、部分高位存储芯片。
+    </div>
+  </div>
+</div>
+
+<!-- 本周回顾 -->
+<div class="section">
+  <div class="section-title">本周回顾（8.10 - 8.14）</div>
+  <div class="card">
+    <table class="weekly-table">
+      <thead>
+        <tr>
+          <th>指数</th>
+          <th style="text-align:right;">周一开盘</th>
+          <th style="text-align:right;">周五收盘</th>
+          <th style="text-align:right;">周涨跌幅</th>
+          <th style="text-align:right;">备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>上证指数</td><td style="text-align:right;">3966.59</td><td style="text-align:right;">3927.18</td><td style="text-align:right;" class="green">-0.99%</td><td style="text-align:right;">高位回落</td></tr>
+        <tr><td>深证成指</td><td style="text-align:right;">14316.96</td><td style="text-align:right;">14354.31</td><td style="text-align:right;" class="red">+0.26%</td><td style="text-align:right;">小幅收红</td></tr>
+        <tr><td>创业板指</td><td style="text-align:right;">3537.21</td><td style="text-align:right;">3626.30</td><td style="text-align:right;" class="red">+2.52%</td><td style="text-align:right;">全周最强</td></tr>
+        <tr><td>科创50</td><td style="text-align:right;">1709.50</td><td style="text-align:right;">1717.68</td><td style="text-align:right;" class="red">+0.50%</td><td style="text-align:right;">窄幅震荡</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div class="stat-box">
+        <div class="stat-label">北向资金全周</div>
+        <div class="stat-value red">+225.69亿</div>
+        <div class="stat-sub">周三单日流入304.89亿</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">日均成交额</div>
+        <div class="stat-value blue">约2.34万亿</div>
+        <div class="stat-sub">周五缩至2.14万亿</div>
+      </div>
+    </div>
+    <div style="margin-top:16px;font-size:14px;color:var(--text-sub);line-height:1.8;">
+      <strong>本周特征：</strong>存量博弈，高频快速轮动。先高位震荡，周三反弹，周四放量分歧大跌，周五缩量修复。成长强于主板，医药全程避险，算力内部分化严重，地产脉冲一日游，周期有色先涨后大跌后周五超跌反弹。
+    </div>
+  </div>
+</div>
+
+<!-- 后市展望 -->
+<div class="section">
+  <div class="section-title">后市展望</div>
+  <div class="card">
+    <div class="highlight-box">
+      <div class="highlight-title">短期判断：震荡分化延续</div>
+      <div class="highlight-text">
+        市场大幅缩量，大盘虽收红但赚钱效应较弱。高位股出现跌停潮，资金做多意愿减弱。热点快速轮动特征明显，在量能未能有效放大情况下，后续大概率仍以震荡分化为主。
+      </div>
+    </div>
+    <div style="padding:8px 4px;font-size:14px;line-height:2;">
+      <strong>关注方向：</strong><br>
+      1. <strong style="color:var(--red);">医药生物（CXO/创新药）</strong>：本周持续资金净流入，中报业绩确定性驱动，震荡行情中的避风港<br>
+      2. <strong style="color:var(--red);">算力硬件（国产光芯片/PCB/封测）</strong>：自主可控方向受资金青睐，回避高海外收入标的<br>
+      3. <strong style="color:var(--red);">有色稀土（超跌反弹）</strong>：短线博弈机会，但尚未出现趋势反转信号<br><br>
+      <strong>风险提示：</strong><br>
+      1. 中报披露尾声，规避业绩不及预期的高位题材股<br>
+      2. 控制仓位，不宜盲目追高或抄底<br>
+      3. 重点盯两市成交量能否重新放大、北向资金持续性
+    </div>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <strong>免责声明：</strong>本报告基于公开市场数据整理，仅供参考，不构成任何投资建议。股市有风险，投资需谨慎。数据来源：沪深交易所、同花顺、证券时报、中新经纬等。
+</div>
+
+<div class="footer">
+  A股收盘总结 · 2026年8月14日 · 数据截至收盘
+</div>
+
+</body>
+</html>
