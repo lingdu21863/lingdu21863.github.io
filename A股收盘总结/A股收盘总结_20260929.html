@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 | 2026年9月29日</title>
+<style>
+:root {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --border: #e8e8ed;
+  --text: #1a1a2e;
+  --text-sub: #6b7280;
+  --red: #e74c3c;
+  --red-bg: #fef2f2;
+  --green: #27ae60;
+  --green-bg: #f0fdf4;
+  --blue: #3b82f6;
+  --blue-bg: #eff6ff;
+  --orange: #f39c12;
+  --purple: #8b5cf6;
+  --purple-bg: #faf5ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  padding: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.header {
+  text-align: center;
+  padding: 32px 24px 28px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border-radius: 16px;
+  margin-bottom: 24px;
+  color: #fff;
+}
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.header .date { font-size: 15px; opacity: 0.7; }
+.header .tag {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 14px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  font-size: 13px;
+}
+.section { margin-bottom: 24px; }
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  padding-left: 12px;
+  border-left: 4px solid var(--blue);
+}
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+.index-card {
+  text-align: center;
+  padding: 18px 12px;
+}
+.index-name { font-size: 14px; color: var(--text-sub); margin-bottom: 6px; }
+.index-value { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+.index-change { font-size: 14px; font-weight: 600; }
+.red { color: var(--red); }
+.green { color: var(--green); }
+.blue { color: var(--blue); }
+.stat-box {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 18px 16px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.stat-label { font-size: 13px; color: var(--text-sub); margin-bottom: 6px; }
+.stat-value { font-size: 22px; font-weight: 700; }
+.stat-sub { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+table th {
+  background: #f8f9fb;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-sub);
+  border-bottom: 2px solid var(--border);
+  font-size: 13px;
+}
+table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+table tr:last-child td { border-bottom: none; }
+table tr:hover { background: #f8f9fb; }
+.tag-up {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--red-bg);
+  color: var(--red);
+}
+.tag-down {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--green-bg);
+  color: var(--green);
+}
+.highlight-box {
+  background: var(--blue-bg);
+  border-radius: 10px;
+  padding: 16px 20px;
+  border-left: 4px solid var(--blue);
+  margin-bottom: 12px;
+}
+.highlight-box.warning {
+  background: #fffbeb;
+  border-left-color: var(--orange);
+}
+.highlight-box.success {
+  background: var(--green-bg);
+  border-left-color: var(--green);
+}
+.highlight-box.danger {
+  background: var(--red-bg);
+  border-left-color: var(--red);
+}
+.highlight-title { font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+.highlight-text { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+.flow-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.flow-name { width: 110px; font-size: 13px; text-align: right; flex-shrink: 0; }
+.flow-bar-container { flex: 1; height: 24px; background: #f0f0f0; border-radius: 4px; overflow: hidden; position: relative; }
+.flow-bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: #fff; font-size: 12px; font-weight: 600; }
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 12px;
+  color: var(--text-sub);
+  border-top: 1px solid var(--border);
+  margin-top: 24px;
+}
+.disclaimer {
+  background: #fffbeb;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: #92400e;
+  margin-top: 16px;
+  line-height: 1.8;
+}
+.stock-code { color: var(--blue); font-family: Consolas, monospace; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  body { padding: 12px; }
+  .header h1 { font-size: 22px; }
+  .flow-name { width: 85px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>A股收盘总结</h1>
+  <div class="date">2026年9月29日 · 周二</div>
+  <div class="tag">缩量反弹 · 地产爆发 · 出版传媒连板 · PCB反包 · 广汽重组一字板</div>
+</div>
+
+<!-- 核心指数 -->
+<div class="section">
+  <div class="section-title">核心指数收盘</div>
+  <div class="grid-3">
+    <div class="card index-card">
+      <div class="index-name">上证指数</div>
+      <div class="index-value red">3830.45</div>
+      <div class="index-change red">+0.18% (+6.83)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">深证成指</div>
+      <div class="index-value red">12901.95</div>
+      <div class="index-change red">+0.34% (+43.59)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">创业板指</div>
+      <div class="index-value red">3142.56</div>
+      <div class="index-change red">+0.09% (+2.75)</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">科创50</div>
+      <div class="index-value red">+0.86%</div>
+      <div class="index-change red">科技小幅回暖</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">沪市成交</div>
+      <div class="index-value blue" style="font-size:20px;">约6700亿</div>
+      <div class="index-change" style="color:var(--text-sub);">大幅缩量</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">深市成交</div>
+      <div class="index-value blue" style="font-size:20px;">约7400亿</div>
+      <div class="index-change" style="color:var(--text-sub);">两市合计1.41万亿</div>
+    </div>
+  </div>
+</div>
+
+<!-- 市场概览 -->
+<div class="section">
+  <div class="section-title">市场情绪概览</div>
+  <div class="grid-4">
+    <div class="stat-box">
+      <div class="stat-label">两市成交额</div>
+      <div class="stat-value red">1.41万亿</div>
+      <div class="stat-sub green">较前日缩量约2936亿 · 创1年多新低</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">上涨家数</div>
+      <div class="stat-value red">3471</div>
+      <div class="stat-sub">占比约62% · 普涨格局</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">下跌家数</div>
+      <div class="stat-value green">1933</div>
+      <div class="stat-sub">占比约35%</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">涨停 / 跌停</div>
+      <div class="stat-value red">57 / 12</div>
+      <div class="stat-sub">封板率82.61%（12股封板未遂）</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">主力资金</div>
+      <div class="stat-value blue" style="font-size:16px;">多数行业净流入</div>
+      <div class="stat-sub">电子+89亿、电力设备+49亿</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">领涨行业</div>
+      <div class="stat-value red" style="font-size:16px;">房地产 +4.06%</div>
+      <div class="stat-sub">传媒 +1.85%、元件强势</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">领跌行业</div>
+      <div class="stat-value green" style="font-size:16px;">石油石化 -1.66%</div>
+      <div class="stat-sub">煤炭 -1.34%、航天装备跌幅居前</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">市场风格</div>
+      <div class="stat-value blue" style="font-size:16px;">政策驱动 · 防御+题材</div>
+      <div class="stat-sub">长假效应下缩量博弈</div>
+    </div>
+  </div>
+</div>
+
+<!-- 板块表现 -->
+<div class="section">
+  <div class="section-title">板块涨跌一览（申万一级）</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">领涨行业</h3>
+      <table>
+        <thead><tr><th>板块</th><th style="text-align:right;">涨跌幅</th></tr></thead>
+        <tbody>
+          <tr><td>🏠 房地产开发</td><td style="text-align:right;"><span class="tag-up">+4.06%（居首）</span></td></tr>
+          <tr><td>📰 传媒</td><td style="text-align:right;"><span class="tag-up">+1.85%</span></td></tr>
+          <tr><td>🔌 元件/PCB</td><td style="text-align:right;"><span class="tag-up">全天强势</span></td></tr>
+          <tr><td>🔋 电池</td><td style="text-align:right;"><span class="tag-up">涨幅居前</span></td></tr>
+          <tr><td>📢 广告营销</td><td style="text-align:right;"><span class="tag-up">涨幅居前</span></td></tr>
+          <tr><td>🎬 影视院线</td><td style="text-align:right;"><span class="tag-up">节日消费催化</span></td></tr>
+          <tr><td>⚡ 能源金属</td><td style="text-align:right;"><span class="tag-up">涨幅居前</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">
+        房地产板块全天强势，午后进一步放量上攻：万科A尾盘封板，信达地产、华发股份、滨江集团、深物业A涨停。催化来自9月28日国务院常务会议"研究出台稳定房地产市场政策"，叠加央行PSL降息扩围、中央财政首次对个人住房商业贷款贴息（100万房贷利息可少还近5万，10月1日起实施）。
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">领跌行业</h3>
+      <table>
+        <thead><tr><th>板块</th><th style="text-align:right;">涨跌幅</th></tr></thead>
+        <tbody>
+          <tr><td>🛢️ 石油石化</td><td style="text-align:right;"><span class="tag-down">-1.66%</span></td></tr>
+          <tr><td>⛏️ 煤炭</td><td style="text-align:right;"><span class="tag-down">-1.34%</span></td></tr>
+          <tr><td>🚀 航天装备</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+          <tr><td>💎 培育钻石</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+          <tr><td>🌾 种植业与林业</td><td style="text-align:right;"><span class="tag-down">万向德农跌停</span></td></tr>
+          <tr><td>🍖 农产品加工</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">
+        石油石化、煤炭等周期资源股领跌，节前资金从资源品撤出转向政策受益的地产与科技。培育钻石延续弱势，黄河旋风、惠丰钻石、四方达跌幅居前。种植业与林业低迷，万向德农跌停，福建金森、平潭发展、海南橡胶跟跌。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- 资金流向 -->
+<div class="section">
+  <div class="section-title">主力资金流向（行业）</div>
+  <div class="card">
+    <div class="grid-2">
+      <div>
+        <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">主力净流入行业</h3>
+        <div class="flow-bar">
+          <div class="flow-name">电子</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:100%;background:var(--red);">+89亿</div></div>
+        </div>
+        <div class="flow-bar">
+          <div class="flow-name">电力设备</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:55%;background:var(--red);">+49亿</div></div>
+        </div>
+        <div class="flow-bar">
+          <div class="flow-name">计算机</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:37%;background:var(--red);">+30亿+</div></div>
+        </div>
+        <div class="flow-bar">
+          <div class="flow-name">有色金属</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:37%;background:var(--red);">+30亿+</div></div>
+        </div>
+        <div class="flow-bar">
+          <div class="flow-name">房地产</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:37%;background:var(--red);">+30亿+</div></div>
+        </div>
+        <div class="flow-bar">
+          <div class="flow-name">传媒</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:14%;background:var(--red);">+12.27亿</div></div>
+        </div>
+        <p style="font-size:12px;color:var(--text-sub);margin-top:8px;">汽车连续12个交易日获得主力资金净流入。</p>
+      </div>
+      <div>
+        <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">主力净流出行业</h3>
+        <div class="flow-bar">
+          <div class="flow-name">农林牧渔</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:30%;background:var(--green);">小幅净流出</div></div>
+        </div>
+        <div class="flow-bar">
+          <div class="flow-name">石油石化</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:30%;background:var(--green);">小幅净流出</div></div>
+        </div>
+        <div class="flow-bar">
+          <div class="flow-name">基础化工</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:30%;background:var(--green);">小幅净流出</div></div>
+        </div>
+        <div class="flow-bar">
+          <div class="flow-name">煤炭</div>
+          <div class="flow-bar-container"><div class="flow-bar-fill" style="width:30%;background:var(--green);">小幅净流出</div></div>
+        </div>
+        <p style="font-size:12px;color:var(--text-sub);margin-top:8px;">共7个行业遭主力资金小幅净流出。</p>
+        <h3 style="color:var(--blue);margin:14px 0 10px;font-size:15px;">概念板块净流入</h3>
+        <p style="font-size:13px;line-height:1.9;">
+          电路板概念 <span class="red">+67亿</span> · 华为概念 <span class="red">+40亿+</span> · 消费电子 <span class="red">+40亿+</span><br>
+          人工智能、5G应用、光模块、锂电池均 <span class="red">+20亿+</span><br>
+          净流出：玻璃基板、预制菜、特高压均 <span class="green">超10亿</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 涨停跌停 -->
+<div class="section">
+  <div class="section-title">个股异动</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">涨停股（部分代表）</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">涨幅</th><th style="text-align:right;">亮点</th></tr></thead>
+        <tbody>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh601238.html">广汽集团(601238)</a></td><td style="text-align:right;" class="red">一字涨停</td><td style="text-align:right;">重组复牌 · 收购一汽丰田50%股权</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600825.html">新华传媒(600825)</a></td><td style="text-align:right;" class="red">涨停（6连板）</td><td style="text-align:right;">出版 · 封单18.53亿居首</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002074.html">国轩高科(002074)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">电池 · 封单6.25亿</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000002.html">万科A(000002)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">房地产 · 尾盘封板</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600657.html">信达地产(600657)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">房地产</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600325.html">华发股份(600325)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">房地产</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002244.html">滨江集团(002244)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">房地产</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000011.html">深物业A(000011)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">房地产服务</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000823.html">超声电子(000823)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">PCB · 昨日跌停今日反包</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002815.html">崇达技术(002815)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">PCB · 龙虎榜机构博弈</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh688655.html">迅捷兴(688655)</a></td><td style="text-align:right;" class="red">+20.01%</td><td style="text-align:right;">PCB · 科创板20cm</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh601811.html">新华文轩(601811)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">出版 · 延续连板</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh601949.html">中国出版(601949)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">出版</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000607.html">华媒控股(000607)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">传媒</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603533.html">掌阅科技(603533)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">传媒/短剧</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603598.html">引力传媒(603598)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">传媒/抖音概念</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px;font-size:13px;color:var(--text-sub);">20cm涨停还有：尚水智能(301513)、众捷股份(301560)、善水科技(301190)。园林股份一字板（拟收购华澜微93.5%股份布局存储）。值得买(300785)涨停（节日消费概念）。</p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">重挫/跌停代表</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">涨跌</th><th style="text-align:right;">备注</th></tr></thead>
+        <tbody>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600371.html">万向德农(600371)</a></td><td style="text-align:right;" class="green">跌停</td><td style="text-align:right;">农业 · 昨日涨停今日跌停</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh601579.html">会稽山(601579)</a></td><td style="text-align:right;" class="green">-9.99%</td><td style="text-align:right;">酿酒 · 高位连板股退潮</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603823.html">百合花(603823)</a></td><td style="text-align:right;" class="green">-9.99%</td><td style="text-align:right;">化工材料</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603396.html">金辰股份(603396)</a></td><td style="text-align:right;" class="green">-10.00%</td><td style="text-align:right;">光伏设备</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600815.html">厦工股份(600815)</a></td><td style="text-align:right;" class="green">-10.02%</td><td style="text-align:right;">工程机械</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz001234.html">泰慕士(001234)</a></td><td style="text-align:right;" class="green">-10.01%</td><td style="text-align:right;">纺织服装</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz001368.html">通达创智(001368)</a></td><td style="text-align:right;" class="green">-10.00%</td><td style="text-align:right;">塑料制品</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002827.html">高争民爆(002827)</a></td><td style="text-align:right;" class="green">-10.00%</td><td style="text-align:right;">民爆器材</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh301699.html">洛轴股份(301699)</a></td><td style="text-align:right;" class="green">-7.30%</td><td style="text-align:right;">机器人 · 前日20cm后回调</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh920229.html">世纪数码(920229)</a></td><td style="text-align:right;" class="green">-12.06%</td><td style="text-align:right;">北交所 · 前日大涨后回调</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603230.html">内蒙新华(603230)</a></td><td style="text-align:right;" class="green">-7.88%</td><td style="text-align:right;">出版 · 高位补跌</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz300463.html">迈克生物(300463)</a></td><td style="text-align:right;" class="green">下跌</td><td style="text-align:right;">医药生物持续退潮</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px;font-size:13px;color:var(--text-sub);">跌停股还包括：华茂股份、*ST岭南等。前期高位连板股（会稽山、万向德农）出现剧烈分化，部分品种天地板后继续跌停，资金节前风险偏好下降。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 今日要点 -->
+<div class="section">
+  <div class="section-title">今日盘面要点</div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">1. 房地产板块爆发——政策组合拳落地，万科A尾盘封板、多股涨停</div>
+    <div class="highlight-text">
+      房地产开发板块+4.06%居申万涨幅首位，房地产服务+2.95%。万科A尾盘封板（获逾9亿主力净流入），信达地产、华发股份、滨江集团、深物业A涨停，首开股份临近收盘一度垂直拉升触及涨停。催化密集：①9月28日国务院常务会议明确"研究出台稳定房地产市场、促进就业增收等政策措施"；②央行下调PSL利率0.25%并扩围，"放水"7000亿元，再贷款加量提比例；③中央财政史上首次对个人住房商业贷款贴息——100万房贷利息可少还近5万，10月1日起实施，实施期暂定1年；④上海印发《关于贯彻落实〈关于完善商品住房销售制度的通知〉的实施意见》。港股地产板块同步走强，恒生内地地产指数涨幅居前。
+    </div>
+  </div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">2. 出版传媒继续连板——新华传媒6连板封单18.53亿，资金抱团不退</div>
+    <div class="highlight-text">
+      传媒行业+1.85%，全天主力净流入12.27亿。新华传媒(600825)6连板（封单18.53亿、占流通A股18.84%），为连续涨停天数最多的个股；新华文轩(601811)继续涨停，中国出版(601949)、华媒控股(000607)涨停。短剧游戏/影视院线/抖音概念等节日消费概念走强，掌阅科技(603533)、引力传媒(603598)、值得买(300785)涨停。传媒板块涨停股达7只，资金节前抱团"十五五"文化产业规划+国庆档消费预期。但内蒙新华(603230)-7.88%高位补跌，板块内部分化加剧。
+    </div>
+  </div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">3. PCB/元件全天强势——超声电子"地天板"反包，迅捷兴20cm涨停</div>
+    <div class="highlight-text">
+      元件板块全天强势，电路板概念获主力净流入逾67亿居概念首位。超声电子(000823)昨日跌停今日涨停，走出"地天板"反包；崇达技术(002815)涨停（龙虎榜显示深股通净卖出2644万、机构净卖出7332万，主力仍净流入1.87亿）；迅捷兴(688655)20cm涨停。华泰证券指出科技股内部优先关注光通信、PCB及部分国产算力龙头。PCB方向在连续调整后迎来资金回流，与电子行业整体+89亿净流入形成共振。
+    </div>
+  </div>
+
+  <div class="highlight-box warning">
+    <div class="highlight-title">4. 广汽集团重组复牌一字涨停——"南北丰田"协同运营破局</div>
+    <div class="highlight-text">
+      广汽集团(601238)复牌一字涨停（封单超100万手、封单额6.5亿+，收盘报5.60元/股、总市值571亿）。催化：9月28日晚披露重大资产重组预案，拟以发行股份方式（5.75元/股）购买一汽股份持有的一汽丰田50%股权，并募集配套资金。交易完成后，一汽丰田将成为广汽集团合营企业，一汽股份预计成为第二大股东，"南北丰田"（一汽丰田+广汽丰田）将在同一上市平台下协同运营。一汽丰田2024/2025年净利润分别为47.17亿/42.34亿元，有望增厚广汽集团投资收益。此次"央地协同+外资品牌为纽带"的整合范式，为汽车行业存量整合提供样本。
+    </div>
+  </div>
+
+  <div class="highlight-box danger">
+    <div class="highlight-title">5. 成交骤降至1.4万亿创1年多新低——长假效应下缩量博弈，持股or持币？</div>
+    <div class="highlight-text">
+      沪深两市成交14091.98亿，较前日缩量2936亿，创1年多新低。上证指数、深证成指、创业板指、科创综指等红绿间转换均超10次，多空拉锯明显。全市场3471涨/1933跌，57涨停/12跌停，封板率82.61%。资金面呈现"政策驱动+防御观望"分裂：一方面地产、PCB、传媒受政策催化活跃；另一方面石油石化、煤炭、培育钻石等资源品领跌，高位连板股（会稽山、万向德农）出现剧烈退潮。中金公司指出9月日均成交额1.87万亿，交投情绪降温，后续关注长假期间外部环境变化；中航证券认为节后资金回归后温和修复行情仍可期待，科技成长风格或相对占优。
+    </div>
+  </div>
+</div>
+
+<!-- 后市展望 -->
+<div class="section">
+  <div class="section-title">后市展望与操作建议</div>
+  <div class="card">
+
+    <div class="highlight-box warning">
+      <div class="highlight-title">📊 关键点位参考</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;">
+        <div class="stat-box" style="background:#ffeaea;border-color:#e74c3c;">
+          <div class="stat-label" style="color:#b03a2e;">上方压力</div>
+          <div class="stat-value" style="color:#e74c3c;font-size:18px;">3900 / 3950</div>
+          <div class="stat-sub">整数关口 & 前期平台</div>
+        </div>
+        <div class="stat-box" style="background:#fff9e6;border-color:#f39c12;">
+          <div class="stat-label" style="color:#b7950b;">当前位</div>
+          <div class="stat-value" style="color:#d68910;font-size:18px;">3830.45（今收）</div>
+          <div class="stat-sub red">+0.18% · 缩量反弹</div>
+        </div>
+        <div class="stat-box" style="background:#e8f8f0;border-color:#27ae60;">
+          <div class="stat-label" style="color:#1e8449;">下方支撑</div>
+          <div class="stat-value" style="color:#27ae60;font-size:18px;">3800 / 3760</div>
+          <div class="stat-sub">整数关口 & 9月低点</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-title">💡 操作建议</div>
+      <div class="highlight-text">
+        <strong>1. 政策主线关注房地产链条：</strong>国务院常务会议定调+房贷贴息+PSL降息三重利好落地，地产链（开发、物业、建材、家居）有望迎来估值修复，但需警惕"利好兑现"后的短期波动，优先关注基本面改善确定性较高的龙头（万科A、保利发展、华发股份等）。<br><br>
+        <strong>2. 科技成长逢低布局PCB/光模块：</strong>电子行业主力净流入89亿、电路板概念+67亿，资金回流明显。华泰证券建议关注光通信、PCB及国产算力龙头。超声电子"地天板"或预示短线情绪修复，但节前追高需谨慎。<br><br>
+        <strong>3. 出版传媒警惕高位分化：</strong>新华传媒6连板后封单仍达18.53亿，资金抱团极致，但内蒙新华已补跌-7.88%，板块内部分化加剧。持仓者可继续持有，追高需设好止损。<br><br>
+        <strong>4. 节前仓位控制：</strong>成交创1年多新低，长假期间外部不确定性（美联储政策、地缘局势）仍存，建议控制仓位、避免重仓单一方向，预留资金应对节后波动。中航证券判断节后科技成长风格或相对占优，AI硬件与应用有望共同演绎。
+      </div>
+    </div>
+
+    <div class="highlight-box success">
+      <div class="highlight-title">🎯 关注方向</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+        <div>
+          <p style="font-size:14px;font-weight:600;color:var(--red);margin-bottom:6px;">进攻方向</p>
+          <p style="font-size:13px;line-height:1.9;">
+            🏠 房地产链（政策催化）<br>
+            🔌 PCB/光模块（资金回流）<br>
+            📰 出版传媒（抱团延续）<br>
+            🚗 汽车（广汽重组+连续净流入）
+          </p>
+        </div>
+        <div>
+          <p style="font-size:14px;font-weight:600;color:var(--green);margin-bottom:6px;">谨慎方向</p>
+          <p style="font-size:13px;line-height:1.9;">
+            🛢️ 石油石化/煤炭（资金撤出）<br>
+            💎 培育钻石（延续弱势）<br>
+            🌾 农林牧渔（主力净流出）<br>
+            ⚠️ 高位连板股（分化退潮）
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <p>数据来源：东方财富、证券时报·数据宝、同花顺、Wind · 仅供参考，不构成投资建议</p>
+  <div class="disclaimer">
+    ⚠️ 免责声明：本报告基于公开市场数据整理，所有内容仅供学习交流，不构成任何投资建议。股市有风险，投资需谨慎。
+  </div>
+</div>
+
+</body>
+</html>
