@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 | 2026年10月30日</title>
+<style>
+:root {
+  --bg: #f5f6fa; --card: #ffffff; --border: #e8e8ed; --text: #1a1a2e; --text-sub: #6b7280;
+  --red: #e74c3c; --red-bg: #fef2f2; --green: #27ae60; --green-bg: #f0fdf4;
+  --blue: #3b82f6; --blue-bg: #eff6ff; --orange: #f39c12; --purple: #8b5cf6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "Microsoft YaHei", "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 24px; max-width: 1100px; margin: 0 auto; }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.header { text-align: center; padding: 32px 24px 28px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 16px; margin-bottom: 24px; color: #fff; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.header .date { font-size: 15px; opacity: 0.7; }
+.header .tag { display: inline-block; margin-top: 12px; padding: 4px 14px; background: rgba(255,255,255,0.15); border-radius: 20px; font-size: 13px; }
+.section { margin-bottom: 24px; }
+.section-title { font-size: 18px; font-weight: 700; margin-bottom: 14px; padding-left: 12px; border-left: 4px solid var(--blue); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.card { background: var(--card); border-radius: 12px; padding: 20px; border: 1px solid var(--border); }
+.index-card { text-align: center; padding: 18px 12px; }
+.index-name { font-size: 14px; color: var(--text-sub); margin-bottom: 6px; }
+.index-value { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+.index-change { font-size: 14px; font-weight: 600; }
+.red { color: var(--red); } .green { color: var(--green); } .blue { color: var(--blue); }
+.stat-box { background: var(--card); border-radius: 12px; padding: 18px 16px; border: 1px solid var(--border); text-align: center; }
+.stat-label { font-size: 13px; color: var(--text-sub); margin-bottom: 6px; }
+.stat-value { font-size: 22px; font-weight: 700; }
+.stat-sub { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+table th { background: #f8f9fb; padding: 10px 12px; text-align: left; font-weight: 600; color: var(--text-sub); border-bottom: 2px solid var(--border); font-size: 13px; }
+table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+table tr:last-child td { border-bottom: none; }
+table tr:hover { background: #f8f9fb; }
+.tag-up { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; background: var(--red-bg); color: var(--red); }
+.tag-down { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; background: var(--green-bg); color: var(--green); }
+.highlight-box { background: var(--blue-bg); border-radius: 10px; padding: 16px 20px; border-left: 4px solid var(--blue); margin-bottom: 12px; }
+.highlight-box.warning { background: #fffbeb; border-left-color: var(--orange); }
+.highlight-box.success { background: var(--green-bg); border-left-color: var(--green); }
+.highlight-box.danger { background: var(--red-bg); border-left-color: var(--red); }
+.highlight-title { font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+.highlight-text { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+.footer { text-align: center; padding: 20px; font-size: 12px; color: var(--text-sub); border-top: 1px solid var(--border); margin-top: 24px; }
+.disclaimer { background: #fffbeb; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #92400e; margin-top: 16px; line-height: 1.8; }
+.stock-code { color: var(--blue); font-family: Consolas, monospace; }
+@media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } body { padding: 12px; } .header h1 { font-size: 22px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>A股收盘总结</h1>
+  <div class="date">2026年10月30日 · 周五（10月收官）</div>
+  <div class="tag">沪指失守3600 · 10月收官收跌 · 科创50-5.48% · 白酒医药逆势拉涨 · 全市场超4600股飘绿 · 北向资金持续流出</div>
+</div>
+
+<!-- 核心指数 -->
+<div class="section">
+  <div class="section-title">核心指数收盘</div>
+  <div class="grid-3">
+    <div class="card index-card">
+      <div class="index-name">上证指数</div>
+      <div class="index-value green">3599.02</div>
+      <div class="index-change green">-1.44%（失守3600）</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">深证成指</div>
+      <div class="index-value green">10833.78</div>
+      <div class="index-change green">-2.73%</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">创业板指</div>
+      <div class="index-value green">2413.63</div>
+      <div class="index-change green">-4.13%</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">科创50</div>
+      <div class="index-value green">——</div>
+      <div class="index-change green">-5.48%</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">科创综指</div>
+      <div class="index-value green">1421.31</div>
+      <div class="index-change green">-4.66%</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">北证50</div>
+      <div class="index-value green">——</div>
+      <div class="index-change green">-2.68%</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">沪深北三市成交</div>
+      <div class="index-value blue" style="font-size:20px;">16877亿</div>
+      <div class="index-change" style="color:var(--text-sub);">放量1170亿（放量下跌）</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">上涨 / 下跌</div>
+      <div class="index-value" style="font-size:18px;color:var(--red);">约800 / <span class="green">超4600</span></div>
+      <div class="index-change" style="color:var(--text-sub);">约14%个股飘红</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">今日涨停 / 封板率</div>
+      <div class="index-value red" style="font-size:20px;">47 / 60%</div>
+      <div class="index-change" style="color:var(--text-sub);">连板股9只 · 31股封板未遂</div>
+    </div>
+  </div>
+</div>
+
+<!-- 市场概览 -->
+<div class="section">
+  <div class="section-title">市场情绪概览</div>
+  <div class="grid-4">
+    <div class="stat-box">
+      <div class="stat-label">最高连板</div>
+      <div class="stat-value red" style="font-size:20px;">5连板</div>
+      <div class="stat-sub">青岛食品（大消费 · 食品饮料）</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">其他连板高度</div>
+      <div class="stat-value red" style="font-size:16px;">8天4板 / 3连板</div>
+      <div class="stat-sub">东方海洋 / 澳洋健康、上海沪工</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">杀跌主线</div>
+      <div class="stat-value green" style="font-size:16px;">CPO光通信 + 半导体</div>
+      <div class="stat-sub">通信设备、短剧游戏、文化传媒、军工</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">逆势主线</div>
+      <div class="stat-value red" style="font-size:16px;">白酒 + CRO/创新药</div>
+      <div class="stat-sub">航运港口、石油天然气、银行（午后）、煤炭（午后）</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">放量下跌特征</div>
+      <div class="stat-value green" style="font-size:15px;">+1170亿</div>
+      <div class="stat-sub">放量通常对应筹码加速派发</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">北向资金</div>
+      <div class="stat-value green" style="font-size:15px;">持续流出</div>
+      <div class="stat-sub">外资近两日减持科技、加仓红利防御</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">10月月度表现</div>
+      <div class="stat-value green" style="font-size:15px;">收跌</div>
+      <div class="stat-sub">高开低走 · 本月主要由红利板块护盘</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">资金风格</div>
+      <div class="stat-value blue" style="font-size:15px;">极致跷跷板</div>
+      <div class="stat-sub">科技成长崩 → 价值防御（白酒医药航运）</div>
+    </div>
+  </div>
+</div>
+
+<!-- 板块表现 -->
+<div class="section">
+  <div class="section-title">板块涨跌一览</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">逆势领涨方向</h3>
+      <table>
+        <thead><tr><th>板块</th><th style="text-align:right;">表现</th></tr></thead>
+        <tbody>
+          <tr><td>🍶 白酒</td><td style="text-align:right;"><span class="tag-up">逆势拉升 · 皇台酒业/泸州老窖/迎驾贡酒/古井贡酒涨停</span></td></tr>
+          <tr><td>💊 CRO／创新药</td><td style="text-align:right;"><span class="tag-up">全天强势 · 万邦医药20CM · 毕得医药盘中20CM</span></td></tr>
+          <tr><td>🍼 饮料乳品</td><td style="text-align:right;"><span class="tag-up">午后异动 · 新乳业涨停</span></td></tr>
+          <tr><td>🚢 海运／港口</td><td style="text-align:right;"><span class="tag-up">中远海控+7.44% · 石油天然气同步走强</span></td></tr>
+          <tr><td>🛢️ 石油天然气</td><td style="text-align:right;"><span class="tag-up">涨幅居前 · 红利防御</span></td></tr>
+          <tr><td>🏦 银行</td><td style="text-align:right;"><span class="tag-up">午后走强 · 延续估值修复</span></td></tr>
+          <tr><td>⛏️ 煤炭</td><td style="text-align:right;"><span class="tag-up">午后走俏 · 高股息</span></td></tr>
+          <tr><td>🍲 食品饮料（大消费）</td><td style="text-align:right;"><span class="tag-up">青岛食品5连板 · 黑芝麻涨停</span></td></tr>
+          <tr><td>🛰️ 商业航天</td><td style="text-align:right;"><span class="tag-up">上海沪工3连板 · 分化中仍有延续</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">
+        今日盘面极致演绎"<strong>价值/成长跷跷板</strong>"——科技成长全线崩跌，资金涌入白酒、医药、航运等防御性板块。白酒板块是今日最强主线，皇台酒业、泸州老窖、迎驾贡酒、古井贡酒集体涨停，多只中高端龙头（今世缘、山西汾酒）涨幅居前；医药/CRO方向反复活跃，万邦医药触及20%涨停、毕得医药盘中一度20CM，近岸蛋白+16%、皓元医药+10%。航运港口受益于集运指数欧线强势，中远海控盘中+7.44%，石油天然气同步走强。银行、煤炭则延续红利属性，午后被低位资金承接。
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">领跌方向</h3>
+      <table>
+        <thead><tr><th>板块</th><th style="text-align:right;">表现</th></tr></thead>
+        <tbody>
+          <tr><td>📡 通信设备</td><td style="text-align:right;"><span class="tag-down">继续调整 · 移远通信跌停 · 太辰光/新易盛跌幅靠前</span></td></tr>
+          <tr><td>📶 CPO／光通信</td><td style="text-align:right;"><span class="tag-down">连续第二日杀跌</span></td></tr>
+          <tr><td>💻 元器件</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+          <tr><td>🧬 半导体</td><td style="text-align:right;"><span class="tag-down">持续承压</span></td></tr>
+          <tr><td>🎮 短剧游戏</td><td style="text-align:right;"><span class="tag-down">题材退潮 · 文投控股7天4板后低开9.69%</span></td></tr>
+          <tr><td>📺 文化传媒／影视院线</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+          <tr><td>✈️ 军工</td><td style="text-align:right;"><span class="tag-down">领跌方向之一</span></td></tr>
+          <tr><td>🤖 人形机器人</td><td style="text-align:right;"><span class="tag-down">光洋股份低开0.86% · 东贝集团竞价跌停</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">
+        科技成长是连续第二日被砸盘——CPO/光通信、元器件、半导体、通信设备全线弱势，其中通信设备板块最惨：移远通信直接跌停、太辰光、新易盛跌幅靠前。前期最热的短剧、机器人题材今日集体退潮：文投控股（7天4板）竞价低开9.69%，东贝集团（3板）竞价直接跌停，光洋股份（4板）也以低开0.86%收场。高位无业绩支撑的题材股正被市场快速淘汰。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- 个股异动 -->
+<div class="section">
+  <div class="section-title">个股异动</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">涨停/逆势上涨股（部分代表）</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">异动</th><th style="text-align:right;">亮点</th></tr></thead>
+        <tbody>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz001219.html">青岛食品(001219)</a></td><td style="text-align:right;" class="red">5连板</td><td style="text-align:right;">大消费 · 控制权拟变更 · 公司澄清无其他未披露事项</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002086.html">东方海洋(002086)</a></td><td style="text-align:right;" class="red">8天4板</td><td style="text-align:right;">农业 · 反包延续</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002172.html">澳洋健康(002172)</a></td><td style="text-align:right;" class="red">3连板</td><td style="text-align:right;">医疗 · CRO</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603131.html">上海沪工(603131)</a></td><td style="text-align:right;" class="red">3连板</td><td style="text-align:right;">商业航天 · 卫星互联网</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000995.html">皇台酒业(000995)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">白酒 · 早盘领涨</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000568.html">泸州老窖(000568)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">白酒龙头 · 高端白酒</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603198.html">迎驾贡酒(603198)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">白酒 · 10:12率先封板</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000596.html">古井贡酒(000596)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">白酒 · 暴涨9.72%</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz301520.html">万邦医药(301520)</a></td><td style="text-align:right;" class="red">20CM涨停</td><td style="text-align:right;">医药 · 午后直线拉升</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600721.html">百花医药(600721)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">医药 · 午后封板</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh688073.html">毕得医药(688073)</a></td><td style="text-align:right;" class="red">盘中20CM</td><td style="text-align:right;">CRO · 科创</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh688137.html">近岸蛋白(688137)</a></td><td style="text-align:right;" class="red">+16%</td><td style="text-align:right;">CRO · 科创</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh688131.html">皓元医药(688131)</a></td><td style="text-align:right;" class="red">+10%</td><td style="text-align:right;">CRO · 科创</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002946.html">新乳业(002946)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">饮料乳品 · 午后异动</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh601919.html">中远海控(601919)</a></td><td style="text-align:right;" class="red">+7.44%</td><td style="text-align:right;">海运龙头 · 集运指数欧线强势</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600285.html">羚锐制药(600285)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">医药 · 早盘封板</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002275.html">桂林三金(002275)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">医药 · 早盘封板</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002365.html">永安药业(002365)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">医药 · 早盘封板</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">领跌 & 封板失败股</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">异动</th><th style="text-align:right;">备注</th></tr></thead>
+        <tbody>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603236.html">移远通信(603236)</a></td><td style="text-align:right;" class="green">跌停</td><td style="text-align:right;">通信设备龙头 · 继续调整</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz300570.html">太辰光(300570)</a></td><td style="text-align:right;" class="green">跌幅靠前</td><td style="text-align:right;">光通信 · CPO</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz300502.html">新易盛(300502)</a></td><td style="text-align:right;" class="green">跌幅靠前</td><td style="text-align:right;">光模块 · 连续杀跌</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600936.html">文投控股(600936)</a></td><td style="text-align:right;" class="green">低开9.69%</td><td style="text-align:right;">短剧7天4板 · 竞价就跳水</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh601956.html">东贝集团(601956)</a></td><td style="text-align:right;" class="green">竞价跌停</td><td style="text-align:right;">机器人3板 · 直接终结</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002708.html">光洋股份(002708)</a></td><td style="text-align:right;" class="green">低开0.86%</td><td style="text-align:right;">机器人4板 · 高位无业绩</td></tr>
+          <tr><td>（大量半导体/元器件）</td><td style="text-align:right;" class="green">普跌</td><td style="text-align:right;">科创50-5.48% · 半导体领跌</td></tr>
+          <tr><td>（传媒/影视院线）</td><td style="text-align:right;" class="green">普跌</td><td style="text-align:right;">题材退潮</td></tr>
+          <tr><td>（军工板块）</td><td style="text-align:right;" class="green">领跌</td><td style="text-align:right;">高位整理后承压</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px;font-size:13px;color:var(--text-sub);">今日全市场47股涨停，但同时有31股封板未遂（封板率60%），封板失败中有相当一部分是竞价就跳水，说明高位股的溢价能力已经严重下降。尤其是机器人、短剧等前期最热的题材，几乎是"竞价即宣判"——这种极端反应往往意味着题材已经进入尾声。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 今日要点 -->
+<div class="section">
+  <div class="section-title">今日盘面要点</div>
+
+  <div class="highlight-box danger">
+    <div class="highlight-title">1. 沪指失守3600点 · 10月收官收跌 · 全市场超4600股飘绿</div>
+    <div class="highlight-text">
+      今日A股三大指数集体低开，午后一度探底回升、创业板指盘中逼近翻红，但随后再度回落，收盘全线翻绿：<strong>上证指数收跌1.44%报3599.02点，失守3600点整数关口</strong>（这也是自10月8日低开反弹以来首次跌回3600下方）；深证成指跌2.73%报10833.78点，创业板指跌4.13%报2413.63点；科创50指数暴跌5.48%，科创综指跌4.66%，北证50跌2.68%。沪深北三市成交额16877亿元、较上一交易日放量1170亿元——放量下跌往往对应筹码加速派发。全市场约800只个股上涨、超4600只下跌，仅约14%个股飘红。今日也是10月的最后一个交易日，A股10月整体收跌，主要由红利板块（银行、石油、煤炭）护盘抗跌。
+    </div>
+  </div>
+
+  <div class="highlight-box danger">
+    <div class="highlight-title">2. 科技成长连续第二日崩跌 · CPO光通信、半导体、通信设备轮番被砸</div>
+    <div class="highlight-text">
+      科技成长是连续第二日被市场集中抛售。昨日天孚通信-19.77%引爆的调整，今日进一步发酵：通信设备板块最惨——移远通信直接跌停、太辰光、新易盛跌幅靠前；CPO/光通信、元器件、半导体全线弱势；科创50指数单日暴跌5.48%，领跌各大指数。支撑昨日科技反弹的SK海力士财报，今天就被谷歌财报暴雷+三星芯片利润失速的海外利空完全抵消，而更深层的问题依然是<strong>公募抱团瓦解+融资余额回落</strong>——中际旭创被减持702.96亿、新易盛超400亿、兆易创新近400亿，筹码重新分配远未结束。
+    </div>
+  </div>
+
+  <div class="highlight-box danger">
+    <div class="highlight-title">3. 高位题材股"竞价即跳水"——东贝集团竞价跌停、文投控股低开9.69%</div>
+    <div class="highlight-text">
+      前期最热的机器人、短剧题材今日集体退潮，而且退潮方式极端：<strong>东贝集团（3连板，机器人零部件）竞价直接跌停</strong>，<strong>文投控股（7天4板，短剧）竞价低开9.69%</strong>，光洋股份（4连板，机器人）也以低开0.86%收场。这意味着短线资金对高位无业绩支撑的题材股已到"零容忍"地步——任何高溢价预期都会在竞价阶段被直接打掉。而与之形成对比的，是有业绩或有基本面支撑的大消费和医药题材，青岛食品（5连板，控制权拟变更）高开9.98%继续封板，澳洋健康（3连板，医疗）、上海沪工（3连板，商业航天）都有较好承接。
+    </div>
+  </div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">4. 白酒板块逆势爆发 · 四股集体涨停 · 从医药CRO到饮料乳品全线异动</div>
+    <div class="highlight-text">
+      白酒是今日最强逆势主线：皇台酒业、泸州老窖、迎驾贡酒、古井贡酒集体涨停，今世缘、山西汾酒涨幅居前。医药/CRO方向全天反复活跃：万邦医药触及20%涨停、毕得医药盘中一度20CM（科创）、近岸蛋白+16%、皓元医药+10%；早盘羚锐制药、桂林三金、永安药业已封死涨停，午后百花医药直线拉升封10%涨停。饮料乳品板块午后异动上涨：新乳业涨停。华源证券指出，经过2015—2025年的十年创新转型，中国医药产业已完成新旧增长动能转换——创新替代仿制、出海能力提升，尤其是创新药显著打开了中国医药的成长空间；白酒则受益于消费复苏预期+三季报业绩稳健+估值低位三重逻辑。
+    </div>
+  </div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">5. 航运港口+石油天然气延续防御风格 · 中远海控+7.44%</div>
+    <div class="highlight-text">
+      海运、港口、石油天然气板块今日涨幅居前——中远海控盘中+7.44%，石油天然气板块同步走强。这与昨日的银行+煤炭+油气"红利组合"是同一套防御逻辑：在科技成长崩跌、全市场放量下跌的背景下，资金从高弹性资产撤离，涌入低估值、高股息、低波动的防御性板块。银行、煤炭也延续了这一风格，午后被低位资金承接。本质上是典型的<strong>"风格切换+避险驱动"</strong>——科技崩 → 防御涨，跷跷板效应极致演绎。
+    </div>
+  </div>
+
+  <div class="highlight-box warning">
+    <div class="highlight-title">6. 北向资金持续流出 · 外资近两日减持科技、加仓红利防御</div>
+    <div class="highlight-text">
+      北向资金近两日持续流出，外资的持仓调整方向清晰：<strong>减持科技成长（光模块、半导体、CPO产业链），加仓红利防御（银行、白酒、石油）</strong>。这背后是全球资金对AI基建投资回报率的担忧——此前Meta开放算力租赁等事件，引发市场担忧AI基建阶段性供大于求，而谷歌、三星财报不及预期进一步强化了这一预期。加上美联储加息周期下利率预期上行、硬科技作为久期长的成长资产对贴现率非常敏感，外资选择减仓科技、加仓防御的逻辑并不难理解。
+    </div>
+  </div>
+
+  <div class="highlight-box danger">
+    <div class="highlight-title">7. 10月收官月收跌 · 全月"高开低走+红利护盘"格局 · 11月面临三季报尾段考验</div>
+    <div class="highlight-text">
+      今日是10月最后一个交易日，A股10月整体收跌。回顾全月格局：月初（长假后）高开低走、以科技放量反弹开局；月中银行/石油/煤炭连续护盘、上证守住3700；月末科技连续两日崩跌、沪指失守3600。全月红利板块是最确定的主线：工商银行、建设银行续创历史新高、四大行A+H总市值首破10万亿，青岛银行、成都银行等城商行弹性十足。11月是三季报披露尾段（一般到11月上旬结束），业绩证伪压力仍在——目前光洋股份等高位题材已经开始暴露业绩风险，后续需警惕更多"业绩雷"。此外，美联储议息会议（11月中）等外部事件也可能扰动市场节奏。
+    </div>
+  </div>
+</div>
+
+<!-- 后市展望 -->
+<div class="section">
+  <div class="section-title">后市展望与操作建议</div>
+  <div class="card">
+
+    <div class="highlight-box danger">
+      <div class="highlight-title">📊 关键点位参考</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;">
+        <div class="stat-box" style="background:#ffeaea;border-color:#e74c3c;">
+          <div class="stat-label" style="color:#b03a2e;">上方压力</div>
+          <div class="stat-value" style="color:#e74c3c;font-size:18px;">3648 / 3674</div>
+          <div class="stat-sub">周二低点 & 本周反弹高点</div>
+        </div>
+        <div class="stat-box" style="background:#fff9e6;border-color:#f39c12;">
+          <div class="stat-label" style="color:#b7950b;">当前位</div>
+          <div class="stat-value" style="color:#d68910;font-size:18px;">3599.02（今收）</div>
+          <div class="stat-sub green">-1.44% · 失守3600整数关</div>
+        </div>
+        <div class="stat-box" style="background:#e8f8f0;border-color:#27ae60;">
+          <div class="stat-label" style="color:#1e8449;">下方关键位</div>
+          <div class="stat-value" style="color:#27ae60;font-size:18px;">3570 / 3500</div>
+          <div class="stat-sub">9月末低点 & 心理关口</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-title">💡 操作建议</div>
+      <div class="highlight-text">
+        <strong>1. 沪指失守3600是短期关键信号——跌破则下方看3570/3500：</strong>今日收盘3599.02，刚好在3600下方。3600是9月下旬的密集成交区，一旦有效跌破，下方支撑位依次是9月末低点3570、心理关口3500。但也要注意：沪指自10月8日低开反弹以来已经连跌三日，且今日成交量（16877亿）较前日放量1170亿，放量下跌本身说明筹码在加速派发，短期很难形成有效反弹，更可能先寻底。<br><br>
+        <strong>2. 科技成长的调整尚未结束——不要急于左侧抄底，等两个信号：</strong>CPO/光通信、半导体、通信设备连续两日杀跌，公募减持（中际旭创702亿、新易盛超400亿）+融资余额回落（2.545万亿→2.381万亿）的筹码结构问题远未解决。历史上抱团瓦解需要"业绩验证+筹码出清+情绪冰点"三重条件，目前只满足了"业绩验证"这一半（天孚Q3低于预期、谷歌/三星财报失速），筹码和情绪层面都还没有到位。等两个信号再考虑介入：① 放量止跌（单日K线出现长下影、且成交额≥1.7万亿）；② 中际旭创、新易盛、天孚通信这三个"锚"能否同步止跌。<br><br>
+        <strong>3. 防御/红利可以继续持有，但白酒不宜追高、银行性价比更好：</strong>白酒今日集体爆发，迎驾贡酒、古井贡酒、泸州老窖、皇台酒业集体涨停，消费复苏预期+三季报稳健+估值低位三重逻辑成立，适合作为防守型底仓继续持有；但短期涨幅过大的龙头追高性价比已经下降。银行（四大行总市值破10万亿、净息差拐点+中期分红+惠誉评级上调）和煤炭（高股息+低位）的确定性更强，特别是四大行，在科技崩跌中连续创历史新高，已经成为"市场情绪稳定器"。<br><br>
+        <strong>4. 医药CRO是本周新崛起的主线——创新药出海+估值修复+业绩兑现三重共振：</strong>万邦医药20CM、毕得医药盘中20CM、近岸蛋白+16%、皓元医药+10%，创新药/CRO方向的强势有基本面支撑（华源证券指出中国医药产业已完成新旧动能转换），且与科技成长的跷跷板效应清晰。这条线具备跨月延续的潜质，建议在分歧时分批介入有出海能力、业绩兑现的标的。<br><br>
+        <strong>5. 高位题材股已经进入"竞价即宣判"的冰点期——坚决回避无业绩支撑的题材票：</strong>东贝集团竞价跌停、文投控股低开9.69%、光洋股份低开，这种极端退潮方式在A股短线生态中通常预示题材周期接近尾声。当前连板高度最高只有5连板（青岛食品），且青岛食品有"控制权拟变更"的基本面支撑，其余连板高度骤降。在跌停数/炸板率高企的环境下，任何追高连板都是高风险操作，短线建议观望为主。<br><br>
+        <strong>6. 关注两个重要时间节点：</strong>① 下周五（11月6日）是美国非农数据发布日，叠加美联储11月议息会议（11月18—19日）临近，外围扰动可能加大；② 11月上旬三季报披露收尾，业绩证伪压力仍在，部分前期高估值但业绩不达预期的个股可能继续下跌。仓位建议保持5成以下，以红利+防御为主、题材为辅，等科技成长充分出清后再考虑加仓。
+      </div>
+    </div>
+
+    <div class="highlight-box warning">
+      <div class="highlight-title">🎯 关注方向（防守反击）</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+        <div>
+          <p style="font-size:14px;font-weight:600;color:var(--red);margin-bottom:6px;">相对占优方向</p>
+          <p style="font-size:13px;line-height:1.9;">
+            📊 银行（四大行总市值破10万亿 · 已成情绪稳定器）<br>
+            💊 医药/CRO/创新药（创新药出海 · 业绩兑现）<br>
+            🍶 白酒（消费复苏 · 三季报稳健 · 但不宜追高）<br>
+            🛢️ 石油天然气/煤炭（高股息 · 抗跌）<br>
+            🚢 航运港口（中远海控+7.44% · 集运欧线强势）<br>
+            🛰️ 商业航天（上海沪工3连板 · 有政策支撑）
+          </p>
+        </div>
+        <div>
+          <p style="font-size:14px;font-weight:600;color:var(--green);margin-bottom:6px;">坚决回避方向</p>
+          <p style="font-size:13px;line-height:1.9;">
+            📡 通信设备（移远通信跌停 · 连续调整）<br>
+            📶 CPO/光通信/光模块（连续第二日崩跌）<br>
+            💻 半导体（科创50-5.48% · 领跌）<br>
+            🎮 短剧游戏（文投控股低开9.69% · 退潮）<br>
+            🤖 人形机器人（东贝竞价跌停 · 题材退潮）<br>
+            ✈️ 高位无业绩连板股（竞价即宣判）
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <p>数据来源：证券时报e公司、财联社、第一财经、大河财立方、证券之星、新浪财经、科创板日报 · 仅供参考，不构成投资建议</p>
+  <div class="disclaimer">
+    ⚠️ 免责声明：本报告基于公开市场数据整理，所有内容仅供学习交流，不构成任何投资建议。股市有风险，投资需谨慎。
+  </div>
+</div>
+
+</body>
+</html>
