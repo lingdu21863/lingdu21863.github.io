@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 | 2026年11月11日</title>
+<style>
+:root {
+  --bg: #f5f6fa; --card: #ffffff; --border: #e8e8ed; --text: #1a1a2e; --text-sub: #6b7280;
+  --red: #e74c3c; --red-bg: #fef2f2; --green: #27ae60; --green-bg: #f0fdf4;
+  --blue: #3b82f6; --blue-bg: #eff6ff; --orange: #f39c12; --purple: #8b5cf6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "Microsoft YaHei", "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 24px; max-width: 1100px; margin: 0 auto; }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.header { text-align: center; padding: 32px 24px 28px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 16px; margin-bottom: 24px; color: #fff; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.header .date { font-size: 15px; opacity: 0.7; }
+.header .tag { display: inline-block; margin-top: 12px; padding: 4px 14px; background: rgba(255,255,255,0.15); border-radius: 20px; font-size: 13px; }
+.section { margin-bottom: 24px; }
+.section-title { font-size: 18px; font-weight: 700; margin-bottom: 14px; padding-left: 12px; border-left: 4px solid var(--blue); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.card { background: var(--card); border-radius: 12px; padding: 20px; border: 1px solid var(--border); }
+.index-card { text-align: center; padding: 18px 12px; }
+.index-name { font-size: 14px; color: var(--text-sub); margin-bottom: 6px; }
+.index-value { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+.index-change { font-size: 14px; font-weight: 600; }
+.red { color: var(--red); } .green { color: var(--green); } .blue { color: var(--blue); }
+.stat-box { background: var(--card); border-radius: 12px; padding: 18px 16px; border: 1px solid var(--border); text-align: center; }
+.stat-label { font-size: 13px; color: var(--text-sub); margin-bottom: 6px; }
+.stat-value { font-size: 22px; font-weight: 700; }
+.stat-sub { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+table th { background: #f8f9fb; padding: 10px 12px; text-align: left; font-weight: 600; color: var(--text-sub); border-bottom: 2px solid var(--border); font-size: 13px; }
+table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+table tr:last-child td { border-bottom: none; }
+table tr:hover { background: #f8f9fb; }
+.tag-up { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; background: var(--red-bg); color: var(--red); }
+.tag-down { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; background: var(--green-bg); color: var(--green); }
+.highlight-box { background: var(--blue-bg); border-radius: 10px; padding: 16px 20px; border-left: 4px solid var(--blue); margin-bottom: 12px; }
+.highlight-box.warning { background: #fffbeb; border-left-color: var(--orange); }
+.highlight-box.success { background: var(--green-bg); border-left-color: var(--green); }
+.highlight-box.danger { background: var(--red-bg); border-left-color: var(--red); }
+.highlight-title { font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+.highlight-text { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+.footer { text-align: center; padding: 20px; font-size: 12px; color: var(--text-sub); border-top: 1px solid var(--border); margin-top: 24px; }
+.disclaimer { background: #fffbeb; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #92400e; margin-top: 16px; line-height: 1.8; }
+.stock-code { color: var(--blue); font-family: Consolas, monospace; }
+@media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } body { padding: 12px; } .header h1 { font-size: 22px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>A股收盘总结</h1>
+  <div class="date">2026年11月11日 · 周三</div>
+  <div class="tag">低开高走 · 沪指+0.46% · 创业板+3.11% · 算力硬件(CPO/PCB)爆发 · 培育钻石创历史新高</div>
+</div>
+
+<!-- 核心指数 -->
+<div class="section">
+  <div class="section-title">核心指数收盘</div>
+  <div class="grid-3">
+    <div class="card index-card">
+      <div class="index-name">上证指数</div>
+      <div class="index-value red">3680.64</div>
+      <div class="index-change red">+0.46%（低开高走）</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">深证成指</div>
+      <div class="index-value red">11389.74</div>
+      <div class="index-change red">+1.32%</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">创业板指</div>
+      <div class="index-value red">2572.07</div>
+      <div class="index-change red">+3.11%（盘中涨超3%）</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">科创50</div>
+      <div class="index-value red">约1300</div>
+      <div class="index-change red">+2.80%（午后放量拉升）</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">科创综指</div>
+      <div class="index-value red">—</div>
+      <div class="index-change red">涨近3%（科技股领涨）</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">北证50</div>
+      <div class="index-value red">约923</div>
+      <div class="index-change red">+2.30%</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">两市成交额</div>
+      <div class="index-value blue" style="font-size:20px;">1.69万亿</div>
+      <div class="index-change red">16887亿 · 放量约1719亿</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">上涨 / 下跌</div>
+      <div class="index-value" style="font-size:19px;"><span class="red">3500+</span> / <span class="green">—</span></div>
+      <div class="index-change" style="color:var(--text-sub);">午后一度超3800只上涨</div>
+    </div>
+    <div class="card index-card">
+      <div class="index-name">涨停 / 跌停 / 最高连板</div>
+      <div class="index-value red" style="font-size:20px;">70+ / — / 6板</div>
+      <div class="index-change" style="color:var(--text-sub);">福莱新材6天4板</div>
+    </div>
+  </div>
+</div>
+
+<!-- 市场概览 -->
+<div class="section">
+  <div class="section-title">市场情绪概览</div>
+  <div class="grid-4">
+    <div class="stat-box">
+      <div class="stat-label">最高连板</div>
+      <div class="stat-value red" style="font-size:20px;">3连板</div>
+      <div class="stat-sub">文投控股 / 锋龙股份 / 光洋股份</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">涨停家数</div>
+      <div class="stat-value red" style="font-size:20px;">70+只</div>
+      <div class="stat-sub">午后一度超70只涨停</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">沪指日内振幅</div>
+      <div class="stat-value blue" style="font-size:18px;">约0.7%</div>
+      <div class="stat-sub">低开-0.22% → 午后涨27点</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">最强主线</div>
+      <div class="stat-value red" style="font-size:15px;">算力硬件/CPO/PCB</div>
+      <div class="stat-sub">源杰20CM · 中际旭创市值回6000亿</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">次强主线</div>
+      <div class="stat-value red" style="font-size:15px;">培育钻石</div>
+      <div class="stat-sub">板块指数涨近6% · 创历史新高</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">反复活跃</div>
+      <div class="stat-value red" style="font-size:15px;">机器人概念</div>
+      <div class="stat-sub">福莱新材6天4板</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">最大杀跌</div>
+      <div class="stat-value green" style="font-size:15px;">白酒/冰雪旅游/光伏</div>
+      <div class="stat-sub">皇台酒业、古井贡酒等下挫</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-label">盘面特征</div>
+      <div class="stat-value blue" style="font-size:15px;">低开高走·午后集体拉升</div>
+      <div class="stat-sub">A50直线拉升 · 4只千亿龙头涨停</div>
+    </div>
+  </div>
+</div>
+
+<!-- 板块表现 -->
+<div class="section">
+  <div class="section-title">板块涨跌一览</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">领涨方向</h3>
+      <table>
+        <thead><tr><th>板块</th><th style="text-align:right;">涨幅</th></tr></thead>
+        <tbody>
+          <tr><td>💎 培育钻石（概念）</td><td style="text-align:right;"><span class="tag-up">涨近6% · 创历史新高</span></td></tr>
+          <tr><td>🔌 CPO / 光通信</td><td style="text-align:right;"><span class="tag-up">集体爆发</span></td></tr>
+          <tr><td>🖲️ PCB / 覆铜板</td><td style="text-align:right;"><span class="tag-up">领涨 · 多股涨停</span></td></tr>
+          <tr><td>📡 光芯片 / 通信设备</td><td style="text-align:right;"><span class="tag-up">4只千亿龙头涨停</span></td></tr>
+          <tr><td>🤖 人形机器人</td><td style="text-align:right;"><span class="tag-up">反复活跃</span></td></tr>
+          <tr><td>🎬 AI漫剧 / 影视</td><td style="text-align:right;"><span class="tag-up">文投3连板 · 上影8天4板</span></td></tr>
+          <tr><td>🌲 林业 / 新能源 / 塑料</td><td style="text-align:right;"><span class="tag-up">涨幅居前</span></td></tr>
+          <tr><td>🔥 燃气 / 微盘股</td><td style="text-align:right;"><span class="tag-up">盘中显著上涨</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">
+        今日主线高度集中在<strong>算力硬件（CPO/PCB/光芯片/光通信/覆铜板）</strong>：源杰科技20CM涨停，新易盛大涨超16%，中际旭创涨超9%收复500元关口、A+H总市值重返6000亿上方，奥士康3天2板，剑桥科技、青山纸业、光迅科技、东山精密、景旺电子、沪电股份、宇特光电涨停，致尚科技、太辰光涨超10%。<strong>培育钻石板块指数放量大涨近6%、创历史新高</strong>，自去年"9·24"行情以来累计上涨逾215%，力量钻石涨近10%、黄河旋风涨超8%。
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">领跌方向</h3>
+      <table>
+        <thead><tr><th>板块</th><th style="text-align:right;">跌幅</th></tr></thead>
+        <tbody>
+          <tr><td>🍶 白酒</td><td style="text-align:right;"><span class="tag-down">震荡调整</span></td></tr>
+          <tr><td>🏔️ 冰雪旅游</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+          <tr><td>☀️ 光伏</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+          <tr><td>🛍️ 消费电子</td><td style="text-align:right;"><span class="tag-down">板块调整</span></td></tr>
+          <tr><td>🚀 航天装备</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+          <tr><td>🏦 多元金融</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+          <tr><td>🥇 黄金 / 有色金属</td><td style="text-align:right;"><span class="tag-down">早盘领跌</span></td></tr>
+          <tr><td>🔋 锂矿 / CRO</td><td style="text-align:right;"><span class="tag-down">早盘领跌</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">
+        跌幅集中在<strong>白酒、冰雪旅游、光伏</strong>三个方向：白酒概念震荡调整，皇台酒业、古井贡酒、今世缘、金徽酒等纷纷下挫。早盘有色金属、黄金概念、锂矿、CRO概念跌幅居前，光学光电子亦走弱。整体跌幅温和，未出现恐慌性抛售，资金主要从昨日领涨的影视/资源方向切换至算力硬件与培育钻石。
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- 个股异动 -->
+<div class="section">
+  <div class="section-title">个股异动</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">涨停／强势股</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">表现</th><th style="text-align:right;">驱动</th></tr></thead>
+        <tbody>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh688498.html">源杰科技(688498)</a></td><td style="text-align:right;" class="red">20CM涨停</td><td style="text-align:right;">光芯片 · 科创</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz300502.html">新易盛(300502)</a></td><td style="text-align:right;" class="red">+16%+</td><td style="text-align:right;">CPO光模块龙头</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz300308.html">中际旭创(300308)</a></td><td style="text-align:right;" class="red">+9%+ · 收复500元</td><td style="text-align:right;">CPO · 市值回6000亿</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002913.html">奥士康(002913)</a></td><td style="text-align:right;" class="red">涨停 · 3天2板</td><td style="text-align:right;">PCB</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603083.html">剑桥科技(603083)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">CPO</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600103.html">青山纸业(600103)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">CPO概念</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002281.html">光迅科技(002281)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">光通信器件</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002384.html">东山精密(002384)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">PCB/光模块</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603228.html">景旺电子(603228)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">PCB</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002463.html">沪电股份(002463)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">PCB/服务器</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh688560.html">宇特光电(688560)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">光通信连接</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz301486.html">致尚科技(301486)</a></td><td style="text-align:right;" class="red">+10%+</td><td style="text-align:right;">光模块精密件</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz300570.html">太辰光(300570)</a></td><td style="text-align:right;" class="red">+10%+</td><td style="text-align:right;">光通信</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz301071.html">力量钻石(301071)</a></td><td style="text-align:right;" class="red">+9.47%</td><td style="text-align:right;">培育钻石</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600172.html">黄河旋风(600172)</a></td><td style="text-align:right;" class="red">+8.24%</td><td style="text-align:right;">培育钻石</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh605488.html">福莱新材(605488)</a></td><td style="text-align:right;" class="red">涨停 · 6天4板</td><td style="text-align:right">机器人 · 电子皮肤</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002931.html">锋龙股份(002931)</a></td><td style="text-align:right;" class="red">涨停 · 3连板</td><td style="text-align:right;">机器人零部件</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002708.html">光洋股份(002708)</a></td><td style="text-align:right;" class="red">涨停 · 3连板</td><td style="text-align:right;">机器人 · 轴承</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603466.html">风语筑(603466)</a></td><td style="text-align:right;" class="red">涨停 · 2连板</td><td style="text-align:right;">机器人/数字展示</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002520.html">日发精机(002520)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">机器人/数控机床</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002362.html">汉王科技(002362)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">AI/机器人</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002164.html">宁波东力(002164)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">机器人减速器</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600715.html">文投控股(600715)</a></td><td style="text-align:right;" class="red">涨停 · 3连板</td><td style="text-align:right;">AI漫剧/影视</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh601595.html">上海电影(601595)</a></td><td style="text-align:right;" class="red">涨停 · 8天4板</td><td style="text-align:right;">影视 · 创历史新高</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh688396.html">华润微(688396)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">半导体/功率器件</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">领跌：白酒／冰雪旅游／光伏</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">跌幅</th><th style="text-align:right;">备注</th></tr></thead>
+        <tbody>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000995.html">皇台酒业(000995)</a></td><td style="text-align:right;" class="green">下挫</td><td style="text-align:right;">白酒</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000596.html">古井贡酒(000596)</a></td><td style="text-align:right;" class="green">下挫</td><td style="text-align:right;">白酒</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603369.html">今世缘(603369)</a></td><td style="text-align:right;" class="green">下挫</td><td style="text-align:right;">白酒</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603919.html">金徽酒(603919)</a></td><td style="text-align:right;" class="green">下挫</td><td style="text-align:right;">白酒</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603799.html">华友钴业(603799)</a></td><td style="text-align:right;" class="green">调整</td><td style="text-align:right;">有色金属</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600519.html">贵州茅台(600519)</a></td><td style="text-align:right;" class="green">微跌</td><td style="text-align:right;">白酒龙头</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:8px;font-size:13px;color:var(--text-sub);">
+        今日下跌集中在<strong>白酒、冰雪旅游、光伏、消费电子、航天装备、多元金融</strong>，早盘有色金属、黄金、锂矿、CRO亦领跌。白酒板块的调整与昨日AI短剧吸金形成跷跷板；冰雪旅游与光伏则是前期涨幅后的正常兑现。整体看，<strong>没有跌停潮</strong>，资金只是从前期热门方向切向算力硬件与培育钻石，盘面属良性轮动而非系统性风险。
+      </p>
+      <h3 style="color:var(--orange);margin:16px 0 10px;font-size:15px;">⚠️ 需要关注的两点</h3>
+      <p style="font-size:13px;line-height:1.9;color:var(--text-sub);">① <strong>北向与外资共振</strong>：午后A50直线拉升、沪指一度涨27点，说明有外部资金或消息面催化，需关注晚间是否有政策/汇率利好落地；② <strong>沪指3680一线压力</strong>：今日收3680.64，重新站上11月5日收盘3689.91下方不远处，明日若能放量突破3689—3720区间，则本轮反弹有望延续，否则仍属箱体震荡。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 今日要点 -->
+<div class="section">
+  <div class="section-title">今日盘面要点</div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">1. 三大指数低开高走集体收红 · 沪指+0.46% · 创业板+3.11% · 成交额1.69万亿放量1719亿</div>
+    <div class="highlight-text">
+      今日A股<strong>低开高走、午后集体拉升</strong>。早盘三大指数集体低开（沪指-0.22%、深成指-0.32%、创业板-0.17%），有色金属、黄金、锂矿、CRO领跌；午后算力硬件发力，沪指快速走高一度涨27点，创业板指涨超3%。收盘：<strong>沪指涨0.46%报3680.64点，深证成指涨1.32%报11389.74点，创业板指涨3.11%报2572.07点，科创50涨2.80%，北证50涨2.30%</strong>。沪深两市成交额<strong>16887亿元（约1.69万亿）</strong>，较上一交易日放量约1719亿元；<strong>全市场超3500只个股上涨，午后一度超3800只</strong>，涨停个股一度超70只（数据来源：财联社、新浪财经）。
+    </div>
+  </div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">2. 算力硬件全面爆发 · CPO/PCB/光芯片领涨 · 源杰科技20CM、中际旭创市值回6000亿</div>
+    <div class="highlight-text">
+      今日最强主线是<strong>算力硬件方向</strong>：CPO、PCB、光芯片、光通信、覆铜板、光纤概念全面爆发。<strong>源杰科技20CM涨停</strong>；<strong>新易盛大涨超16%</strong>；<strong>中际旭创涨超9%，收复500元关口，A+H股总市值重返6000亿上方</strong>；奥士康3天2板；剑桥科技、青山纸业、光迅科技、东山精密、景旺电子、沪电股份、宇特光电涨停；致尚科技、太辰光涨超10%。<strong>4只千亿级龙头涨停，通信ETF暴力拉升</strong>。逻辑来自AI算力资本开支持续高景气，光模块/PCB作为算力网络的核心瓶颈环节，订单与业绩确定性最高，资金在昨日调整后今日集中回流。
+    </div>
+  </div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">3. 培育钻石板块创历史新高 · 指数涨近6% · "9·24"以来累计涨超215%</div>
+    <div class="highlight-text">
+      <strong>培育钻石概念全天保持强势，板块指数放量大涨近6%，创历史新高</strong>。自去年"9·24"行情以来，该板块累计上涨逾215%，远远超过同期大盘。个股：<strong>力量钻石涨9.47%报59.28元、黄河旋风涨8.24%报12.22元、英诺激光涨超5%、惠丰钻石涨超6%</strong>。培育钻石兼具"消费复苏+实验室培育技术降本+海外需求"三重逻辑，且板块容量适中、辨识度高，成为资金在算力之外的第二进攻方向。
+    </div>
+  </div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">4. 机器人概念反复活跃 · 福莱新材6天4板 · 锋龙/光洋3连板</div>
+    <div class="highlight-text">
+      机器人概念今日<strong>反复活跃</strong>：<strong>福莱新材6天4板</strong>（电子皮肤），<strong>锋龙股份、光洋股份3连板</strong>，风语筑2连板，日发精机、汉王科技、宁波东力涨停。机器人作为贯穿10—11月的主线之一，在算力硬件爆发日仍能保持热度，说明资金对该方向的中长期逻辑仍有信心。催化上，特斯拉Optimus早期量产推进、苹果HALO机器人控制系统论文等消息持续发酵。
+    </div>
+  </div>
+
+  <div class="highlight-box success">
+    <div class="highlight-title">5. AI漫剧延续强势 · 文投控股3连板 · 上海电影8天4板创历史新高</div>
+    <div class="highlight-text">
+      AI内容方向今日<strong>分化中仍有龙头走强</strong>：<strong>文投控股3连板</strong>（延续15天8板后的高度），<strong>上海电影8天4板并创历史新高</strong>。昨日集体爆发的影视院线板块今日出现分化（北京文化接近跌停、中广天择/奥飞娱乐/博纳影业下跌），但核心龙头仍被资金抱团，说明AI短剧/影视的产业逻辑（QuestMobile：9月短剧时长净增133亿小时、海外短剧82%主投为中国厂商）仍在支撑龙头估值。
+    </div>
+  </div>
+
+  <div class="highlight-box danger">
+    <div class="highlight-title">6. 白酒/冰雪旅游/光伏领跌 · 资金跷跷板切换至科技成长</div>
+    <div class="highlight-text">
+      跌幅集中在<strong>白酒、冰雪旅游、光伏、消费电子、航天装备、多元金融</strong>。白酒概念震荡调整，<strong>皇台酒业、古井贡酒、今世缘、金徽酒</strong>等纷纷下挫。早盘有色金属、黄金概念、锂矿、CRO概念跌幅居前。整体跌幅温和，<strong>没有出现跌停潮</strong>，说明这是资金从前期防御/消费方向切向算力硬件与培育钻石的良性轮动，而非系统性风险释放。
+    </div>
+  </div>
+
+  <div class="highlight-box warning">
+    <div class="highlight-title">7. 午后A50直线拉升 · 4只千亿龙头涨停 · 关注外部催化</div>
+    <div class="highlight-text">
+      午后市场异动明显：<strong>A50直线拉升、沪指一度涨27点、沪深京三市上涨个股超3800只、涨停个股一度超70只</strong>，<strong>4只千亿级龙头涨停</strong>（通信方向为主）。这种"权重+题材"共振的拉升通常伴随外部消息面或资金面催化，需关注晚间是否有政策、汇率或外资层面的利好落地。若催化持续，明日有望延续强势；若仅是盘中脉冲，则需警惕冲高回落。
+    </div>
+  </div>
+</div>
+
+<!-- 后市展望 -->
+<div class="section">
+  <div class="section-title">后市展望与操作建议</div>
+  <div class="card">
+
+    <div class="highlight-box danger">
+      <div class="highlight-title">📊 关键点位参考</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px;">
+        <div class="stat-box" style="background:#ffeaea;border-color:#e74c3c;">
+          <div class="stat-label" style="color:#b03a2e;">上方压力</div>
+          <div class="stat-value" style="color:#e74c3c;font-size:18px;">3689 / 3720</div>
+          <div class="stat-sub">11月5日收盘高点 & 10月高点</div>
+        </div>
+        <div class="stat-box" style="background:#fff9e6;border-color:#f39c12;">
+          <div class="stat-label" style="color:#b7950b;">当前位</div>
+          <div class="stat-value" style="color:#d68910;font-size:18px;">3680.64（今收）</div>
+          <div class="stat-sub red">低开高走 · +0.46%</div>
+        </div>
+        <div class="stat-box" style="background:#e8f8f0;border-color:#27ae60;">
+          <div class="stat-label" style="color:#1e8449;">下方支撑</div>
+          <div class="stat-value" style="color:#27ae60;font-size:18px;">3660 / 3640</div>
+          <div class="stat-sub">5日线 & 昨日低点</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="highlight-title">💡 操作建议</div>
+      <div class="highlight-text">
+        <strong>1. 沪指低开高走收3680.64，重新逼近11月5日高点3689.91，短线看放量突破：</strong>今日沪指低开-0.22%后午后拉升，收+0.46%报3680.64，距11月5日收盘3689.91仅一步之遥。明日观察两点：① 能否放量突破3689并向3720发起攻击；② 若冲高回落跌破3660，则本轮反弹仍属箱体震荡。仓位可维持6成左右，突破后可适当加仓，回落则减仓。<br><br>
+        <strong>2. 算力硬件（CPO/PCB/光芯片）是今日最强主线，但追高需谨慎，优先选二线补涨：</strong>源杰科技20CM、新易盛+16%、中际旭创涨9%收复500元，龙头位置已高。AI算力资本开支是中长期最确定的方向，但短期追高20CM/10CM龙头风险较大，建议<strong>选择涨幅相对落后、但确有算力硬件业务的二线标的</strong>（如PCB二线、光模块配套、光芯片材料），或等待分歧后的低吸机会。<br><br>
+        <strong>3. 培育钻石创历史新高，趋势确立但需警惕加速后分化：</strong>板块指数涨近6%、"9·24"以来累计涨超215%，趋势非常强。但单日大涨近6%后，短期有获利兑现压力。参与方式上，<strong>不追高、等回踩5日线或10日线的低吸机会</strong>，重点看力量钻石、黄河旋风等核心标的的承接力。<br><br>
+        <strong>4. 机器人概念反复活跃，可作为中线底仓持有：</strong>福莱新材6天4板、锋龙/光洋3连板，说明资金仍在围绕机器人做文章。机器人兼具政策催化（Optimus量产、苹果HALO）和产业落地预期，且相比算力硬件位置更低，<strong>适合作为组合的中线底仓</strong>，逢回调布局核心零部件标的。<br><br>
+        <strong>5. 白酒/冰雪旅游/光伏调整属良性轮动，不宜恐慌：</strong>今日白酒、冰雪旅游、光伏领跌，但没有跌停潮，是资金从消费/防御切向科技成长的跷跷板效应。白酒等消费方向仍有估值修复逻辑，<strong>急跌反而是分批低吸机会</strong>，但需等待企稳信号（如单日跌幅收窄、放量长下影）。<br><br>
+        <strong>6. 结构建议：</strong>仓位6成左右，配置上"<strong>算力硬件（攻）+ 机器人/培育钻石（中线弹性）+ 消费/白酒（防御底仓）</strong>"三条腿。明日重点：① 沪指能否突破3689；② 成交额能否维持在1.6万亿以上；③ 算力硬件能否继续扩散而非一日游。
+      </div>
+    </div>
+
+    <div class="highlight-box warning">
+      <div class="highlight-title">🎯 关注方向</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+        <div>
+          <p style="font-size:14px;font-weight:600;color:var(--red);margin-bottom:6px;">相对占优方向</p>
+          <p style="font-size:13px;line-height:1.9;">
+            🔌 CPO/光模块（新易盛+16% · 中际旭创回6000亿）<br>
+            🖲️ PCB/覆铜板（奥士康3天2板 · 多股涨停）<br>
+            💎 培育钻石（指数涨近6% · 创历史新高）<br>
+            🤖 人形机器人（福莱新材6天4板）<br>
+            🎬 AI漫剧（文投3连板 · 上影8天4板创新高）<br>
+            📡 光芯片/光通信（源杰20CM）
+          </p>
+        </div>
+        <div>
+          <p style="font-size:14px;font-weight:600;color:var(--green);margin-bottom:6px;">暂时回避／减仓</p>
+          <p style="font-size:13px;line-height:1.9;">
+            🍶 白酒（皇台/古井/今世缘下挫 · 资金流出）<br>
+            🏔️ 冰雪旅游（跌幅居前）<br>
+            ☀️ 光伏（跌幅居前）<br>
+            🛍️ 消费电子（板块调整）<br>
+            🥇 黄金/有色金属/锂矿（早盘领跌）<br>
+            ⚠️ 算力硬件20CM龙头（位置高 · 不追高）
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+  <p>数据来源：财联社、新浪财经、东方财富、上海证券报、第一财经、证券时报 · 指数与个股行情经公开市场数据核验</p>
+  <div class="disclaimer">
+    ⚠️ 免责声明：本报告基于公开市场数据整理，所有内容仅供学习交流，不构成任何投资建议。股市有风险，投资需谨慎。
+  </div>
+</div>
+
+</body>
+</html>
