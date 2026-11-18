@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 | 2026年11月18日</title>
+<style>
+:root {
+  --bg: #f5f6fa; --card: #ffffff; --border: #e8e8ed; --text: #1a1a2e; --text-sub: #6b7280;
+  --red: #e74c3c; --red-bg: #fef2f2; --green: #27ae60; --green-bg: #f0fdf4;
+  --blue: #3b82f6; --blue-bg: #eff6ff; --orange: #f39c12; --purple: #8b5cf6;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "Microsoft YaHei", "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; padding: 24px; max-width: 1100px; margin: 0 auto; }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.header { text-align: center; padding: 32px 24px 28px; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); border-radius: 16px; margin-bottom: 24px; color: #fff; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+.header .date { font-size: 15px; opacity: 0.7; }
+.header .tag { display: inline-block; margin-top: 12px; padding: 4px 14px; background: rgba(255,255,255,0.15); border-radius: 20px; font-size: 13px; }
+.section { margin-bottom: 24px; }
+.section-title { font-size: 18px; font-weight: 700; margin-bottom: 14px; padding-left: 12px; border-left: 4px solid var(--green); }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.card { background: var(--card); border-radius: 12px; padding: 20px; border: 1px solid var(--border); }
+.index-card { text-align: center; padding: 18px 12px; }
+.index-name { font-size: 14px; color: var(--text-sub); margin-bottom: 6px; }
+.index-value { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+.index-change { font-size: 14px; font-weight: 600; }
+.red { color: var(--red); } .green { color: var(--green); } .blue { color: var(--blue); }
+.stat-box { background: var(--card); border-radius: 12px; padding: 18px 16px; border: 1px solid var(--border); text-align: center; }
+.stat-label { font-size: 13px; color: var(--text-sub); margin-bottom: 6px; }
+.stat-value { font-size: 22px; font-weight: 700; }
+.stat-sub { font-size: 12px; color: var(--text-sub); margin-top: 4px; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+table th { background: #f8f9fb; padding: 10px 12px; text-align: left; font-weight: 600; color: var(--text-sub); border-bottom: 2px solid var(--border); font-size: 13px; }
+table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+table tr:last-child td { border-bottom: none; }
+table tr:hover { background: #f8f9fb; }
+.tag-up { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; background: var(--red-bg); color: var(--red); }
+.tag-down { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 13px; font-weight: 600; background: var(--green-bg); color: var(--green); }
+.highlight-box { background: var(--blue-bg); border-radius: 10px; padding: 16px 20px; border-left: 4px solid var(--blue); margin-bottom: 12px; }
+.highlight-box.warning { background: #fffbeb; border-left-color: var(--orange); }
+.highlight-box.success { background: var(--green-bg); border-left-color: var(--green); }
+.highlight-box.danger { background: var(--red-bg); border-left-color: var(--red); }
+.highlight-title { font-weight: 700; margin-bottom: 6px; font-size: 15px; }
+.highlight-text { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+.footer { text-align: center; padding: 20px; font-size: 12px; color: var(--text-sub); border-top: 1px solid var(--border); margin-top: 24px; }
+.disclaimer { background: #fffbeb; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #92400e; margin-top: 16px; line-height: 1.8; }
+.stock-code { color: var(--blue); font-family: Consolas, monospace; }
+.event-banner { background: linear-gradient(135deg, #334155 0%, #1e293b 100%); color: #fff; border-radius: 12px; padding: 18px 24px; margin-bottom: 20px; }
+.event-banner h3 { font-size: 16px; margin-bottom: 8px; }
+.event-banner p { font-size: 13px; line-height: 1.8; opacity: 0.95; }
+.cite { color: var(--blue); font-size: 11px; vertical-align: super; margin-left: 3px; }
+.sources { text-align: left; max-width: 760px; margin: 12px auto 0; line-height: 1.9; }
+.sources a { color: var(--blue); }
+@media (max-width: 768px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } body { padding: 12px; } .header h1 { font-size: 22px; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>A股收盘总结</h1>
+  <div class="date">2026年11月18日 · 周三</div>
+  <div class="tag">三大指数集体收涨 · 沪指+0.09% · 创业板+0.85% · 科创50领涨+2.19% · 成交1.37万亿创16个月地量 · 算力硬件反弹 · AI漫剧跌停潮延续</div>
+</div>
+
+<div class="event-banner">
+  <h3>关键催化：英伟达Q3财报超预期，盘后涨超4%</h3>
+  <p>美东时间11月17日盘后，英伟达公布2027财年Q3财报（截至2026年10月25日）：营收1158亿美元（预期1093.3亿）、同比+103.1%，史上首次单季破千亿；数据中心营收1076亿美元（预期1019亿）、同比翻倍；GAAP毛利率74.8%、调整后毛利率74.9%，均同比+1.4pp；净利润652.87亿美元、同比+105%。此前英伟达市值较高点已蒸发约2.1万亿美元（40天跌36%），财报超预期后盘后股价反弹涨超4%。<a class="cite" href="#source-2" style="color:#bfdbfe;">[2]</a><a class="cite" href="#source-5" style="color:#bfdbfe;">[5]</a></p>
+</div>
+
+<div class="event-banner" style="background:linear-gradient(135deg,#0c4a6e 0%,#075985 100%);">
+  <h3>今日主线：算力硬件反弹，AI漫剧连续退潮</h3>
+  <p>A股三大指数集体收涨：沪指+0.09%报3587.83、深成指+0.20%报10659.41、创业板指+0.85%报2311.62；科创50领涨+2.19%报1247.99，北证50收跌-2.20%报823.01。沪深两市成交1.37万亿元、缩量880亿元，创2025年7月以来新低（刷新年内9月29日14092亿前低）。上涨1277只、下跌3823只，涨停42只（不含ST）、跌停47只。算力硬件/算力租赁全天强势，家电/海运/通信服务跟随；AI漫剧、贵金属、游戏、军工持续调整。<a class="cite" href="#source-1" style="color:#bfdbfe;">[1]</a><a class="cite" href="#source-3" style="color:#bfdbfe;">[3]</a></p>
+</div>
+
+<div class="section">
+  <div class="section-title">核心指数收盘</div>
+  <div class="grid-3">
+    <div class="card index-card"><div class="index-name">上证指数</div><div class="index-value red">3587.83</div><div class="index-change red">+0.09%</div></div>
+    <div class="card index-card"><div class="index-name">深证成指</div><div class="index-value red">10659.41</div><div class="index-change red">+0.20%</div></div>
+    <div class="card index-card"><div class="index-name">创业板指</div><div class="index-value red">2311.62</div><div class="index-change red">+0.85%</div></div>
+    <div class="card index-card"><div class="index-name">科创50</div><div class="index-value red">1247.99</div><div class="index-change red">+2.19%（领涨）</div></div>
+    <div class="card index-card"><div class="index-name">北证50</div><div class="index-value green">823.01</div><div class="index-change green">-2.20%（领跌）</div></div>
+    <div class="card index-card"><div class="index-name">沪深两市成交额</div><div class="index-value blue" style="font-size:21px;">1.37万亿</div><div class="index-change green">缩量880亿 · 16个月新低</div></div>
+    <div class="card index-card"><div class="index-name">上涨 / 下跌</div><div class="index-value" style="font-size:22px;"><span class="red">1277</span> / <span class="green">3823</span></div><div class="index-change" style="color:var(--text-sub);">上涨占比约25%</div></div>
+    <div class="card index-card"><div class="index-name">涨停 / 跌停</div><div class="index-value" style="font-size:22px;"><span class="red">42</span> / <span class="green">47</span></div><div class="index-change" style="color:var(--text-sub);">不含ST · 旭光电子4连板为最高</div></div>
+    <div class="card index-card"><div class="index-name">最活跃个股（成交额前5）</div><div class="index-value" style="font-size:14px;line-height:1.55;">中际旭创164.39亿<br>新易盛128.07亿 / 寒武纪113.35亿<br>东山精密91.46亿 / 长鑫科技83.64亿</div><div class="index-change red">算力权重成交居前</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">市场情绪概览</div>
+  <div class="grid-4">
+    <div class="stat-box"><div class="stat-label">量能变化</div><div class="stat-value green" style="font-size:18px;">1.37万亿 · 缩量880亿</div><div class="stat-sub">2025年7月以来新低</div></div>
+    <div class="stat-box"><div class="stat-label">连板最高标</div><div class="stat-value red" style="font-size:18px;">旭光电子 4连板</div><div class="stat-sub">CPO概念</div></div>
+    <div class="stat-box"><div class="stat-label">3连板个股</div><div class="stat-value red" style="font-size:15px;">江钨装备 / 艾华集团 / 中天精装 / 贤丰控股</div><div class="stat-sub">各1只，分化明显</div></div>
+    <div class="stat-box"><div class="stat-label">2连板个股</div><div class="stat-value" style="font-size:14px;color:var(--text-sub);">中京电子 / 金博股份 / 立航科技 / 盛剑科技 / 冰轮环境 / 通鼎互联 等11只</div><div class="stat-sub">板块分散</div></div>
+    <div class="stat-box"><div class="stat-label">算力硬件反弹</div><div class="stat-value red" style="font-size:16px;">深南电路/沪电股份/生益电子涨停</div><div class="stat-sub">PCB · 先进封装</div></div>
+    <div class="stat-box"><div class="stat-label">算力租赁拉升</div><div class="stat-value red" style="font-size:16px;">美利云/常山北明/青云科技/恒润股份涨停</div><div class="stat-sub">华为算力 · 云算力</div></div>
+    <div class="stat-box"><div class="stat-label">家电/海运强势</div><div class="stat-value red" style="font-size:15px;">九阳股份/海丰国际 等</div><div class="stat-sub">全天强势</div></div>
+    <div class="stat-box"><div class="stat-label">AI漫剧连续跌停</div><div class="stat-value green" style="font-size:14px;">文投控股/横店影视/慈文传媒</div><div class="stat-sub">连续2天跌停</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">板块涨跌一览</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">领涨板块</h3>
+      <table>
+        <thead><tr><th>方向</th><th style="text-align:right;">表现</th></tr></thead>
+        <tbody>
+          <tr><td>算力硬件（PCB / 先进封装 / CPO / 通信设备）</td><td style="text-align:right;"><span class="tag-up">反弹</span></td></tr>
+          <tr><td>算力租赁 / 云算力</td><td style="text-align:right;"><span class="tag-up">全天强势 · 多股涨停</span></td></tr>
+          <tr><td>半导体 / 半导体设备</td><td style="text-align:right;"><span class="tag-up">盛合晶微+10%+ · 盛剑科技2连板</span></td></tr>
+          <tr><td>家用电器 / 小家电</td><td style="text-align:right;"><span class="tag-up">全天强势</span></td></tr>
+          <tr><td>航海装备 / 航运港口 / 海运</td><td style="text-align:right;"><span class="tag-up">全天强势</span></td></tr>
+          <tr><td>通信服务 / IT服务</td><td style="text-align:right;"><span class="tag-up">领涨行业</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">英伟达Q3财报超预期盘后涨超4%，直接催化今日算力硬件与算力租赁方向反弹。PCB/先进封装（深南电路/沪电股份/生益电子涨停）、华为算力生态（美利云/常山北明/青云科技/恒润股份涨停）两条子线齐涨。家电和海运是全天独立强势方向，未跟随其他板块轮动。<a class="cite" href="#source-3">[3]</a><a class="cite" href="#source-5">[5]</a></p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">领跌板块</h3>
+      <table>
+        <thead><tr><th>方向</th><th style="text-align:right;">跌幅</th></tr></thead>
+        <tbody>
+          <tr><td>AI漫剧 / 影视院线</td><td style="text-align:right;"><span class="tag-down">连续跌停潮</span></td></tr>
+          <tr><td>贵金属 / 黄金</td><td style="text-align:right;"><span class="tag-down">领跌行业</span></td></tr>
+          <tr><td>电视广播 / 出版</td><td style="text-align:right;"><span class="tag-down">跌幅居前</span></td></tr>
+          <tr><td>游戏 / CRO / 零售</td><td style="text-align:right;"><span class="tag-down">下挫</span></td></tr>
+          <tr><td>军工装备</td><td style="text-align:right;"><span class="tag-down">调整</span></td></tr>
+          <tr><td>乳业（午后）</td><td style="text-align:right;"><span class="tag-down">阳光乳业跌停</span></td></tr>
+          <tr><td>北证50指数</td><td style="text-align:right;"><span class="tag-down">-2.20%</span></td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">AI漫剧方向出现连续2天的高位退潮：文投控股（11月17日跌停后今日再跌停）、横店影视、慈文传媒、湖北广电集体跌停。贵金属、传媒出版、军工同样持续调整。北证50早盘一度涨超2%，但午后随小微盘情绪退潮翻绿收跌-2.20%，与11月17日午后翻绿走势一致。<a class="cite" href="#source-1">[1]</a><a class="cite" href="#source-3">[3]</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">个股异动</div>
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color:var(--red);margin-bottom:12px;font-size:16px;">涨停与强势股（含连板梯队）</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">表现</th><th style="text-align:right;">方向</th></tr></thead>
+        <tbody>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600353.html">旭光电子(600353)</a></td><td style="text-align:right;" class="red">4连板</td><td style="text-align:right;">CPO / 电子材料</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600268.html">国电南自(600268)</a> / 江钨装备 / 艾华集团 / 中天精装 / 贤丰控股</td><td style="text-align:right;" class="red">3连板</td><td style="text-align:right;">多方向分散</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002916.html">深南电路(002916)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">PCB · 先进封装</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh601138.html">沪电股份(601138)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">PCB · AI服务器主板</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh688183.html">生益电子(688183)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">PCB · 科创板</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000815.html">美利云(000815)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">算力租赁 · 华为算力</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz000158.html">常山北明(000158)</a></td><td style="text-align:right;" class="red">涨停</td><td style="text-align:right;">华为算力 / 云算力</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh688310.html">青云科技(688310)</a></td><td style="text-align:right;" class="red">涨停 · 20CM</td><td style="text-align:right;">科创板 · 云算力</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002236.html">大华股份(002236)</a></td><td style="text-align:right;" class="red">+10%+</td><td style="text-align:right;">算力硬件 · 盘后消息催化</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh603135.html">盛剑科技(603135)</a></td><td style="text-align:right;" class="red">2连板</td><td style="text-align:right;">半导体设备</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz002242.html">九阳股份(002242)</a></td><td style="text-align:right;" class="red">2连板</td><td style="text-align:right;">家电 · 昨日地天板</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">连板高度回升至4连板（旭光电子），11月17日以来首次出现4连板。连板梯队以3板+2板为主，板块相对分散，CPO、华为算力、半导体设备、家电均有代表。算力硬件方向虽然有反弹，但仍未完全走出连板股。<a class="cite" href="#source-4">[4]</a></p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--green);margin-bottom:12px;font-size:16px;">跌停与高位退潮</h3>
+      <table>
+        <thead><tr><th>股票</th><th style="text-align:right;">表现</th><th style="text-align:right;">方向</th></tr></thead>
+        <tbody>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600715.html">文投控股(600715)</a></td><td style="text-align:right;" class="green">连续2天跌停</td><td style="text-align:right;">AI漫剧 · 前期19天11板高标</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600397.html">横店影视(600397)</a></td><td style="text-align:right;" class="green">跌停</td><td style="text-align:right;">AI漫剧 · 影视院线</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sz300306.html">慈文传媒(300306)</a></td><td style="text-align:right;" class="green">跌停</td><td style="text-align:right;">AI漫剧 · 短剧游戏</td></tr>
+          <tr><td><a class="stock-code" href="https://quote.eastmoney.com/sh600903.html">贵州燃气(600903)</a> / 阳光乳业 / 凯撒文化 / 吉视传媒 / 中国稀土 / 阳光照明 等</td><td style="text-align:right;" class="green">跌停</td><td style="text-align:right;">分散退潮</td></tr>
+          <tr><td>合计</td><td style="text-align:right;" class="green">47只跌停</td><td style="text-align:right;">不含ST · 含九阳/凯撒等前日强势股</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:13px;color:var(--text-sub);">AI漫剧方向高位退潮持续，文投控股连续2天跌停，横店影视、慈文传媒跟进。值得注意的是，前日涨停的凯撒文化、吉视传媒、九阳股份（家电方向）今日转入跌停，说明情绪分化较快，前日强势股并不一定能延续。整体来看，高位退潮与低位反弹并存，47只跌停家数高于涨停42只，盘面仍偏弱。<a class="cite" href="#source-3">[3]</a></p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">今日盘面要点</div>
+  <div class="highlight-box success">
+    <div class="highlight-title">1. 英伟达Q3财报超预期，算力硬件迎来短期催化</div>
+    <div class="highlight-text">美东时间11月17日盘后，英伟达财报全面超预期：营收1158亿美元（预期1093亿）、数据中心营收1076亿（预期1019亿）、毛利率74.8%（同比+1.4pp）、净利润652.87亿美元。盘后股价反弹涨超4%。A股算力硬件今日直接受益：PCB方向（深南电路、沪电股份、生益电子）、算力租赁（美利云、常山北明、青云科技、恒润股份）、CPO/通信设备（旭光电子4连板）齐涨，中际旭创、长鑫科技盘中快速拉升。<a class="cite" href="#source-2">[2]</a><a class="cite" href="#source-5">[5]</a></div>
+  </div>
+  <div class="highlight-box warning">
+    <div class="highlight-title">2. 1.37万亿创16个月地量，缩量反弹含金量有限</div>
+    <div class="highlight-text">沪深两市成交1.37万亿元、缩量880亿元，创出2025年7月以来新低，甚至低于2026年9月29日（14092亿）的年内前低。三大指数虽然集体收涨，但缩量背景下的反弹说明资金参与度仍低，属于"指数稳但情绪弱"的状态。上涨个股仅1277只（占比约25%），远低于前一日1136只但仍偏少；跌停47只高于涨停42只。<a class="cite" href="#source-1">[1]</a><a class="cite" href="#source-3">[3]</a></div>
+  </div>
+  <div class="highlight-box warning">
+    <div class="highlight-title">3. 科创50领涨+2.19%，北证50却领跌-2.20%</div>
+    <div class="highlight-text">今日最显著的结构性分化：科创50收涨2.19%（领涨所有宽基），而北证50收跌-2.20%（领跌）。北证50早盘一度涨超2%，但午后随小微盘情绪退潮翻绿，与11月17日"早盘冲高、午后翻绿"的走势一致。科创50则受算力硬件、半导体设备反弹驱动，全天维持领涨。资金在"科创半导体赛道"与"北证小微盘"之间做了明确选择。<a class="cite" href="#source-3">[3]</a></div>
+  </div>
+  <div class="highlight-box danger">
+    <div class="highlight-title">4. AI漫剧高位退潮进入第二阶段：多只龙头连续跌停</div>
+    <div class="highlight-text">文投控股（11月17日跌停后今日再跌停，前期19天11板高标）、横店影视、慈文传媒、湖北广电等AI漫剧龙头连续跌停或大幅下挫。AI漫剧方向自11月16日起连续3天出现高位退潮，且有向传媒出版、游戏、贵金属等非科技方向扩散的迹象。相比之下，算力硬件、半导体设备等"AI基础设施"方向在同一时间窗口出现反弹，资金在"AI硬件 vs AI应用"之间完成了一次清晰的切换。<a class="cite" href="#source-1">[1]</a><a class="cite" href="#source-3">[3]</a></div>
+  </div>
+  <div class="highlight-box success">
+    <div class="highlight-title">5. 家电/海运成为全天独立强势方向</div>
+    <div class="highlight-text">家电（九阳股份2连板、小熊电器）、海运/航运港口、通信服务是今日全天独立强势方向，既未跟随算力硬件早盘反弹节奏，也未跟随午后小幅回落，走出了独立行情。10月家电出口数据（量+14.1%、额+20.9%）仍是基本面支撑，海运受全球贸易补库预期影响。这类低估值、有实锤基本面支撑的方向，在缩量环境中容易成为资金的"避风港"。<a class="cite" href="#source-3">[3]</a></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">后市观察</div>
+  <div class="card">
+    <div class="highlight-box">
+      <div class="highlight-title">重点观察清单</div>
+      <div class="highlight-text">
+        1. <strong>英伟达财报后续影响：</strong>盘后涨超4%能否转化为美股次日涨幅，以及对A股算力硬件的次日持续性。注意：英伟达40天市值已蒸发2.1万亿美元，财报利好能否扭转中期趋势仍有疑问。<br>
+        2. <strong>量能能否回升：</strong>1.37万亿地量是缩到极致后的反弹，还是继续缩。若量能持续在1.4万亿以下，反弹的持续性有限。<br>
+        3. <strong>连板高度能否继续抬升：</strong>旭光电子4连板已高于此前11月17日的4连板水平，能否继续上板反映短线情绪的修复强度。<br>
+        4. <strong>北证50/小微盘：</strong>连续2天"早盘冲高、午后翻绿"，小微盘退潮是否接近尾声或仍有空间。<br>
+        5. <strong>高位退潮扩散风险：</strong>AI漫剧→传媒出版→游戏→贵金属→乳业，退潮是否扩散到其他高位板块需警惕。<br>
+        6. <strong>外部事件：</strong>APEC、Anthropic上市、沃什听证会等1-2周内密集事件仍可能带来波动。
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>数据截至2026年11月18日收盘。不同媒体对涨跌停数量是否包含ST股/退市股口径存在差异，页面已在关键指标区标注。所有指数点位、成交额、涨跌家数均来自21财经雷达数据（精确口径）。</p>
+  <div class="sources">
+    <strong>资料来源：</strong><br>
+    <span id="source-1">[1] <a href="https://m.weibo.cn/detail/5366619945832789">财联社11月18日收评微博：沪指+0.09%、成交1.37万亿、板块异动</a></span><br>
+    <span id="source-2">[2] <a href="https://finance.sina.com.cn/wm/2026-11-18/doc-inizcexi1207952.shtml">新浪财经：英伟达Q3财报超预期、盘后股价反弹</a></span><br>
+    <span id="source-3">[3] <a href="http://m.163.com/dy/article/LC1DEISF05199NPP.html">21世纪经济报道 / 21财经雷达：三大指数精确点位、科创50、成交额、个股成交额前5</a></span><br>
+    <span id="source-4">[4] <a href="https://www.stcn.com/article/detail/3969309.html">证券时报：CPO、先进封装等概念走强，旭光电子4连板，连板梯队</a></span><br>
+    <span id="source-5">[5] <a href="https://finance.eastmoney.com/a/202611183933530898.html">东方财富：英伟达2027Q3财报数据、指引</a></span>
+  </div>
+  <div class="disclaimer">免责声明：本报告基于公开市场数据整理，仅供学习交流，不构成任何投资建议。股市有风险，投资需谨慎。</div>
+</div>
+
+</body>
+</html>
