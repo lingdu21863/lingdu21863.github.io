@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 | 2026年11月19日</title>
+<style>
+:root {
+  --up: #e5484d; --down: #12a150; --flat: #8b8d98;
+  --bg: #f4f5f7; --card: #fff; --line: #e6e8ec;
+  --ink: #16181d; --ink2: #5b5f6b; --ink3: #8b8d98;
+  --accent: #2f6df6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; padding: 26px 16px 56px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+header { background: linear-gradient(135deg, #141821 0%, #232a3a 55%, #2b3448 100%); color: #fff; border-radius: 16px; padding: 30px 34px 26px; position: relative; overflow: hidden; }
+header::after { content: ""; position: absolute; right: -70px; top: -90px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(72,141,255,.38), transparent 68%); }
+.tagline { font-size: 12.5px; letter-spacing: .14em; color: #9fb0cc; display: flex; align-items: center; gap: 10px; }
+.tagline .dot { width: 6px; height: 6px; border-radius: 50%; background: #4d8dff; box-shadow: 0 0 0 4px rgba(77,141,255,.18); }
+h1 { font-size: 30px; font-weight: 700; letter-spacing: -.5px; margin: 12px 0 14px; }
+.verdict { display: inline-block; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); padding: 9px 16px; border-radius: 10px; font-size: 14.5px; color: #dfe7f5; }
+.meta { margin-top: 16px; font-size: 12.5px; color: #8fa1bd; display: flex; gap: 18px; flex-wrap: wrap; }
+
+.kpi { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 16px 0; }
+.kpi .cell { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.kpi .lab { font-size: 11.5px; color: var(--ink3); white-space: nowrap; }
+.kpi .val { font-size: 21px; font-weight: 700; letter-spacing: -.4px; margin-top: 5px; font-variant-numeric: tabular-nums; }
+.kpi .sub { font-size: 11.5px; color: var(--ink3); margin-top: 2px; }
+
+section { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; margin-top: 16px; }
+h2 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 9px; margin-bottom: 6px; }
+h2::before { content: ""; width: 3px; height: 15px; border-radius: 2px; background: var(--accent); }
+h2 small { font-weight: 400; font-size: 12px; color: var(--ink3); margin-left: auto; }
+.lead { font-size: 13px; color: var(--ink2); margin: 0 0 14px 12px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+th { text-align: right; font-weight: 500; color: var(--ink3); font-size: 11.5px; padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th.l, td.l { text-align: left; }
+td { text-align: right; padding: 7px 8px; border-bottom: 1px solid #f2f3f6; }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #fafbfd; }
+
+.up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--flat); }
+.bold { font-weight: 700; }
+.badge { display: inline-block; font-size: 11.5px; padding: 2px 9px; border-radius: 20px; margin-left: 8px; font-weight: 600; vertical-align: 2px; }
+.b-up { background: rgba(229,72,77,.1); color: var(--up); }
+.b-dn { background: rgba(18,161,80,.1); color: var(--down); }
+.nm a { color: #1d4ed8; text-decoration: none; border-bottom: 1px dashed #b9cdf5; font-weight: 600; }
+.nm a:hover { color: #0b3bb3; border-bottom-color: #0b3bb3; }
+.cd a { color: var(--ink3); text-decoration: none; font-size: 11.5px; font-family: Consolas, monospace; }
+.cd a:hover { color: var(--accent); text-decoration: underline; }
+.idx { color: var(--ink3); font-size: 11px; width: 26px; }
+.ind { color: var(--ink3); font-size: 12px; }
+.lb { color: var(--up); font-weight: 700; font-size: 12px; }
+
+.note { background: #fafbfd; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 12.8px; color: var(--ink2); line-height: 1.75; margin-top: 12px; }
+.note b { color: var(--ink); }
+
+.bar { display: flex; height: 26px; border-radius: 7px; overflow: hidden; margin: 6px 0 10px; font-size: 11.5px; color: #fff; font-weight: 600; }
+.bar div { display: flex; align-items: center; justify-content: center; }
+.bar .u { background: var(--up); } .bar .f { background: #c9ccd4; } .bar .d { background: var(--down); }
+.legend { display: flex; gap: 18px; font-size: 12.5px; color: var(--ink2); flex-wrap: wrap; }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+
+.pts { display: grid; gap: 12px; margin-top: 4px; }
+.pt { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+.pt .no { width: 26px; height: 26px; border-radius: 8px; background: #eef3ff; color: #2f6df6; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.pt h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.pt p { font-size: 13.3px; color: var(--ink2); line-height: 1.78; }
+.pt p b { color: var(--ink); }
+
+footer { margin-top: 18px; font-size: 11.5px; color: var(--ink3); line-height: 1.8; text-align: center; padding: 0 10px; }
+
+@media (max-width:900px){ .kpi { grid-template-columns: repeat(3,1fr); } }
+@media (max-width:560px){ body { padding: 12px 8px 40px; } header { padding: 22px 18px; } h1 { font-size: 22px; } .kpi { grid-template-columns: repeat(2,1fr); } section { padding: 16px 12px; } table { font-size: 12px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tagline"><span class="dot"></span>A股行情日报 · 2026.11.19 · 收盘数据</div>
+  <h1>A股收盘总结</h1>
+  <div class="verdict"><b>指数微跌但个股雪崩。</b>仅 649 只上涨 vs 4876 只下跌，北证50 -3.99% 小微盘踩踏，26 涨停 vs 72 跌停——指数靠上证50护盘，赚钱效应极差。</div>
+  <div class="meta">
+    <span>沪深京三市 · 5525只有效样本</span>
+    <span>点击股票名称 → 东方财富行情页</span>
+    <span>数据来源：财联社 / 新浪财经 / 大河财立方 / 粤开市场日报 · 15:00 收市</span>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kpi">
+  <div class="cell"><div class="lab">上证指数</div><div class="val down">3578</div><div class="sub down">-0.28% · 尾盘回升</div></div>
+  <div class="cell"><div class="lab">深证成指</div><div class="val down">10583</div><div class="sub down">-0.71%</div></div>
+  <div class="cell"><div class="lab">创业板指</div><div class="val down">2293</div><div class="sub down">-0.79% · 弱势</div></div>
+  <div class="cell"><div class="lab">科创50</div><div class="val up">+1.83%</div><div class="sub up">唯一逆势上涨宽基</div></div>
+  <div class="cell"><div class="lab">北证50</div><div class="val down">-3.99%</div><div class="sub down">领跌 · 小微盘踩踏</div></div>
+  <div class="cell"><div class="lab">沪深两市成交额</div><div class="val">1.31<span style="font-size:13px">万亿</span></div><div class="sub">缩量646亿 · 16个月地量附近</div></div>
+</div>
+
+<!-- 指数表现 -->
+<section>
+  <h2>指数表现 <small>收盘 / 涨跌幅</small></h2>
+  <table>
+    <thead><tr><th class="l">指数</th><th class="l">代码</th><th>涨跌幅</th><th class="l">收盘说明</th></tr></thead>
+    <tbody>
+      <tr><td class="l"><b>科创50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000688.html" target="_blank">000688</a></td><td class="up bold">+1.83%</td><td class="ind l">半导体分化但权重护盘</td></tr>
+      <tr><td class="l"><b>上证50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000016.html" target="_blank">000016</a></td><td class="up bold">+0.32%</td><td class="ind l">尾盘探底回升护盘</td></tr>
+      <tr><td class="l"><b>上证指数</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000001.html" target="_blank">000001</a></td><td class="down bold">-0.28%</td><td class="ind l">收盘3578点，跌幅收窄</td></tr>
+      <tr><td class="l"><b>深证成指</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sz399001.html" target="_blank">399001</a></td><td class="down bold">-0.71%</td><td class="ind l">收盘10583点</td></tr>
+      <tr><td class="l"><b>创业板指</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sz399006.html" target="_blank">399006</a></td><td class="down bold">-0.79%</td><td class="ind l">收盘2293点</td></tr>
+      <tr><td class="l"><b>北证50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/bj899050.html" target="_blank">899050</a></td><td class="down bold">-3.99%</td><td class="ind l">领跌 · 小微盘踩踏</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 市场宽度 -->
+<section>
+  <h2>市场宽度 <small>5525只有效样本 · 极端失衡</small></h2>
+  <div class="bar">
+    <div class="u" style="width:11.7%">上涨 649</div>
+    <div class="d" style="width:88.3%">下跌 4876</div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--up)"></i>上涨 649（11.7%）</span>
+    <span><i style="background:var(--down)"></i>下跌 4876（88.3%）</span>
+    <span style="margin-left:auto">涨停 <b style="color:var(--up)">26</b> · 跌停 <b style="color:var(--down)">72</b></span>
+  </div>
+  <div class="note">这是<b>近期最极端的一次个股失衡</b>。三大指数跌幅看起来都不大（沪指仅-0.28%），但88%的股票在跌，跌停数量是涨停的2.8倍。上证50尾盘+0.32%护盘，说明资金在<b>用权重股稳定指数</b>，而中小市值股票全面失血。北证50 -3.99% 是小微盘退潮的明确信号。</div>
+</section>
+
+<!-- 主线一：半导体分化 -->
+<section>
+  <h2>主线一：半导体（剧烈分化） <small>晶圆代工涨 · 算力芯片跌</small></h2>
+  <p class="lead">今天半导体板块出现<b>罕见的内部撕裂</b>：晶圆代工方向（晶合集成、华虹、粤芯）涨，但前期涨幅巨大的算力芯片（燧原、沐曦、盛科、摩尔线程）集体暴跌。这是<b>半导体内部的"高切低"</b>。</p>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301348.html" target="_blank">蓝箭电子</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301348.html" target="_blank">301348</a></td><td class="ind l">先进封装</td><td class="up bold">盘中触及涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688691.html" target="_blank">灿芯股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688691.html" target="_blank">688691</a></td><td class="ind l">半导体设计</td><td class="up bold">盘中触及涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688172.html" target="_blank">燕东微</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688172.html" target="_blank">688172</a></td><td class="ind l">晶圆代工</td><td class="up bold">盘中触及涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002077.html" target="_blank">大港股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002077.html" target="_blank">002077</a></td><td class="ind l">先进封装</td><td class="up bold">直线涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688249.html" target="_blank">晶合集成</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688249.html" target="_blank">688249</a></td><td class="ind l">晶圆代工</td><td class="up">涨幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688347.html" target="_blank">华虹公司</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688347.html" target="_blank">688347</a></td><td class="ind l">晶圆代工</td><td class="up">涨幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688256.html" target="_blank">燧原科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688256.html" target="_blank">688256</a></td><td class="ind l">算力芯片</td><td class="down bold">触及20cm跌停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688725.html" target="_blank">沐曦股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688725.html" target="_blank">688725</a></td><td class="ind l">GPU</td><td class="down bold">重挫</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688702.html" target="_blank">盛科通信</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688702.html" target="_blank">688702</a></td><td class="ind l">交换芯片</td><td class="down bold">重挫</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688135.html" target="_blank">利扬芯片</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688135.html" target="_blank">688135</a></td><td class="ind l">芯片测试</td><td class="down bold">重挫</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688795.html" target="_blank">摩尔线程</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688795.html" target="_blank">688795</a></td><td class="ind l">GPU</td><td class="down bold">重挫</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>半导体内部"高切低"是今天最重要的结构性信号</b>。前期因为英伟达财报、AI资本开支预期被推高的算力芯片（燧原、沐曦、摩尔线程）今天集体崩盘，但晶圆代工（晶合、华虹、燕东微）反而被资金承接。逻辑是：<b>算力芯片估值已经炒到天上，而晶圆代工是业绩兑现度更高的环节</b>。</div>
+</section>
+
+<!-- 主线二：光刻胶 -->
+<section>
+  <h2>主线二：光刻胶（局部活跃） <small>半导体材料</small></h2>
+  <p class="lead">光刻胶是半导体国产替代的关键材料环节，今天在半导体整体分化背景下独立走强。</p>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603928.html" target="_blank">兴业股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603928.html" target="_blank">603928</a></td><td class="up bold">盘中触及涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603931.html" target="_blank">格林达</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603931.html" target="_blank">603931</a></td><td class="up bold">盘中触及涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603324.html" target="_blank">盛剑科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603324.html" target="_blank">603324</a></td><td class="up bold">盘中触及涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603078.html" target="_blank">江化微</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603078.html" target="_blank">603078</a></td><td class="up bold">盘中触及涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300786.html" target="_blank">国林科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300786.html" target="_blank">300786</a></td><td class="up">涨幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002888.html" target="_blank">兴欣新材</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002888.html" target="_blank">002888</a></td><td class="up">涨幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300905.html" target="_blank">宝丽迪</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300905.html" target="_blank">300905</a></td><td class="up">涨幅居前</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 主线三：机场航运 -->
+<section>
+  <h2>主线三：机场航运 <small>防御 + 出行复苏</small></h2>
+  <p class="lead">在市场整体下跌背景下，机场航运逆势走强。三大航领涨，逻辑是出行需求复苏 + 油价企稳。</p>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603885.html" target="_blank">吉祥航空</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603885.html" target="_blank">603885</a></td><td class="up bold">涨幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh600115.html" target="_blank">中国东航</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh600115.html" target="_blank">600115</a></td><td class="up bold">涨幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh601111.html" target="_blank">中国国航</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh601111.html" target="_blank">601111</a></td><td class="up bold">涨幅居前</td></tr>
+    </tbody>
+  </table>
+  <div class="note">机场航运在下跌市中独立走强，是典型的<b>防御性资金选择</b>：现金流稳定、估值合理、有出行复苏逻辑。</div>
+</section>
+
+<!-- 退潮一：影视院线 -->
+<section>
+  <h2>退潮一：影视院线（连续跌停） <small>AI短剧持续退潮</small></h2>
+  <p class="lead">AI短剧/影视院线已经连续多日大跌，今天再次集体跌停。这是11月以来最惨的方向。</p>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002343.html" target="_blank">慈文传媒</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002343.html" target="_blank">002343</a></td><td class="down bold">跌停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603103.html" target="_blank">横店影视</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603103.html" target="_blank">603103</a></td><td class="down bold">跌停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002905.html" target="_blank">金逸影视</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002905.html" target="_blank">002905</a></td><td class="down bold">跌停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh600715.html" target="_blank">文投控股</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh600715.html" target="_blank">600715</a></td><td class="down bold">跌停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603721.html" target="_blank">中广天择</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603721.html" target="_blank">603721</a></td><td class="down">跌幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz000892.html" target="_blank">欢瑞世纪</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz000892.html" target="_blank">000892</a></td><td class="down">跌幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz001330.html" target="_blank">博纳影业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz001330.html" target="_blank">001330</a></td><td class="down">跌幅居前</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>文投控股是这场退潮的"风向标"</b>：前期 19 天 11 板的高标，11/13 开板、11/17 跌停、11/18 一字跌停、11/19 继续跌停。公司公告已明确 AI 漫剧收入占比仅 2.57%——题材炒了这么久，AI 漫剧实际上根本没贡献业绩。</div>
+</section>
+
+<!-- 退潮二：文化传媒 -->
+<section>
+  <h2>退潮二：文化传媒（持续走低） <small>内容变现退潮</small></h2>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh601929.html" target="_blank">吉视传媒</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh601929.html" target="_blank">601929</a></td><td class="down bold">盘中触及跌停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh600228.html" target="_blank">返利科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh600228.html" target="_blank">600228</a></td><td class="down bold">盘中触及跌停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301052.html" target="_blank">果麦文化</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301052.html" target="_blank">301052</a></td><td class="down">跌幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300061.html" target="_blank">旗天科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300061.html" target="_blank">300061</a></td><td class="down">跌幅居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz000607.html" target="_blank">华媒控股</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz000607.html" target="_blank">000607</a></td><td class="down">跌幅居前</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 后市观察 -->
+<section>
+  <h2>这轮调整的核心逻辑 <small>11月13日 — 11月19日</small></h2>
+  <div class="pts">
+    <div class="pt"><div class="no">1</div><div><h4>英伟达CEO黄仁勋突然辞职（11/12晚官宣）</h4><p>英伟达市值较高点已蒸发约2.1万亿美元（40天跌36%），11月13日A股AI硬件链全线崩盘。11月17日盘后英伟达Q3财报超预期（营收1158亿USD、同比+103%），短暂修复后，11月19日算力芯片再次集体跌停（燧原20cm、沐曦/盛科/摩尔线程重挫）。<b>财报超预期未能扭转中期趋势，反而成为资金兑现的"卖点"</b>。</p></div></div>
+    <div class="pt"><div class="no">2</div><div><h4>AI应用持续退潮</h4><p>AI短剧/影视院线/文化传媒连续多日大跌，文投控股从19天11板高标连续跌停，公司公告已明确AI漫剧收入占比仅2.57%。<b>"AI变现"的故事讲不下去了，资金转向"AI基础设施"的确定性环节</b>。</p></div></div>
+    <div class="pt"><div class="no">3</div><div><h4>半导体内部"高切低"</h4><p>今天晶圆代工（晶合、华虹、燕东微）涨，算力芯片（燧原、沐曦、摩尔线程）跌，是半导体内部的估值切换。<b>资金在半导体内部做高低切，而不是整体撤退</b>。</p></div></div>
+    <div class="pt"><div class="no">4</div><div><h4>小微盘退潮明确</h4><p>北证50今日-3.99%，是领跌宽基。小微盘在前期涨幅过大后，正在经历明显的退潮。资金从"北证+小微盘"撤向"科创50+权重"做防守。</p></div></div>
+    <div class="pt"><div class="no">5</div><div><h4>量能持续萎缩</h4><p>11月19日成交1.31万亿，较上日再缩量646亿，接近2025年7月以来最低水平。<b>地量之后是反弹还是继续磨底，仍需观察</b>。</p></div></div>
+  </div>
+</section>
+
+<footer>
+  <p>数据来源：财联社 / 新浪财经 / 大河财立方 / 粤开市场日报 · 15:00 收市精确数据</p>
+  <p style="margin-top:6px;"><b>免责声明：</b>本报告基于公开市场数据整理，仅供学习交流，不构成任何投资建议。</p>
+</footer>
+
+</div>
+</body>
+</html>
