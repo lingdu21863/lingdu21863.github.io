@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 | 2026年11月23日</title>
+<style>
+:root {
+  --up: #e5484d; --down: #12a150; --flat: #8b8d98;
+  --bg: #f4f5f7; --card: #fff; --line: #e6e8ec;
+  --ink: #16181d; --ink2: #5b5f6b; --ink3: #8b8d98;
+  --accent: #2f6df6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; padding: 26px 16px 56px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+header { background: linear-gradient(135deg, #141821 0%, #232a3a 55%, #2b3448 100%); color: #fff; border-radius: 16px; padding: 30px 34px 26px; position: relative; overflow: hidden; }
+header::after { content: ""; position: absolute; right: -70px; top: -90px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(72,141,255,.38), transparent 68%); }
+.tagline { font-size: 12.5px; letter-spacing: .14em; color: #9fb0cc; display: flex; align-items: center; gap: 10px; }
+.tagline .dot { width: 6px; height: 6px; border-radius: 50%; background: #4d8dff; box-shadow: 0 0 0 4px rgba(77,141,255,.18); }
+h1 { font-size: 30px; font-weight: 700; letter-spacing: -.5px; margin: 12px 0 14px; }
+.verdict { display: inline-block; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); padding: 9px 16px; border-radius: 10px; font-size: 14.5px; color: #dfe7f5; }
+.meta { margin-top: 16px; font-size: 12.5px; color: #8fa1bd; display: flex; gap: 18px; flex-wrap: wrap; }
+
+.kpi { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 16px 0; }
+.kpi .cell { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.kpi .lab { font-size: 11.5px; color: var(--ink3); white-space: nowrap; }
+.kpi .val { font-size: 21px; font-weight: 700; letter-spacing: -.4px; margin-top: 5px; font-variant-numeric: tabular-nums; }
+.kpi .sub { font-size: 11.5px; color: var(--ink3); margin-top: 2px; }
+
+section { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; margin-top: 16px; }
+h2 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 9px; margin-bottom: 6px; flex-wrap: wrap; }
+h2::before { content: ""; width: 3px; height: 15px; border-radius: 2px; background: var(--accent); }
+h2 small { font-weight: 400; font-size: 12px; color: var(--ink3); margin-left: auto; }
+.lead { font-size: 13px; color: var(--ink2); margin: 0 0 14px 12px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+th { text-align: right; font-weight: 500; color: var(--ink3); font-size: 11.5px; padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th.l, td.l { text-align: left; }
+td { text-align: right; padding: 7px 8px; border-bottom: 1px solid #f2f3f6; }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #fafbfd; }
+
+.up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--flat); }
+.bold { font-weight: 700; }
+.badge { display: inline-block; font-size: 11.5px; padding: 2px 9px; border-radius: 20px; margin-left: 8px; font-weight: 600; vertical-align: 2px; }
+.b-up { background: rgba(229,72,77,.1); color: var(--up); }
+.b-dn { background: rgba(18,161,80,.1); color: var(--down); }
+.nm a { color: #1d4ed8; text-decoration: none; border-bottom: 1px dashed #b9cdf5; font-weight: 600; }
+.nm a:hover { color: #0b3bb3; border-bottom-color: #0b3bb3; }
+.cd a { color: var(--ink3); text-decoration: none; font-size: 11.5px; font-family: Consolas, monospace; }
+.cd a:hover { color: var(--accent); text-decoration: underline; }
+.ind { color: var(--ink3); font-size: 12px; }
+
+.note { background: #fafbfd; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 12.8px; color: var(--ink2); line-height: 1.75; margin-top: 12px; }
+.note b { color: var(--ink); }
+
+.bar { display: flex; height: 26px; border-radius: 7px; overflow: hidden; margin: 6px 0 10px; font-size: 11.5px; color: #fff; font-weight: 600; }
+.bar div { display: flex; align-items: center; justify-content: center; }
+.bar .u { background: var(--up); } .bar .d { background: var(--down); }
+.legend { display: flex; gap: 18px; font-size: 12.5px; color: var(--ink2); flex-wrap: wrap; }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+
+.pts { display: grid; gap: 12px; margin-top: 4px; }
+.pt { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+.pt .no { width: 26px; height: 26px; border-radius: 8px; background: #eef3ff; color: #2f6df6; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.pt h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.pt p { font-size: 13.3px; color: var(--ink2); line-height: 1.78; }
+.pt p b { color: var(--ink); }
+
+footer { margin-top: 18px; font-size: 11.5px; color: var(--ink3); line-height: 1.8; text-align: center; padding: 0 10px; }
+
+@media (max-width:900px){ .kpi { grid-template-columns: repeat(3,1fr); } }
+@media (max-width:560px){ body { padding: 12px 8px 40px; } header { padding: 22px 18px; } h1 { font-size: 22px; } .kpi { grid-template-columns: repeat(2,1fr); } section { padding: 16px 12px; } table { font-size: 12px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tagline"><span class="dot"></span>A股行情日报 · 2026.11.23 · 收盘数据</div>
+  <h1>A股收盘总结</h1>
+  <div class="verdict"><b>探底回升 · 全面反弹。</b>沪指盘中跌破3500点后拉回，创业板指涨3.08%，151只个股涨停、仅3只跌停。人形机器人近60股涨停成为绝对主线，赚钱效应显著修复。</div>
+  <div class="meta">
+    <span>沪深京三市 · 逾4600只个股上涨</span>
+    <span>点击股票名称 → 东方财富行情页</span>
+    <span>数据来源：财联社 / 上海证券报 / 证券时报 · 15:00 收市</span>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kpi">
+  <div class="cell"><div class="lab">上证指数</div><div class="val up">3538.95</div><div class="sub up">+0.15% · 探底回升</div></div>
+  <div class="cell"><div class="lab">深证成指</div><div class="val up">10454.37</div><div class="sub up">+1.93%</div></div>
+  <div class="cell"><div class="lab">创业板指</div><div class="val up">2280.20</div><div class="sub up">+3.08% · 领涨主板</div></div>
+  <div class="cell"><div class="lab">北证50</div><div class="val up">+4.64%</div><div class="sub up">涨幅最大宽基</div></div>
+  <div class="cell"><div class="lab">科创50</div><div class="val down">1227.89</div><div class="sub down">-0.26% · 唯一下跌</div></div>
+  <div class="cell"><div class="lab">沪深两市成交额</div><div class="val">1.55<span style="font-size:13px">万亿</span></div><div class="sub">放量1307亿</div></div>
+</div>
+
+<!-- 指数表现 -->
+<section>
+  <h2>指数表现 <small>收盘 / 涨跌幅</small></h2>
+  <table>
+    <thead><tr><th class="l">指数</th><th class="l">代码</th><th>收盘</th><th>涨跌幅</th><th class="l">备注</th></tr></thead>
+    <tbody>
+      <tr><td class="l"><b>北证50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/bj899050.html" target="_blank">899050</a></td><td>—</td><td class="up bold">+4.64%</td><td class="ind l">涨幅最大 · 小微盘暴力反弹</td></tr>
+      <tr><td class="l"><b>创业板指</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sz399006.html" target="_blank">399006</a></td><td>2,280.20</td><td class="up bold">+3.08%</td><td class="ind l">盘中一度跌超1%，午后拉升</td></tr>
+      <tr><td class="l"><b>科创综指</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000680.html" target="_blank">000680</a></td><td>—</td><td class="up bold">+2.62%</td><td class="ind l">反弹</td></tr>
+      <tr><td class="l"><b>深证成指</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sz399001.html" target="_blank">399001</a></td><td>10,454.37</td><td class="up bold">+1.93%</td><td class="ind l">成长风格修复</td></tr>
+      <tr><td class="l"><b>上证指数</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000001.html" target="_blank">000001</a></td><td>3,538.95</td><td class="up bold">+0.15%</td><td class="ind l">早盘跌破3500点，午后拉回</td></tr>
+      <tr><td class="l"><b>科创50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000688.html" target="_blank">000688</a></td><td>1,227.89</td><td class="down bold">-0.26%</td><td class="ind l">唯一下跌 · 半导体设备拖累</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>走势：</b>三大指数集体低开（沪指-0.86%），早盘沪指一度跌逾1%跌破3500点，午后在机器人、算力硬件、AI漫剧带动下探底回升，全线收红（科创50除外）。</div>
+</section>
+
+<!-- 市场宽度 -->
+<section>
+  <h2>市场宽度 <small>赚钱效应显著修复</small></h2>
+  <div class="bar">
+    <div class="u" style="width:85.6%">上涨 4658</div>
+    <div class="d" style="width:14.4%">下跌 783</div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--up)"></i>上涨 4658（85.6%）</span>
+    <span><i style="background:var(--down)"></i>下跌 783（14.4%）</span>
+    <span style="margin-left:auto">涨停 <b style="color:var(--up)">151</b> · 跌停 <b style="color:var(--down)">3</b></span>
+  </div>
+  <div class="note">与上一交易日（上涨占比仅5.6%）形成<b>极端反转</b>。151只涨停、仅3只跌停，是11月以来最强的赚钱效应。连板股16只，<b>晋级率100%</b>（上一交易日3只连板股全部晋级），短线情绪全面回暖。</div>
+</section>
+
+<!-- 主线一：人形机器人 -->
+<section>
+  <h2>主线一：人形机器人 / 物理AI <span class="badge b-up">板块内近60股涨停</span><small>今日绝对主线</small></h2>
+  <p class="lead">全场最耀眼的方向。人形机器人概念集体爆发，15只个股拿下20CM大板，机器人ETF午后涨超9%。</p>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/bj920690.html" target="_blank">捷众科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/bj920690.html" target="_blank">920690</a></td><td class="ind l">机器人零部件</td><td class="up bold">30CM涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688585.html" target="_blank">上纬新材</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688585.html" target="_blank">688585</a></td><td class="ind l">机器人材料</td><td class="up bold">20CM涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688836.html" target="_blank">宇树科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688836.html" target="_blank">688836</a></td><td class="ind l">人形机器人整机</td><td class="up bold">20CM涨停 · 重回700元上方</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300007.html" target="_blank">汉威科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300007.html" target="_blank">300007</a></td><td class="ind l">传感器</td><td class="up bold">20CM涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301413.html" target="_blank">安培龙</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301413.html" target="_blank">301413</a></td><td class="ind l">力传感器</td><td class="up bold">20CM涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301313.html" target="_blank">凡拓数创</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301313.html" target="_blank">301313</a></td><td class="ind l">物理AI</td><td class="up bold">20CM · 2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603960.html" target="_blank">克来机电</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603960.html" target="_blank">603960</a></td><td class="ind l">机器人装备</td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh605018.html" target="_blank">长华集团</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh605018.html" target="_blank">605018</a></td><td class="ind l">机器人结构件</td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh600156.html" target="_blank">华升股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh600156.html" target="_blank">600156</a></td><td class="ind l">机器人概念</td><td class="up bold">4天3板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002164.html" target="_blank">宁波东力</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002164.html" target="_blank">002164</a></td><td class="ind l">减速器</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002931.html" target="_blank">锋龙股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002931.html" target="_blank">002931</a></td><td class="ind l">机器人零部件</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002708.html" target="_blank">光洋股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002708.html" target="_blank">002708</a></td><td class="ind l">轴承</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh605488.html" target="_blank">福莱新材</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh605488.html" target="_blank">605488</a></td><td class="ind l">柔性传感器</td><td class="up bold">回封涨停</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>催化密集：</b>① 人形机器人新国标落地；② 特斯拉Optimus家务功能预期；③ 养老机器人政策；④ 华为发布并开源昇腾原生具身世界模型 CloudRobo-WM1.2；⑤ 蚂蚁灵波开源 LingBot-Touch 触觉基础模型。多家大厂具身模型集中发布，资金集中抱团。</div>
+</section>
+
+<!-- 主线二：AI漫剧/短剧 -->
+<section>
+  <h2>主线二：AI漫剧 / 短剧 <span class="badge b-up">大幅反弹</span><small>前期退潮方向集体修复</small></h2>
+  <p class="lead">连续大跌多日的AI短剧方向今日集体涨停反弹，是前期退潮板块的修复行情。</p>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301052.html" target="_blank">果麦文化</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301052.html" target="_blank">301052</a></td><td class="up bold">20CM涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301218.html" target="_blank">华是科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301218.html" target="_blank">301218</a></td><td class="up bold">20CM涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh605577.html" target="_blank">龙版传媒</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh605577.html" target="_blank">605577</a></td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh601599.html" target="_blank">浙文影业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh601599.html" target="_blank">601599</a></td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603103.html" target="_blank">横店影视</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603103.html" target="_blank">603103</a></td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh601595.html" target="_blank">上海电影</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh601595.html" target="_blank">601595</a></td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603533.html" target="_blank">掌阅科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603533.html" target="_blank">603533</a></td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh605398.html" target="_blank">新炬网络</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh605398.html" target="_blank">605398</a></td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh605287.html" target="_blank">德才股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh605287.html" target="_blank">605287</a></td><td class="up bold">涨停</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>催化：</b>国家广播电视总局数据显示，2026年1-9月上线微短剧共49万部，是2025年全年的13倍；微短剧用户规模达8.5亿，月活超6亿，人均单日收看时长约2小时。行业基本面数据强劲，叠加前期超跌，触发集体反弹。</div>
+</section>
+
+<!-- 主线三：算力硬件（PCB+CPO+液冷） -->
+<section>
+  <h2>主线三：算力硬件（PCB / CPO / 液冷） <span class="badge b-up">同步走高</span><small>英伟达夜盘涨7%带动</small></h2>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002579.html" target="_blank">中京电子</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002579.html" target="_blank">002579</a></td><td class="ind l">PCB</td><td class="up bold">3连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002815.html" target="_blank">崇达技术</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002815.html" target="_blank">002815</a></td><td class="ind l">PCB</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603920.html" target="_blank">世运电路</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603920.html" target="_blank">603920</a></td><td class="ind l">PCB</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh600103.html" target="_blank">青山纸业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh600103.html" target="_blank">600103</a></td><td class="ind l">CPO</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300394.html" target="_blank">天孚通信</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300394.html" target="_blank">300394</a></td><td class="ind l">CPO/光器件</td><td class="up bold">涨超10%</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/bj920045.html" target="_blank">蘅东光</a></td><td class="cd l"><a href="https://quote.eastmoney.com/bj920045.html" target="_blank">920045</a></td><td class="ind l">CPO无源光器件</td><td class="up bold">涨超10%</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688195.html" target="_blank">腾景科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688195.html" target="_blank">688195</a></td><td class="ind l">光学元件</td><td class="up bold">涨超10%</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300502.html" target="_blank">新易盛</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300502.html" target="_blank">300502</a></td><td class="ind l">光模块</td><td class="up">涨超6%</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300308.html" target="_blank">中际旭创</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300308.html" target="_blank">300308</a></td><td class="ind l">光模块</td><td class="up">涨超6%</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603516.html" target="_blank">淳中科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603516.html" target="_blank">603516</a></td><td class="ind l">液冷</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301252.html" target="_blank">同星科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301252.html" target="_blank">301252</a></td><td class="ind l">液冷</td><td class="up bold">逼近20CM涨停</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>催化：</b>美股科技股夜盘继续走高，英伟达涨幅扩大至7%，3倍做多半导体ETF涨近15%。PCB方面，全球电子协会发布供应预警，玻纤布、树脂到成品电路板全环节供不应求。液冷方面，中国信通院测算2026年国内液冷市场规模将达700-1050亿元，年增速超70%。</div>
+</section>
+
+<!-- 其他活跃 -->
+<section>
+  <h2>其他活跃方向 <small>猪肉 / 前期人气股</small></h2>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002548.html" target="_blank">金新农</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002548.html" target="_blank">002548</a></td><td class="ind l">猪肉</td><td class="up bold">7天4板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002771.html" target="_blank">真视通</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002771.html" target="_blank">002771</a></td><td class="ind l">市场焦点股</td><td class="up bold">5连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603324.html" target="_blank">盛剑科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603324.html" target="_blank">603324</a></td><td class="ind l">芯片产业链</td><td class="up bold">5连板</td></tr>
+    </tbody>
+  </table>
+  <div class="note">猪肉：大商所生猪主力合约日内涨超5%，站上1万元/吨，金新农直线涨停走出7天4板。连板情绪：真视通、盛剑科技双双晋级5连板，中京电子3连板，上一交易日3只连板股全部晋级，晋级率100%。前期热门股全线反弹（东方海洋18天9板、大东方15天8板）。</div>
+</section>
+
+<!-- 退潮方向 -->
+<section>
+  <h2>调整方向 <span class="badge b-dn">银行 / 权重股 / 半导体设备</span><small>前期护盘方向回落</small></h2>
+  <p class="lead">市场风格从"红利避险"切换回"成长进攻"，前期护盘的银行、权重股集体回落。</p>
+  <table>
+    <thead><tr><th class="l">方向</th><th>表现</th><th class="l">说明</th></tr></thead>
+    <tbody>
+      <tr><td class="l"><b>银行</b></td><td class="down bold">震荡调整</td><td class="ind l">建设银行、工商银行、中国银行纷纷回落</td></tr>
+      <tr><td class="l"><b>权重股</b></td><td class="down bold">早盘走弱</td><td class="ind l">中国石油跌超5%，贵州茅台、中芯国际、中国平安、中国人寿跌超2%</td></tr>
+      <tr><td class="l"><b>半导体设备</b></td><td class="down bold">震荡回落</td><td class="ind l">中科飞测跌超10%，北方华创盘中一度逼近跌停</td></tr>
+      <tr><td class="l"><b>房地产</b></td><td class="down">调整</td><td class="ind l">金科股份、三湘印象、大悦城回落</td></tr>
+    </tbody>
+  </table>
+  <div class="note">银行/权重股回落是<b>风格切换的直接证据</b>：上周市场暴跌时资金涌入银行避险，今天情绪修复，资金从红利撤出、回流成长。科创50成为唯一下跌宽基，正是受半导体设备（北方华创、中芯国际等权重）拖累。</div>
+</section>
+
+<!-- 后市观察 -->
+<section>
+  <h2>本轮反弹的性质与观察点 <small>11月13日暴跌 — 11月23日反弹</small></h2>
+  <div class="pts">
+    <div class="pt"><div class="no">1</div><div><h4>放量反弹，量能配合良好</h4><p>今日成交1.55万亿、放量1307亿，是<b>放量上涨</b>（区别于上周的放量下跌）。量能重回1.5万亿上方，说明有增量资金进场，反弹质量较高。</p></div></div>
+    <div class="pt"><div class="no">2</div><div><h4>风格从"红利避险"切回"成长进攻"</h4><p>上周国有大行+2.52%领涨、工行/建行/中信/长电齐创历史新高；今天银行集体回落、中国石油跌超5%，而机器人/AI/算力全面爆发。<b>一周之内完成了一次完整的避险→进攻切换</b>。</p></div></div>
+    <div class="pt"><div class="no">3</div><div><h4>人形机器人成为新主线的确认信号</h4><p>近60股涨停、15只20CM、机器人ETF涨超9%，且有多重产业催化（新国标、Optimus、华为/蚂蚁具身模型开源）。这是11月以来第一次出现<b>有产业逻辑支撑的大规模板块性行情</b>。</p></div></div>
+    <div class="pt"><div class="no">4</div><div><h4>前期退潮方向集体修复</h4><p>AI短剧/影视院线在连续跌停后今日集体涨停（横店影视、浙文影业、上海电影等），属于超跌反弹。需注意：<b>反弹不等于反转</b>，AI漫剧基本面（文投控股AI收入占比仅2.57%）的问题并未解决。</p></div></div>
+    <div class="pt"><div class="no">5</div><div><h4>后续观察点</h4><p>① 机器人主线的持续性（能否走出连板高度）；② 量能能否维持在1.5万亿上方；③ 英伟达夜盘涨7%后，美股AI链能否止跌企稳；④ 科创50能否补涨（今日唯一下跌，半导体设备拖累）。</p></div></div>
+  </div>
+</section>
+
+<footer>
+  <p>数据来源：财联社 / 上海证券报 / 证券时报 / 上海证券交易所 / 北京证券交易所 · 15:00 收市精确数据</p>
+  <p style="margin-top:6px;"><b>免责声明：</b>本报告基于公开市场数据整理，仅供学习交流，不构成任何投资建议。</p>
+</footer>
+
+</div>
+</body>
+</html>
