@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 | 2026年11月24日</title>
+<style>
+:root {
+  --up: #e5484d; --down: #12a150; --flat: #8b8d98;
+  --bg: #f4f5f7; --card: #fff; --line: #e6e8ec;
+  --ink: #16181d; --ink2: #5b5f6b; --ink3: #8b8d98;
+  --accent: #2f6df6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; padding: 26px 16px 56px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+header { background: linear-gradient(135deg, #141821 0%, #232a3a 55%, #2b3448 100%); color: #fff; border-radius: 16px; padding: 30px 34px 26px; position: relative; overflow: hidden; }
+header::after { content: ""; position: absolute; right: -70px; top: -90px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(72,141,255,.38), transparent 68%); }
+.tagline { font-size: 12.5px; letter-spacing: .14em; color: #9fb0cc; display: flex; align-items: center; gap: 10px; }
+.tagline .dot { width: 6px; height: 6px; border-radius: 50%; background: #4d8dff; box-shadow: 0 0 0 4px rgba(77,141,255,.18); }
+h1 { font-size: 30px; font-weight: 700; letter-spacing: -.5px; margin: 12px 0 14px; }
+.verdict { display: inline-block; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); padding: 9px 16px; border-radius: 10px; font-size: 14.5px; color: #dfe7f5; }
+.meta { margin-top: 16px; font-size: 12.5px; color: #8fa1bd; display: flex; gap: 18px; flex-wrap: wrap; }
+
+.kpi { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 16px 0; }
+.kpi .cell { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.kpi .lab { font-size: 11.5px; color: var(--ink3); white-space: nowrap; }
+.kpi .val { font-size: 21px; font-weight: 700; letter-spacing: -.4px; margin-top: 5px; font-variant-numeric: tabular-nums; }
+.kpi .sub { font-size: 11.5px; color: var(--ink3); margin-top: 2px; }
+
+section { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; margin-top: 16px; }
+h2 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 9px; margin-bottom: 6px; flex-wrap: wrap; }
+h2::before { content: ""; width: 3px; height: 15px; border-radius: 2px; background: var(--accent); }
+h2 small { font-weight: 400; font-size: 12px; color: var(--ink3); margin-left: auto; }
+.lead { font-size: 13px; color: var(--ink2); margin: 0 0 14px 12px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+th { text-align: right; font-weight: 500; color: var(--ink3); font-size: 11.5px; padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th.l, td.l { text-align: left; }
+td { text-align: right; padding: 7px 8px; border-bottom: 1px solid #f2f3f6; }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #fafbfd; }
+
+.up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--flat); }
+.bold { font-weight: 700; }
+.badge { display: inline-block; font-size: 11.5px; padding: 2px 9px; border-radius: 20px; margin-left: 8px; font-weight: 600; vertical-align: 2px; }
+.b-up { background: rgba(229,72,77,.1); color: var(--up); }
+.b-dn { background: rgba(18,161,80,.1); color: var(--down); }
+.nm a { color: #1d4ed8; text-decoration: none; border-bottom: 1px dashed #b9cdf5; font-weight: 600; }
+.nm a:hover { color: #0b3bb3; border-bottom-color: #0b3bb3; }
+.cd a { color: var(--ink3); text-decoration: none; font-size: 11.5px; font-family: Consolas, monospace; }
+.cd a:hover { color: var(--accent); text-decoration: underline; }
+.ind { color: var(--ink3); font-size: 12px; }
+
+.note { background: #fafbfd; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 12.8px; color: var(--ink2); line-height: 1.75; margin-top: 12px; }
+.note b { color: var(--ink); }
+
+.pts { display: grid; gap: 12px; margin-top: 4px; }
+.pt { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+.pt .no { width: 26px; height: 26px; border-radius: 8px; background: #eef3ff; color: #2f6df6; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.pt h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.pt p { font-size: 13.3px; color: var(--ink2); line-height: 1.78; }
+.pt p b { color: var(--ink); }
+
+footer { margin-top: 18px; font-size: 11.5px; color: var(--ink3); line-height: 1.8; text-align: center; padding: 0 10px; }
+
+@media (max-width:900px){ .kpi { grid-template-columns: repeat(3,1fr); } }
+@media (max-width:560px){ body { padding: 12px 8px 40px; } header { padding: 22px 18px; } h1 { font-size: 22px; } .kpi { grid-template-columns: repeat(2,1fr); } section { padding: 16px 12px; } table { font-size: 12px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tagline"><span class="dot"></span>A股行情日报 · 2026.11.24 · 收盘数据</div>
+  <h1>A股收盘总结</h1>
+  <div class="verdict"><b>高开低走 · 放量滞涨。</b>创业板指早盘一度涨超4%、收盘翻绿，科创50逆势涨1.81%独强。人形机器人连板梯队完整，但全市场超3400只个股下跌，反弹进入分歧整理。</div>
+  <div class="meta">
+    <span>沪深京三市 · 全市场成交16678亿元</span>
+    <span>点击股票名称 → 东方财富行情页</span>
+    <span>数据来源：财联社 / 南方都市报 / 中国商报 · 15:00 收市</span>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kpi">
+  <div class="cell"><div class="lab">科创50</div><div class="val up">1250.09</div><div class="sub up">+1.81% · 逆势领涨</div></div>
+  <div class="cell"><div class="lab">上证指数</div><div class="val up">3548.37</div><div class="sub up">+0.27%</div></div>
+  <div class="cell"><div class="lab">创业板指</div><div class="val down">2278.99</div><div class="sub down">-0.05% · 高开低走</div></div>
+  <div class="cell"><div class="lab">深证成指</div><div class="val down">10423.60</div><div class="sub down">-0.29%</div></div>
+  <div class="cell"><div class="lab">北证50</div><div class="val down">-0.22%</div><div class="sub down">早盘一度涨近5%</div></div>
+  <div class="cell"><div class="lab">全市场成交额</div><div class="val">16678<span style="font-size:13px">亿</span></div><div class="sub">放量1038亿</div></div>
+</div>
+
+<!-- 指数表现 -->
+<section>
+  <h2>指数表现 <small>收盘 / 涨跌幅</small></h2>
+  <table>
+    <thead><tr><th class="l">指数</th><th class="l">代码</th><th>收盘</th><th>涨跌幅</th><th class="l">备注</th></tr></thead>
+    <tbody>
+      <tr><td class="l"><b>科创50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000688.html" target="_blank">000688</a></td><td>1,250.09</td><td class="up bold">+1.81%</td><td class="ind l">逆势领涨 · 半导体设备活跃</td></tr>
+      <tr><td class="l"><b>上证指数</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000001.html" target="_blank">000001</a></td><td>3,548.37</td><td class="up bold">+0.27%</td><td class="ind l">早盘一度涨1.11%报3578点</td></tr>
+      <tr><td class="l"><b>创业板指</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sz399006.html" target="_blank">399006</a></td><td>2,278.99</td><td class="down bold">-0.05%</td><td class="ind l">早盘涨超4%，午后回落翻绿</td></tr>
+      <tr><td class="l"><b>北证50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/bj899050.html" target="_blank">899050</a></td><td>—</td><td class="down bold">-0.22%</td><td class="ind l">早盘涨近5%，尾盘翻绿</td></tr>
+      <tr><td class="l"><b>深证成指</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sz399001.html" target="_blank">399001</a></td><td>10,423.60</td><td class="down bold">-0.29%</td><td class="ind l">高开低走</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>走势：</b>受隔夜美股科技股走强带动集体高开，早盘沪指涨1.11%、创业板指与科创综指涨超4%、北证50涨近5%、全市场超5100只个股上涨；午后获利盘涌出，涨幅大幅收窄，深成指、创业板指、北证50先后翻绿，<b>仅科创50与沪指收红</b>。</div>
+</section>
+
+<!-- 主线一：人形机器人 -->
+<section>
+  <h2>主线一：人形机器人 <span class="badge b-up">近20股涨停</span><small>连续第二日成为主线</small></h2>
+  <p class="lead">昨日爆发后今日继续走强，连板梯队完整，是本轮反弹中<b>持续性最强</b>的方向。</p>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603960.html" target="_blank">克来机电</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603960.html" target="_blank">603960</a></td><td class="ind l">机器人装备</td><td class="up bold">3连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh605018.html" target="_blank">长华集团</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh605018.html" target="_blank">605018</a></td><td class="ind l">机器人结构件</td><td class="up bold">3连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300508.html" target="_blank">维宏股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300508.html" target="_blank">300508</a></td><td class="ind l">运动控制</td><td class="up bold">20CM · 2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301413.html" target="_blank">安培龙</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301413.html" target="_blank">301413</a></td><td class="ind l">力传感器</td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002164.html" target="_blank">宁波东力</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002164.html" target="_blank">002164</a></td><td class="ind l">减速器</td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002931.html" target="_blank">锋龙股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002931.html" target="_blank">002931</a></td><td class="ind l">机器人零部件</td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh605488.html" target="_blank">福莱新材</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh605488.html" target="_blank">605488</a></td><td class="ind l">柔性传感器</td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002196.html" target="_blank">方正电机</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002196.html" target="_blank">002196</a></td><td class="ind l">电机</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603662.html" target="_blank">柯力传感</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603662.html" target="_blank">603662</a></td><td class="ind l">传感器</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301398.html" target="_blank">星源卓镁</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301398.html" target="_blank">301398</a></td><td class="ind l">镁合金结构件</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300652.html" target="_blank">雷迪克</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300652.html" target="_blank">300652</a></td><td class="ind l">轴承</td><td class="up bold">涨停</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>与昨日对比：</b>昨日是"全面爆发"（近60股涨停、15只20CM），今日转为"梯队晋级"（3连板、2连板为主）。龙头从普涨走向集中，是题材从启动期进入<b>分化期</b>的典型特征。</div>
+</section>
+
+<!-- 主线二：AI漫剧 -->
+<section>
+  <h2>主线二：AI漫剧 <span class="badge b-up">反复活跃</span><small>连板股继续晋级</small></h2>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh601599.html" target="_blank">浙文影业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh601599.html" target="_blank">601599</a></td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603103.html" target="_blank">横店影视</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603103.html" target="_blank">603103</a></td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh605398.html" target="_blank">新炬网络</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh605398.html" target="_blank">605398</a></td><td class="up bold">2连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh600715.html" target="_blank">文投控股</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh600715.html" target="_blank">600715</a></td><td class="up bold">涨停</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 其他活跃 -->
+<section>
+  <h2>其他活跃方向 <small>能源金属 / 消费电子 / 保险 / 半导体设备</small></h2>
+  <table>
+    <thead><tr><th class="l">方向</th><th class="l">代表个股</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="l"><b>能源金属</b></td><td class="l"><a class="nm" href="https://quote.eastmoney.com/sz301219.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">腾远钴业</a>、寒锐钴业、华友钴业、永兴材料</td><td class="up bold">腾远钴业一度涨超16%</td></tr>
+      <tr><td class="l"><b>消费电子</b></td><td class="l">奥尼电子、科森科技、龙旗科技、朗特智能、福立旺</td><td class="up bold">奥尼电子、科森科技涨停</td></tr>
+      <tr><td class="l"><b>保险</b></td><td class="l"><a href="https://quote.eastmoney.com/sh601628.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">中国人寿</a>、<a href="https://quote.eastmoney.com/sh601601.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">中国太保</a>、<a href="https://quote.eastmoney.com/sh601318.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">中国平安</a></td><td class="up">低开高走 · 涨幅居前</td></tr>
+      <tr><td class="l"><b>半导体设备</b></td><td class="l"><a href="https://quote.eastmoney.com/sh603030.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">全筑股份</a>、百傲化学</td><td class="up bold">全筑股份6天4板</td></tr>
+    </tbody>
+  </table>
+  <div class="note">半导体设备昨日领跌、今日盘中活跃，是科创50逆势领涨的主要贡献方向；保险低开高走，延续权重护盘特征。</div>
+</section>
+
+<!-- 焦点股 -->
+<section>
+  <h2>焦点股 / 连板高度 <small>短线情绪标杆</small></h2>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>高度</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002086.html" target="_blank">东方海洋</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002086.html" target="_blank">002086</a></td><td class="ind l">大消费</td><td class="up bold">22天11板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002685.html" target="_blank">华东重机</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002685.html" target="_blank">002685</a></td><td class="ind l">国产算力</td><td class="up bold">8天6板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002548.html" target="_blank">金新农</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002548.html" target="_blank">002548</a></td><td class="ind l">猪肉</td><td class="up bold">8天5板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002242.html" target="_blank">九阳股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002242.html" target="_blank">002242</a></td><td class="ind l">家电</td><td class="up bold">6天4板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002579.html" target="_blank">中京电子</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002579.html" target="_blank">002579</a></td><td class="ind l">PCB</td><td class="up bold">4连板</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 退潮方向 -->
+<section>
+  <h2>调整方向 <span class="badge b-dn">贵金属 / 煤炭</span><small>高开低走重灾区</small></h2>
+  <table>
+    <thead><tr><th class="l">方向</th><th class="l">代表个股</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="l"><b>贵金属</b></td><td class="l"><a href="https://quote.eastmoney.com/sz000426.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">兴业银锡</a>、<a href="https://quote.eastmoney.com/sh601069.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">西部黄金</a>、<a href="https://quote.eastmoney.com/sh600988.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">赤峰黄金</a>、<a href="https://quote.eastmoney.com/sh601899.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">紫金矿业</a></td><td class="down bold">高开低走 · 领跌</td></tr>
+      <tr><td class="l"><b>煤炭开采加工</b></td><td class="l">电投能源、开滦股份、山西焦化</td><td class="down bold">表现疲软</td></tr>
+      <tr><td class="l"><b>其他</b></td><td class="l">工业金属、燃气、造纸</td><td class="down">跌幅居前</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 后市观察 -->
+<section>
+  <h2>本轮反弹的进度与分歧 <small>11月23日反弹 — 11月24日分化</small></h2>
+  <div class="pts">
+    <div class="pt"><div class="no">1</div><div><h4>放量但滞涨，是分歧而非走弱</h4><p>成交16678亿、连续第二日放量，但指数高开低走。<b>量能维持高位说明承接资金仍在</b>，只是连续两日反弹后，短线获利盘与前期套牢盘集中兑现。</p></div></div>
+    <div class="pt"><div class="no">2</div><div><h4>科创50逆势独强，是最值得注意的信号</h4><p>昨日科创50是唯一下跌宽基（-0.26%），今日转为最强（+1.81%），半导体设备从领跌转为领涨。<b>科技权重开始接力</b>，有利于行情从题材炒作向权重企稳扩散。</p></div></div>
+    <div class="pt"><div class="no">3</div><div><h4>机器人主线从"普涨"进入"分化"</h4><p>昨日近60股涨停，今日近20股涨停但以连板晋级为主（克来机电/长华集团3连板）。题材未结束，但<b>追高性价比下降</b>，重点看龙头能否继续打开高度。</p></div></div>
+    <div class="pt"><div class="no">4</div><div><h4>市场宽度明显弱于指数</h4><p>早盘超5100只上涨，收盘超3400只下跌。<b>指数红、个股绿</b>的背离说明赚钱效应集中在少数主线，多数个股仍在调整。</p></div></div>
+    <div class="pt"><div class="no">5</div><div><h4>后续观察点</h4><p>① 量能能否守住1.6万亿；② 科创50能否延续强势（科技权重企稳是行情升级的关键）；③ 机器人3连板龙头能否晋级4板；④ 创业板指能否收复今日失地（高开低走的阴线需要尽快修复）。</p></div></div>
+  </div>
+</section>
+
+<footer>
+  <p>数据来源：财联社 / 南方都市报 / 中国商报 / 宁波日报 · 15:00 收市精确数据</p>
+  <p style="margin-top:6px;"><b>免责声明：</b>本报告基于公开市场数据整理，仅供学习交流，不构成任何投资建议。</p>
+</footer>
+
+</div>
+</body>
+</html>
