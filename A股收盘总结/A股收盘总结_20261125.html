@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股收盘总结 | 2026年11月25日</title>
+<style>
+:root {
+  --up: #e5484d; --down: #12a150; --flat: #8b8d98;
+  --bg: #f4f5f7; --card: #fff; --line: #e6e8ec;
+  --ink: #16181d; --ink2: #5b5f6b; --ink3: #8b8d98;
+  --accent: #2f6df6;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; padding: 26px 16px 56px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+header { background: linear-gradient(135deg, #141821 0%, #232a3a 55%, #2b3448 100%); color: #fff; border-radius: 16px; padding: 30px 34px 26px; position: relative; overflow: hidden; }
+header::after { content: ""; position: absolute; right: -70px; top: -90px; width: 280px; height: 280px; background: radial-gradient(circle, rgba(72,141,255,.38), transparent 68%); }
+.tagline { font-size: 12.5px; letter-spacing: .14em; color: #9fb0cc; display: flex; align-items: center; gap: 10px; }
+.tagline .dot { width: 6px; height: 6px; border-radius: 50%; background: #4d8dff; box-shadow: 0 0 0 4px rgba(77,141,255,.18); }
+h1 { font-size: 30px; font-weight: 700; letter-spacing: -.5px; margin: 12px 0 14px; }
+.verdict { display: inline-block; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); padding: 9px 16px; border-radius: 10px; font-size: 14.5px; color: #dfe7f5; }
+.meta { margin-top: 16px; font-size: 12.5px; color: #8fa1bd; display: flex; gap: 18px; flex-wrap: wrap; }
+
+.kpi { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 16px 0; }
+.kpi .cell { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.kpi .lab { font-size: 11.5px; color: var(--ink3); white-space: nowrap; }
+.kpi .val { font-size: 21px; font-weight: 700; letter-spacing: -.4px; margin-top: 5px; font-variant-numeric: tabular-nums; }
+.kpi .sub { font-size: 11.5px; color: var(--ink3); margin-top: 2px; }
+
+section { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; margin-top: 16px; }
+h2 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 9px; margin-bottom: 6px; flex-wrap: wrap; }
+h2::before { content: ""; width: 3px; height: 15px; border-radius: 2px; background: var(--accent); }
+h2 small { font-weight: 400; font-size: 12px; color: var(--ink3); margin-left: auto; }
+.lead { font-size: 13px; color: var(--ink2); margin: 0 0 14px 12px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+th { text-align: right; font-weight: 500; color: var(--ink3); font-size: 11.5px; padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th.l, td.l { text-align: left; }
+td { text-align: right; padding: 7px 8px; border-bottom: 1px solid #f2f3f6; }
+tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #fafbfd; }
+
+.up { color: var(--up); } .down { color: var(--down); } .flat { color: var(--flat); }
+.bold { font-weight: 700; }
+.badge { display: inline-block; font-size: 11.5px; padding: 2px 9px; border-radius: 20px; margin-left: 8px; font-weight: 600; vertical-align: 2px; }
+.b-up { background: rgba(229,72,77,.1); color: var(--up); }
+.b-dn { background: rgba(18,161,80,.1); color: var(--down); }
+.nm a { color: #1d4ed8; text-decoration: none; border-bottom: 1px dashed #b9cdf5; font-weight: 600; }
+.nm a:hover { color: #0b3bb3; border-bottom-color: #0b3bb3; }
+.cd a { color: var(--ink3); text-decoration: none; font-size: 11.5px; font-family: Consolas, monospace; }
+.cd a:hover { color: var(--accent); text-decoration: underline; }
+.ind { color: var(--ink3); font-size: 12px; }
+
+.note { background: #fafbfd; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 12.8px; color: var(--ink2); line-height: 1.75; margin-top: 12px; }
+.note b { color: var(--ink); }
+
+.pts { display: grid; gap: 12px; margin-top: 4px; }
+.pt { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
+.pt .no { width: 26px; height: 26px; border-radius: 8px; background: #eef3ff; color: #2f6df6; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.pt h4 { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
+.pt p { font-size: 13.3px; color: var(--ink2); line-height: 1.78; }
+.pt p b { color: var(--ink); }
+
+footer { margin-top: 18px; font-size: 11.5px; color: var(--ink3); line-height: 1.8; text-align: center; padding: 0 10px; }
+
+@media (max-width:900px){ .kpi { grid-template-columns: repeat(3,1fr); } }
+@media (max-width:560px){ body { padding: 12px 8px 40px; } header { padding: 22px 18px; } h1 { font-size: 22px; } .kpi { grid-template-columns: repeat(2,1fr); } section { padding: 16px 12px; } table { font-size: 12px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="tagline"><span class="dot"></span>A股行情日报 · 2026.11.25 · 收盘数据</div>
+  <h1>A股收盘总结</h1>
+  <div class="verdict"><b>反弹夭折 · 集体重挫。</b>三大股指盘中均刷新年内新低，沪指失守3500点，科创50跌5.12%。海外关税担忧+美国云厂商企业债遭抛售双重冲击，超4900只个股下跌，仅医药抗流感与零售逆势走强。</div>
+  <div class="meta">
+    <span>沪深京三市 · 全市场成交13927亿元</span>
+    <span>点击股票名称 → 东方财富行情页</span>
+    <span>数据来源：财联社 / 21世纪经济报道 / 中国商报 · 15:00 收市</span>
+  </div>
+</header>
+
+<!-- KPI -->
+<div class="kpi">
+  <div class="cell"><div class="lab">上证指数</div><div class="val down">3476</div><div class="sub down">-2.03% · 失守3500点</div></div>
+  <div class="cell"><div class="lab">深证成指</div><div class="val down">-3.24%</div><div class="sub down">年内新低</div></div>
+  <div class="cell"><div class="lab">创业板指</div><div class="val down">-4.19%</div><div class="sub down">年内新低</div></div>
+  <div class="cell"><div class="lab">科创50</div><div class="val down">-5.12%</div><div class="sub down">跌幅最大 · 昨日刚领涨</div></div>
+  <div class="cell"><div class="lab">北证50</div><div class="val down">-4.75%</div><div class="sub down">小微盘再遭抛售</div></div>
+  <div class="cell"><div class="lab">全市场成交额</div><div class="val">13927<span style="font-size:13px">亿</span></div><div class="sub down">缩量2751亿</div></div>
+</div>
+
+<!-- 指数表现 -->
+<section>
+  <h2>指数表现 <small>涨跌幅 / 走势</small></h2>
+  <table>
+    <thead><tr><th class="l">指数</th><th class="l">代码</th><th>涨跌幅</th><th class="l">备注</th></tr></thead>
+    <tbody>
+      <tr><td class="l"><b>上证指数</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000001.html" target="_blank">000001</a></td><td class="down bold">-2.03%</td><td class="ind l">收报3476点，失守3500点整数关</td></tr>
+      <tr><td class="l"><b>深证成指</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sz399001.html" target="_blank">399001</a></td><td class="down bold">-3.24%</td><td class="ind l">盘中刷新年内新低</td></tr>
+      <tr><td class="l"><b>创业板指</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sz399006.html" target="_blank">399006</a></td><td class="down bold">-4.19%</td><td class="ind l">盘中刷新年内新低</td></tr>
+      <tr><td class="l"><b>北证50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/bj899050.html" target="_blank">899050</a></td><td class="down bold">-4.75%</td><td class="ind l">连续大幅波动</td></tr>
+      <tr><td class="l"><b>科创50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000688.html" target="_blank">000688</a></td><td class="down bold">-5.12%</td><td class="ind l">昨日+1.81%领涨，今日-5.12%领跌</td></tr>
+    </tbody>
+  </table>
+  <div class="note">两日行情完成一次完整"诱多"：11/23反弹（创业板+3.08%）、11/24高开低走、11/25直接重挫并创年内新低。<b>缩量2751亿下跌</b>，说明反弹进场的资金快速撤离，承接不足。</div>
+</section>
+
+<!-- 下跌诱因 -->
+<section>
+  <h2>下跌诱因：两重海外因素冲击 <small>机构解析（越声理财 / 申万宏源）</small></h2>
+  <div class="pts">
+    <div class="pt"><div class="no">1</div><div><h4>关税担忧重燃</h4><p>有报道称美国计划对包括中国在内的有关国家加征关税。11月25日外交部例行记者会上，发言人郭嘉昆回应：关税战、贸易战不符合任何一方利益，双方应在平等、尊重、互惠基础上协商解决。</p></div></div>
+    <div class="pt"><div class="no">2</div><div><h4>美国云厂商企业债遭集中抛售 —— AI叙事走弱的直接信号</h4><p>CoreWeave股价单日下跌近12%，其2031年到期、票息9.75%的债券<b>收益率突破17%</b>；五年期CDS利差跳涨8.5%、突破1200个基点。Meta、亚马逊等高评级科技巨头CDS利差走阔逾2%，英伟达CDS利差扩大3.4%，整个超大规模云服务商CDS利差升至<b>创纪录水平</b>。</p></div></div>
+    <div class="pt"><div class="no">3</div><div><h4>AI链估值锚面临重定价</h4><p>申万宏源蒋亦凡：黄仁勋回归修复了短期不确定性，但AI链结构性约束未解除，云厂商资本开支与现金流问题仍在加剧。<b>市场定价关键点正从"资本开支增速"转向"现金流回报周期"</b>，A股算力链估值锚同样面临重定价。美国对外算力输出限制反而强化了国产先进制程、昇腾链的远期定价逻辑，但兑现需以国产HBM、先进制程与封装产能实际突破为前提，不宜线性外推。</p></div></div>
+  </div>
+</section>
+
+<!-- 逆势走强 -->
+<section>
+  <h2>逆势走强方向 <span class="badge b-up">医药抗流感 / 零售</span><small>普跌中的避风港</small></h2>
+  <table>
+    <thead><tr><th class="l">方向</th><th class="l">代表个股</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="l"><b>医药 · 抗流感</b></td><td class="l"><a href="https://quote.eastmoney.com/sz300086.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">康芝药业</a>、<a href="https://quote.eastmoney.com/sz301089.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">拓新药业</a>、<a href="https://quote.eastmoney.com/sz301211.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">亨迪药业</a>、<a href="https://quote.eastmoney.com/sz002038.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">双鹭药业</a>、<a href="https://quote.eastmoney.com/sz002728.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">特一药业</a></td><td class="up bold">多股涨停 · 领涨全市场</td></tr>
+      <tr><td class="l"><b>零售</b></td><td class="l"><a href="https://quote.eastmoney.com/sh600814.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">杭州解百</a>、<a href="https://quote.eastmoney.com/sh600280.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">中央商场</a>、<a href="https://quote.eastmoney.com/sh601086.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">国芳集团</a>、<a href="https://quote.eastmoney.com/sh603708.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">家家悦</a></td><td class="up bold">杭州解百3连板</td></tr>
+    </tbody>
+  </table>
+  <div class="note">抗流感与零售都是<b>低位防御型题材</b>，与前期高位的机器人/算力/AI漫剧形成鲜明反差——资金在极端弱势中转向"低位+防御+事件催化"。</div>
+</section>
+
+<!-- 领跌方向 -->
+<section>
+  <h2>领跌方向 <span class="badge b-dn">芯片 / 算力 / 机器人 / 锂电</span><small>前期主线全线崩塌</small></h2>
+  <table>
+    <thead><tr><th class="l">方向</th><th class="l">代表个股</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="l"><b>芯片产业链</b></td><td class="l"><a href="https://quote.eastmoney.com/sh688347.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">华虹公司</a>、<a href="https://quote.eastmoney.com/sh688691.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">灿芯股份</a>、<a href="https://quote.eastmoney.com/sz002371.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">北方华创</a>、<a href="https://quote.eastmoney.com/sh688802.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">沐曦股份</a>、富创精密</td><td class="down bold">集体下挫</td></tr>
+      <tr><td class="l"><b>算力硬件</b></td><td class="l">CPO、PCB、液冷</td><td class="down bold">跌幅居前</td></tr>
+      <tr><td class="l"><b>机器人</b></td><td class="l">前两日领涨的人形机器人概念</td><td class="down bold">跌幅居前</td></tr>
+      <tr><td class="l"><b>短剧 / AI应用</b></td><td class="l">前两日反弹的AI漫剧方向</td><td class="down bold">跌幅居前</td></tr>
+      <tr><td class="l"><b>电池产业链</b></td><td class="l">锂电池</td><td class="down">震荡调整</td></tr>
+    </tbody>
+  </table>
+  <div class="note">前两日的所有主线（机器人、AI漫剧、算力硬件）今日<b>全部转为领跌</b>，题材持续性极弱，反弹被证明是一次性修复而非趋势反转。</div>
+</section>
+
+<!-- 资金流向 -->
+<section>
+  <h2>主力资金动向 <small>逆势净流入的少数方向</small></h2>
+  <table>
+    <thead><tr><th class="l">方向</th><th class="l">个股</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td class="l up bold">净流入居前</td><td class="l"><a href="https://quote.eastmoney.com/sz300394.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">天孚通信</a>、青山纸业、<a href="https://quote.eastmoney.com/sz300476.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">胜宏科技</a>、京东方A</td><td class="l ind">天孚通信主力净买入超10亿元居首（早盘数据）</td></tr>
+      <tr><td class="l down bold">净流出居前</td><td class="l">长鑫科技、<a href="https://quote.eastmoney.com/sz300750.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">宁德时代</a>、<a href="https://quote.eastmoney.com/sh601138.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">工业富联</a>、<a href="https://quote.eastmoney.com/sz002086.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">东方海洋</a></td><td class="l ind">长鑫科技净卖出超5亿元；东方海洋此前22天11板</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 外围 -->
+<section>
+  <h2>外围市场 <span class="badge b-dn">亚太全线承压</span><small>跌幅普遍大于A股</small></h2>
+  <table>
+    <thead><tr><th class="l">市场</th><th>收盘</th><th>涨跌幅</th></tr></thead>
+    <tbody>
+      <tr><td class="l">韩国综合指数</td><td>4,697.51</td><td class="down bold">-6.16%</td></tr>
+      <tr><td class="l">日经225</td><td>57,011.62</td><td class="down bold">-2.78%</td></tr>
+    </tbody>
+  </table>
+  <div class="note">两地半导体权重股均大幅调整。A股跌幅（上证-2.03%）反而小于韩国（-6.16%），说明本轮下跌是<b>全球AI资产共振调整</b>，而非A股独立风险。</div>
+</section>
+
+<!-- 后市观察 -->
+<section>
+  <h2>后市观察 <small>年内新低之后</small></h2>
+  <div class="pts">
+    <div class="pt"><div class="no">1</div><div><h4>年内新低的含义</h4><p>三大股指盘中均刷新年内新低，沪指失守3500点。<b>技术形态转弱</b>，前期反弹构造的底部被破坏，需要重新寻找支撑。</p></div></div>
+    <div class="pt"><div class="no">2</div><div><h4>关键变量在海外而非国内</h4><p>本轮下跌由关税担忧+美国云厂商信用风险驱动。需跟踪：① 关税是否落地及中方反制；② CoreWeave等云厂商债券/CDS是否继续恶化（AI叙事的信用定价）；③ 美股AI链能否止跌。</p></div></div>
+    <div class="pt"><div class="no">3</div><div><h4>缩量下跌的两面性</h4><p>缩量2751亿说明抛压衰减，但也说明<b>买盘不愿进场</b>。真正的企稳信号是"缩量止跌+放量反弹"的组合，目前尚未出现。</p></div></div>
+    <div class="pt"><div class="no">4</div><div><h4>结构性机会转向低位防御</h4><p>抗流感、零售逆势涨停，资金明显偏好"低位+防御+事件催化"。在指数企稳前，<b>高位题材（机器人/算力/AI漫剧）的反弹持续性存疑</b>。</p></div></div>
+  </div>
+</section>
+
+<footer>
+  <p>数据来源：财联社 / 21世纪经济报道 / 中国商报 / 新浪财经 · 15:00 收市数据</p>
+  <p>注：部分指数精确收盘点位媒体未披露，本报告仅采用已核实的涨跌幅与关键点位（沪指3476点）。</p>
+  <p style="margin-top:6px;"><b>免责声明：</b>本报告基于公开市场数据整理，仅供学习交流，不构成任何投资建议。</p>
+</footer>
+
+</div>
+</body>
+</html>
