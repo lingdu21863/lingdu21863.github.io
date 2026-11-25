@@ -55,6 +55,12 @@ tbody tr:hover { background: #fafbfd; }
 .note { background: #fafbfd; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 12.8px; color: var(--ink2); line-height: 1.75; margin-top: 12px; }
 .note b { color: var(--ink); }
 
+.bar { display: flex; height: 26px; border-radius: 7px; overflow: hidden; margin: 6px 0 10px; font-size: 11.5px; color: #fff; font-weight: 600; }
+.bar div { display: flex; align-items: center; justify-content: center; }
+.bar .u { background: var(--up); } .bar .d { background: var(--down); }
+.legend { display: flex; gap: 18px; font-size: 12.5px; color: var(--ink2); flex-wrap: wrap; }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+
 .pts { display: grid; gap: 12px; margin-top: 4px; }
 .pt { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
 .pt .no { width: 26px; height: 26px; border-radius: 8px; background: #eef3ff; color: #2f6df6; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
@@ -106,6 +112,21 @@ footer { margin-top: 18px; font-size: 11.5px; color: var(--ink3); line-height: 1
     </tbody>
   </table>
   <div class="note"><b>走势：</b>受隔夜美股科技股走强带动集体高开，早盘沪指涨1.11%、创业板指与科创综指涨超4%、北证50涨近5%、全市场超5100只个股上涨；午后获利盘涌出，涨幅大幅收窄，深成指、创业板指、北证50先后翻绿，<b>仅科创50与沪指收红</b>。</div>
+</section>
+
+<!-- 市场宽度 -->
+<section>
+  <h2>市场宽度 <small>指数红、个股绿 · 封板率仅45%</small></h2>
+  <div class="bar">
+    <div class="u" style="width:35.8%">上涨 1952</div>
+    <div class="d" style="width:64.2%">下跌 3498</div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--up)"></i>上涨 1952（35.8%）</span>
+    <span><i style="background:var(--down)"></i>下跌 3498（64.2%）</span>
+    <span style="margin-left:auto">涨停 <b style="color:var(--up)">55</b> · 连板股 <b>30</b> 只</span>
+  </div>
+  <div class="note"><b>宽度与指数的背离是今日最关键的信号：</b>早盘超5100只个股上涨，收盘仅1952只——超过3000只个股在午后由涨转跌。涨停55只（不含ST）、封板率仅45%（68股封板未遂），说明<b>追高资金意愿不足、炸板率高</b>，与11/23的151只涨停、100%晋级率形成鲜明反差。</div>
 </section>
 
 <!-- 主线一：人形机器人 -->
