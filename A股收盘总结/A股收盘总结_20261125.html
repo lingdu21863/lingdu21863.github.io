@@ -55,6 +55,12 @@ tbody tr:hover { background: #fafbfd; }
 .note { background: #fafbfd; border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 12.8px; color: var(--ink2); line-height: 1.75; margin-top: 12px; }
 .note b { color: var(--ink); }
 
+.bar { display: flex; height: 26px; border-radius: 7px; overflow: hidden; margin: 6px 0 10px; font-size: 11.5px; color: #fff; font-weight: 600; }
+.bar div { display: flex; align-items: center; justify-content: center; }
+.bar .u { background: var(--up); } .bar .d { background: var(--down); }
+.legend { display: flex; gap: 18px; font-size: 12.5px; color: var(--ink2); flex-wrap: wrap; }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; }
+
 .pts { display: grid; gap: 12px; margin-top: 4px; }
 .pt { display: grid; grid-template-columns: 30px 1fr; gap: 12px; }
 .pt .no { width: 26px; height: 26px; border-radius: 8px; background: #eef3ff; color: #2f6df6; font-size: 12.5px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
@@ -105,7 +111,105 @@ footer { margin-top: 18px; font-size: 11.5px; color: var(--ink3); line-height: 1
       <tr><td class="l"><b>科创50</b></td><td class="cd l"><a href="https://quote.eastmoney.com/sh000688.html" target="_blank">000688</a></td><td class="down bold">-5.12%</td><td class="ind l">昨日+1.81%领涨，今日-5.12%领跌</td></tr>
     </tbody>
   </table>
-  <div class="note">两日行情完成一次完整"诱多"：11/23反弹（创业板+3.08%）、11/24高开低走、11/25直接重挫并创年内新低。<b>缩量2751亿下跌</b>，说明反弹进场的资金快速撤离，承接不足。</div>
+  <div class="note"><b>三日节奏：</b>11/23反弹（创业板+3.08%）→ 11/24高开低走 → 11/25直接重挫并创年内新低。<b>缩量2751亿下跌</b>，说明反弹进场的资金快速撤离，承接不足。</div>
+</section>
+
+<!-- 市场宽度 -->
+<section>
+  <h2>市场宽度 <small>涨停51 · 跌停逾40 · 晋级率30%</small></h2>
+  <div class="legend" style="margin-bottom:6px;">
+    <span><i style="background:var(--down)"></i>下跌超 4900 只</span>
+    <span><i style="background:var(--up)"></i>涨停 51 只</span>
+    <span><i style="background:#c9ccd4"></i>跌停 逾40 只</span>
+    <span style="margin-left:auto">封板率 <b>63%</b> · 连板晋级率 <b>30%</b></span>
+  </div>
+  <div class="note">连板股总数14只，三连板及以上9只；上一交易日30只连板股，晋级率仅30%（11/23曾达100%）。<b>短线情绪明显降温</b>，但盛剑科技7天6板、金新农9天6板等高位股仍在抱团。</div>
+</section>
+
+<!-- 主线一：医药抗流感 -->
+<section>
+  <h2>主线一：医药 · 抗流感 <span class="badge b-up">多股涨停</span><small>普跌中的避风港</small></h2>
+  <p class="lead">医药板块逆势走强，抗流感方向领涨全市场，是今日<b>唯一形成板块效应</b>的上涨方向。</p>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300086.html" target="_blank">康芝药业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300086.html" target="_blank">300086</a></td><td class="ind l">儿童药/抗流感</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301089.html" target="_blank">拓新药业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301089.html" target="_blank">301089</a></td><td class="ind l">原料药/抗病毒</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz301211.html" target="_blank">亨迪药业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz301211.html" target="_blank">301211</a></td><td class="ind l">解热镇痛</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002038.html" target="_blank">双鹭药业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002038.html" target="_blank">002038</a></td><td class="ind l">生物医药</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002728.html" target="_blank">特一药业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002728.html" target="_blank">002728</a></td><td class="ind l">中成药/止咳</td><td class="up bold">涨停</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>逻辑：</b>抗流感属于<b>低位防御+季节事件催化</b>，与前期高位的机器人/算力/AI漫剧形成鲜明反差——极端弱势中资金转向"低位+防御"。</div>
+</section>
+
+<!-- 主线二：零售 -->
+<section>
+  <h2>主线二：零售 <span class="badge b-up">杭州解百3连板</span><small>消费防御</small></h2>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh600814.html" target="_blank">杭州解百</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh600814.html" target="_blank">600814</a></td><td class="ind l">百货零售</td><td class="up bold">3连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh600280.html" target="_blank">中央商场</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh600280.html" target="_blank">600280</a></td><td class="ind l">百货零售</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh601086.html" target="_blank">国芳集团</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh601086.html" target="_blank">601086</a></td><td class="ind l">百货零售</td><td class="up bold">涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603708.html" target="_blank">家家悦</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603708.html" target="_blank">603708</a></td><td class="ind l">超市连锁</td><td class="up bold">涨停</td></tr>
+    </tbody>
+  </table>
+  <div class="note">此外"美好寓意"炒作活跃，福瑞达、家家悦、桂发祥、万事利、合富中国、人民同泰等个股涨停——典型的<b>弱势炒玄学</b>特征。</div>
+</section>
+
+<!-- 焦点股 -->
+<section>
+  <h2>焦点股 / 连板高度 <small>短线情绪标杆</small></h2>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>高度</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603324.html" target="_blank">盛剑科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603324.html" target="_blank">603324</a></td><td class="ind l">芯片产业链</td><td class="up bold">7天6板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603030.html" target="_blank">全筑股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603030.html" target="_blank">603030</a></td><td class="ind l">芯片产业链</td><td class="up bold">7天5板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002548.html" target="_blank">金新农</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002548.html" target="_blank">002548</a></td><td class="ind l">猪肉</td><td class="up bold">9天6板 · 大长腿涨停</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002579.html" target="_blank">中京电子</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002579.html" target="_blank">002579</a></td><td class="ind l">PCB</td><td class="up bold">5连板 · 尾盘封板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002242.html" target="_blank">九阳股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002242.html" target="_blank">002242</a></td><td class="ind l">家电</td><td class="up bold">7天5板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603960.html" target="_blank">克来机电</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603960.html" target="_blank">603960</a></td><td class="ind l">机器人装备</td><td class="up bold">4连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002164.html" target="_blank">宁波东力</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002164.html" target="_blank">002164</a></td><td class="ind l">减速器</td><td class="up bold">3连板</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh603926.html" target="_blank">铁流股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh603926.html" target="_blank">603926</a></td><td class="ind l">机器人零部件</td><td class="up bold">3连板</td></tr>
+    </tbody>
+  </table>
+  <div class="note"><b>抱团特征明显：</b>中京电子5连板但当日主力资金<b>净流出2.17亿元</b>（特大单净流出1.28亿），属于典型的<b>高位分歧放量</b>。机器人概念仍有局部活跃（克来机电4连板、宁波东力/铁流股份3连板），但板块整体已转为下跌。</div>
+</section>
+
+<!-- 调整方向 -->
+<section>
+  <h2>调整方向 <span class="badge b-dn">芯片 / 算力 / 机器人 / 锂电</span><small>前期主线全线崩塌</small></h2>
+  <p class="lead">前两日的所有主线今日<b>全部转为领跌</b>，题材持续性极弱。</p>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>表现</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688347.html" target="_blank">华虹公司</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688347.html" target="_blank">688347</a></td><td class="ind l">晶圆代工</td><td class="down bold">回落</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688691.html" target="_blank">灿芯股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688691.html" target="_blank">688691</a></td><td class="ind l">芯片设计服务</td><td class="down bold">回落</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002371.html" target="_blank">北方华创</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002371.html" target="_blank">002371</a></td><td class="ind l">半导体设备</td><td class="down bold">回落</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688802.html" target="_blank">沐曦股份</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688802.html" target="_blank">688802</a></td><td class="ind l">GPU算力芯片</td><td class="down bold">回落</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh688409.html" target="_blank">富创精密</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh688409.html" target="_blank">688409</a></td><td class="ind l">半导体零部件</td><td class="down bold">回落</td></tr>
+      <tr><td class="l"><b>其他方向</b></td><td class="ind l">—</td><td class="ind l">CPO / PCB / 液冷 / 短剧 / 锂电池</td><td class="down bold">跌幅居前</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 主力资金 -->
+<section>
+  <h2>主力资金动向 <small>早盘监控数据</small></h2>
+  <table>
+    <thead><tr><th class="l">股票</th><th class="l">代码</th><th>方向</th><th>资金</th></tr></thead>
+    <tbody>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300394.html" target="_blank">天孚通信</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300394.html" target="_blank">300394</a></td><td class="ind l">CPO/光器件</td><td class="up bold">净买入超10亿 · 居首</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh600103.html" target="_blank">青山纸业</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh600103.html" target="_blank">600103</a></td><td class="ind l">CPO</td><td class="up">净流入居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300476.html" target="_blank">胜宏科技</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300476.html" target="_blank">300476</a></td><td class="ind l">PCB</td><td class="up">净流入居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz000725.html" target="_blank">京东方A</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz000725.html" target="_blank">000725</a></td><td class="ind l">面板</td><td class="up">净流入居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz300750.html" target="_blank">宁德时代</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz300750.html" target="_blank">300750</a></td><td class="ind l">锂电池</td><td class="down bold">净流出居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sh601138.html" target="_blank">工业富联</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sh601138.html" target="_blank">601138</a></td><td class="ind l">算力硬件</td><td class="down bold">净流出居前</td></tr>
+      <tr><td class="nm l"><a href="https://quote.eastmoney.com/sz002086.html" target="_blank">东方海洋</a></td><td class="cd l"><a href="https://quote.eastmoney.com/sz002086.html" target="_blank">002086</a></td><td class="ind l">大消费</td><td class="down bold">净流出居前 · 此前22天11板</td></tr>
+    </tbody>
+  </table>
+  <div class="note">此外长鑫科技遭净卖出超5亿元。天孚通信逆势获10亿净买入，说明<b>机构资金仍在光模块龙头上有分歧性承接</b>。</div>
 </section>
 
 <!-- 下跌诱因 -->
@@ -116,47 +220,6 @@ footer { margin-top: 18px; font-size: 11.5px; color: var(--ink3); line-height: 1
     <div class="pt"><div class="no">2</div><div><h4>美国云厂商企业债遭集中抛售 —— AI叙事走弱的直接信号</h4><p>CoreWeave股价单日下跌近12%，其2031年到期、票息9.75%的债券<b>收益率突破17%</b>；五年期CDS利差跳涨8.5%、突破1200个基点。Meta、亚马逊等高评级科技巨头CDS利差走阔逾2%，英伟达CDS利差扩大3.4%，整个超大规模云服务商CDS利差升至<b>创纪录水平</b>。</p></div></div>
     <div class="pt"><div class="no">3</div><div><h4>AI链估值锚面临重定价</h4><p>申万宏源蒋亦凡：黄仁勋回归修复了短期不确定性，但AI链结构性约束未解除，云厂商资本开支与现金流问题仍在加剧。<b>市场定价关键点正从"资本开支增速"转向"现金流回报周期"</b>，A股算力链估值锚同样面临重定价。美国对外算力输出限制反而强化了国产先进制程、昇腾链的远期定价逻辑，但兑现需以国产HBM、先进制程与封装产能实际突破为前提，不宜线性外推。</p></div></div>
   </div>
-</section>
-
-<!-- 逆势走强 -->
-<section>
-  <h2>逆势走强方向 <span class="badge b-up">医药抗流感 / 零售</span><small>普跌中的避风港</small></h2>
-  <table>
-    <thead><tr><th class="l">方向</th><th class="l">代表个股</th><th>表现</th></tr></thead>
-    <tbody>
-      <tr><td class="l"><b>医药 · 抗流感</b></td><td class="l"><a href="https://quote.eastmoney.com/sz300086.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">康芝药业</a>、<a href="https://quote.eastmoney.com/sz301089.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">拓新药业</a>、<a href="https://quote.eastmoney.com/sz301211.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">亨迪药业</a>、<a href="https://quote.eastmoney.com/sz002038.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">双鹭药业</a>、<a href="https://quote.eastmoney.com/sz002728.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">特一药业</a></td><td class="up bold">多股涨停 · 领涨全市场</td></tr>
-      <tr><td class="l"><b>零售</b></td><td class="l"><a href="https://quote.eastmoney.com/sh600814.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">杭州解百</a>、<a href="https://quote.eastmoney.com/sh600280.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">中央商场</a>、<a href="https://quote.eastmoney.com/sh601086.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">国芳集团</a>、<a href="https://quote.eastmoney.com/sh603708.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">家家悦</a></td><td class="up bold">杭州解百3连板</td></tr>
-    </tbody>
-  </table>
-  <div class="note">抗流感与零售都是<b>低位防御型题材</b>，与前期高位的机器人/算力/AI漫剧形成鲜明反差——资金在极端弱势中转向"低位+防御+事件催化"。</div>
-</section>
-
-<!-- 领跌方向 -->
-<section>
-  <h2>领跌方向 <span class="badge b-dn">芯片 / 算力 / 机器人 / 锂电</span><small>前期主线全线崩塌</small></h2>
-  <table>
-    <thead><tr><th class="l">方向</th><th class="l">代表个股</th><th>表现</th></tr></thead>
-    <tbody>
-      <tr><td class="l"><b>芯片产业链</b></td><td class="l"><a href="https://quote.eastmoney.com/sh688347.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">华虹公司</a>、<a href="https://quote.eastmoney.com/sh688691.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">灿芯股份</a>、<a href="https://quote.eastmoney.com/sz002371.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">北方华创</a>、<a href="https://quote.eastmoney.com/sh688802.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">沐曦股份</a>、富创精密</td><td class="down bold">集体下挫</td></tr>
-      <tr><td class="l"><b>算力硬件</b></td><td class="l">CPO、PCB、液冷</td><td class="down bold">跌幅居前</td></tr>
-      <tr><td class="l"><b>机器人</b></td><td class="l">前两日领涨的人形机器人概念</td><td class="down bold">跌幅居前</td></tr>
-      <tr><td class="l"><b>短剧 / AI应用</b></td><td class="l">前两日反弹的AI漫剧方向</td><td class="down bold">跌幅居前</td></tr>
-      <tr><td class="l"><b>电池产业链</b></td><td class="l">锂电池</td><td class="down">震荡调整</td></tr>
-    </tbody>
-  </table>
-  <div class="note">前两日的所有主线（机器人、AI漫剧、算力硬件）今日<b>全部转为领跌</b>，题材持续性极弱，反弹被证明是一次性修复而非趋势反转。</div>
-</section>
-
-<!-- 资金流向 -->
-<section>
-  <h2>主力资金动向 <small>逆势净流入的少数方向</small></h2>
-  <table>
-    <thead><tr><th class="l">方向</th><th class="l">个股</th><th>说明</th></tr></thead>
-    <tbody>
-      <tr><td class="l up bold">净流入居前</td><td class="l"><a href="https://quote.eastmoney.com/sz300394.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">天孚通信</a>、青山纸业、<a href="https://quote.eastmoney.com/sz300476.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">胜宏科技</a>、京东方A</td><td class="l ind">天孚通信主力净买入超10亿元居首（早盘数据）</td></tr>
-      <tr><td class="l down bold">净流出居前</td><td class="l">长鑫科技、<a href="https://quote.eastmoney.com/sz300750.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">宁德时代</a>、<a href="https://quote.eastmoney.com/sh601138.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">工业富联</a>、<a href="https://quote.eastmoney.com/sz002086.html" target="_blank" style="color:#1d4ed8;text-decoration:none;">东方海洋</a></td><td class="l ind">长鑫科技净卖出超5亿元；东方海洋此前22天11板</td></tr>
-    </tbody>
-  </table>
 </section>
 
 <!-- 外围 -->
@@ -177,15 +240,15 @@ footer { margin-top: 18px; font-size: 11.5px; color: var(--ink3); line-height: 1
   <h2>后市观察 <small>年内新低之后</small></h2>
   <div class="pts">
     <div class="pt"><div class="no">1</div><div><h4>年内新低的含义</h4><p>三大股指盘中均刷新年内新低，沪指失守3500点。<b>技术形态转弱</b>，前期反弹构造的底部被破坏，需要重新寻找支撑。</p></div></div>
-    <div class="pt"><div class="no">2</div><div><h4>关键变量在海外而非国内</h4><p>本轮下跌由关税担忧+美国云厂商信用风险驱动。需跟踪：① 关税是否落地及中方反制；② CoreWeave等云厂商债券/CDS是否继续恶化（AI叙事的信用定价）；③ 美股AI链能否止跌。</p></div></div>
-    <div class="pt"><div class="no">3</div><div><h4>缩量下跌的两面性</h4><p>缩量2751亿说明抛压衰减，但也说明<b>买盘不愿进场</b>。真正的企稳信号是"缩量止跌+放量反弹"的组合，目前尚未出现。</p></div></div>
+    <div class="pt"><div class="no">2</div><div><h4>关键变量在海外而非国内</h4><p>本轮下跌由关税担忧+美国云厂商信用风险驱动。需跟踪：① 关税是否落地及中方反制；② CoreWeave等云厂商债券/CDS是否继续恶化；③ 美股AI链能否止跌。</p></div></div>
+    <div class="pt"><div class="no">3</div><div><h4>短线情绪从100%晋级率跌至30%</h4><p>11/23连板晋级率100% → 11/25仅30%，涨停从151只缩至51只。<b>情绪退潮速度极快</b>，但盛剑科技7天6板、金新农9天6板说明高位抱团未完全瓦解。</p></div></div>
     <div class="pt"><div class="no">4</div><div><h4>结构性机会转向低位防御</h4><p>抗流感、零售逆势涨停，资金明显偏好"低位+防御+事件催化"。在指数企稳前，<b>高位题材（机器人/算力/AI漫剧）的反弹持续性存疑</b>。</p></div></div>
   </div>
 </section>
 
 <footer>
-  <p>数据来源：财联社 / 21世纪经济报道 / 中国商报 / 新浪财经 · 15:00 收市数据</p>
-  <p>注：部分指数精确收盘点位媒体未披露，本报告仅采用已核实的涨跌幅与关键点位（沪指3476点）。</p>
+  <p>数据来源：财联社 / 21世纪经济报道 / 中国商报 / 证券时报 · 15:00 收市数据</p>
+  <p>注：部分指数精确收盘点位媒体未披露，本报告仅采用已核实的涨跌幅与关键点位（沪指3476点）；涨停/连板数据不含ST股、退市股。</p>
   <p style="margin-top:6px;"><b>免责声明：</b>本报告基于公开市场数据整理，仅供学习交流，不构成任何投资建议。</p>
 </footer>
 
