@@ -13,3 +13,5 @@ Gemfile.lock
 
 # 工具记忆
 .workbuddy/
+.trae-html-share-packages/
+
